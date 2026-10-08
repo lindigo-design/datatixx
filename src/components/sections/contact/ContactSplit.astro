@@ -39,36 +39,34 @@ const linkedin = site.social.linkedin;
 
       <div class="c-group">
         <p class="c-label">{t('contact.email')}</p>
-        <a class="c-value c-link" href={`mailto:${site.email}`}>{site.email}</a>
+        <a class="c-value c-link" href={`mailto:${site.email}`}>
+          {site.email}
+        </a>
       </div>
 
-      {
-        site.phone && (
-          <div class="c-group">
-            <p class="c-label">{t('contact.phone')}</p>
-            <a class="c-value c-link num" href={telHref(site.phone)}>
-              {site.phone}
-            </a>
-          </div>
-        )
-      }
+      {site.phone && (
+        <div class="c-group">
+          <p class="c-label">{t('contact.phone')}</p>
+          <a class="c-value c-link num" href={telHref(site.phone)}>
+            {site.phone}
+          </a>
+        </div>
+      )}
 
-      {
-        linkedin && (
-          <div class="c-group">
-            <p class="c-label">{t('contact.linkedin')}</p>
-            <a
-              class="c-icon"
-              href={linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn DataTixx"
-            >
-              <IconLinkedin aria-hidden="true" />
-            </a>
-          </div>
-        )
-      }
+      {linkedin && (
+        <div class="c-group">
+          <p class="c-label">{t('contact.linkedin')}</p>
+          <a
+            class="c-icon"
+            href={linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn DataTixx"
+          >
+            <IconLinkedin aria-hidden="true" />
+          </a>
+        </div>
+      )}
     </aside>
   </div>
 </section>
@@ -76,7 +74,8 @@ const linkedin = site.social.linkedin;
 <style>
   /* Figma: 80 зверху, 112 знизу, 48 між колонками */
   .c-split {
-    padding-block: clamp(var(--space-12), 5.5vw, var(--space-20)) var(--section-pad);
+    padding-block: clamp(var(--space-12), 5.5vw, var(--space-20))
+      var(--section-pad);
   }
 
   .c-split__inner {

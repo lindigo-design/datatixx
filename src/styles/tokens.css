@@ -50,7 +50,8 @@
   --font-sans:
     'Afacad Variable', 'Afacad', system-ui, -apple-system, 'Segoe UI',
     sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-mono:
+    'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   /* Плавно: телефон 360px → десктоп 1440px. Цілі px на краях. */
   --fs-display: clamp(2.75rem, 1.4rem + 6vw, 6.75rem); /* 44 → 108 */
