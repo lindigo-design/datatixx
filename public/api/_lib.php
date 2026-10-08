@@ -17,6 +17,10 @@ if (basename($_SERVER['SCRIPT_FILENAME'] ?? '') === basename(__FILE__)) {
     exit;
 }
 
+// Помилки — лише в журнал сервера, ніколи у відповідь (шляхи на сервері, зламаний JSON)
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 header('Cache-Control: no-store');
@@ -48,8 +52,10 @@ function dtx_guard(string $page): array
     if (trim((string)($_POST['website'] ?? '')) !== '') {
         dtx_respond(200, 'ok', $lang, $page);
     }
-    $ts = (int)($_POST['ts'] ?? 0);
-    if ($ts > 0 && ((int)(microtime(true) * 1000) - $ts) < 3000) {
+    // ts — скільки мілісекунд форма була відкрита (рахує браузер, тож годинник відвідувача не важливий).
+    // Без JS поле порожнє — тоді перевірку пропускаємо.
+    $elapsed = (string)($_POST['ts'] ?? '');
+    if (ctype_digit($elapsed) && (int)$elapsed < 3000) {
         dtx_respond(200, 'ok', $lang, $page);
     }
 
@@ -101,13 +107,49 @@ function dtx_email(string $key): string
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 160 || preg_match('/[\r\n]/', $email)) {
         return '';
     }
+    if (!dtx_domain_accepts_mail(substr($email, strrpos($email, '@') + 1))) {
+        return '';
+    }
     return $email;
+}
+
+/**
+ * Чи може домен приймати пошту (перевірка DNS, без листа на скриньку).
+ * MX-запис → так (крім «null MX» — домен явно каже «пошту не приймаю»).
+ * Немає MX → як і поштові сервери, пробуємо A/AAAA (RFC 5321).
+ * Збій самого DNS → пропускаємо, щоб не відхилити живу людину.
+ */
+function dtx_domain_accepts_mail(string $domain): bool
+{
+    $fqdn = rtrim(strtolower($domain), '.') . '.'; // крапка в кінці — без підстановки локального домену
+    $mx = @dns_get_record($fqdn, DNS_MX);
+    if ($mx === false) return true;
+    if ($mx) {
+        foreach ($mx as $r) {
+            if (!in_array($r['target'] ?? '', ['', '.'], true)) return true;
+        }
+        return false;
+    }
+    return checkdnsrr($fqdn, 'A') || checkdnsrr($fqdn, 'AAAA');
+}
+
+/**
+ * Одна скринька — один ключ для лічильника: Ivan+1@Gmail.com, i.van@gmail.com → ivan@gmail.com.
+ * Лише для підрахунку, лист іде на адресу як є.
+ */
+function dtx_mailbox_key(string $email): string
+{
+    [$local, $domain] = explode('@', strtolower($email), 2);
+    $local = explode('+', $local, 2)[0];
+    if ($domain === 'googlemail.com') $domain = 'gmail.com';
+    if ($domain === 'gmail.com') $local = str_replace('.', '', $local);
+    return $local . '@' . $domain;
 }
 
 /** Надсилає простий текстовий лист. Reply-To — адреса відвідувача. */
 function dtx_mail(array $config, string $subject, array $lines, string $replyTo): bool
 {
-    $encoded = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+    $encoded = mb_encode_mimeheader($subject, 'UTF-8', 'B', "\r\n");
     $headers = implode("\r\n", [
         'From: ' . $config['mail_from'],
         'Reply-To: ' . $replyTo,
@@ -129,13 +171,18 @@ function dtx_mail(array $config, string $subject, array $lines, string $replyTo)
  * які ввів відвідувач — інакше форму можна використати, щоб розсилати спам
  * від імені DataTixx на чужі адреси. Єдине, що підставляємо, — ім'я, і лише якщо
  * воно складається з літер (без посилань і символів).
- * Обмеження: не більше 2 підтверджень на одну адресу за добу.
+ * Обмеження: не більше 2 підтверджень на одну скриньку за добу (варіанти адреси з «+» і крапками
+ * в Gmail рахуються як одна) і не більше confirmations_per_day на весь сайт.
  * Якщо лист не пішов — відвідувач однаково бачить «надіслано»: наш лист уже в скриньці DataTixx.
  */
 function dtx_confirm(array $config, string $to, string $firstName, string $lang): void
 {
     if (empty($config['send_confirmation'])) return;
-    if (!dtx_rate_ok('confirm:' . strtolower($to), 2, 'Ymd')) return;
+    if (!dtx_rate_ok('confirm:' . dtx_mailbox_key($to), 2, 'Ymd')) return;
+    if (!dtx_rate_ok('confirm:*', (int)($config['confirmations_per_day'] ?? 50), 'Ymd')) {
+        error_log('[forms] daily confirmation limit reached');
+        return;
+    }
 
     $name = preg_match("/^[\p{L}][\p{L}' \-]{0,39}$/u", $firstName) ? $firstName : '';
 
@@ -176,7 +223,7 @@ function dtx_confirm(array $config, string $to, string $firstName, string $lang)
         'Auto-Submitted: auto-replied',
         'X-Mailer: datatixx-website',
     ]);
-    $ok = mail($to, '=?UTF-8?B?' . base64_encode($subject) . '?=', implode("\n", $lines), $headers, '-f' . $config['mail_envelope_from']);
+    $ok = mail($to, mb_encode_mimeheader($subject, 'UTF-8', 'B', "\r\n"),implode("\n", $lines), $headers, '-f' . $config['mail_envelope_from']);
     if (!$ok) error_log('[forms] confirmation mail() failed');
 }
 

@@ -9,7 +9,7 @@ $page = 'chambers';
 [$config, $lang] = dtx_guard($page);
 
 $f = [
-    'country'      => dtx_line('country', 2),
+    'country'      => dtx_line('country', 3), // 3, щоб «USA» не обрізалось до «US» і не пройшло перевірку
     'province'     => dtx_line('province', 120),
     'city'         => dtx_line('city', 120),
     'district'     => dtx_line('district', 120),
