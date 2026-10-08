@@ -100,7 +100,7 @@ const organizationLd = {
 
     <script
       type="application/ld+json"
-      set:html={JSON.stringify(organizationLd)}
+      set:html={JSON.stringify(organizationLd).replace(/</g, '\\u003c')}
       is:inline
     />
   </head>

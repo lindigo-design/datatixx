@@ -45,7 +45,7 @@
     ]
   },
   "why": {
-    "label": "Why Tixx™",
+    "label": "Why Datixxia™",
     "titleLine1": "Why choose our",
     "titleLine2": "market intelligence platform",
     "lead": "Datixxia™ is a groundbreaking economic forecasting system. It accurately calculates the past, present, and future relative growth, decline, share, size, and value of any market sector and its players—up to four years in advance.",
@@ -70,7 +70,7 @@
   "about": {
     "label": "About",
     "title": "Facts for futures™",
-    "text": "The world's governments publish over eight million contract award notices every year. Each one is a data point containing a buyer, a supplier, a value, and a duration. Most platforms treat this as archival information. We treat it as a live signal. Tixx™ ingests this firehose of structured data, normalizes it across 194 countries, and surfaces the real economy in motion. No sentiment analysis. No large language models. Just the hard arithmetic of public spending, updated daily.",
+    "text": "The world's governments publish over eight million contract award notices every year. Each one is a data point containing a buyer, a supplier, a value, and a duration. Most platforms treat this as archival information. We treat it as a live signal. Datixxia™ ingests this firehose of structured data, normalizes it across 194 countries, and surfaces the real economy in motion. No sentiment analysis. No large language models. Just the hard arithmetic of public spending, updated daily.",
     "cta": "About us"
   },
   "model": {
@@ -169,7 +169,7 @@
         "role": "CEO",
         "photo": "../../../assets/img/team/malcolm-duff.jpg",
         "photoAlt": "Portrait of Malcolm Duff",
-        "bio": "Formerly the CEO of two ISO-9001 certified translation companies and senior translator in technology for UNESCO, Paris, Malcolm carried out the 2 years of groundbreaking conceptual and research work that resulted in Tixx™.\nHe has extensive experience in managing multinational projects, notably with translators from 33 countries for the Inttranet™, the world's first multilingual portal (added to the UNESCO Observatory for the Information Society in January 2006). That and his in-depth knowledge of the Tixx™ application make him the ideal Chief Executive Officer for its global deployment.",
+        "bio": "Formerly the CEO of two ISO-9001 certified translation companies and senior translator in technology for UNESCO, Paris, Malcolm carried out the 2 years of groundbreaking conceptual and research work that resulted in Datixxia™.\nHe has extensive experience in managing multinational projects, notably with translators from 33 countries for the Inttranet™, the world's first multilingual portal (added to the UNESCO Observatory for the Information Society in January 2006). That and his in-depth knowledge of the Datixxia™ application make him the ideal Chief Executive Officer for its global deployment.",
         "linkedin": "",
         "x": "",
         "dribbble": ""
@@ -198,7 +198,7 @@
     "items": [
       {
         "q": "Is this AI?",
-        "a": "No. Tixx™ uses zero artificial intelligence or statistical extrapolation. We read only signed, legally binding procurement contracts that remain valid for years."
+        "a": "No. Datixxia™ uses zero artificial intelligence or statistical extrapolation. We read only signed, legally binding procurement contracts that remain valid for years."
       },
       {
         "q": "Where does data come from?",
@@ -213,7 +213,7 @@
         "a": "We offer a Free tier to explore the terminal. Standard is €100 and Premium is €200 per user per month for full access to indexes and forecasts."
       },
       {
-        "q": "Who uses Tixx™?",
+        "q": "Who uses Datixxia™?",
         "a": "Banks, insurers, chambers of commerce, economic analysts, and MSMEs. Anyone who needs to know what the public sector will spend and with whom."
       }
     ]

@@ -83,7 +83,7 @@ const homeSchema = {
       ),
       imageAlt: text('Опис скриншота дашборду'),
     },
-    { label: '4 · Why Tixx™' }
+    { label: '4 · Why Datixxia™' }
   ),
   about: fields.object(
     {

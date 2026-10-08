@@ -50,6 +50,7 @@
   --font-sans:
     'Afacad Variable', 'Afacad', system-ui, -apple-system, 'Segoe UI',
     sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   /* Плавно: телефон 360px → десктоп 1440px. Цілі px на краях. */
   --fs-display: clamp(2.75rem, 1.4rem + 6vw, 6.75rem); /* 44 → 108 */
@@ -65,7 +66,10 @@
   --fs-button: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem); /* 18 → 20 */
   --fs-body-lg: 1.125rem; /* 18 */
   --fs-body: 1rem; /* 16 */
-  --fs-small: 0.875rem; /* 14 */
+  /* Дрібний текст: 14 на телефоні → 16 на десктопі (раніше було 14 скрізь — задрібно) */
+  --fs-small: clamp(0.875rem, 0.8rem + 0.28vw, 1rem); /* 14 → 16 */
+  /* Службові дрібні підписи, які лишаються 14 (тікер, номери в меню і списках) */
+  --fs-label-14: 0.875rem;
   --fs-meta-s: 0.75rem; /* 12 (у Figma 11 моноширинним; Afacad вужчий) */
 
   --fw-regular: 400;

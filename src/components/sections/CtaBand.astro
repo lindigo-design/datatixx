@@ -33,8 +33,9 @@ const { data, href } = Astro.props;
 
 <style>
   .cta {
-    padding: 0 clamp(var(--space-4), 4.4vw, var(--space-16))
-      clamp(var(--space-12), 6.6vw, 6rem);
+    /* зверху і знизу однаково: 48px на телефоні → 96px на десктопі */
+    padding-block: clamp(var(--space-12), 6.6vw, 6rem);
+    padding-inline: clamp(var(--space-4), 4.4vw, var(--space-16));
   }
 
   .cta__band {

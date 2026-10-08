@@ -12,7 +12,8 @@ interface Props {
     button: string;
     items: { q: string; a: string }[];
   };
-  buttonHref: string;
+  /** Кнопка «Contact» під текстом. На Partners її в макеті немає — не передаємо */
+  buttonHref?: string;
 }
 const { data, buttonHref } = Astro.props;
 ---
@@ -32,11 +33,13 @@ const { data, buttonHref } = Astro.props;
         {data.title}
       </h2>
       <p class="lead faq__lead">{data.lead}</p>
-      <div class="actions">
-        <Button href={buttonHref} variant="outline">
-          {data.button}
-        </Button>
-      </div>
+      {buttonHref && (
+        <div class="actions">
+          <Button href={buttonHref} variant="outline">
+            {data.button}
+          </Button>
+        </div>
+      )}
     </header>
 
     <div class="faq__list">
@@ -142,6 +145,5 @@ const { data, buttonHref } = Astro.props;
   .faq-item__a {
     padding-bottom: var(--space-6);
     color: var(--color-text-soft);
-    max-width: 62ch;
   }
 </style>

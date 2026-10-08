@@ -122,11 +122,70 @@ function dtx_mail(array $config, string $subject, array $lines, string $replyTo)
     return $ok;
 }
 
-function dtx_rate_ok(string $ip, int $limit): bool
+/**
+ * Короткий лист-підтвердження відвідувачу: «Ми отримали ваше повідомлення».
+ *
+ * Безпека: текст листа фіксований. Ми НЕ копіюємо в нього повідомлення чи тему,
+ * які ввів відвідувач — інакше форму можна використати, щоб розсилати спам
+ * від імені DataTixx на чужі адреси. Єдине, що підставляємо, — ім'я, і лише якщо
+ * воно складається з літер (без посилань і символів).
+ * Обмеження: не більше 2 підтверджень на одну адресу за добу.
+ * Якщо лист не пішов — відвідувач однаково бачить «надіслано»: наш лист уже в скриньці DataTixx.
+ */
+function dtx_confirm(array $config, string $to, string $firstName, string $lang): void
+{
+    if (empty($config['send_confirmation'])) return;
+    if (!dtx_rate_ok('confirm:' . strtolower($to), 2, 'Ymd')) return;
+
+    $name = preg_match("/^[\p{L}][\p{L}' \-]{0,39}$/u", $firstName) ? $firstName : '';
+
+    if ($lang === 'fr') {
+        $subject = 'Nous avons bien reçu votre message — DataTixx';
+        $lines = [
+            $name !== '' ? "Bonjour {$name}," : 'Bonjour,',
+            '',
+            'Merci de nous avoir écrit. Votre message est bien arrivé chez DataTixx.',
+            'Nous vous répondrons rapidement à cette adresse e-mail.',
+            '',
+            "Si vous n'avez pas envoyé ce message, ignorez simplement cet e-mail.",
+            '',
+            "L'équipe DataTixx",
+            'https://www.datatixx.com/fr/',
+        ];
+    } else {
+        $subject = 'We have received your message — DataTixx';
+        $lines = [
+            $name !== '' ? "Hello {$name}," : 'Hello,',
+            '',
+            'Thank you for writing to us. Your message has reached DataTixx.',
+            'We will reply to this email address soon.',
+            '',
+            'If you did not send this message, you can simply ignore this email.',
+            '',
+            'The DataTixx team',
+            'https://www.datatixx.com/en/',
+        ];
+    }
+
+    $headers = implode("\r\n", [
+        'From: ' . $config['mail_from'],
+        'Reply-To: ' . ($config['reply_to'] ?? $config['mail_to']),
+        'MIME-Version: 1.0',
+        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding: 8bit',
+        'Auto-Submitted: auto-replied',
+        'X-Mailer: datatixx-website',
+    ]);
+    $ok = mail($to, '=?UTF-8?B?' . base64_encode($subject) . '?=', implode("\n", $lines), $headers, '-f' . $config['mail_envelope_from']);
+    if (!$ok) error_log('[forms] confirmation mail() failed');
+}
+
+/** Лічильник: не більше $limit спроб для ключа (IP або e-mail) за годину ('YmdH') чи добу ('Ymd'). */
+function dtx_rate_ok(string $key, int $limit, string $period = 'YmdH'): bool
 {
     $dir = sys_get_temp_dir() . '/dtx-forms';
     if (!is_dir($dir)) @mkdir($dir, 0700, true);
-    $file = $dir . '/' . hash('sha256', $ip . date('YmdH')); // IP не зберігаємо у відкритому вигляді
+    $file = $dir . '/' . hash('sha256', $key . date($period)); // IP і e-mail не зберігаємо у відкритому вигляді
     $count = is_file($file) ? (int)file_get_contents($file) : 0;
     if ($count >= $limit) return false;
     file_put_contents($file, (string)($count + 1), LOCK_EX);

@@ -2,7 +2,6 @@
 /** Vision: «What the world needs is intelligent business» — текст ліворуч, фото праворуч. */
 import { Image } from 'astro:assets';
 import Button from '@/components/ui/Button.astro';
-import bg from '@/assets/img/home/bg-aurora-3.jpg';
 import workshop from '@/assets/img/platform/vision-workshop.jpg';
 
 interface Props {
@@ -21,14 +20,6 @@ const { data, ctaHref } = Astro.props;
 ---
 
 <section class="section vision" aria-labelledby="vision-title">
-  <Image
-    src={bg}
-    alt=""
-    class="section-bg vision__bg"
-    widths={[800, 1568]}
-    sizes="100vw"
-    loading="lazy"
-  />
   <div class="container vision__inner">
     <div class="vision__content">
       <p class="section-label">{data.label}</p>
@@ -55,10 +46,6 @@ const { data, ctaHref } = Astro.props;
 </section>
 
 <style>
-  .vision__bg {
-    opacity: 0.4;
-  }
-
   .vision__inner {
     display: grid;
     gap: var(--space-12);
@@ -78,8 +65,9 @@ const { data, ctaHref } = Astro.props;
     justify-items: start;
   }
 
-  .vision__content .section-label {
-    margin-bottom: calc(var(--space-2) * -1);
+  /* «What the world / needs is intelligent / business» — перенос як у Figma */
+  .vision__content .section-title {
+    text-wrap: wrap;
   }
 
   .vision__lead {

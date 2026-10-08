@@ -5,6 +5,7 @@
  * Обробник: public/api/contact.php.
  */
 import Button from '@/components/ui/Button.astro';
+import FormDone from '@/components/ui/FormDone.astro';
 import { useTranslations, type Locale } from '@/i18n/utils';
 
 interface Props {
@@ -35,6 +36,7 @@ const topicList = [
   data-msg-success={t('form.success')}
   data-msg-error={t('form.error')}
   data-msg-required={t('form.required')}
+  data-msg-hint={t('form.hint')}
 >
   <input type="hidden" name="lang" value={lang} />
   <input type="hidden" name="page" value={page} />
@@ -125,22 +127,35 @@ const topicList = [
       ></textarea>
     </div>
 
-    <label class="form__consent">
-      <input type="checkbox" name="consent" value="1" required />
-      <span>{t('form.consent')}</span>
-    </label>
-
     <div class="form__footer">
       <Button type="submit">{t('form.submit')}</Button>
       <p class="form__status" role="status" aria-live="polite" data-status></p>
+    <p class="form__hint" id={`${page}-hint`} data-hint hidden></p>
+    <p class="form__note">{t('form.privacyNote')}</p>
     </div>
   </div>
+  <FormDone lang={lang} />
 </form>
 
 <style>
   .form__fields {
     display: grid;
     gap: var(--space-5);
+  }
+
+  /* Contact (Figma «form-card»): padding 36, вище поле повідомлення, кнопка 52px */
+  .form__fields.form-card {
+    padding: clamp(var(--space-6), 3vw, 36px);
+  }
+
+  /* Figma: поле повідомлення 157px */
+  .form-card textarea {
+    min-height: 157px;
+  }
+
+  .form-card .form__footer :global(.btn) {
+    min-height: 52px;
+    padding: 14px var(--space-8);
   }
 </style>
 

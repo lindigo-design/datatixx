@@ -16,7 +16,6 @@ $email     = dtx_email('email');
 $subject   = dtx_line('subject', 160);
 $topic     = in_array($_POST['topic'] ?? '', $topics, true) ? $_POST['topic'] : '';
 $message   = dtx_text('message', 4000);
-$consent   = ($_POST['consent'] ?? '') === '1';
 
 $errors = [];
 if ($firstName === '') $errors[] = 'firstName';
@@ -24,7 +23,6 @@ if ($lastName === '')  $errors[] = 'lastName';
 if ($email === '')     $errors[] = 'email';
 if ($subject === '')   $errors[] = 'subject';
 if (mb_strlen($message) < 10) $errors[] = 'message';
-if (!$consent) $errors[] = 'consent';
 if ($errors) dtx_respond(422, 'invalid', $lang, $page, ['fields' => $errors]);
 
 $sent = dtx_mail($config, "Website ({$page}): {$subject}", [
@@ -37,5 +35,7 @@ $sent = dtx_mail($config, "Website ({$page}): {$subject}", [
     '',
     $message,
 ], $email);
+
+if ($sent) dtx_confirm($config, $email, $firstName, $lang);
 
 dtx_respond($sent ? 200 : 502, $sent ? 'ok' : 'send_failed', $lang, $page);

@@ -41,7 +41,7 @@ const mark = (n: string) => sup[Number(n) - 1] ?? n;
     <dl class="impact__stats">
       {data.stats.map(s => (
         <div class="impact-card">
-          <dt class="impact-card__caption meta-s">
+          <dt class="impact-card__caption meta-s mono">
             {s.caption}
             {s.source && <sup> {mark(s.source)}</sup>}
           </dt>
@@ -52,7 +52,7 @@ const mark = (n: string) => sup[Number(n) - 1] ?? n;
 
     <div class="impact__foot">
       <p class="impact__text">{data.text}</p>
-      <p class="impact__sources meta-s">
+      <p class="impact__sources meta-s mono">
         {data.sources.map((s, i) => `${sup[i] ?? i + 1} ${s}`).join('   ·   ')}
       </p>
     </div>
@@ -104,12 +104,15 @@ const mark = (n: string) => sup[Number(n) - 1] ?? n;
     gap: var(--space-3);
     min-height: 190px;
     padding: var(--space-8) 28px;
-    background: var(--color-glass);
+    background: var(--color-card);
     border: 1px solid var(--color-hairline);
     border-radius: var(--radius-md);
   }
 
+  /* align-self: center — щоб градієнт ішов по ширині самої цифри, а не всієї картки */
   .impact-card__value {
+    align-self: center;
+    padding-block: 0.06em;
     font-size: clamp(4rem, 3.4rem + 2.2vw, 6.25rem); /* 64 → 100 */
     font-weight: var(--fw-semibold);
     line-height: 0.85;

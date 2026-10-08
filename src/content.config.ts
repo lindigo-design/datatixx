@@ -14,6 +14,12 @@ const seo = {
 
 const twoCtas = { primaryCta: z.string(), secondaryCta: z.string() };
 
+/** Зовнішнє посилання: порожньо або лише https:// (жодних javascript: у href). */
+const link = z.union([
+  z.literal(''),
+  z.url({ protocol: /^https$/, error: 'Потрібне посилання https://…' }),
+]);
+
 // ---------- Головна ----------
 const home = defineCollection({
   loader: glob({ pattern: '*/home.json', base: './src/content/pages' }),
@@ -89,9 +95,9 @@ const home = defineCollection({
             photo: image(),
             photoAlt: z.string(),
             bio: z.string(),
-            linkedin: z.string(),
-            x: z.string(),
-            dribbble: z.string(),
+            linkedin: link,
+            x: link,
+            dribbble: link,
           })
         ),
       }),
@@ -390,14 +396,14 @@ const site = defineCollection({
     }),
     email: z.email(),
     phone: z.string(),
-    loginUrl: z.string(),
+    loginUrl: link,
     showLogin: z.boolean(),
     social: z.object({
-      linkedin: z.string(),
-      x: z.string(),
-      facebook: z.string(),
-      instagram: z.string(),
-      youtube: z.string(),
+      linkedin: link,
+      x: link,
+      facebook: link,
+      instagram: link,
+      youtube: link,
     }),
     ticker: z.array(
       z.object({ name: z.string(), value: z.number(), change: z.number() })

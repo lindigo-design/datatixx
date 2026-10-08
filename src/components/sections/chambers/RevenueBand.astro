@@ -1,5 +1,5 @@
 ---
-/** «Your postcode. Your revenue.» — градієнтна стрічка з двома цифрами. */
+/** «Your postcode. Your revenue.» (Figma «New Markets — Revenue») — градієнтна стрічка з двома цифрами. */
 interface Props {
   data: {
     label: string;
@@ -15,16 +15,16 @@ const { data } = Astro.props;
   <div class="container">
     <div class="revenue__band">
       <div class="revenue__copy">
-        <p class="meta-s revenue__tag">{data.label}</p>
+        <p class="meta-s mono revenue__tag">{data.label}</p>
         <h2 id="revenue-title" class="revenue__title">
           {data.title}
         </h2>
-        <p>{data.text}</p>
+        <p class="revenue__text">{data.text}</p>
       </div>
       <dl class="revenue__stats">
         {data.stats.map(s => (
           <div class="r-stat">
-            <dt class="meta-s">{s.caption}</dt>
+            <dt class="meta-s mono">{s.caption}</dt>
             <dd class="r-stat__value num">{s.value}</dd>
           </div>
         ))}
@@ -34,39 +34,46 @@ const { data } = Astro.props;
 </section>
 
 <style>
+  /* Figma: 60 зверху, 112 знизу */
   .revenue {
-    padding-bottom: var(--section-pad);
+    padding-block: clamp(var(--space-8), 4.2vw, 60px) var(--section-pad);
   }
 
+  /* Стрічка: градієнт #42aa39 → #27509e, радіус 32, відступи 56, між колонками 48 */
   .revenue__band {
     display: grid;
     gap: var(--space-10);
     align-items: center;
-    padding: clamp(var(--space-8), 4vw, var(--space-14, 3.5rem));
+    padding: clamp(var(--space-6), 3.9vw, 56px);
     border-radius: var(--radius-lg);
     background: var(--gradient-band);
   }
 
   @media (min-width: 1024px) {
     .revenue__band {
-      grid-template-columns: 1fr 400px;
+      grid-template-columns: minmax(0, 680fr) minmax(0, 400fr);
       gap: var(--space-12);
     }
   }
 
   .revenue__copy {
     display: grid;
-    gap: var(--space-4);
+    gap: var(--space-3);
   }
 
   .revenue__tag {
     color: var(--color-text);
   }
 
+  /* Afacad Bold 74 / 90% */
   .revenue__title {
-    font-size: clamp(2.5rem, 1.8rem + 3vw, 4.25rem); /* 40 → 68 */
+    font-size: var(--fs-h2);
     font-weight: var(--fw-bold);
-    line-height: 1;
+    line-height: 0.9;
+  }
+
+  .revenue__text {
+    font-size: var(--fs-body-lg);
   }
 
   .revenue__stats {
@@ -74,11 +81,12 @@ const { data } = Astro.props;
     gap: var(--space-3);
   }
 
+  /* Комірка: темна, радіус 16, відступи 20/24, між рядками 4 */
   .r-stat {
     display: flex;
     flex-direction: column-reverse;
-    gap: var(--space-2);
-    padding: var(--space-6);
+    gap: 4px;
+    padding: var(--space-5) var(--space-6);
     background: var(--color-bg);
     border-radius: var(--radius-sm);
   }
@@ -88,8 +96,8 @@ const { data } = Astro.props;
   }
 
   .r-stat__value {
-    font-size: clamp(3rem, 2.6rem + 1.6vw, 4rem);
-    font-weight: var(--fw-semibold);
-    line-height: 1;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-bold);
+    line-height: 0.9;
   }
 </style>

@@ -53,6 +53,10 @@ AddDefaultCharset UTF-8
   <If "%{REQUEST_URI} =~ m#^/_astro/#">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </If>
+  <ElseIf "%{REQUEST_URI} =~ m#^/api/#">
+    # Відповіді форм не кешувати ніде (інакше перекрили б no-store з PHP)
+    Header set Cache-Control "no-store"
+  </ElseIf>
   <Else>
     Header set Cache-Control "public, max-age=3600"
   </Else>

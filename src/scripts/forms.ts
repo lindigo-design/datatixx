@@ -11,7 +11,8 @@ for (const form of document.querySelectorAll<HTMLFormElement>(
   const submit = form.querySelector<HTMLButtonElement>('[type="submit"]')!;
   const ts = form.querySelector<HTMLInputElement>('[data-ts]')!;
   const msg = form.dataset;
-  ts.value = String(Date.now());
+  // Сервер отримує не час, а скільки мс форма була відкрита — так годинник відвідувача не впливає
+  let openedAt = Date.now();
 
   const show = (text: string, kind: 'success' | 'error' | '') => {
     status.textContent = text;
@@ -47,6 +48,7 @@ for (const form of document.querySelectorAll<HTMLFormElement>(
 
     submit.disabled = true;
     show(msg.msgSending ?? '', '');
+    ts.value = String(Date.now() - openedAt);
 
     try {
       const response = await fetch(form.action, {
@@ -65,7 +67,7 @@ for (const form of document.querySelectorAll<HTMLFormElement>(
         throw new Error(String(response.status));
       }
       form.reset();
-      ts.value = String(Date.now());
+      openedAt = Date.now();
       show(msg.msgSuccess ?? '', 'success');
     } catch {
       show(msg.msgError ?? '', 'error');

@@ -1,0 +1,107 @@
+---
+/**
+ * Тікер індексів Tixx™ — фірмовий елемент сайту.
+ * TODO: значення зараз — приклад. Перед запуском: або реальні дані, або підпис «ілюстрація».
+ */
+interface Props {
+  items: { name: string; change: number }[];
+  label: string;
+}
+const { items, label } = Astro.props;
+const fmt = (n: number) => `${n > 0 ? '+' : ''}${n.toFixed(2)}%`;
+---
+
+<section class="ticker" aria-label={label}>
+  {/* Для скрінрідера — звичайний список, без руху */}
+  <ul role="list" class="visually-hidden">
+    {items.map(i => (
+      <li>
+        {i.name}: {fmt(i.change)}
+      </li>
+    ))}
+  </ul>
+
+  {/* Візуальна стрічка: дві копії для безшовного руху */}
+  <div class="ticker__track" aria-hidden="true">
+    {[0, 1].map(() => (
+      <ul role="list" class="ticker__group">
+        {items.map(i => (
+          <li class="ticker__item">
+            <span>{i.name}</span>
+            <span
+              class:list={[
+                'ticker__change',
+                i.change >= 0 ? 'is-up' : 'is-down',
+              ]}
+            >
+              {i.change >= 0 ? '↗' : '↘'} {fmt(i.change)}
+            </span>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</section>
+
+<style>
+  .ticker {
+    overflow: hidden;
+    border-block: var(--border);
+    background: var(--color-surface);
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+  }
+
+  .ticker__track {
+    display: flex;
+    width: max-content;
+    animation: ticker 40s linear infinite;
+  }
+
+  .ticker:hover .ticker__track {
+    animation-play-state: paused;
+  }
+
+  .ticker__group {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .ticker__item {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-8);
+    font-weight: var(--fw-medium);
+    white-space: nowrap;
+    border-right: var(--border);
+  }
+
+  .ticker__change.is-up {
+    color: var(--color-success);
+  }
+  .ticker__change.is-down {
+    color: var(--color-error);
+  }
+
+  @keyframes ticker {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker__track {
+      animation: none;
+      flex-wrap: wrap;
+      width: auto;
+    }
+    .ticker__group + .ticker__group {
+      display: none;
+    }
+  }
+</style>

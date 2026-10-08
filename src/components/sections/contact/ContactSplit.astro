@@ -1,152 +1,184 @@
 ---
-/** «Contact — Split»: форма з темами ліворуч, картки з контактами праворуч. */
+/**
+ * «Contact — Split» (Figma 10294:10092, оновлено 08.10).
+ * Ліворуч: теми + форма. Праворуч: ОДНА картка — офіс, e-mail, телефон, LinkedIn.
+ * На десктопі картка починається на одному рівні з карткою форми і має ту саму висоту
+ * (CSS subgrid: форма займає два ряди сітки — «теми» і «картка форми»).
+ */
 import ContactForm from '@/components/sections/ContactForm.astro';
+import IconLinkedin from '@/assets/icons/social-linkedin.svg';
 import { useTranslations, type Locale } from '@/i18n/utils';
 import { getSiteSettings, telHref } from '@/content/helpers';
 
 interface Props {
   lang: Locale;
-  map: { lat: number; lon: number };
+  /** Координати офісу — зараз не показуються (карти в новому макеті немає), лишаються в даних */
+  map?: { lat: number; lon: number };
 }
-const { lang, map } = Astro.props;
+const { lang } = Astro.props;
 const t = useTranslations(lang);
 const site = await getSiteSettings();
 const a = site.address;
-// Посилання на OpenStreetMap: без cookies і стороннього коду на сторінці
-const mapHref = `https://www.openstreetmap.org/?mlat=${map.lat}&mlon=${map.lon}#map=15/${map.lat}/${map.lon}`;
-const coords = `${map.lat.toFixed(4)}°N · ${map.lon.toFixed(4)}°E`;
 const linkedin = site.social.linkedin;
 ---
 
-<section class="section c-split" id="form" aria-label={t('nav.contact')}>
+<section class="c-split" id="form" aria-label={t('nav.contact')}>
   <div class="container c-split__inner">
     <ContactForm lang={lang} page="contact" topics />
 
-    <aside class="c-cards">
-      <div class="c-card">
-        <p class="meta-s accent">{t('contact.hq')}</p>
-        <p class="c-card__big">{site.companyName}</p>
-        <address class="c-card__address">
-          {`${a.street}, ${a.box}`}
+    <aside class="c-card">
+      <div class="c-group c-group--hq">
+        <p class="c-label">{t('contact.hq')}</p>
+        <p class="c-value">{site.companyName}</p>
+        <address class="c-address">
+          <span class="c-street">{`${a.street}, ${a.box}`}</span>
           <br />
           {`${a.postalCode} ${a.city}, ${a.country}`}
         </address>
-        <a
-          class="c-card__map"
-          href={mapHref}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span class="meta-s num">{coords}</span>
-          <span>{t('contact.map')} ↗</span>
-        </a>
       </div>
 
-      <div class="c-card">
-        <p class="meta-s accent">{t('contact.email')}</p>
-        <a class="c-card__big" href={`mailto:${site.email}`}>
-          {site.email}
-        </a>
+      <div class="c-group">
+        <p class="c-label">{t('contact.email')}</p>
+        <a class="c-value c-link" href={`mailto:${site.email}`}>{site.email}</a>
       </div>
 
-      {site.phone && (
-        <div class="c-card">
-          <p class="meta-s accent">{t('contact.phone')}</p>
-          <a class="c-card__big num" href={telHref(site.phone)}>
-            {site.phone}
-          </a>
-        </div>
-      )}
+      {
+        site.phone && (
+          <div class="c-group">
+            <p class="c-label">{t('contact.phone')}</p>
+            <a class="c-value c-link num" href={telHref(site.phone)}>
+              {site.phone}
+            </a>
+          </div>
+        )
+      }
 
-      {linkedin && (
-        <div class="c-card">
-          <p class="meta-s accent">{t('contact.linkedin')}</p>
-          <a
-            class="c-card__big c-card__link"
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
-          </a>
-        </div>
-      )}
+      {
+        linkedin && (
+          <div class="c-group">
+            <p class="c-label">{t('contact.linkedin')}</p>
+            <a
+              class="c-icon"
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn DataTixx"
+            >
+              <IconLinkedin aria-hidden="true" />
+            </a>
+          </div>
+        )
+      }
     </aside>
   </div>
 </section>
 
 <style>
-  .accent {
-    color: var(--color-green);
-  }
-
+  /* Figma: 80 зверху, 112 знизу, 48 між колонками */
   .c-split {
-    padding-top: var(--space-12);
+    padding-block: clamp(var(--space-12), 5.5vw, var(--space-20)) var(--section-pad);
   }
 
   .c-split__inner {
     display: grid;
     gap: var(--space-12);
-    align-items: start;
   }
 
   @media (min-width: 1024px) {
     .c-split__inner {
       grid-template-columns: 772fr 420fr;
-      gap: var(--space-12);
+      grid-template-rows: auto 1fr;
+      column-gap: var(--space-12);
+      row-gap: var(--space-5);
+    }
+
+    /* Форма займає два ряди: 1 — теми, 2 — картка форми */
+    .c-split__inner > :global(.form) {
+      grid-row: 1 / span 2;
+      grid-template-rows: subgrid;
+    }
+
+    /* Після відправки панель «надіслано» стає на місце картки форми */
+    .c-split__inner :global(.form__done) {
+      grid-row: 2;
+    }
+
+    /* Картка контактів — у другому ряду, на всю висоту картки форми */
+    .c-card {
+      grid-column: 2;
+      grid-row: 2;
     }
   }
 
-  .c-cards {
-    display: grid;
-    gap: var(--space-5);
-  }
-
+  /* Figma «card — HQ»: фон #babbbd 10%, рамка білим 14%, радіус 20, відступи 36/24, між блоками 24 */
   .c-card {
-    display: grid;
-    gap: var(--space-3);
-    padding: var(--space-6);
-    background: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: clamp(var(--space-6), 2.5vw, 36px) var(--space-6);
+    background: var(--color-card);
     border: 1px solid var(--color-hairline);
     border-radius: 20px;
     min-width: 0;
   }
 
-  .c-card__big {
-    font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.875rem);
-    font-weight: var(--fw-semibold);
-    line-height: 1.2;
+  .c-group {
+    display: grid;
+    justify-items: start;
+    gap: 6px;
+  }
+
+  .c-group--hq {
+    gap: var(--space-3);
+  }
+
+  /* Мітки: IBM Plex Mono 11, +6%, зелені */
+  .c-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 16px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-green);
+  }
+
+  /* Назва, e-mail, телефон: Afacad Bold 32 / 140% */
+  .c-value {
+    font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+    font-weight: var(--fw-bold);
+    line-height: 1.4;
     overflow-wrap: anywhere;
   }
 
-  a.c-card__big:hover {
+  .c-link:hover {
     color: var(--color-green);
   }
 
-  .c-card__address {
+  .c-address {
     font-style: normal;
+    color: var(--color-text-secondary);
+  }
+
+  .c-street {
     text-transform: uppercase;
-    color: var(--color-text-soft);
   }
 
-  .c-card__map {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: var(--space-2);
-    margin-top: var(--space-2);
-    padding: var(--space-4);
-    border-radius: var(--radius-sm);
-    background:
-      linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / 24px
-        24px,
-      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 /
-        24px 24px,
-      var(--color-bg);
+  /* LinkedIn: блок 42×42, іконка 32, колір #dfdfdf */
+  .c-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    color: #dfdfdf;
+    transition: color var(--dur-fast) ease;
+  }
+
+  .c-icon :global(svg) {
+    width: 32px;
+    height: 32px;
+  }
+
+  .c-icon:hover {
     color: var(--color-green);
-  }
-
-  .c-card__map:hover {
-    outline: 1px solid var(--color-green);
   }
 </style>

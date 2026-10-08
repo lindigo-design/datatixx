@@ -45,7 +45,7 @@
     ]
   },
   "why": {
-    "label": "Pourquoi Tixx™",
+    "label": "Pourquoi Datixxia™",
     "titleLine1": "Pourquoi choisir notre",
     "titleLine2": "plateforme d'intelligence de marché",
     "lead": "Datixxia™ est un système de prévision économique inédit. Il calcule avec précision la croissance, le déclin, la part, la taille et la valeur passés, présents et futurs de tout secteur de marché et de ses acteurs, jusqu'à quatre ans à l'avance.",
@@ -70,7 +70,7 @@
   "about": {
     "label": "À propos",
     "title": "Facts for futures™",
-    "text": "Les États du monde publient plus de huit millions d'avis d'attribution de marchés chaque année. Chacun contient un acheteur, un fournisseur, une valeur et une durée. La plupart des plateformes les traitent comme des archives. Nous les traitons comme un signal vivant. Tixx™ absorbe ce flux de données structurées, l'harmonise dans 194 pays et montre l'économie réelle en mouvement. Pas d'analyse de sentiment. Pas de grands modèles de langage. Seulement l'arithmétique de la dépense publique, mise à jour chaque jour.",
+    "text": "Les États du monde publient plus de huit millions d'avis d'attribution de marchés chaque année. Chacun contient un acheteur, un fournisseur, une valeur et une durée. La plupart des plateformes les traitent comme des archives. Nous les traitons comme un signal vivant. Datixxia™ absorbe ce flux de données structurées, l'harmonise dans 194 pays et montre l'économie réelle en mouvement. Pas d'analyse de sentiment. Pas de grands modèles de langage. Seulement l'arithmétique de la dépense publique, mise à jour chaque jour.",
     "cta": "Qui sommes-nous"
   },
   "model": {
@@ -169,7 +169,7 @@
         "role": "PDG",
         "photo": "../../../assets/img/team/malcolm-duff.jpg",
         "photoAlt": "Portrait de Malcolm Duff",
-        "bio": "Ancien PDG de deux sociétés de traduction certifiées ISO 9001 et traducteur technique senior pour l'UNESCO à Paris, Malcolm a mené deux années de travaux de conception et de recherche qui ont donné naissance à Tixx™.\nIl a une grande expérience de la gestion de projets multinationaux, notamment avec des traducteurs de 33 pays pour Inttranet™, le premier portail multilingue au monde (ajouté à l'Observatoire de l'UNESCO sur la société de l'information en janvier 2006). Cette expérience et sa connaissance approfondie de l'application Tixx™ font de lui le PDG idéal pour son déploiement mondial.",
+        "bio": "Ancien PDG de deux sociétés de traduction certifiées ISO 9001 et traducteur technique senior pour l'UNESCO à Paris, Malcolm a mené deux années de travaux de conception et de recherche qui ont donné naissance à Datixxia™.\nIl a une grande expérience de la gestion de projets multinationaux, notamment avec des traducteurs de 33 pays pour Inttranet™, le premier portail multilingue au monde (ajouté à l'Observatoire de l'UNESCO sur la société de l'information en janvier 2006). Cette expérience et sa connaissance approfondie de l'application Datixxia™ font de lui le PDG idéal pour son déploiement mondial.",
         "linkedin": "",
         "x": "",
         "dribbble": ""
@@ -198,7 +198,7 @@
     "items": [
       {
         "q": "Est-ce de l'IA ?",
-        "a": "Non. Tixx™ n'utilise ni intelligence artificielle ni extrapolation statistique. Nous lisons uniquement des contrats publics signés et juridiquement contraignants, valides pendant des années."
+        "a": "Non. Datixxia™ n'utilise ni intelligence artificielle ni extrapolation statistique. Nous lisons uniquement des contrats publics signés et juridiquement contraignants, valides pendant des années."
       },
       {
         "q": "D'où viennent les données ?",
@@ -213,7 +213,7 @@
         "a": "Une offre gratuite permet de découvrir le terminal. L'offre Standard coûte 100 € et l'offre Premium 200 € par utilisateur et par mois, avec un accès complet aux indices et aux prévisions."
       },
       {
-        "q": "Qui utilise Tixx™ ?",
+        "q": "Qui utilise Datixxia™ ?",
         "a": "Les banques, les assureurs, les chambres de commerce, les analystes économiques et les MPME. Toute personne qui doit savoir ce que le secteur public va dépenser, et avec qui."
       }
     ]

@@ -23,14 +23,12 @@ $f = [
     'affiliations' => dtx_line('affiliations', 240),
     'comments'     => dtx_text('comments', 4000),
 ];
-$consent = ($_POST['consent'] ?? '') === '1';
 
 $required = ['country', 'city', 'district', 'postcode', 'organisation', 'address', 'phone', 'email', 'registration'];
 $errors = array_values(array_filter($required, fn($k) => $f[$k] === ''));
 if ($f['country'] !== '' && !preg_match('/^[A-Z]{2}$/', $f['country'])) $errors[] = 'country';
 if ($f['phone'] !== '' && !preg_match('/^[0-9 +().\-]{5,40}$/', $f['phone'])) $errors[] = 'phone';
 if ($f['websiteUrl'] !== '' && !filter_var($f['websiteUrl'], FILTER_VALIDATE_URL)) $errors[] = 'websiteUrl';
-if (!$consent) $errors[] = 'consent';
 if ($errors) dtx_respond(422, 'invalid', $lang, $page, ['fields' => array_values(array_unique($errors))]);
 
 $lines = ["Market survey ({$lang}) — " . gmdate('Y-m-d H:i') . ' UTC', ''];
@@ -42,4 +40,5 @@ $lines[] = '';
 $lines[] = $f['comments'] !== '' ? $f['comments'] : '(no comments)';
 
 $sent = dtx_mail($config, "Market survey: {$f['organisation']} ({$f['country']})", $lines, $f['email']);
+if ($sent) dtx_confirm($config, $f['email'], '', $lang);
 dtx_respond($sent ? 200 : 502, $sent ? 'ok' : 'send_failed', $lang, $page);

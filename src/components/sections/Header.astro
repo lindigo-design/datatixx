@@ -81,6 +81,26 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
                 </span>
                 {t(item.key)}
               </a>
+              {item.children && (
+                <ul role="list" class="menu__sub">
+                  {item.children.map(sub => {
+                    const subHref = localizePath(sub.path, lang);
+                    return (
+                      <li>
+                        <a
+                          class="menu__sublink"
+                          href={subHref}
+                          aria-current={
+                            current === subHref ? 'page' : undefined
+                          }
+                        >
+                          {t(sub.key)}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
             </li>
           );
         })}
@@ -253,8 +273,37 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
     color: var(--color-green);
   }
 
+  /* Підпункт (Partners → Chambers of commerce) */
+  .menu__sub {
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .menu__sub li + li {
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .menu__sublink {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) 0 var(--space-3) calc(var(--space-4) + 2ch);
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+    font-weight: var(--fw-medium);
+    color: var(--color-text-secondary);
+  }
+
+  .menu__sublink::before {
+    content: '↳';
+    color: var(--color-green);
+  }
+
+  .menu__sublink:hover,
+  .menu__sublink[aria-current='page'] {
+    color: var(--color-text);
+  }
+
   .menu__num {
-    font-size: var(--fs-small);
+    font-size: var(--fs-label-14);
     font-weight: var(--fw-medium);
     color: var(--color-text-muted);
     letter-spacing: var(--tracking-meta);

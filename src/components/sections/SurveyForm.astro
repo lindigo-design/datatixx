@@ -1,6 +1,7 @@
 ---
 /** Анкета для палат і мовних компаній (Figma: «Market Survey»). Обробник: public/api/survey.php. */
 import Button from '@/components/ui/Button.astro';
+import FormDone from '@/components/ui/FormDone.astro';
 import { useTranslations, type Locale } from '@/i18n/utils';
 import { countryOptions } from '@/utils/countries';
 
@@ -123,6 +124,7 @@ const pairs: [
   data-msg-success={t('form.success')}
   data-msg-error={t('form.error')}
   data-msg-required={t('form.required')}
+  data-msg-hint={t('form.hint')}
 >
   <input type="hidden" name="lang" value={lang} />
   <input type="hidden" name="ts" value="" data-ts />
@@ -189,16 +191,25 @@ const pairs: [
     ></textarea>
   </div>
 
-  <label class="form__consent">
-    <input type="checkbox" name="consent" value="1" required />
-    <span>{t('survey.consent')}</span>
-  </label>
-
   <div class="form__footer">
     <Button type="submit">{t('form.submit')}</Button>
     <p class="form__status" role="status" aria-live="polite" data-status></p>
+    <p class="form__hint" id="survey-hint" data-hint hidden></p>
+    <p class="form__note">{t('survey.privacyNote')}</p>
   </div>
+  <FormDone lang={lang} />
 </form>
+
+<style>
+  /* Figma «survey-form-card»: відступи 40, поле коментаря 120 */
+  .form-card {
+    padding: clamp(var(--space-6), 3vw, var(--space-10));
+  }
+
+  textarea {
+    min-height: 120px;
+  }
+</style>
 
 <script>
   import '@/scripts/forms';

@@ -49,7 +49,7 @@ const num = (i: number) => String(i).padStart(2, '0');
     <div class="bento">
       {main && (
         <article class="bento__card bento__card--main">
-          <p class="meta-s accent">{`01 — ${main.tag}`}</p>
+          <p class="meta-s mono accent">{`01 — ${main.tag}`}</p>
           <h3 class="bento__title bento__title--lg">{main.title}</h3>
           <p class="bento__text">{main.text}</p>
           <div class="bento__viz" aria-hidden="true">
@@ -57,7 +57,7 @@ const num = (i: number) => String(i).padStart(2, '0');
               <span class:list={['bento__bar', j >= 5 && 'is-forecast']} />
             ))}
           </div>
-          <p class="bento__caption meta-s">
+          <p class="bento__caption meta-s mono">
             <span>{main.vizCaption}</span>
             <span class="accent">{main.vizTag}</span>
           </p>
@@ -66,16 +66,16 @@ const num = (i: number) => String(i).padStart(2, '0');
       <div class="bento__stack">
         {members && (
           <article class="bento__card">
-            <p class="meta-s accent">{`02 — ${members.tag}`}</p>
+            <p class="meta-s mono accent">{`02 — ${members.tag}`}</p>
             <h3 class="bento__title">{members.title}</h3>
             <p class="bento__text">{members.text}</p>
           </article>
         )}
         {revenue && (
           <article class="bento__card bento__card--grad">
-            <p class="meta-s">{`03 — ${revenue.tag}`}</p>
+            <p class="meta-s mono bento__tag-light">{`03 — ${revenue.tag}`}</p>
             <h3 class="bento__title">{revenue.title}</h3>
-            <p>{revenue.text}</p>
+            <p class="bento__text bento__text--light">{revenue.text}</p>
           </article>
         )}
       </div>
@@ -110,6 +110,7 @@ const num = (i: number) => String(i).padStart(2, '0');
     color: var(--color-green);
   }
 
+  /* Figma: між блоками секції 64 */
   .nine__inner {
     display: grid;
     gap: var(--space-16);
@@ -147,18 +148,22 @@ const num = (i: number) => String(i).padStart(2, '0');
     gap: var(--space-6);
   }
 
+  /* Figma: скляна картка #babbbd 10%, рамка білим 14%, радіус 24, відступи 28, між рядками 12 */
   .bento__card {
     display: grid;
     align-content: start;
-    gap: var(--space-4);
-    padding: var(--space-8) 28px;
-    background: var(--color-surface);
+    gap: var(--space-3);
+    padding: 28px;
+    background: var(--color-card);
     border: 1px solid var(--color-hairline);
     border-radius: var(--radius-md);
+    min-width: 0;
   }
 
+  /* Велика картка: відступи 40/36, між рядками 16 */
   .bento__card--main {
-    padding: var(--space-10) var(--space-10) var(--space-12);
+    gap: var(--space-4);
+    padding: var(--space-10) 36px;
   }
 
   .bento__card--grad {
@@ -166,56 +171,65 @@ const num = (i: number) => String(i).padStart(2, '0');
     border-color: transparent;
   }
 
-  .bento__title {
-    font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.875rem);
-    font-weight: var(--fw-semibold);
-    line-height: 1.3;
+  .bento__tag-light {
+    color: var(--color-text);
   }
 
-  .bento__title--lg {
-    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.75rem);
+  /* Заголовки карток: Afacad Bold 32 / 140% */
+  .bento__title {
+    font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
     font-weight: var(--fw-bold);
-    line-height: 1.15;
+    line-height: 1.4;
+  }
+
+  /* Велика картка: Bold 48 / 100% */
+  .bento__title--lg {
+    font-size: clamp(1.875rem, 1.4rem + 1.9vw, 3rem);
+    line-height: 1.05;
   }
 
   .bento__text {
     color: var(--color-text-secondary);
   }
 
+  .bento__text--light {
+    color: var(--color-text);
+  }
+
+  /* Міні-графік: стовпчики 56 завширшки, 12 між ними, найвищий 118, радіус 4 */
   .bento__viz {
     display: flex;
     align-items: flex-end;
     gap: var(--space-3);
-    height: 120px;
-    margin-top: var(--space-6);
+    height: 118px;
+    margin-top: var(--space-4);
   }
 
   .bento__bar {
-    flex: 1;
-    max-width: 56px;
+    flex: 0 1 56px;
     background: #3d444d;
-    border-radius: 2px;
+    border-radius: 4px;
   }
 
   .bento__bar.is-forecast {
     background: linear-gradient(90deg, #42aa39, #27509e);
   }
 
-  /* висоти стовпчиків — без inline-стилів (CSP) */
+  /* висоти стовпчиків з Figma (44 68 56 88 72 118 96 з 118) — без inline-стилів (CSP) */
   .bento__bar:nth-child(1) {
-    height: 36%;
+    height: 37%;
   }
   .bento__bar:nth-child(2) {
-    height: 56%;
+    height: 58%;
   }
   .bento__bar:nth-child(3) {
-    height: 46%;
+    height: 47%;
   }
   .bento__bar:nth-child(4) {
-    height: 74%;
+    height: 75%;
   }
   .bento__bar:nth-child(5) {
-    height: 60%;
+    height: 61%;
   }
   .bento__bar:nth-child(6) {
     height: 100%;
@@ -226,19 +240,22 @@ const num = (i: number) => String(i).padStart(2, '0');
 
   .bento__caption {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    gap: var(--space-4);
+    gap: var(--space-2) var(--space-4);
+    margin-top: calc(var(--space-2) * -1); /* 8 від графіка, як у макеті */
   }
 
   /* ---------- Ще шість ---------- */
   .more {
     display: grid;
-    gap: var(--space-10);
+    gap: var(--space-16);
   }
 
   .more__title {
-    font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.875rem);
-    font-weight: var(--fw-semibold);
+    font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+    font-weight: var(--fw-bold);
+    line-height: 1.4;
   }
 
   .more__list {
@@ -259,29 +276,34 @@ const num = (i: number) => String(i).padStart(2, '0');
     }
   }
 
+  /* Рядок: номер 36 + 20 + текст; відступи 20/4 */
   .more__item {
     display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: var(--space-2);
-    padding-block: var(--space-6);
+    grid-template-columns: 36px 1fr;
+    gap: var(--space-5);
+    padding: var(--space-5) 4px;
     border-bottom: 1px solid var(--color-hairline);
   }
 
+  /* Номер: IBM Plex Mono Medium 14 */
   .more__num {
-    font-size: var(--fs-small);
-    font-weight: var(--fw-medium);
-    padding-top: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-label-14);
+    font-weight: 500;
+    line-height: 20px;
+    padding-top: var(--space-3);
   }
 
   .more__name {
-    font-size: clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem);
-    font-weight: var(--fw-semibold);
-    line-height: 1.3;
-    margin-bottom: var(--space-2);
+    font-size: clamp(1.375rem, 1.2rem + 0.75vw, 2rem);
+    font-weight: var(--fw-bold);
+    line-height: 1.4;
+    margin-bottom: 4px;
   }
 
   .more__text {
     font-size: var(--fs-small);
-    color: var(--color-text-secondary);
+    line-height: 1.5;
+    color: var(--color-text-muted);
   }
 </style>

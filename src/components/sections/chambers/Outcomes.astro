@@ -1,8 +1,8 @@
 ---
-/** «A sustainable revenue engine» — три картки-цифри, примітка і текст. */
-import { Image } from 'astro:assets';
-import aurora from '@/assets/img/home/bg-aurora-3.jpg';
-
+/**
+ * «A sustainable revenue engine» (Figma «Outcomes — Measurable»): три картки-цифри, примітка і текст.
+ * Фон — рівний темний, без зображення (як у макеті).
+ */
 interface Props {
   data: {
     label: string;
@@ -17,14 +17,6 @@ const { data } = Astro.props;
 ---
 
 <section class="section outcomes" aria-labelledby="outcomes-title">
-  <Image
-    src={aurora}
-    alt=""
-    class="section-bg outcomes__bg"
-    widths={[800, 1568]}
-    sizes="100vw"
-    loading="lazy"
-  />
   <div class="container outcomes__inner">
     <header class="outcomes__head">
       <p class="section-label">{data.label}</p>
@@ -37,25 +29,22 @@ const { data } = Astro.props;
     <dl class="outcomes__stats">
       {data.stats.map(s => (
         <div class="o-card">
-          <dt class="meta-s">{s.caption}</dt>
+          <dt class="meta-s mono">{s.caption}</dt>
           <dd class="o-card__value grad-text num">{s.value}</dd>
         </div>
       ))}
     </dl>
 
-    <p class="meta-s outcomes__note">{data.note}</p>
+    <p class="meta-s mono outcomes__note">{data.note}</p>
     <p class="outcomes__text">{data.text}</p>
   </div>
 </section>
 
 <style>
-  .outcomes__bg {
-    opacity: 0.4;
-  }
-
+  /* Figma: між блоками 48 */
   .outcomes__inner {
     display: grid;
-    gap: var(--space-10);
+    gap: var(--space-12);
   }
 
   .outcomes__head {
@@ -74,24 +63,30 @@ const { data } = Astro.props;
     }
   }
 
+  /* Скляна картка: #babbbd 10%, рамка білим 14%, радіус 24, відступи 32/28, між рядками 12 */
   .o-card {
     display: flex;
     flex-direction: column-reverse;
+    justify-content: flex-end;
     gap: var(--space-3);
     padding: var(--space-8) 28px;
-    background: var(--color-surface);
+    background: var(--color-card);
     border: 1px solid var(--color-hairline);
     border-radius: var(--radius-md);
+    min-width: 0;
   }
 
   .o-card dt {
     color: var(--color-text-secondary);
   }
 
+  /* Цифра: Afacad SemiBold 100 / 80%. Градієнт зелений → синій по ширині самої цифри */
   .o-card__value {
-    font-size: clamp(3.5rem, 2.9rem + 2.4vw, 5.25rem); /* 56 → 84 */
+    align-self: flex-start;
+    font-size: clamp(3.5rem, 2.4rem + 3.6vw, 6.25rem); /* 56 → 100 */
     font-weight: var(--fw-semibold);
-    line-height: 1;
+    line-height: 0.85;
+    padding-block: 0.06em; /* щоб градієнт не обрізав верх і низ літер */
     white-space: nowrap;
   }
 
@@ -100,7 +95,7 @@ const { data } = Astro.props;
   }
 
   .outcomes__text {
-    max-width: 840px;
+    max-width: 880px;
     margin-inline: auto;
     text-align: center;
     font-size: var(--fs-body-lg);

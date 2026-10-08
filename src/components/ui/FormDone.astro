@@ -1,0 +1,24 @@
+---
+/**
+ * Панель «Повідомлення надіслано» — з'являється замість полів форми після успішної відправки
+ * (керує scripts/forms.ts).
+ */
+import { useTranslations, type Locale } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="form__done" data-done hidden tabindex="-1" role="status">
+  <span class="form__done-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+  </span>
+  <p class="form__done-title">{t('form.doneTitle')}</p>
+  <p class="form__done-text">{t('form.doneText')}</p>
+  <button class="btn btn--outline" type="button" data-again>
+    {t('form.doneAgain')}
+  </button>
+</div>
