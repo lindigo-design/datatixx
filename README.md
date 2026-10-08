@@ -125,7 +125,7 @@ FAQ окремою сторінкою поки не робимо: меню і к
 - [ ] Відео для hero About: файл MP4 → `public/video/about-hero.mp4`, шлях у `src/pages/[lang]/about.astro` і `platform.astro` (`heroVideo`)
 - [ ] Фото для блоку «Turn data into opportunity» на Partners (зараз фірмова панель з логотипом)
 - [ ] Анкета для палат: дати в тексті (31.12.2025 і 02.01.2026) уже минули — оновити
-- [ ] Сторінки Benefits, Partners, Team, FAQ, Contact — за макетами з Figma
+- [ ] Сторінка FAQ (поки відкладена)
 - [ ] Privacy Policy, Terms of Service, Mentions légales
 - [ ] Hero-зображення у вищій якості для Retina (зараз 1568 px завширшки)
 - [ ] Зображення для LinkedIn-превʼю: `public/og-image.png` (1200×630)
