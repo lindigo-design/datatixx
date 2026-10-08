@@ -1,14 +1,24 @@
 ---
+/** Головна сторінка — порядок секцій як у Figma «Home • Desktop». */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/sections/Hero.astro';
-import Ticker from '@/components/sections/Ticker.astro';
+import Marquee from '@/components/sections/Marquee.astro';
+import Features from '@/components/sections/Features.astro';
+import WhyTixx from '@/components/sections/WhyTixx.astro';
+import PartnersStrip from '@/components/sections/PartnersStrip.astro';
+import About from '@/components/sections/About.astro';
+import ModelStats from '@/components/sections/ModelStats.astro';
+import BenefitsByRole from '@/components/sections/BenefitsByRole.astro';
+import Team from '@/components/sections/Team.astro';
+import CtaBand from '@/components/sections/CtaBand.astro';
+import Faq from '@/components/sections/Faq.astro';
 import {
   locales,
   localizePath,
   useTranslations,
   type Locale,
 } from '@/i18n/utils';
-import { getPage } from '@/content/helpers';
+import { getHome } from '@/content/helpers';
 
 export function getStaticPaths() {
   return locales.map(lang => ({ params: { lang } }));
@@ -16,22 +26,28 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang as Locale;
 const t = useTranslations(lang);
-const page = await getPage('home', lang);
+const page = await getHome(lang);
+const to = (path: string) => localizePath(path, lang);
 ---
 
 <BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
-  <Hero
-    label={page.heroLabel}
-    title={page.heroTitle ?? ''}
-    lead={page.heroLead}
-    ctaText={page.heroCta}
-    ctaHref={localizePath('contact', lang)}
-    image={page.heroImage}
-    imageAlt={page.heroImageAlt}
+  <Hero {...page.hero} primaryHref={to('contact')} secondaryHref="#features" />
+  <Marquee items={page.marquee} label={t('marquee.label')} />
+  <Features data={page.features} />
+  <WhyTixx
+    data={page.why}
+    primaryHref={to('benefits')}
+    secondaryHref={to('about')}
   />
-  {page.tickerItems && (
-    <Ticker items={page.tickerItems} label={t('ticker.label')} />
-  )}
-
-  {/* Далі секції з Figma: Features, Why Tixx™, Forecasting model, Benefits, Team, FAQ, CTA */}
+  <PartnersStrip label={t('partners.label')} />
+  <About data={page.about} ctaHref={to('about')} />
+  <ModelStats
+    data={page.model}
+    primaryHref={to('platform')}
+    secondaryHref={to('platform')}
+  />
+  <BenefitsByRole data={page.benefits} />
+  <Team data={page.team} />
+  <CtaBand data={page.cta} href={to('contact')} />
+  <Faq data={page.faq} buttonHref={to('contact')} />
 </BaseLayout>

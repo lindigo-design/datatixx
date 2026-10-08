@@ -17,6 +17,7 @@ export function getStaticPaths() {
     'faq',
     'legal',
     'privacy',
+    'terms',
   ];
   return locales.flatMap(lang =>
     pending.map(page => ({ params: { lang, page } }))
@@ -35,8 +36,8 @@ const { page } = Astro.params;
 >
   <section class="section">
     <div class="container">
-      <p class="label">In progress</p>
-      <h1 class="pending-title">{page}</h1>
+      <p class="section-label">In progress</p>
+      <h1 class="section-title pending-title">{page}</h1>
     </div>
   </section>
 </BaseLayout>

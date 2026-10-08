@@ -1,80 +1,121 @@
 /*
-  Дизайн-токени DataTixx.
-  Джерело правди — Figma (брендбук). Коли зчитаємо Figma, оновлюємо ТІЛЬКИ цей файл.
+  Дизайн-токени DataTixx — з Figma «Datatixx site Relume» → Redesign → Home • Desktop
+  (колекція змінних «Datixxia Web» + текстові стилі datatixx/*).
+  Змінюємо дизайн → оновлюємо ТІЛЬКИ цей файл.
 */
 :root {
-  /* Бренд */
-  --color-brand-green: #42aa39;
-  --color-brand-blue: #27509e;
-  --gradient-data: linear-gradient(90deg, #42aa39 0%, #27509e 100%);
+  /* ---------- Кольори ---------- */
+  --color-bg: #010912; /* surface/terminal */
+  --color-surface: #161b22; /* surface/terminal-raised */
+  --color-border: #3d444d; /* surface/terminal-border */
+  --color-footer: #01080c;
+  --color-paper: #f0f2f4; /* світлі картки */
+  --color-ink: #000c28; /* заголовки на світлому */
+  --color-ink-secondary: #3d444d; /* текст на світлому */
 
-  /* Поверхні */
-  --color-bg: #0a0e13;
-  --color-surface: #161b22;
-  --color-border: #3d444d;
-
-  /* Текст */
   --color-text: #ffffff;
+  --color-heading: #f0f2f4;
+  --color-text-soft: #dfdfdf;
+  --color-text-card: #c4c4c4;
   --color-text-secondary: #babbbd;
   --color-text-muted: #8b949e;
 
-  /* Стани */
+  --color-green: #42aa39;
+  --color-blue: #27509e;
+  --color-blue-2: #2e509d;
+  --color-cyan: #74d1ff;
+  --color-up: #42aa39;
   --color-success: #57ed4a;
+  --color-down: #ff5555;
   --color-warning: #f59e0b;
   --color-error: #ff5555;
   --color-focus: #57ed4a;
 
-  /* Типографіка — Afacad, локально (без Google Fonts) */
+  --color-hairline: rgb(255 255 255 / 0.14);
+  --color-card: rgb(186 187 189 / 0.1);
+  --color-glass: rgb(0 22 46 / 0.6);
+  --color-green-10: rgb(66 170 57 / 0.1);
+  --color-ticker-bg: rgb(22 27 34 / 0.2);
+
+  /* Градієнти */
+  --gradient-brand: linear-gradient(90deg, #42aa39 0%, #2e509d 100%);
+  --gradient-band: linear-gradient(90deg, #42aa39 0%, #27509e 100%);
+  --gradient-hero-fade: linear-gradient(
+    180deg,
+    rgb(11 19 30 / 0) 0%,
+    #010912 100%
+  );
+
+  /* ---------- Типографіка (Afacad скрізь) ---------- */
   --font-sans:
     'Afacad Variable', 'Afacad', system-ui, -apple-system, 'Segoe UI',
     sans-serif;
 
-  /* Плавні розміри: мінімум на телефоні → максимум на десктопі (цілі px) */
-  --fs-display: clamp(3rem, 1.6rem + 6vw, 8.75rem); /* 48 → 140 */
-  --fs-h1: clamp(2.5rem, 1.7rem + 3.6vw, 4.5rem); /* 40 → 72 */
-  --fs-h2: clamp(2rem, 1.5rem + 2.2vw, 3.5rem); /* 32 → 56 */
-  --fs-h3: clamp(1.5rem, 1.3rem + 0.8vw, 2rem); /* 24 → 32 */
-  --fs-body-lg: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem); /* 18 → 20 */
+  /* Плавно: телефон 360px → десктоп 1440px. Цілі px на краях. */
+  --fs-display: clamp(2.75rem, 1.4rem + 6vw, 6.75rem); /* 44 → 108 */
+  --fs-cta: clamp(2.5rem, 1.33rem + 5.2vw, 6rem); /* 40 → 96 */
+  --fs-stat: clamp(3.5rem, 2.85rem + 2.9vw, 5.25rem); /* 56 → 84 */
+  --fs-h2: clamp(2.5rem, 1.79rem + 3.15vw, 4.625rem); /* 40 → 74 */
+  --fs-marquee: clamp(1.5rem, 1.17rem + 1.48vw, 2.5rem); /* 24 → 40 */
+  --fs-subtitle: clamp(1.5rem, 1.25rem + 1.11vw, 2.25rem); /* 24 → 36 */
+  --fs-lead: clamp(1.25rem, 1.08rem + 0.74vw, 1.75rem); /* 20 → 28 */
+  --fs-h3: clamp(1.25rem, 1.17rem + 0.37vw, 1.5rem); /* 20 → 24 */
+  --fs-card-title: 1.375rem; /* 22 */
+  --fs-meta-m: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem); /* 18 → 20 */
+  --fs-button: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem); /* 18 → 20 */
+  --fs-body-lg: 1.125rem; /* 18 */
   --fs-body: 1rem; /* 16 */
   --fs-small: 0.875rem; /* 14 */
-  --fs-label: 0.8125rem; /* 13 */
+  --fs-meta-s: 0.75rem; /* 12 (у Figma 11 моноширинним; Afacad вужчий) */
 
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
 
-  --lh-tight: 1.05;
-  --lh-heading: 1.15;
-  --lh-body: 1.6;
+  --lh-display: 1.04; /* 112/108 */
+  --lh-h2: 0.95; /* у Figma 90%; трохи більше, щоб не злипались виносні елементи */
+  --lh-tight: 1;
+  --lh-snug: 1.27; /* 28/22 */
+  --lh-body: 1.5;
 
-  /* Відступи (крок 4px) */
+  --tracking-display: -0.02em;
+  --tracking-label: 0.16em;
+  --tracking-meta: 0.04em;
+  --tracking-role: 0.05em;
+
+  /* ---------- Простір і сітка ---------- */
+  --container-max: 1240px;
+  --gutter: clamp(1rem, -0.2rem + 5.4vw, 6.25rem); /* 16 → 100 */
+  --section-pad: clamp(4rem, 3.11rem + 3.95vw, 7rem); /* 64 → 112 */
+  --section-gap: clamp(3rem, 2.4rem + 2.6vw, 5rem); /* 48 → 80 */
+
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
+  --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
-  --space-24: 6rem;
-  --section-gap: clamp(4rem, 2.5rem + 6vw, 8rem);
+  --space-20: 5rem;
 
-  /* Контейнер */
-  --container-max: 1440px;
-  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem); /* 16 → 40 */
-
-  /* Форма */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
+  /* ---------- Форма ---------- */
+  --radius-xs: 6px;
+  --radius-sm: 16px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
+  --radius-xl: 40px;
   --radius-pill: 999px;
   --border: 1px solid var(--color-border);
 
-  /* Рух */
+  /* ---------- Рух ---------- */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-fast: 150ms;
   --dur-base: 300ms;
 
-  --header-h: 72px;
+  --nav-h: 74px;
+  --ticker-h: 40px;
 }

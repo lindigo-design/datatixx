@@ -1,0 +1,156 @@
+---
+/** Stats / 17 / — «Datixxia™ Forecasting Model» + 4 великі цифри. */
+import { Image } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import bg from '@/assets/img/home/bg-aurora-2.jpg';
+
+interface Props {
+  data: {
+    label: string;
+    title: string;
+    lead: string;
+    primaryCta: string;
+    secondaryCta: string;
+    stats: { value: string; caption: string }[];
+  };
+  primaryHref: string;
+  secondaryHref: string;
+}
+const { data, primaryHref, secondaryHref } = Astro.props;
+---
+
+<section class="section model" aria-labelledby="model-title">
+  <Image
+    src={bg}
+    alt=""
+    class="section-bg model__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container model__inner">
+    <header class="model__head">
+      <p class="section-label">{data.label}</p>
+      <h2 id="model-title" class="section-title align-end-lg">
+        {data.title}
+      </h2>
+      <p class="lead indent-first model__lead">{data.lead}</p>
+      <div class="actions model__actions">
+        <Button href={primaryHref}>{data.primaryCta}</Button>
+        <Button href={secondaryHref} variant="outline">
+          {data.secondaryCta}
+        </Button>
+      </div>
+    </header>
+
+    <dl class="stats">
+      {data.stats.map(s => (
+        <div class="stat">
+          <dt class="stat__caption">{s.caption}</dt>
+          <dd class="stat__value grad-text num">{s.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .model__bg {
+    opacity: 0.2;
+  }
+
+  .model__inner {
+    display: grid;
+    gap: var(--section-gap);
+  }
+
+  .model__head {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .model__lead {
+    --indent: 33%;
+    margin-top: var(--space-2);
+  }
+
+  .model__actions {
+    margin-top: var(--space-4);
+  }
+
+  @media (min-width: 1024px) {
+    .model__actions {
+      justify-content: flex-end;
+    }
+  }
+
+  .stats {
+    display: grid;
+    gap: var(--space-8) var(--space-3);
+  }
+
+  @media (min-width: 480px) {
+    .stats {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .stat {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    padding-left: var(--space-5);
+  }
+
+  /* Вертикальна градієнтна лінія ліворуч (крім першої) */
+  .stat + .stat::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, #42aa39, #2e509d);
+  }
+
+  @media (max-width: 479px) {
+    .stat {
+      padding-left: 0;
+    }
+    .stat + .stat::before {
+      display: none;
+    }
+  }
+
+  @media (min-width: 480px) and (max-width: 1023px) {
+    .stat:nth-child(3)::before {
+      display: none;
+    }
+    .stat:nth-child(odd) {
+      padding-left: 0;
+    }
+  }
+
+  .stat__value {
+    font-size: var(--fs-stat);
+    font-weight: var(--fw-semibold);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .stat__caption {
+    font-size: var(--fs-meta-m);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: var(--color-text-soft);
+  }
+</style>

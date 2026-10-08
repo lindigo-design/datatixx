@@ -1,0 +1,134 @@
+---
+/** Layout / 491 / — «Why choose our market intelligence platform». */
+import { Image } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import dashboard from '@/assets/img/home/dashboard.png';
+
+interface Props {
+  data: {
+    label: string;
+    titleLine1: string;
+    titleLine2: string;
+    lead: string;
+    primaryCta: string;
+    secondaryCta: string;
+    cards: { title: string; text: string }[];
+    imageAlt: string;
+  };
+  primaryHref: string;
+  secondaryHref: string;
+}
+const { data, primaryHref, secondaryHref } = Astro.props;
+---
+
+<section class="section why" aria-labelledby="why-title">
+  <div class="container why__inner">
+    <header class="why__head">
+      <div class="why__title-row">
+        <p class="section-label">{data.label}</p>
+        <h2 id="why-title" class="section-title align-end-lg">
+          {data.titleLine1}
+          <br />
+          <span class="grad-text">{data.titleLine2}</span>
+        </h2>
+      </div>
+      <p class="section-subtitle indent-first why__lead">{data.lead}</p>
+      <div class="actions">
+        <Button href={primaryHref}>{data.primaryCta}</Button>
+        <Button href={secondaryHref} variant="outline">
+          {data.secondaryCta}
+        </Button>
+      </div>
+    </header>
+
+    <div class="why__body">
+      <ul role="list" class="why__cards">
+        {data.cards.map(c => (
+          <li class="g-card why-card">
+            <h3 class="meta-m">{c.title}</h3>
+            <p>{c.text}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="why__media">
+        <Image
+          src={dashboard}
+          alt={data.imageAlt}
+          widths={[600, 1000, 1568]}
+          sizes="(min-width: 1024px) 550px, 100vw"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why__inner {
+    display: grid;
+    gap: clamp(var(--space-12), 4vw, var(--space-16));
+  }
+
+  .why__head {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .why__title-row {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 1024px) {
+    .why__title-row {
+      grid-template-columns: auto 1fr;
+      align-items: start;
+    }
+  }
+
+  .why__lead {
+    --indent: 34%;
+  }
+
+  .why__body {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  @media (min-width: 1024px) {
+    .why__body {
+      grid-template-columns: 610fr 550fr;
+      gap: var(--space-20);
+      align-items: stretch;
+    }
+  }
+
+  .why__cards {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .why-card {
+    display: grid;
+    align-content: start;
+    gap: var(--space-4);
+    padding: var(--space-6) var(--space-5);
+    font-size: var(--fs-body-lg);
+    color: var(--color-text-card);
+  }
+
+  .why__media {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--color-hairline);
+    background: var(--color-green);
+    min-height: 320px;
+  }
+
+  .why__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+  }
+</style>

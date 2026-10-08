@@ -1,7 +1,7 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-h) + var(--space-4));
+  scroll-padding-top: calc(var(--nav-h) + var(--space-4));
 }
 
 body {
@@ -12,6 +12,7 @@ body {
   background-color: var(--color-bg);
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
 }
 
 main {
@@ -20,39 +21,33 @@ main {
 
 h1,
 h2,
-h3 {
-  font-weight: var(--fw-semibold);
-  line-height: var(--lh-heading);
-  letter-spacing: -0.01em;
-}
-
-h1 {
-  font-size: var(--fs-h1);
-}
-h2 {
-  font-size: var(--fs-h2);
-}
-h3 {
-  font-size: var(--fs-h3);
+h3,
+h4 {
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-h2);
 }
 
 a {
   transition: color var(--dur-fast) ease;
 }
 
-/* Видимий фокус для клавіатури — вимога доступності WCAG 2.2 */
+/* Видимий фокус для клавіатури — WCAG 2.2 */
 :focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 3px;
-  border-radius: var(--radius-sm);
+  border-radius: 4px;
 }
 
 ::selection {
-  background: var(--color-brand-green);
+  background: var(--color-green);
   color: var(--color-bg);
 }
 
-/* Повага до налаштування «зменшити рух» */
+/* Цифри однакової ширини — для тікера, статистики, сум */
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

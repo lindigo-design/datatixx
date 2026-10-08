@@ -1,0 +1,69 @@
+---
+/** Marquee — use cases (Figma: 80px, градієнтна стрічка з великими словами). */
+interface Props {
+  items: string[];
+  label: string;
+}
+const { items, label } = Astro.props;
+---
+
+<section class="marquee" aria-label={label}>
+  <ul role="list" class="visually-hidden">
+    {items.map(i => (
+      <li>{i}</li>
+    ))}
+  </ul>
+  <div class="marquee__track" aria-hidden="true">
+    {[0, 1].map(() => (
+      <ul role="list" class="marquee__group">
+        {items.map(i => (
+          <li class="marquee__item">
+            {i}
+            <span class="marquee__dot">·</span>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</section>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    background: var(--gradient-band);
+    padding-block: var(--space-5);
+  }
+
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: marquee-move 45s linear infinite;
+  }
+
+  .marquee__group {
+    display: flex;
+  }
+
+  .marquee__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-10);
+    padding-right: var(--space-10);
+    font-size: var(--fs-marquee);
+    font-weight: var(--fw-bold);
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .marquee__dot {
+    font-size: 0.8em;
+    font-weight: var(--fw-semibold);
+  }
+
+  @keyframes marquee-move {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

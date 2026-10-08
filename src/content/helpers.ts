@@ -1,6 +1,15 @@
 import { getEntry } from 'astro:content';
 import type { Locale } from '@/i18n/utils';
 
+export async function getHome(lang: Locale) {
+  const entry = await getEntry('home', `${lang}/home`);
+  if (!entry)
+    throw new Error(
+      `Немає тексту головної: src/content/pages/${lang}/home.json`
+    );
+  return entry.data;
+}
+
 export async function getPage(slug: string, lang: Locale) {
   const entry = await getEntry('pages', `${lang}/${slug}`);
   if (!entry)
@@ -15,3 +24,6 @@ export async function getSiteSettings() {
   if (!entry) throw new Error('Немає src/content/site/settings.json');
   return entry.data;
 }
+
+/** Номер телефону для посилання tel: (без пробілів) */
+export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, '')}`;

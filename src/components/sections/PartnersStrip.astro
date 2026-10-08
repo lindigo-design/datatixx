@@ -1,0 +1,55 @@
+---
+/**
+ * Logos — смуга логотипів партнерів.
+ * TODO: ЗАРАЗ ЗАГЛУШКИ з шаблону (Webflow, Relume, OpenAI). Перед запуском —
+ * замінити на справжніх партнерів або прибрати секцію з головної.
+ */
+import Partner1 from '@/assets/icons/partner-1.svg';
+import Partner2 from '@/assets/icons/partner-2.svg';
+import PartnerOpenai from '@/assets/icons/partner-openai.svg';
+
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+const logos = [Partner1, Partner2, Partner1, Partner2, PartnerOpenai];
+---
+
+<section class="partners" aria-label={label}>
+  <ul role="list" class="partners__list">
+    {logos.map(Logo => (
+      <li>
+        <Logo class="partners__logo" aria-hidden="true" />
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .partners {
+    background: var(--gradient-band);
+    padding-block: var(--space-2);
+    overflow: hidden;
+  }
+
+  .partners__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-8);
+    min-height: 56px;
+    padding-inline: var(--gutter);
+  }
+
+  .partners__logo {
+    height: 40px;
+    width: auto;
+  }
+
+  @media (max-width: 639px) {
+    .partners__logo {
+      height: 32px;
+    }
+  }
+</style>

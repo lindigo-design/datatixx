@@ -2,7 +2,7 @@
   "skipToContent": "Aller au contenu",
   "nav.home": "Accueil",
   "nav.about": "À propos de Tixx™",
-  "nav.platform": "Plateforme",
+  "nav.platform": "Plateforme Tixx™",
   "nav.benefits": "Avantages",
   "nav.partners": "Partenaires",
   "nav.team": "Équipe",
@@ -12,7 +12,6 @@
   "menu.open": "Ouvrir le menu",
   "menu.close": "Fermer le menu",
   "lang.label": "Langue",
-  "footer.address": "Adresse",
   "footer.contact": "Contact",
   "footer.legal": "Mentions légales",
   "footer.privacy": "Politique de confidentialité",
@@ -28,5 +27,13 @@
   "form.success": "Merci. Votre message a bien été envoyé. Nous vous répondrons rapidement.",
   "form.error": "Une erreur s'est produite. Réessayez ou écrivez-nous par e-mail.",
   "form.required": "Veuillez remplir les champs marqués d'un *.",
-  "ticker.label": "Indices Tixx™"
+  "ticker.label": "Indices Tixx™ (valeurs indicatives)",
+  "nav.login": "Connexion",
+  "footer.terms": "Conditions d'utilisation",
+  "footer.social": "Réseaux sociaux",
+  "footer.phone": "Téléphone",
+  "footer.email": "E-mail",
+  "marquee.label": "Cas d'usage",
+  "partners.label": "Partenaires",
+  "home.home": "Accueil Datixxia"
 }

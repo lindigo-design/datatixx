@@ -11,26 +11,13 @@
   border: 0;
 }
 
-/* Моно-лейбл у стилі «01 / DATA» */
-.label {
-  font-size: var(--fs-label);
-  font-weight: var(--fw-medium);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.accent {
-  color: var(--color-brand-green);
-}
-
 .skip-link {
   position: absolute;
   top: var(--space-2);
   left: var(--space-2);
   z-index: 100;
   padding: var(--space-2) var(--space-4);
-  background: var(--color-brand-green);
+  background: var(--color-green);
   color: var(--color-bg);
   font-weight: var(--fw-semibold);
   border-radius: var(--radius-md);

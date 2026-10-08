@@ -1,0 +1,221 @@
+---
+/** Layout / 254 / — «Four instruments, one terminal». */
+import { Image } from 'astro:assets';
+import bg from '@/assets/img/home/bg-aurora-1.jpg';
+import ring from '@/assets/img/home/features-ring.jpg';
+import LogoSymbol from '@/assets/icons/logo-symbol.svg';
+import IconCalculate from '@/assets/icons/icon-calculate.svg';
+import IconContract from '@/assets/icons/icon-contract.svg';
+import IconVisibility from '@/assets/icons/icon-visibility.svg';
+import IconUniversal from '@/assets/icons/icon-universal.svg';
+import { boldBrand } from '@/utils/text';
+
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    subtitle: string;
+    items: { label: string; text: string }[];
+  };
+}
+const { data } = Astro.props;
+const icons = [IconCalculate, IconContract, IconVisibility, IconUniversal];
+const card = (i: number) => ({
+  ...data.items[i],
+  Icon: icons[i],
+  num: String(i + 1).padStart(2, '0'),
+});
+const left = [card(0), card(1)];
+const right = [card(2), card(3)];
+---
+
+<section
+  class="section features"
+  id="features"
+  aria-labelledby="features-title"
+>
+  <Image
+    src={bg}
+    alt=""
+    class="section-bg features__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container">
+    <header class="features__head">
+      <p class="section-label">{data.label}</p>
+      <h2 id="features-title" class="section-title">
+        {data.titleStart}{' '}
+        <span class="features__accent">{data.titleAccent}</span>
+      </h2>
+      <p class="section-subtitle">{data.subtitle}</p>
+    </header>
+
+    <div class="features__grid">
+      <ul role="list" class="features__col">
+        {left.map(({ Icon, num, label, text }) => (
+          <li class="g-card f-card">
+            <Icon class="f-card__icon" aria-hidden="true" />
+            <h3 class="meta-m">
+              <span class="num">{num}</span> {label}
+            </h3>
+            <p class="f-card__text" set:html={boldBrand(text)} />
+          </li>
+        ))}
+      </ul>
+
+      <div class="features__ring" aria-hidden="true">
+        <Image
+          src={ring}
+          alt=""
+          widths={[300, 600, 900]}
+          sizes="(min-width: 1024px) 390px, 280px"
+          loading="lazy"
+        />
+        <LogoSymbol class="features__symbol" />
+      </div>
+
+      <ul role="list" class="features__col">
+        {right.map(({ Icon, num, label, text }) => (
+          <li class="g-card f-card">
+            <Icon class="f-card__icon" aria-hidden="true" />
+            <h3 class="meta-m">
+              <span class="num">{num}</span> {label}
+            </h3>
+            <p class="f-card__text" set:html={boldBrand(text)} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features__bg {
+    opacity: 0.2;
+  }
+
+  .features__head {
+    display: grid;
+    gap: var(--space-4);
+    justify-items: center;
+    text-align: center;
+    margin-bottom: var(--section-gap);
+  }
+
+  .features__head .section-label {
+    justify-self: start;
+  }
+
+  .features__accent {
+    color: var(--color-green);
+  }
+
+  .features__head .section-subtitle {
+    color: var(--color-text-secondary);
+    max-width: 30ch;
+  }
+
+  @media (min-width: 768px) {
+    .features__head .section-subtitle {
+      max-width: none;
+    }
+  }
+
+  .features__grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .features__col {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .f-card {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    text-align: center;
+  }
+
+  /* Перша картка — трохи темніша, як у макеті */
+  .features__col:first-child .f-card:first-child {
+    background: var(--color-glass);
+  }
+
+  .f-card__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .f-card__text {
+    font-size: var(--fs-body-lg);
+    color: var(--color-text-secondary);
+    text-align: left;
+    justify-self: stretch;
+  }
+
+  .f-card__text :global(strong) {
+    font-weight: var(--fw-semibold);
+  }
+
+  .features__ring {
+    position: relative;
+    justify-self: center;
+    width: clamp(240px, 60vw, 390px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    order: -1;
+    box-shadow: 0 0 80px rgb(66 170 57 / 0.25);
+  }
+
+  .features__ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .features__symbol {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 36%;
+    height: auto;
+  }
+
+  /* Планшет: кільце зверху, картки 2×2 */
+  @media (min-width: 640px) {
+    .features__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .features__ring {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Десктоп: картки | кільце | картки */
+  @media (min-width: 1024px) {
+    .features__grid {
+      grid-template-columns: 1fr minmax(260px, 390px) 1fr;
+      align-items: center;
+      gap: var(--space-12);
+    }
+    .features__ring {
+      grid-column: auto;
+      order: 0;
+      width: 100%;
+    }
+    .features__col {
+      gap: var(--space-10);
+    }
+    .f-card {
+      min-height: 225px;
+    }
+  }
+</style>

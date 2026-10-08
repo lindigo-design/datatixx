@@ -1,0 +1,75 @@
+---
+/** Layout / 192 / — «Facts for futures™» на фоні глобуса, скляна панель праворуч. */
+import { Image } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import globe from '@/assets/img/home/about-globe.jpg';
+
+interface Props {
+  data: { label: string; title: string; text: string; cta: string };
+  ctaHref: string;
+}
+const { data, ctaHref } = Astro.props;
+---
+
+<section class="section about" aria-labelledby="about-title">
+  <Image
+    src={globe}
+    alt=""
+    class="section-bg about__bg"
+    widths={[800, 1280, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container about__inner">
+    <div class="g-card about__panel">
+      <p class="section-label">{data.label}</p>
+      <h2 id="about-title" class="section-title">
+        {data.title}
+      </h2>
+      <p class="about__text">{data.text}</p>
+      <div class="actions">
+        <Button href={ctaHref}>{data.cta}</Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    min-height: clamp(560px, 52vw, 751px);
+    display: flex;
+    align-items: center;
+  }
+
+  .about__bg {
+    object-position: 30% center;
+  }
+
+  .about__inner {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .about__panel {
+    display: grid;
+    gap: var(--space-4);
+    width: 100%;
+    max-width: 666px;
+    padding: clamp(var(--space-6), 3vw, var(--space-10));
+    background: var(--color-glass);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .about__text {
+    font-size: var(--fs-body-lg);
+    margin-bottom: var(--space-4);
+  }
+
+  @media (max-width: 767px) {
+    .about {
+      align-items: flex-end;
+      padding-top: 45vw;
+    }
+  }
+</style>

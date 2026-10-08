@@ -36,7 +36,9 @@ VS Code сам запропонує розширення Astro і Prettier — �
 ```
 src/
 ├─ components/
-│  ├─ sections/     ← секції сторінок: Header, Hero, Ticker, ContactForm, Footer
+│  ├─ sections/     ← секції: Header, TickerBar, Hero, Marquee, Features, WhyTixx,
+│  │                  PartnersStrip, About, ModelStats, BenefitsByRole, Team,
+│  │                  CtaBand, Faq, Footer, ContactForm
 │  └─ ui/           ← дрібні елементи: Button, Logo, LanguageSwitcher, IntroLoader
 ├─ layouts/
 │  └─ BaseLayout.astro   ← каркас сторінки: <head>, SEO, шапка, футер
@@ -53,11 +55,13 @@ src/
 │  ├─ ui/en|fr.json ← короткі написи інтерфейсу (меню, форма, футер)
 │  └─ nav.ts        ← пункти меню
 ├─ styles/
+│  ├─ components.css ← спільне: кнопки, картки з градієнтною рамкою, заголовки секцій
 │  ├─ tokens.css    ← КОЛЬОРИ, ШРИФТИ, ВІДСТУПИ з Figma — головний файл дизайну
 │  ├─ reset.css, base.css, container.css, utilities.css
 │  └─ global.css    ← підключає все по порядку
 ├─ scripts/         ← допоміжні скрипти
-└─ assets/img/      ← зображення (Astro сам стискає і робить WebP/AVIF)
+├─ assets/img/      ← зображення з Figma (Astro сам стискає і робить WebP)
+└─ assets/icons/    ← іконки, логотип, прапорці (SVG з Figma)
 public/
 ├─ .htaccess        ← налаштування сервера IONOS: HTTPS, захист, кеш
 ├─ api/contact.php  ← обробник форми
@@ -96,14 +100,23 @@ keystatic.config.ts ← які поля є в адмінці
 На сервері IONOS: скопіювати `api/config.example.php` → `api/config.php`
 і вписати справжню адресу скриньки. Без `config.php` форма відповідає помилкою.
 
+## Дизайн
+
+Джерело правди — Figma «Datatixx site Relume» → сторінка Redesign → **Home • Desktop**.
+Токени (кольори, шрифти, відступи) — у `src/styles/tokens.css`.
+Мобільної версії в Figma немає: адаптив зроблено в коді (телефон → планшет → десктоп).
+Шрифт — **Afacad скрізь**; для цифр увімкнено однакову ширину (`tabular-nums`).
+
 ## Що ще треба зробити
 
-- [ ] Справжній логотип з Figma (`src/components/ui/Logo.astro`)
-- [ ] Токени з Figma (`src/styles/tokens.css`)
-- [ ] Тексти і секції сторінок з Figma
-- [ ] Email для форми і контактів (`src/content/site/settings.json`, `config.php`)
-- [ ] Значення тікера: реальні дані або підпис «ілюстрація»
-- [ ] Mentions légales і політика конфіденційності
+- [ ] Смуга логотипів партнерів — ЗАРАЗ ЗАГЛУШКИ (Webflow, Relume, OpenAI): замінити або прибрати до запуску
+- [ ] Цифри в тікері й міні-графіках Benefits — ілюстративні
+- [ ] Посилання для кнопки Login (`settings.json` → `loginUrl`; поки порожнє — кнопку сховано)
+- [ ] Посилання на соцмережі компанії і команди (поки порожні — іконки сховано)
+- [ ] Перевірити французькі тексти (переклад чорновий)
+- [ ] Сторінки About, Platform, Benefits, Partners, Team, FAQ, Contact — за макетами з Figma
+- [ ] Privacy Policy, Terms of Service, Mentions légales
+- [ ] Hero-зображення у вищій якості для Retina (зараз 1568 px завширшки)
 - [ ] Зображення для LinkedIn-превʼю: `public/og-image.png` (1200×630)
 - [ ] Редиректи зі старих адрес WordPress (`public/.htaccess`)
 - [ ] Підключення IONOS Deploy Now і домену

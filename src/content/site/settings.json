@@ -1,15 +1,31 @@
 {
-  "companyName": "DataTixx SaS",
+  "companyName": "DataTixx SAS",
   "brandName": "Datixxia™",
   "tagline": "See Tomorrow. Act Today.",
   "address": {
+    "city": "Rouen",
     "street": "Passage de la Luciline",
     "box": "CS 40641",
     "postalCode": "76000",
-    "city": "Rouen",
     "country": "France"
   },
   "email": "contact@datatixx.com",
-  "phone": "",
-  "linkedin": "https://www.linkedin.com/company/datatixx/"
+  "phone": "+33 6 15 57 54 59",
+  "loginUrl": "",
+  "social": {
+    "linkedin": "",
+    "x": "",
+    "facebook": "",
+    "instagram": "",
+    "youtube": ""
+  },
+  "ticker": [
+    { "name": "Tixx™ Global", "value": 128.42, "change": 1.2 },
+    { "name": "Tixx™ Europe", "value": 112.07, "change": 0.8 },
+    { "name": "Tixx™ Americas", "value": 134.91, "change": -0.3 },
+    { "name": "Tixx™ APAC", "value": 121.55, "change": 2.1 },
+    { "name": "Construction", "value": 98.44, "change": -1.1 },
+    { "name": "Energy", "value": 141.02, "change": 3.4 },
+    { "name": "Healthcare", "value": 119.76, "change": 0.5 }
+  ]
 }

@@ -1,0 +1,418 @@
+---
+/** Layout / 381 / — «What you can do with Datixxia™»: 4 ролі, у кожної картка з міні-графіком і 3 сценарії. */
+interface Role {
+  audience: string;
+  name: string;
+  cardTitle: string;
+  cardText: string;
+  vizCaption: string;
+  vizTag: string;
+  cases: string[];
+}
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    lead: string;
+    note: string;
+    roles: Role[];
+  };
+}
+const { data } = Astro.props;
+
+// Ілюстративні дані міні-графіків (як у макеті)
+const bars = 6; // висоти стовпчиків — у CSS (nth-child), останній — прогноз
+const forward = [
+  { label: '2026', value: '€ 4.2M', tone: 'strong' },
+  { label: '2027', value: '€ 3.6M', tone: 'mid' },
+  { label: '2028', value: '€ 2.9M', tone: 'low' },
+];
+const cascade = [
+  { label: 'Award', value: '€ 12.4M', accent: true },
+  { label: 'Subcontracts', value: '€ 4.9M' },
+  { label: 'Supply', value: '€ 2.3M' },
+];
+const share = [
+  { label: 'Co. A', change: '+4.2%', up: true },
+  { label: 'Co. B', change: '+1.1%', up: true },
+  { label: 'Co. C', change: '−2.8%', up: false },
+];
+---
+
+<section class="section benefits" aria-labelledby="benefits-title">
+  <div class="container benefits__inner">
+    <header class="benefits__head">
+      <p class="section-label">{data.label}</p>
+      <h2 id="benefits-title" class="section-title align-end-lg">
+        {data.titleStart} <span class="grad-text">{data.titleAccent}</span>
+      </h2>
+      <p class="section-subtitle indent-first benefits__lead">{data.lead}</p>
+      <p class="benefits__note">{data.note}</p>
+    </header>
+
+    <ol role="list" class="roles">
+      {data.roles.map((role, i) => (
+        <li class="role">
+          <div class="role__head">
+            <p class="meta-s">
+              <span>{String(i + 1).padStart(2, '0')}</span>&nbsp;&nbsp;
+              {role.audience}
+            </p>
+            <h3 class="role__name">{role.name}</h3>
+          </div>
+
+          <div class="case-card">
+            <p class="case-card__title">{role.cardTitle}</p>
+            <p class="case-card__text">{role.cardText}</p>
+
+            <div class="viz" aria-hidden="true">
+              {i === 0 && (
+                <div class="viz-bars">
+                  {Array.from({ length: bars }, (_, j) => (
+                    <span
+                      class:list={[
+                        'viz-bars__bar',
+                        j === bars - 1 && 'is-forecast',
+                      ]}
+                    />
+                  ))}
+                </div>
+              )}
+              {i === 1 && (
+                <ul role="list" class="viz-rows">
+                  {forward.map(r => (
+                    <li class:list={['viz-row', `is-${r.tone}`]}>
+                      <span class="meta-s">{r.label}</span>
+                      <span class="viz-row__value num">{r.value}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {i === 2 && (
+                <ul role="list" class="viz-rows">
+                  {cascade.map(r => (
+                    <li
+                      class:list={[
+                        'viz-row',
+                        r.accent ? 'is-strong' : 'is-mid',
+                      ]}
+                    >
+                      <span class:list={['meta-s', r.accent && 'is-accent']}>
+                        {r.label}
+                      </span>
+                      <span class="viz-row__value num">{r.value}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {i === 3 && (
+                <ul role="list" class="viz-share">
+                  {share.map(r => (
+                    <li class="viz-share__row">
+                      <span class="meta-s">{r.label}</span>
+                      <span
+                        class:list={[
+                          'viz-share__bar',
+                          r.up ? 'is-up' : 'is-down',
+                        ]}
+                      />
+                      <span
+                        class:list={[
+                          'viz-share__change num',
+                          r.up ? 'is-up' : 'is-down',
+                        ]}
+                      >
+                        {r.change}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <p class="case-card__caption meta-s">
+              <span>{role.vizCaption}</span>
+              {role.vizTag && <span class="is-accent">{role.vizTag}</span>}
+            </p>
+          </div>
+
+          <ul role="list" class="cases">
+            {role.cases.map(c => (
+              <li class="cases__item">
+                <span>{c}</span>
+                <span class="cases__arrow" aria-hidden="true">
+                  →
+                </span>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .benefits__inner {
+    display: grid;
+    gap: var(--section-gap);
+  }
+
+  .benefits__head {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .benefits__lead {
+    --indent: 24%;
+    color: var(--color-heading);
+    margin-top: var(--space-2);
+  }
+
+  .benefits__note {
+    font-size: var(--fs-body-lg);
+    color: var(--color-heading);
+  }
+
+  @media (min-width: 1024px) {
+    .benefits__note {
+      text-align: right;
+    }
+  }
+
+  /* ---------- 4 ролі ---------- */
+  .roles {
+    display: grid;
+    gap: var(--space-12) var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .roles {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .roles {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Картки однакової висоти в одному ряду */
+  @media (min-width: 640px) {
+    .roles {
+      grid-auto-rows: auto auto auto;
+    }
+    .role {
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+      row-gap: var(--space-4);
+    }
+  }
+
+  .role {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: var(--space-4);
+  }
+
+  .role__head {
+    display: grid;
+    gap: var(--space-2);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .role__name {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+    line-height: 1.4;
+    letter-spacing: var(--tracking-role);
+    text-transform: uppercase;
+    color: var(--color-green);
+  }
+
+  /* ---------- Світла картка ---------- */
+  .case-card {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: var(--space-2);
+    min-height: 304px;
+    padding: var(--space-5);
+    background: var(--color-paper);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink-secondary);
+  }
+
+  .case-card__title {
+    font-size: var(--fs-card-title);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+    color: var(--color-ink);
+  }
+
+  .case-card__text {
+    font-size: var(--fs-body);
+  }
+
+  .case-card__caption {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding-top: var(--space-2);
+  }
+
+  .is-accent {
+    color: var(--color-green);
+  }
+
+  .viz {
+    align-self: end;
+    padding-top: var(--space-2);
+  }
+
+  /* Стовпчики */
+  .viz-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-2);
+    height: 134px;
+  }
+
+  .viz-bars__bar {
+    flex: 1;
+    max-width: 30px;
+    background: #3d444d;
+    border-radius: 1px;
+  }
+
+  /* Висоти стовпчиків (без inline-стилів — так вимагає CSP) */
+  .viz-bars__bar:nth-child(1) {
+    height: 36%;
+  }
+  .viz-bars__bar:nth-child(2) {
+    height: 58%;
+  }
+  .viz-bars__bar:nth-child(3) {
+    height: 46%;
+  }
+  .viz-bars__bar:nth-child(4) {
+    height: 76%;
+  }
+  .viz-bars__bar:nth-child(5) {
+    height: 63%;
+  }
+  .viz-bars__bar:nth-child(6) {
+    height: 100%;
+  }
+
+  .viz-bars__bar.is-forecast {
+    background: linear-gradient(180deg, #42aa39, #27509e);
+  }
+
+  /* Темні рядки з сумами */
+  .viz-rows {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .viz-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 32px;
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-bg);
+    border-radius: var(--radius-xs);
+  }
+
+  .viz-row__value {
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+  }
+
+  .viz-row.is-strong .viz-row__value {
+    color: var(--color-text);
+  }
+
+  .viz-row.is-mid .viz-row__value {
+    color: var(--color-text-secondary);
+  }
+
+  .viz-row.is-low .viz-row__value {
+    color: var(--color-text-muted);
+  }
+
+  /* Частка конкурентів */
+  .viz-share {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .viz-share__row {
+    display: grid;
+    grid-template-columns: 44px auto auto;
+    justify-content: start;
+    align-items: center;
+    column-gap: var(--space-3);
+  }
+
+  .viz-share__bar {
+    height: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--gradient-brand);
+  }
+
+  .viz-share__row:nth-child(1) .viz-share__bar {
+    width: 96px;
+  }
+  .viz-share__row:nth-child(2) .viz-share__bar {
+    width: 70px;
+  }
+  .viz-share__row:nth-child(3) .viz-share__bar {
+    width: 46px;
+  }
+
+  .viz-share__bar.is-down {
+    background: #3d444d;
+  }
+
+  .viz-share__change {
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+  }
+
+  .viz-share__change.is-up {
+    color: var(--color-up);
+  }
+
+  .viz-share__change.is-down {
+    color: var(--color-down);
+  }
+
+  /* ---------- Сценарії зі стрілками ---------- */
+  .cases {
+    display: grid;
+    align-content: start;
+  }
+
+  .cases__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: 48px;
+    padding: var(--space-3) var(--space-1);
+    color: var(--color-text-secondary);
+  }
+
+  .cases__item + .cases__item {
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .cases__arrow {
+    color: var(--color-green);
+    font-size: var(--fs-small);
+  }
+</style>

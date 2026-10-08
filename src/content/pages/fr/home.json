@@ -1,18 +1,221 @@
 {
   "seoTitle": "Datixxia™ — Intelligence de marché et prévisions à 4 ans",
-  "seoDescription": "DataTixx transforme les données officielles de marchés publics de 194 pays en intelligence de marché et en prévisions à 4 ans.",
-  "heroLabel": "01 / Intelligence de marché",
-  "heroTitle": "See Tomorrow. Act Today.",
-  "heroLead": "Texte provisoire. Le vrai texte viendra de Figma.",
-  "heroCta": "Nous contacter",
-  "heroImage": null,
-  "heroImageAlt": "",
-  "tickerItems": [
-    { "name": "Tixx™ Global", "change": 1.13 },
-    { "name": "Tixx™ FR", "change": 0.12 },
-    { "name": "Tixx™ US", "change": 0.29 },
-    { "name": "Tixx™ DE", "change": -0.41 },
-    { "name": "Tixx™ 500", "change": 0.87 },
-    { "name": "Tixx™ 1000", "change": -0.08 }
-  ]
+  "seoDescription": "Datixxia™ transforme chaque jour les données des marchés publics et privés de 194 pays en intelligence économique en temps réel et en prévisions à 4 ans.",
+  "hero": {
+    "title": "Datixxia™ : intelligence de marché et prévisions à 4 ans",
+    "lead": "Datixxia™ est une plateforme d'intelligence de marché. Elle transforme chaque jour les données des marchés publics et privés en intelligence économique en temps réel et en prévisions à 4 ans pour chaque secteur.",
+    "primaryCta": "Nous contacter",
+    "secondaryCta": "En savoir plus",
+    "imageAlt": ""
+  },
+  "marquee": [
+    "See tomorrow. Act today",
+    "Investissements",
+    "Fusions-acquisitions",
+    "Nouvelles implantations",
+    "Fournisseurs",
+    "Recrutement",
+    "Risques",
+    "Concurrents",
+    "Prix",
+    "Promotion"
+  ],
+  "features": {
+    "label": "Fonctionnalités",
+    "titleStart": "Quatre instruments,",
+    "titleAccent": "un seul terminal",
+    "subtitle": "Les outils essentiels pour lire les données mondiales des marchés publics",
+    "items": [
+      {
+        "label": "Calculer la valeur",
+        "text": "Datixxia™ donne la valeur passée et actuelle de tout secteur de marché, et la prévoit jusqu'à 4 ans à l'avance."
+      },
+      {
+        "label": "Prévisions empiriques",
+        "text": "La plateforme fournit des prévisions micro-économiques, et non macro-économiques, fondées sur des données valides pour l'avenir plutôt que sur des hypothèses."
+      },
+      {
+        "label": "Visibilité économique",
+        "text": "Notre modèle donne une visibilité financière et économique aux micro, petites et moyennes entreprises (MPME)."
+      },
+      {
+        "label": "Universel",
+        "text": "Datixxia™ s'adresse à toutes les entreprises du monde, des banques aux boulangeries."
+      }
+    ]
+  },
+  "why": {
+    "label": "Pourquoi Tixx™",
+    "titleLine1": "Pourquoi choisir notre",
+    "titleLine2": "plateforme d'intelligence de marché",
+    "lead": "Datixxia™ est un système de prévision économique inédit. Il calcule avec précision la croissance, le déclin, la part, la taille et la valeur passés, présents et futurs de tout secteur de marché et de ses acteurs, jusqu'à quatre ans à l'avance.",
+    "primaryCta": "Avantages",
+    "secondaryCta": "En savoir plus",
+    "cards": [
+      {
+        "title": "Aucune extrapolation par l'IA",
+        "text": "Nous ne devinons jamais. Les modèles statistiques peuvent se tromper. Un contrat signé, non. Notre terminal montre uniquement ce que les États et les organismes publics se sont déjà engagés à acheter."
+      },
+      {
+        "title": "Des contrats qui restent valides",
+        "text": "Un avis d'attribution reste exploitable jusqu'à quatre ans après sa publication. Nous suivons chaque avenant, chaque euro, jusqu'à la fin des travaux."
+      },
+      {
+        "title": "Une valeur future exacte",
+        "text": "Vous voyez la valeur exacte, l'acheteur exact, le fournisseur exact et le calendrier exact. Ce n'est pas un indicateur de sentiment. C'est un registre de l'activité économique future. Brevet déposé à l'INPI, réf. DSO2023020065."
+      }
+    ],
+    "imageAlt": "Tableau de bord Datixxia™ : nombre d'attributions, valeurs prévues et réelles par année et par pays"
+  },
+  "about": {
+    "label": "À propos",
+    "title": "Facts for futures™",
+    "text": "Les États du monde publient plus de huit millions d'avis d'attribution de marchés chaque année. Chacun contient un acheteur, un fournisseur, une valeur et une durée. La plupart des plateformes les traitent comme des archives. Nous les traitons comme un signal vivant. Tixx™ absorbe ce flux de données structurées, l'harmonise dans 194 pays et montre l'économie réelle en mouvement. Pas d'analyse de sentiment. Pas de grands modèles de langage. Seulement l'arithmétique de la dépense publique, mise à jour chaque jour.",
+    "cta": "Qui sommes-nous"
+  },
+  "model": {
+    "label": "Modèle",
+    "title": "Le modèle de prévision Datixxia™",
+    "lead": "Les appels d'offres publics financent les priorités d'un pays et déclenchent une réaction en chaîne. Un contrat principal se divise en sous-contrats, commandes et services qui irriguent les PME et les MPME pendant des années. Datixxia™ lit ces cascades chaque jour dans 194 pays et les transforme en perspectives sectorielles pour les principaux acteurs du marché, avec une précision pragmatique, toujours liée au document source.",
+    "primaryCta": "Plateforme",
+    "secondaryCta": "En savoir plus",
+    "stats": [
+      {
+        "value": "194",
+        "caption": "Pays couverts"
+      },
+      {
+        "value": "8M+",
+        "caption": "Avis d'attribution suivis"
+      },
+      {
+        "value": "525 Md€",
+        "caption": "Marchés publics de l'UE suivis"
+      },
+      {
+        "value": "4 ans",
+        "caption": "Horizon de prévision"
+      }
+    ]
+  },
+  "benefits": {
+    "label": "Avantages",
+    "titleStart": "Ce que vous pouvez faire avec",
+    "titleAccent": "Datixxia™",
+    "lead": "Datixxia™ applique des calculs exclusifs aux sources quotidiennes des marchés publics et privés. Résultat : une intelligence de marché par secteur et par acteur, à grande échelle, avec des prévisions à 4 ans cohérentes et vérifiables.",
+    "note": "Quatorze façons dont le terminal travaille pour vous — trouvez la vôtre selon votre métier.",
+    "roles": [
+      {
+        "audience": "Stratèges et analystes",
+        "name": "Stratégie",
+        "cardTitle": "Mesurez tout marché, à tout niveau",
+        "cardText": "Des études de marché fondées sur les montants attribués, pas sur des estimations.",
+        "vizCaption": "Valeur du secteur 22–27",
+        "vizTag": "Prévision",
+        "cases": [
+          "Choisir de nouvelles implantations",
+          "Trouver d'autres secteurs de marché",
+          "Comparer la croissance des pays et des villes"
+        ]
+      },
+      {
+        "audience": "Banques, assureurs, investisseurs",
+        "name": "Finance et risque",
+        "cardTitle": "Vérifiez l'avenir avant d'investir",
+        "cardText": "Investissements et fusions-acquisitions face au chiffre d'affaires contracté.",
+        "vizCaption": "CA futur contracté",
+        "vizTag": "",
+        "cases": [
+          "Repérer les secteurs à risque",
+          "Intégrer les données boursières",
+          "Justifier les décisions de crédit"
+        ]
+      },
+      {
+        "audience": "Achats et RH",
+        "name": "Opérations",
+        "cardTitle": "Suivez l'argent tout au long de la chaîne",
+        "cardText": "Toutes les opportunités au sein d'un grand marché public.",
+        "vizCaption": "Un marché — toute la cascade",
+        "vizTag": "",
+        "cases": [
+          "Trouver de nouveaux fournisseurs",
+          "Trouver de nouvelles recrues",
+          "Justifier vos prix"
+        ]
+      },
+      {
+        "audience": "Ventes et marketing",
+        "name": "Croissance",
+        "cardTitle": "Voyez chaque concurrent gagner ou perdre",
+        "cardText": "Croissance et déclin des concurrents, du passé au futur.",
+        "vizCaption": "Part des attributions — en direct",
+        "vizTag": "",
+        "cases": [
+          "Identifier de nouveaux concurrents",
+          "Mettre en avant votre classement Datixxia™",
+          "Repérer la demande avant l'appel d'offres"
+        ]
+      }
+    ]
+  },
+  "team": {
+    "label": "Équipe",
+    "title": "Notre équipe",
+    "intro": "Une équipe de terrain qui connaît les données et les marchés publics",
+    "members": [
+      {
+        "name": "Malcolm Duff",
+        "role": "PDG",
+        "photo": "../../../assets/img/team/malcolm-duff.jpg",
+        "photoAlt": "Portrait de Malcolm Duff",
+        "bio": "Ancien PDG de deux sociétés de traduction certifiées ISO 9001 et traducteur technique senior pour l'UNESCO à Paris, Malcolm a mené deux années de travaux de conception et de recherche qui ont donné naissance à Tixx™.\nIl a une grande expérience de la gestion de projets multinationaux, notamment avec des traducteurs de 33 pays pour Inttranet™, le premier portail multilingue au monde (ajouté à l'Observatoire de l'UNESCO sur la société de l'information en janvier 2006). Cette expérience et sa connaissance approfondie de l'application Tixx™ font de lui le PDG idéal pour son déploiement mondial.",
+        "linkedin": "",
+        "x": "",
+        "dribbble": ""
+      },
+      {
+        "name": "Yana Levchenko",
+        "role": "CPO",
+        "photo": "../../../assets/img/team/yana-levchenko.jpg",
+        "photoAlt": "Portrait de Yana Levchenko",
+        "bio": "Un an seulement après avoir fui la guerre en Ukraine avec ses enfants et ses animaux, Yana a fondé sa propre agence de web design. Elle a une solide expérience en cybersécurité et en informatique, et de larges compétences en web design au service d'une clientèle en forte croissance. Elle apporte aussi à l'équipe son sens du détail et de l'esthétique de photographe professionnelle, publiée dans des magazines du monde entier.",
+        "linkedin": "",
+        "x": "",
+        "dribbble": ""
+      }
+    ]
+  },
+  "cta": {
+    "title": "See Tomorrow. Act Today.",
+    "text": "Rejoignez le terminal qui lit les contrats sur lesquels l'avenir se construit.",
+    "button": "Nous contacter"
+  },
+  "faq": {
+    "title": "FAQ",
+    "lead": "Des réponses directes aux questions que l'on nous pose le plus souvent.",
+    "button": "Contact",
+    "items": [
+      {
+        "q": "Est-ce de l'IA ?",
+        "a": "Non. Tixx™ n'utilise ni intelligence artificielle ni extrapolation statistique. Nous lisons uniquement des contrats publics signés et juridiquement contraignants, valides pendant des années."
+      },
+      {
+        "q": "D'où viennent les données ?",
+        "a": "Nous intégrons chaque jour les avis d'attribution de marchés publics et privés de 194 pays. Chaque donnée correspond à un vrai acheteur, un vrai fournisseur et une vraie valeur engagée."
+      },
+      {
+        "q": "Jusqu'où vont les prévisions ?",
+        "a": "Notre modèle en cascade, en cours de brevet, produit des prévisions vérifiables à quatre ans. Chaque projection est liée à un document source que vous pouvez consulter vous-même."
+      },
+      {
+        "q": "Combien ça coûte ?",
+        "a": "Une offre gratuite permet de découvrir le terminal. L'offre Standard coûte 100 € et l'offre Premium 200 € par utilisateur et par mois, avec un accès complet aux indices et aux prévisions."
+      },
+      {
+        "q": "Qui utilise Tixx™ ?",
+        "a": "Les banques, les assureurs, les chambres de commerce, les analystes économiques et les MPME. Toute personne qui doit savoir ce que le secteur public va dépenser, et avec qui."
+      }
+    ]
+  }
 }

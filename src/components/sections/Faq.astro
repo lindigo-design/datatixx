@@ -1,0 +1,147 @@
+---
+/** FAQ / 3 / — питання-відповіді (акордеон на <details>, працює без JS). */
+import { Image } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import Chevron from '@/assets/icons/chevron.svg';
+import bg from '@/assets/img/home/bg-aurora-3.jpg';
+
+interface Props {
+  data: {
+    title: string;
+    lead: string;
+    button: string;
+    items: { q: string; a: string }[];
+  };
+  buttonHref: string;
+}
+const { data, buttonHref } = Astro.props;
+---
+
+<section class="section faq" aria-labelledby="faq-title">
+  <Image
+    src={bg}
+    alt=""
+    class="section-bg faq__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container faq__inner">
+    <header class="faq__head">
+      <h2 id="faq-title" class="faq__title">
+        {data.title}
+      </h2>
+      <p class="lead faq__lead">{data.lead}</p>
+      <div class="actions">
+        <Button href={buttonHref} variant="outline">
+          {data.button}
+        </Button>
+      </div>
+    </header>
+
+    <div class="faq__list">
+      {data.items.map((item, i) => (
+        <details class="faq-item" open={i === 0}>
+          <summary class="faq-item__q">
+            <h3>{item.q}</h3>
+            <Chevron class="faq-item__icon" aria-hidden="true" />
+          </summary>
+          <p class="faq-item__a">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__bg {
+    opacity: 0.4;
+  }
+
+  .faq__inner {
+    display: grid;
+    gap: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .faq__inner {
+      grid-template-columns: 500fr 660fr;
+      gap: var(--space-20);
+      align-items: start;
+    }
+  }
+
+  .faq__head {
+    display: grid;
+    gap: var(--space-6);
+    justify-items: start;
+  }
+
+  .faq__title {
+    font-size: clamp(2.5rem, 2.2rem + 1.3vw, 3rem);
+    font-weight: var(--fw-bold);
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--color-text-soft);
+  }
+
+  .faq__lead {
+    color: var(--color-text-soft);
+  }
+
+  .faq-item {
+    position: relative;
+  }
+
+  .faq-item::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: var(--gradient-brand);
+  }
+
+  .faq-item__q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-6);
+    padding: var(--space-5) 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-item__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__q h3 {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    line-height: 1.4;
+    color: var(--color-text-soft);
+  }
+
+  .faq-item__q:hover h3 {
+    color: var(--color-text);
+  }
+
+  .faq-item__icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    color: var(--color-text-soft);
+    transform: rotate(180deg);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .faq-item[open] .faq-item__icon {
+    transform: none;
+  }
+
+  .faq-item__a {
+    padding-bottom: var(--space-6);
+    color: var(--color-text-soft);
+    max-width: 62ch;
+  }
+</style>

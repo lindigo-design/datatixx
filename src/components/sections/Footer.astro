@@ -1,8 +1,14 @@
 ---
+/** Footer / 15 / — логотип, адреса, контакти, соцмережі, меню, юридичні посилання. */
 import Logo from '@/components/ui/Logo.astro';
+import IconFacebook from '@/assets/icons/social-facebook.svg';
+import IconInstagram from '@/assets/icons/social-instagram.svg';
+import IconX from '@/assets/icons/social-x.svg';
+import IconLinkedin from '@/assets/icons/social-linkedin.svg';
+import IconYoutube from '@/assets/icons/social-youtube.svg';
 import { localizePath, useTranslations, type Locale } from '@/i18n/utils';
-import { mainNav } from '@/i18n/nav';
-import { getSiteSettings } from '@/content/helpers';
+import { footerNav } from '@/i18n/nav';
+import { getSiteSettings, telHref } from '@/content/helpers';
 
 interface Props {
   lang: Locale;
@@ -11,120 +17,170 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const site = await getSiteSettings();
 const year = new Date().getFullYear();
+const a = site.address;
+
+// Показуємо лише ті соцмережі, для яких вписано посилання в settings.json
+const socials = [
+  { url: site.social.facebook, Icon: IconFacebook, name: 'Facebook' },
+  { url: site.social.instagram, Icon: IconInstagram, name: 'Instagram' },
+  { url: site.social.x, Icon: IconX, name: 'X' },
+  { url: site.social.linkedin, Icon: IconLinkedin, name: 'LinkedIn' },
+  { url: site.social.youtube, Icon: IconYoutube, name: 'YouTube' },
+].filter(s => s.url);
 ---
 
 <footer class="footer">
-  <div class="container footer__grid">
-    <div class="footer__brand">
-      <Logo />
-      <p class="footer__tagline">{site.tagline}</p>
-    </div>
+  <div class="container">
+    <div class="footer__top">
+      <a
+        href={localizePath('', lang)}
+        class="footer__logo"
+        aria-label={t('home.home')}
+      >
+        <Logo width={517} height={123} />
+      </a>
 
-    <nav aria-label={t('nav.main')}>
-      <ul role="list" class="footer__list">
-        {mainNav.map(item => (
-          <li>
-            <a href={localizePath(item.path, lang)}>{t(item.key)}</a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+      <div class="footer__info">
+        <div class="footer__block">
+          <p class="footer__heading">{a.city}</p>
+          <address class="footer__address">
+            {`${site.companyName}, ${a.street}, ${a.box}, ${a.postalCode} ${a.city}, ${a.country}`}
+          </address>
+        </div>
 
-    <div>
-      <p class="label">{t('footer.address')}</p>
-      <address class="footer__address">
-        {site.companyName}
-        <br />
-        {site.address.street}
-        <br />
-        {site.address.box}
-        <br />
-        {site.address.postalCode} {site.address.city}, {site.address.country}
-      </address>
-    </div>
+        <div class="footer__block">
+          <p class="footer__heading">{t('footer.contact')}</p>
+          <ul role="list" class="footer__contacts">
+            {site.phone && (
+              <li>
+                <a href={telHref(site.phone)}>{site.phone}</a>
+              </li>
+            )}
+            <li>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </li>
+          </ul>
+        </div>
 
-    <div>
-      <p class="label">{t('footer.contact')}</p>
-      <ul role="list" class="footer__list">
-        <li>
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-        </li>
-        {site.phone && (
-          <li>
-            <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>
-          </li>
+        {socials.length > 0 && (
+          <ul
+            role="list"
+            class="footer__social"
+            aria-label={t('footer.social')}
+          >
+            {socials.map(({ url, Icon, name }) => (
+              <li>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={name}
+                >
+                  <Icon aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
         )}
+      </div>
+
+      <nav aria-label={t('nav.main')}>
+        <ul role="list" class="footer__menu">
+          {footerNav.map(item => (
+            <li>
+              <a href={localizePath(item.path, lang)}>{t(item.key)}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">{`© ${year} ${site.companyName}. ${t('footer.rights')}`}</p>
+      <ul role="list" class="footer__legal">
         <li>
-          <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
-            LinkedIn
-          </a>
+          <a href={localizePath('privacy', lang)}>{t('footer.privacy')}</a>
+        </li>
+        <li>
+          <a href={localizePath('terms', lang)}>{t('footer.terms')}</a>
+        </li>
+        <li>
+          <a href={localizePath('legal', lang)}>{t('footer.legal')}</a>
         </li>
       </ul>
     </div>
-  </div>
-
-  <div class="container footer__bottom">
-    <p>
-      © {year} {site.companyName}. {t('footer.rights')}
-    </p>
-    <ul role="list" class="footer__legal">
-      <li>
-        <a href={localizePath('legal', lang)}>{t('footer.legal')}</a>
-      </li>
-      <li>
-        <a href={localizePath('privacy', lang)}>{t('footer.privacy')}</a>
-      </li>
-    </ul>
   </div>
 </footer>
 
 <style>
   .footer {
-    border-top: var(--border);
-    padding-top: var(--space-16);
-    color: var(--color-text-secondary);
+    background: var(--color-footer);
+    padding-block: clamp(var(--space-12), 5.5vw, var(--space-20))
+      var(--space-10);
     font-size: var(--fs-small);
+    color: var(--color-text-soft);
   }
 
-  .footer__grid {
+  .footer a:hover {
+    color: var(--color-green);
+  }
+
+  .footer__top {
+    position: relative;
     display: grid;
-    gap: var(--space-8);
-    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    padding-bottom: var(--space-5);
   }
 
-  @media (min-width: 640px) {
-    .footer__grid {
-      grid-template-columns: repeat(2, 1fr);
+  .footer__top::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: var(--gradient-brand);
+  }
+
+  @media (min-width: 768px) {
+    .footer__top {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer__logo {
+      grid-column: 1 / -1;
     }
   }
 
-  @media (min-width: 1024px) {
-    .footer__grid {
-      grid-template-columns: 2fr 1fr 1fr 1fr;
+  @media (min-width: 1200px) {
+    .footer__top {
+      grid-template-columns: 517fr 371fr 256fr;
+      gap: var(--space-16);
+    }
+    .footer__logo {
+      grid-column: auto;
     }
   }
 
-  .footer__brand {
-    color: var(--color-text);
+  .footer__logo {
+    display: block;
+    max-width: 517px;
   }
 
-  .footer__tagline {
-    margin-top: var(--space-4);
-    color: var(--color-brand-green);
-    font-size: var(--fs-body-lg);
+  .footer__logo :global(.logo) {
+    width: 100%;
   }
 
-  .footer__list {
+  .footer__info {
+    display: grid;
+    gap: var(--space-6);
+    align-content: start;
+  }
+
+  .footer__block {
     display: grid;
     gap: var(--space-2);
   }
 
-  .footer .label {
-    margin-bottom: var(--space-3);
-  }
-
-  .footer a:hover {
-    color: var(--color-text);
+  .footer__heading {
+    font-weight: var(--fw-semibold);
   }
 
   .footer__address {
@@ -132,19 +188,62 @@ const year = new Date().getFullYear();
     line-height: var(--lh-body);
   }
 
+  .footer__contacts a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .footer__social {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .footer__social a {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+  }
+
+  .footer__social :global(svg) {
+    width: 24px;
+    height: 24px;
+  }
+
+  .footer__menu {
+    display: grid;
+    align-content: start;
+  }
+
+  .footer__menu a {
+    display: block;
+    padding-block: var(--space-2);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-semibold);
+  }
+
   .footer__bottom {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: var(--space-4);
-    margin-top: var(--space-12);
-    padding-block: var(--space-6);
-    border-top: var(--border);
-    color: var(--color-text-muted);
+    gap: var(--space-4) var(--space-16);
+    padding-top: var(--space-8);
+    color: var(--color-text-card);
+    opacity: 0.63;
+  }
+
+  .footer__copy {
+    text-transform: uppercase;
   }
 
   .footer__legal {
     display: flex;
-    gap: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+  }
+
+  .footer__legal a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 </style>

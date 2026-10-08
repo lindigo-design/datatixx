@@ -1,0 +1,81 @@
+---
+/** CTA — «SEE TOMORROW. ACT TODAY.» на градієнтній стрічці. */
+import { Image } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import texture from '@/assets/img/home/bg-aurora-2.jpg';
+
+interface Props {
+  data: { title: string; text: string; button: string };
+  href: string;
+}
+const { data, href } = Astro.props;
+---
+
+<section class="cta" aria-labelledby="cta-title">
+  <div class="cta__band">
+    <Image
+      src={texture}
+      alt=""
+      class="cta__texture"
+      widths={[800, 1568]}
+      sizes="100vw"
+      loading="lazy"
+    />
+    <h2 id="cta-title" class="cta__title">
+      {data.title}
+    </h2>
+    <p class="cta__text">{data.text}</p>
+    <Button href={href} variant="light">
+      {data.button}
+    </Button>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding: 0 clamp(var(--space-4), 4.4vw, var(--space-16))
+      clamp(var(--space-12), 6.6vw, 6rem);
+  }
+
+  .cta__band {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    justify-items: center;
+    gap: var(--space-6);
+    max-width: 1312px;
+    margin-inline: auto;
+    padding: clamp(var(--space-12), 5.5vw, var(--space-20))
+      clamp(var(--space-5), 4.4vw, var(--space-16));
+    border-radius: var(--radius-lg);
+    background: var(--gradient-band);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .cta__texture {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+    mix-blend-mode: soft-light;
+  }
+
+  .cta__title {
+    font-size: var(--fs-cta);
+    font-weight: var(--fw-semibold);
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .cta__text {
+    font-size: var(--fs-meta-m);
+    line-height: 1.4;
+    max-width: 52ch;
+  }
+</style>

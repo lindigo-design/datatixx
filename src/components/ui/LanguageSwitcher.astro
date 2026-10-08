@@ -1,4 +1,7 @@
 ---
+/** Вибір мови: «EN 🇬🇧» з випадним списком. Працює без JavaScript (<details>). */
+import FlagUk from '@/assets/icons/flag-uk.svg';
+import FlagFr from '@/assets/icons/flag-fr.svg';
 import {
   locales,
   switchLocale,
@@ -12,49 +15,113 @@ interface Props {
 }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const flags = { en: FlagUk, fr: FlagFr } as const;
+const Current = flags[lang];
 ---
 
-<nav class="lang" aria-label={t('lang.label')}>
+<details class="lang" data-lang-switcher>
+  <summary
+    class="lang__current"
+    aria-label={`${t('lang.label')}: ${localeNames[lang]}`}
+  >
+    <span aria-hidden="true">{lang.toUpperCase()}</span>
+    <Current class="lang__flag" aria-hidden="true" />
+  </summary>
   <ul role="list" class="lang__list">
-    {locales.map(l => (
-      <li>
-        <a
-          class="lang__link"
-          href={switchLocale(Astro.url.pathname, l)}
-          hreflang={l}
-          lang={l}
-          aria-current={l === lang ? 'true' : undefined}
-          title={localeNames[l]}
-        >
-          {l.toUpperCase()}
-        </a>
-      </li>
-    ))}
+    {locales.map(l => {
+      const Flag = flags[l];
+      return (
+        <li>
+          <a
+            class="lang__link"
+            href={switchLocale(Astro.url.pathname, l)}
+            hreflang={l}
+            lang={l}
+            aria-current={l === lang ? 'true' : undefined}
+          >
+            <Flag class="lang__flag" aria-hidden="true" />
+            {localeNames[l]}
+          </a>
+        </li>
+      );
+    })}
   </ul>
-</nav>
+</details>
 
 <style>
-  .lang__list {
+  .lang {
+    position: relative;
+  }
+
+  .lang__current {
     display: flex;
-    gap: var(--space-1);
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding-inline: var(--space-2);
+    font-size: var(--fs-meta-m);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--tracking-meta);
+    cursor: pointer;
+    list-style: none;
+    border-radius: var(--radius-xs);
+  }
+
+  .lang__current::-webkit-details-marker {
+    display: none;
+  }
+
+  .lang__flag {
+    width: 28px;
+    height: 28px;
+  }
+
+  .lang__list {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    right: 0;
+    z-index: 10;
+    min-width: 180px;
+    padding: var(--space-2);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 16px 40px rgb(0 0 0 / 0.4);
   }
 
   .lang__link {
-    display: inline-grid;
-    place-items: center;
-    min-width: 40px;
-    min-height: 40px;
-    font-size: var(--fs-small);
-    font-weight: var(--fw-medium);
-    color: var(--color-text-muted);
-    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 44px;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-xs);
+    color: var(--color-text-secondary);
   }
 
   .lang__link:hover {
+    background: var(--color-green-10);
     color: var(--color-text);
   }
 
   .lang__link[aria-current='true'] {
-    color: var(--color-brand-green);
+    color: var(--color-green);
   }
 </style>
+
+<script>
+  // Закрити список кліком поза ним або клавішею Escape
+  for (const el of document.querySelectorAll<HTMLDetailsElement>(
+    '[data-lang-switcher]'
+  )) {
+    document.addEventListener('click', e => {
+      if (el.open && !el.contains(e.target as Node)) el.open = false;
+    });
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && el.open) {
+        el.open = false;
+        el.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>
