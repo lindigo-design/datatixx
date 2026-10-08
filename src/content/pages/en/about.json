@@ -1,0 +1,94 @@
+{
+  "seoTitle": "About Datixxia™ — Market intelligence from procurement data",
+  "seoDescription": "Datixxia™ turns daily contract award notices from 194 countries into real-time business intelligence and reliable 4-year forecasts.",
+  "hero": {
+    "label": "About Datixxia™",
+    "title": "Market intelligence platform",
+    "lead": "Datixxia™ is a procurement-based market intelligence platform. We turn daily contract award notices from 194 countries into real-time business intelligence and reliable 4-year forecasts.",
+    "primaryCta": "Platform",
+    "secondaryCta": "Benefits",
+    "imageAlt": ""
+  },
+  "story": {
+    "label": "Facts",
+    "titleStart": "The story behind the",
+    "titleAccent": "signal",
+    "subtitle": "Three acts on why the old models fall short — and what we built instead.",
+    "acts": [
+      {
+        "tag": "Act I",
+        "title": "Foresight has always been survival",
+        "text": "From oracles and astrologers to cartomancy and quantum computers, people and enterprises have always tried to anticipate obstacles — so they could act early and avoid the pitfalls.",
+        "stamp": ""
+      },
+      {
+        "tag": "Act II",
+        "title": "Why forecasting matters now",
+        "text": "The global economy changes fast: ecologically, technologically, geopolitically. Forecasting is vital in every industry, from weather reports to winning ratios. Managers, analysts and investors rely on it to allocate budgets, estimate trends and plan resources.",
+        "stamp": ""
+      },
+      {
+        "tag": "Act III",
+        "title": "The flaw in traditional forecasting",
+        "text": "Most forecasting systems share one inherent flaw: they extrapolate past data to infer a possible future. Even with artificial intelligence, the analysis remains conjectural. Contingencies intervene, uncertainty persists — and the farther a forecast projects, the less precise it becomes.",
+        "stamp": "Not Datixxia™"
+      }
+    ]
+  },
+  "discovery": {
+    "label": "Discovery",
+    "titleStart": "Like",
+    "titleAccent": "apples",
+    "titleEnd": "falling from a tree…",
+    "lead": "Some discoveries stem from everyday facts so simple they go unnoticed.",
+    "text": "So it was with Datixxia™. Used for years by majors to monitor competitors in specific market sectors and countries, Datixxia™ processes the data in all the public and private contract awards. As a result, it can accurately and reliably calculate the relative future value of any market sector — and of its players — up to 4 years in advance.",
+    "imageAlt": "A green apple falling, with motion lines and physics measurements around it"
+  },
+  "manifesto": {
+    "label": "Why it matters",
+    "text": "Every form of economic analysis and forecasting is exponentially improved by this ground-breaking methodology. Whatever its size or location, every company finds the hard data it needs about the prospects for its specific market — to form a strategy for its own, unique future.",
+    "signature": "Only Datixxia™ provides those Facts for Futures™."
+  },
+  "data": {
+    "label": "Data",
+    "titleStart": "Data quality comes",
+    "titleAccent": "first",
+    "lead": "When you aim to forecast the future, your data must be solid. The quality of any output depends on the quality of the input — so we start by securing the best inputs.",
+    "pillars": [
+      {
+        "tag": "Sources",
+        "title": "Official, daily sources across 194 countries",
+        "text": "Datixxia™ downloads data each working day from official central, regional and local government websites in 194 countries, as indicated in the contract references. Sources are refreshed continuously to capture new award notices."
+      },
+      {
+        "tag": "Standards",
+        "title": "Accounting & normalization principles",
+        "text": "We apply proprietary calculation formulas and GAAP-compatible accounting principles, including country-specific and commodity-specific depreciation and inflation rates. Results stay pertinent and comparable, whatever the timescale."
+      },
+      {
+        "tag": "Method",
+        "title": "A complementary layer to traditional forecasting",
+        "text": "Data quality also depends on how you use it. Datixxia™ serves as a supplemental intelligence layer alongside traditional forecasting methods: we supply the data — and the tools to shape it to your needs."
+      }
+    ]
+  },
+  "tools": {
+    "label": "Tools",
+    "titleLine1": "Simple tools,",
+    "titleLine2": "flexible exports",
+    "text": "Like any truly useful tools, the Grafixx™ dashboards are easy to understand and quick to use — so teams integrate insights into existing workflows with minimal friction.",
+    "points": [
+      "Download raw data for your own graphics app",
+      "Create basic charts directly in the dashboard",
+      "Export charts together with the data"
+    ],
+    "primaryCta": "See the platform",
+    "secondaryCta": "Benefits",
+    "imageAlt": "Grafixx™ dashboard: overview with filters, key figures and a bar chart of plan and fact values by year"
+  },
+  "cta": {
+    "title": "See the full advantage.",
+    "text": "Move from reactive reporting to pre-emptive strategy. The contracts are already signed. Read them first.",
+    "button": "Contact us"
+  }
+}

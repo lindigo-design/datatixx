@@ -109,9 +109,71 @@ const home = defineCollection({
     }),
 });
 
-// ---------- Інші сторінки ----------
+// ---------- About ----------
+const titled = {
+  label: z.string(),
+  titleStart: z.string(),
+  titleAccent: z.string(),
+};
+
+const about = defineCollection({
+  loader: glob({ pattern: '*/about.json', base: './src/content/pages' }),
+  schema: z.object({
+    ...seo,
+    hero: z.object({
+      label: z.string(),
+      title: z.string(),
+      lead: z.string(),
+      imageAlt: z.string(),
+      ...twoCtas,
+    }),
+    story: z.object({
+      ...titled,
+      subtitle: z.string(),
+      acts: z.array(
+        z.object({
+          tag: z.string(),
+          title: z.string(),
+          text: z.string(),
+          stamp: z.string(),
+        })
+      ),
+    }),
+    discovery: z.object({
+      ...titled,
+      titleEnd: z.string(),
+      lead: z.string(),
+      text: z.string(),
+      imageAlt: z.string(),
+    }),
+    manifesto: z.object({
+      label: z.string(),
+      text: z.string(),
+      signature: z.string(),
+    }),
+    data: z.object({
+      ...titled,
+      lead: z.string(),
+      pillars: z.array(
+        z.object({ tag: z.string(), title: z.string(), text: z.string() })
+      ),
+    }),
+    tools: z.object({
+      label: z.string(),
+      titleLine1: z.string(),
+      titleLine2: z.string(),
+      text: z.string(),
+      points: z.array(z.string()),
+      ...twoCtas,
+      imageAlt: z.string(),
+    }),
+    cta: z.object({ title: z.string(), text: z.string(), button: z.string() }),
+  }),
+});
+
+// ---------- Прості сторінки (контакти тощо) ----------
 const pages = defineCollection({
-  loader: glob({ pattern: '*/!(home).json', base: './src/content/pages' }),
+  loader: glob({ pattern: '*/contact.json', base: './src/content/pages' }),
   schema: z.object({
     ...seo,
     title: z.string(),
@@ -152,4 +214,4 @@ const site = defineCollection({
   }),
 });
 
-export const collections = { home, pages, site };
+export const collections = { home, about, pages, site };

@@ -1,0 +1,110 @@
+---
+/** Data — Pillars: «Data quality comes first» + три рядки 01/02/03. */
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    lead: string;
+    pillars: { tag: string; title: string; text: string }[];
+  };
+}
+const { data } = Astro.props;
+---
+
+<section class="section pillars" aria-labelledby="pillars-title">
+  <div class="container pillars__inner">
+    <header class="pillars__head">
+      <p class="section-label">{data.label}</p>
+      <h2 id="pillars-title" class="section-title align-end-lg">
+        {data.titleStart} <span class="accent">{data.titleAccent}</span>
+      </h2>
+      <p class="section-subtitle indent-first pillars__lead">{data.lead}</p>
+    </header>
+
+    <ol role="list" class="pillars__list">
+      {data.pillars.map((p, i) => (
+        <li class="pillar">
+          <span class="pillar__num grad-text num" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <div class="pillar__title">
+            <p class="meta-s accent">{p.tag}</p>
+            <h3>{p.title}</h3>
+          </div>
+          <p class="pillar__text">{p.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .accent {
+    color: var(--color-green);
+  }
+
+  .pillars__inner {
+    display: grid;
+    gap: var(--section-gap);
+  }
+
+  .pillars__head {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .pillars__lead {
+    --indent: 44%;
+    color: var(--color-text-secondary);
+  }
+
+  .pillars__list {
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .pillar {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-4) var(--space-6);
+    padding-block: var(--space-10);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  @media (min-width: 1024px) {
+    .pillar {
+      grid-template-columns: 128px 468fr 548fr;
+      gap: var(--space-12);
+    }
+  }
+
+  .pillar__num {
+    font-size: clamp(3.5rem, 2.6rem + 3.9vw, 6.25rem); /* 56 → 100 */
+    font-weight: var(--fw-semibold);
+    line-height: 0.8;
+  }
+
+  .pillar__title {
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+  }
+
+  .pillar__title h3 {
+    font-size: clamp(1.75rem, 1.28rem + 2.1vw, 3rem); /* 28 → 48 */
+    font-weight: var(--fw-bold);
+    line-height: 1;
+  }
+
+  .pillar__text {
+    grid-column: 1 / -1;
+    font-size: var(--fs-body-lg);
+    color: var(--color-text-secondary);
+  }
+
+  @media (min-width: 1024px) {
+    .pillar__text {
+      grid-column: auto;
+    }
+  }
+</style>

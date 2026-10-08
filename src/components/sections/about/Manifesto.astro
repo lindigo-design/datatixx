@@ -1,0 +1,53 @@
+---
+/** Promise — Manifesto: великий текст-маніфест по центру. */
+import { Image } from 'astro:assets';
+import bg from '@/assets/img/home/bg-aurora-1.jpg';
+
+interface Props {
+  data: { label: string; text: string; signature: string };
+}
+const { data } = Astro.props;
+---
+
+<section class="section manifesto" aria-label={data.label}>
+  <Image
+    src={bg}
+    alt=""
+    class="section-bg manifesto__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container">
+    <div class="manifesto__inner">
+      <p class="section-label">{data.label}</p>
+      <p class="manifesto__text">{data.text}</p>
+      <p class="manifesto__signature grad-text">{data.signature}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .manifesto__bg {
+    opacity: 0.2;
+    transform: scaleX(-1);
+  }
+
+  .manifesto__inner {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-8);
+    max-width: 960px;
+    margin-inline: auto;
+  }
+
+  .manifesto__text {
+    font-size: clamp(1.75rem, 1.28rem + 2.1vw, 3rem); /* 28 → 48 */
+    line-height: 1.05;
+  }
+
+  .manifesto__signature {
+    font-size: var(--fs-lead);
+    text-align: center;
+  }
+</style>

@@ -1,0 +1,135 @@
+---
+/** Intro — Story: «The story behind the signal» + три картки-акти. */
+import { Image } from 'astro:assets';
+import bg from '@/assets/img/home/bg-aurora-1.jpg';
+
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    subtitle: string;
+    acts: { tag: string; title: string; text: string; stamp: string }[];
+  };
+}
+const { data } = Astro.props;
+---
+
+<section class="section story" aria-labelledby="story-title">
+  <Image
+    src={bg}
+    alt=""
+    class="section-bg story__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container">
+    <header class="story__head">
+      <p class="section-label">{data.label}</p>
+      <h2 id="story-title" class="section-title">
+        {data.titleStart} <span class="accent">{data.titleAccent}</span>
+      </h2>
+      <p class="section-subtitle story__subtitle">{data.subtitle}</p>
+    </header>
+
+    <ol role="list" class="acts">
+      {data.acts.map((act, i) => (
+        <li class:list={['act', i === 0 ? 'g-card act--lead' : 'act--plain']}>
+          <p class="meta-s accent">{act.tag}</p>
+          <h3 class="act__title">{act.title}</h3>
+          <p class="act__text">{act.text}</p>
+          {act.stamp && <p class="act__stamp">{act.stamp}</p>}
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .story__bg {
+    opacity: 0.2;
+  }
+
+  .accent {
+    color: var(--color-green);
+  }
+
+  .story__head {
+    display: grid;
+    gap: var(--space-4);
+    justify-items: center;
+    text-align: center;
+    margin-bottom: var(--section-gap);
+  }
+
+  .story__head .section-label {
+    justify-self: start;
+  }
+
+  .story__subtitle {
+    color: var(--color-text-secondary);
+    max-width: 975px;
+  }
+
+  .acts {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 900px) {
+    .acts {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-12);
+    }
+  }
+
+  .act {
+    display: grid;
+    align-content: start;
+    gap: var(--space-6);
+    min-height: 100%;
+    padding: var(--space-8) 28px;
+    border-radius: var(--radius-md);
+  }
+
+  @media (min-width: 900px) {
+    .act {
+      min-height: 422px;
+    }
+  }
+
+  .act--lead {
+    background: var(--color-glass);
+  }
+
+  .act--plain {
+    background: var(--color-card);
+    border: 1px solid var(--color-card);
+  }
+
+  .act__title {
+    font-size: clamp(1.625rem, 1.45rem + 0.75vw, 2rem); /* 26 → 32 */
+    font-weight: var(--fw-bold);
+    line-height: 1.4;
+  }
+
+  .act__text {
+    color: var(--color-text-secondary);
+  }
+
+  .act--lead .act__text {
+    color: var(--color-text);
+  }
+
+  .act__stamp {
+    justify-self: start;
+    padding: 6px var(--space-3);
+    border: 1px solid var(--color-paper);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-small);
+    line-height: 20px;
+    text-transform: uppercase;
+    color: var(--color-paper);
+  }
+</style>

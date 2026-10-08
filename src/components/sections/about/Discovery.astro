@@ -1,0 +1,99 @@
+---
+/** Discovery — Apples: зображення ліворуч, текст праворуч. */
+import { Image } from 'astro:assets';
+import apple from '@/assets/img/about/discovery-apple.jpg';
+
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    titleEnd: string;
+    lead: string;
+    text: string;
+    imageAlt: string;
+  };
+}
+const { data } = Astro.props;
+---
+
+<section class="section discovery" aria-labelledby="discovery-title">
+  <div class="container discovery__inner">
+    <div class="discovery__media">
+      <Image
+        src={apple}
+        alt={data.imageAlt}
+        widths={[400, 700, 1012]}
+        sizes="(min-width: 1024px) 506px, 100vw"
+        loading="lazy"
+      />
+    </div>
+    <div class="discovery__content">
+      <p class="section-label">{data.label}</p>
+      <h2 id="discovery-title" class="section-title">
+        {`${data.titleStart} `}
+        <span class="grad-text">{data.titleAccent}</span>
+        {` ${data.titleEnd}`}
+      </h2>
+      <p class="discovery__lead">{data.lead}</p>
+      <p class="discovery__text">{data.text}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .discovery__inner {
+    display: grid;
+    gap: var(--space-10);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .discovery__inner {
+      grid-template-columns: 506fr 654fr;
+      gap: var(--space-20);
+    }
+  }
+
+  .discovery__media {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-hairline);
+    overflow: hidden;
+    aspect-ratio: 506 / 527;
+    max-width: 560px;
+  }
+
+  .discovery__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .discovery__content {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 1024px) {
+    .discovery__content {
+      padding: var(--space-10);
+    }
+  }
+
+  .discovery__content .section-label {
+    margin-bottom: calc(var(--space-4) * -1);
+  }
+
+  .discovery__content .section-title {
+    max-width: 574px;
+  }
+
+  .discovery__lead {
+    font-size: var(--fs-body-lg);
+    color: var(--color-text-secondary);
+  }
+
+  .discovery__text {
+    color: var(--color-text-secondary);
+  }
+</style>

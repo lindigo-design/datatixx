@@ -1,0 +1,172 @@
+---
+/**
+ * Hero внутрішньої сторінки (Figma: «Hero — About»): мітка, великий заголовок,
+ * підзаголовок праворуч і дві кнопки. Фон — фото або відео з фото-заставкою.
+ */
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Button from '@/components/ui/Button.astro';
+
+interface Props {
+  label: string;
+  title: string;
+  lead: string;
+  primaryCta: string;
+  primaryHref: string;
+  secondaryCta: string;
+  secondaryHref: string;
+  image: ImageMetadata;
+  imageAlt?: string;
+  /** Шлях до відео в public/, напр. '/video/about-hero.mp4'. Порожньо — лише фото. */
+  video?: string;
+}
+const {
+  label,
+  title,
+  lead,
+  primaryCta,
+  primaryHref,
+  secondaryCta,
+  secondaryHref,
+  image,
+  imageAlt = '',
+  video,
+} = Astro.props;
+const poster = video
+  ? await getImage({ src: image, width: 1568, format: 'webp' })
+  : null;
+---
+
+<section class="page-hero" aria-labelledby="page-hero-title">
+  {video && poster ? (
+    <video
+      class="page-hero__bg"
+      src={video}
+      poster={poster.src}
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-hidden="true"
+      data-hero-video
+    />
+  ) : (
+    <Image
+      src={image}
+      alt={imageAlt}
+      class="page-hero__bg"
+      widths={[640, 960, 1280, 1568]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+  )}
+  <div class="container page-hero__inner">
+    <p class="section-label">{label}</p>
+    <h1 id="page-hero-title" class="page-hero__title">
+      {title}
+    </h1>
+    <div class="page-hero__content">
+      <p class="page-hero__lead">{lead}</p>
+      <div class="actions">
+        <Button href={primaryHref}>{primaryCta}</Button>
+        <Button href={secondaryHref} variant="outline">
+          {secondaryCta}
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(560px, 56vw, 810px);
+    padding-block: clamp(var(--space-20), 12vw, 200px)
+      clamp(var(--space-16), 9.7vw, 140px);
+    overflow: hidden;
+  }
+
+  .page-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% center;
+  }
+
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 66%;
+    z-index: -1;
+    background: var(--gradient-hero-fade);
+  }
+
+  .page-hero__inner {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .page-hero__title {
+    font-size: clamp(2.75rem, 1.6rem + 5.1vw, 6.25rem); /* 44 → 100 */
+    font-weight: var(--fw-semibold);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .page-hero__content {
+    display: grid;
+    gap: var(--space-6);
+    max-width: 720px;
+  }
+
+  @media (min-width: 1024px) {
+    .page-hero__content {
+      margin-left: auto;
+      width: 58%;
+    }
+  }
+
+  .page-hero__lead {
+    font-size: var(--fs-subtitle);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-body);
+    letter-spacing: -0.02em;
+    text-shadow: 0 1px 16px rgb(1 9 18 / 0.7);
+  }
+
+  .page-hero__inner > * {
+    animation: rise 800ms var(--ease-out) both;
+  }
+  .page-hero__inner > :nth-child(2) {
+    animation-delay: 80ms;
+  }
+  .page-hero__inner > :nth-child(3) {
+    animation-delay: 160ms;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+</style>
+
+<script>
+  // Якщо в системі ввімкнено «зменшити рух» — зупиняємо відео (лишається заставка)
+  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+  if (video && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.pause();
+    video.removeAttribute('autoplay');
+  }
+</script>

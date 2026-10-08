@@ -1,0 +1,94 @@
+{
+  "seoTitle": "À propos de Datixxia™ — L'intelligence de marché issue des marchés publics",
+  "seoDescription": "Datixxia™ transforme chaque jour les avis d'attribution de 194 pays en intelligence économique en temps réel et en prévisions fiables à 4 ans.",
+  "hero": {
+    "label": "À propos de Datixxia™",
+    "title": "Plateforme d'intelligence de marché",
+    "lead": "Datixxia™ est une plateforme d'intelligence de marché fondée sur les marchés publics. Nous transformons chaque jour les avis d'attribution de 194 pays en intelligence économique en temps réel et en prévisions fiables à 4 ans.",
+    "primaryCta": "Plateforme",
+    "secondaryCta": "Avantages",
+    "imageAlt": ""
+  },
+  "story": {
+    "label": "Les faits",
+    "titleStart": "L'histoire derrière le",
+    "titleAccent": "signal",
+    "subtitle": "Trois actes : pourquoi les anciens modèles ne suffisent plus, et ce que nous avons construit à la place.",
+    "acts": [
+      {
+        "tag": "Acte I",
+        "title": "Anticiper a toujours été une question de survie",
+        "text": "Des oracles et astrologues à la cartomancie et aux ordinateurs quantiques, les personnes et les entreprises ont toujours cherché à anticiper les obstacles, pour agir tôt et éviter les pièges.",
+        "stamp": ""
+      },
+      {
+        "tag": "Acte II",
+        "title": "Pourquoi la prévision compte aujourd'hui",
+        "text": "L'économie mondiale change vite : sur le plan écologique, technologique et géopolitique. La prévision est essentielle dans tous les secteurs, de la météo aux pronostics sportifs. Les dirigeants, analystes et investisseurs s'en servent pour répartir les budgets, estimer les tendances et planifier les ressources.",
+        "stamp": ""
+      },
+      {
+        "tag": "Acte III",
+        "title": "Le défaut de la prévision traditionnelle",
+        "text": "La plupart des systèmes de prévision ont le même défaut : ils extrapolent le passé pour deviner un futur possible. Même avec l'intelligence artificielle, l'analyse reste une hypothèse. Les imprévus arrivent, l'incertitude demeure, et plus la prévision porte loin, moins elle est précise.",
+        "stamp": "Pas Datixxia™"
+      }
+    ]
+  },
+  "discovery": {
+    "label": "Découverte",
+    "titleStart": "Comme des",
+    "titleAccent": "pommes",
+    "titleEnd": "qui tombent de l'arbre…",
+    "lead": "Certaines découvertes naissent de faits si simples qu'on ne les remarque pas.",
+    "text": "C'est le cas de Datixxia™. Utilisé depuis des années par de grands groupes pour suivre leurs concurrents dans certains secteurs et pays, Datixxia™ traite les données de toutes les attributions de marchés publics et privés. Il peut ainsi calculer, avec précision et fiabilité, la valeur future relative de tout secteur de marché et de ses acteurs, jusqu'à 4 ans à l'avance.",
+    "imageAlt": "Une pomme verte qui tombe, entourée de lignes de mouvement et de mesures physiques"
+  },
+  "manifesto": {
+    "label": "Pourquoi c'est important",
+    "text": "Toute analyse et toute prévision économique gagnent énormément grâce à cette méthode inédite. Quelle que soit sa taille ou sa localisation, chaque entreprise trouve les données concrètes dont elle a besoin sur les perspectives de son marché, pour bâtir une stratégie adaptée à son propre avenir.",
+    "signature": "Seul Datixxia™ fournit ces Facts for Futures™."
+  },
+  "data": {
+    "label": "Données",
+    "titleStart": "La qualité des données",
+    "titleAccent": "d'abord",
+    "lead": "Pour prévoir l'avenir, il faut des données solides. La qualité d'un résultat dépend de la qualité des entrées : nous commençons donc par réunir les meilleures sources.",
+    "pillars": [
+      {
+        "tag": "Sources",
+        "title": "Des sources officielles et quotidiennes dans 194 pays",
+        "text": "Chaque jour ouvré, Datixxia™ télécharge les données des sites officiels des administrations centrales, régionales et locales de 194 pays, comme l'indiquent les références des contrats. Les sources sont mises à jour en continu pour capter chaque nouvel avis d'attribution."
+      },
+      {
+        "tag": "Normes",
+        "title": "Principes comptables et de normalisation",
+        "text": "Nous appliquons des formules de calcul exclusives et des principes comptables compatibles GAAP, avec des taux d'amortissement et d'inflation propres à chaque pays et à chaque produit. Les résultats restent pertinents et comparables, quelle que soit la période."
+      },
+      {
+        "tag": "Méthode",
+        "title": "Un complément à la prévision traditionnelle",
+        "text": "La qualité des données dépend aussi de leur usage. Datixxia™ est une couche d'intelligence qui complète les méthodes de prévision traditionnelles : nous fournissons les données, et les outils pour les adapter à vos besoins."
+      }
+    ]
+  },
+  "tools": {
+    "label": "Outils",
+    "titleLine1": "Des outils simples,",
+    "titleLine2": "des exports flexibles",
+    "text": "Comme tout outil vraiment utile, les tableaux de bord Grafixx™ sont faciles à comprendre et rapides à utiliser. Les équipes intègrent les résultats dans leurs méthodes de travail sans effort.",
+    "points": [
+      "Téléchargez les données brutes pour votre propre logiciel graphique",
+      "Créez des graphiques simples directement dans le tableau de bord",
+      "Exportez les graphiques avec leurs données"
+    ],
+    "primaryCta": "Voir la plateforme",
+    "secondaryCta": "Avantages",
+    "imageAlt": "Tableau de bord Grafixx™ : vue d'ensemble avec filtres, chiffres clés et graphique des valeurs prévues et réelles par année"
+  },
+  "cta": {
+    "title": "Voyez tout l'avantage.",
+    "text": "Passez du reporting réactif à la stratégie anticipée. Les contrats sont déjà signés. Lisez-les en premier.",
+    "button": "Nous contacter"
+  }
+}

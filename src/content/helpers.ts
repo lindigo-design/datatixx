@@ -10,6 +10,13 @@ export async function getHome(lang: Locale) {
   return entry.data;
 }
 
+export async function getAbout(lang: Locale) {
+  const entry = await getEntry('about', `${lang}/about`);
+  if (!entry)
+    throw new Error(`Немає тексту About: src/content/pages/${lang}/about.json`);
+  return entry.data;
+}
+
 export async function getPage(slug: string, lang: Locale) {
   const entry = await getEntry('pages', `${lang}/${slug}`);
   if (!entry)

@@ -192,6 +192,98 @@ const homeSchema = {
   ),
 };
 
+const aboutSchema = {
+  ...seo,
+  hero: fields.object(
+    {
+      label: text('Мітка'),
+      title: text('Заголовок'),
+      lead: longText('Підзаголовок'),
+      ...twoButtons,
+      imageAlt: optional('Опис фону для незрячих (порожньо = декоративний)'),
+    },
+    { label: '1 · Hero' }
+  ),
+  story: fields.object(
+    {
+      label: text('Мітка секції'),
+      titleStart: text('Заголовок — біла частина'),
+      titleAccent: text('Заголовок — зелена частина'),
+      subtitle: text('Підзаголовок'),
+      acts: fields.array(
+        fields.object({
+          tag: text('Мітка (Act I)'),
+          title: text('Заголовок'),
+          text: longText('Текст'),
+          stamp: optional('Позначка-овал (необовʼязково)'),
+        }),
+        { label: 'Акти', itemLabel: p => p.fields.title.value }
+      ),
+    },
+    { label: '2 · Story' }
+  ),
+  discovery: fields.object(
+    {
+      label: text('Мітка секції'),
+      titleStart: text('Заголовок — початок'),
+      titleAccent: text('Заголовок — градієнтне слово'),
+      titleEnd: text('Заголовок — кінець'),
+      lead: text('Перший абзац'),
+      text: longText('Другий абзац'),
+      imageAlt: text('Опис зображення'),
+    },
+    { label: '3 · Discovery' }
+  ),
+  manifesto: fields.object(
+    {
+      label: text('Мітка секції'),
+      text: longText('Великий текст'),
+      signature: text('Підпис (градієнт)'),
+    },
+    { label: '4 · Manifesto' }
+  ),
+  data: fields.object(
+    {
+      label: text('Мітка секції'),
+      titleStart: text('Заголовок — біла частина'),
+      titleAccent: text('Заголовок — зелена частина'),
+      lead: longText('Підзаголовок'),
+      pillars: fields.array(
+        fields.object({
+          tag: text('Мітка'),
+          title: text('Заголовок'),
+          text: longText('Текст'),
+        }),
+        { label: 'Рядки 01/02/03', itemLabel: p => p.fields.title.value }
+      ),
+    },
+    { label: '5 · Data' }
+  ),
+  tools: fields.object(
+    {
+      label: text('Мітка секції'),
+      titleLine1: text('Заголовок — рядок 1'),
+      titleLine2: text('Заголовок — рядок 2 (градієнт)'),
+      text: longText('Текст'),
+      points: fields.array(text('Пункт'), {
+        label: 'Пункти списку',
+        itemLabel: p => p.value,
+      }),
+      ...twoButtons,
+      imageAlt: text('Опис скриншота'),
+    },
+    { label: '6 · Tools' }
+  ),
+  cta: fields.object(
+    {
+      title: text('Великий заголовок'),
+      text: text('Текст'),
+      button: text('Кнопка'),
+    },
+    { label: '7 · CTA' }
+  ),
+};
+
 const contactSchema = {
   ...seo,
   title: text('Заголовок'),
@@ -207,6 +299,15 @@ const pageSingletons = Object.fromEntries(
         path: `src/content/pages/${lang}/home`,
         format: { data: 'json' },
         schema: homeSchema,
+      }),
+    ],
+    [
+      `about_${lang}`,
+      singleton({
+        label: `About · ${lang.toUpperCase()}`,
+        path: `src/content/pages/${lang}/about`,
+        format: { data: 'json' },
+        schema: aboutSchema,
       }),
     ],
     [
