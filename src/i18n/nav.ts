@@ -1,11 +1,12 @@
-// Пункти меню (бургер) і футера. Сторінки, яких ще немає, ведуть на тимчасові заглушки.
+// Пункти меню (бургер) і футера.
+// FAQ поки веде на блок FAQ на головній (окремої сторінки ще немає).
 export const mainNav = [
   { key: 'nav.about', path: 'about' },
   { key: 'nav.platform', path: 'platform' },
   { key: 'nav.benefits', path: 'benefits' },
   { key: 'nav.partners', path: 'partners' },
   { key: 'nav.team', path: 'team' },
-  { key: 'nav.faq', path: 'faq' },
+  { key: 'nav.faq', path: '#faq' },
   { key: 'nav.contact', path: 'contact' },
 ] as const;
 
@@ -15,5 +16,5 @@ export const footerNav = [
   { key: 'nav.platform', path: 'platform' },
   { key: 'nav.benefits', path: 'benefits' },
   { key: 'nav.partners', path: 'partners' },
-  { key: 'nav.faq', path: 'faq' },
+  { key: 'nav.faq', path: '#faq' },
 ] as const;

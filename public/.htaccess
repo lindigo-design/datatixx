@@ -32,7 +32,7 @@ AddDefaultCharset UTF-8
 </IfModule>
 
 # Заборонити доступ до службових файлів
-<FilesMatch "^(config(\.example)?\.php|\.env.*|.*\.(md|log|ini|lock|json))$">
+<FilesMatch "^(_.*|config(\.example)?\.php|\.env.*|.*\.(md|log|ini|lock|json))$">
   Require all denied
 </FilesMatch>
 

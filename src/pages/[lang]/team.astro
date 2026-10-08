@@ -1,0 +1,33 @@
+---
+/** Сторінка Team (Figma «Team • Desktop (new)»). */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import OriginStory from '@/components/sections/team/OriginStory.astro';
+import TeamProfiles from '@/components/sections/team/TeamProfiles.astro';
+import CtaBand from '@/components/sections/CtaBand.astro';
+import heroImage from '@/assets/img/about/hero-europe.jpg';
+import { locales, localizePath, type Locale } from '@/i18n/utils';
+import { getTeam } from '@/content/helpers';
+
+export function getStaticPaths() {
+  return locales.map(lang => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const page = await getTeam(lang);
+const to = (path: string) => localizePath(path, lang);
+const heroVideo = '';
+---
+
+<BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
+  <PageHero
+    {...page.hero}
+    primaryHref={to('about')}
+    secondaryHref={to('contact')}
+    image={heroImage}
+    video={heroVideo}
+  />
+  <OriginStory data={page.origin} />
+  <TeamProfiles members={page.members} />
+  <CtaBand data={page.cta} href={to('platform')} />
+</BaseLayout>

@@ -1,0 +1,111 @@
+{
+  "seoTitle": "Datixxia™ for chambers of commerce — Partnership benefits",
+  "seoDescription": "Nine ways Datixxia™ works for chambers of commerce: economic forecasting, member services and a new revenue stream by postcode.",
+  "hero": {
+    "label": "Partners — Chambers of commerce",
+    "title": "How chambers benefit from partnering",
+    "lead": "Lead your region into the future with Datixxia™. More than just data, Datixxia™ provides foresight — helping chambers predict, plan, and prosper. Join the global network transforming raw information into measurable impact and sustainable growth.",
+    "primaryCta": "Fill in the survey",
+    "secondaryCta": "Contact us",
+    "imageAlt": ""
+  },
+  "ways": {
+    "label": "What your chamber gains",
+    "titleStart": "Nine ways",
+    "titleAccent": "Datixxia™",
+    "titleEnd": "works for chambers",
+    "lead": "Three pillars carry the partnership — intelligence, members, revenue. The rest come built in.",
+    "pillars": [
+      {
+        "tag": "Intelligence",
+        "title": "Economic intelligence & forecasting",
+        "text": "Sector-by-sector forecasts of economic activity up to four years in advance. Identify emerging or declining sectors before official statistics do — and advise members on when and where to invest, diversify or consolidate.",
+        "vizCaption": "Regional sector activity — 4-year outlook",
+        "vizTag": "Forecast"
+      },
+      {
+        "tag": "Members",
+        "title": "Support for member companies",
+        "text": "Future tenders relevant to each member’s industry, demand forecasts for planning — and premium services like “Datixxia™ Insights for Members”.",
+        "vizCaption": "",
+        "vizTag": ""
+      },
+      {
+        "tag": "Revenue",
+        "title": "Financial stability & services",
+        "text": "Act as an authorized Datixxia™ reseller by postcode or region. New data services and a membership incentive unavailable elsewhere.",
+        "vizCaption": "",
+        "vizTag": ""
+      }
+    ],
+    "moreTitle": "And six more, built into the partnership:",
+    "more": [
+      {
+        "title": "Business development & investment",
+        "text": "Future procurement demand by sector and geography; data-driven dossiers for investors."
+      },
+      {
+        "title": "Policy & advocacy",
+        "text": "Quantitative evidence for governments; anticipate slowdowns and inflationary pressures."
+      },
+      {
+        "title": "Education & research",
+        "text": "A teaching and research platform; datasets for forecasting models and policy design."
+      },
+      {
+        "title": "International cooperation",
+        "text": "Cross-border trade maps; chamber-to-chamber trade missions and joint ventures."
+      },
+      {
+        "title": "Crisis monitoring & resilience",
+        "text": "Detect fiscal stress in spending patterns; real-time response plans for regions."
+      },
+      {
+        "title": "Greater impact",
+        "text": "A forward-looking, data-driven institution delivering premium intelligence."
+      }
+    ]
+  },
+  "outcomes": {
+    "label": "Key measurable outcomes",
+    "titleStart": "A sustainable",
+    "titleAccent": "revenue engine",
+    "stats": [
+      {
+        "value": "+28%",
+        "caption": "Member upsell rate"
+      },
+      {
+        "value": "+46%",
+        "caption": "SME engagement increase"
+      },
+      {
+        "value": "+€420K",
+        "caption": "Annual service revenue per chamber"
+      }
+    ],
+    "note": "Based on pilot modelling and scaling simulations",
+    "text": "Higher member engagement, new data-service revenues, and demonstrable economic impact make Datixxia™ both a strategic growth tool and a sustainable revenue engine for chambers worldwide."
+  },
+  "revenue": {
+    "label": "New markets, new revenue",
+    "title": "Your postcode. Your revenue.",
+    "text": "Gain access to 14.7 million corporate prospects — the companies in the Contract Award Notices for 2025 — classified by postcode. Receive 50% of every monthly subscription fee from users within your postcode area.",
+    "stats": [
+      {
+        "value": "14.7M",
+        "caption": "Corporate prospects (CAN 2025)"
+      },
+      {
+        "value": "50%",
+        "caption": "Of every monthly subscription"
+      }
+    ]
+  },
+  "survey": {
+    "label": "Market survey",
+    "titleStart": "To reply,",
+    "titleAccent": "fill in the form",
+    "text": "If you approve the Datixxia™ project, please fill in the form below (deadline: 31 December 2025). Please invite all the interpreters, translators, language service companies and associations you know to do likewise.\nThe survey will allow us to find the partners needed to finance the development of the Datixxia™ application. The results will be sent to you on 2 January 2026.\nIf you have offices in several locations, please fill the form for each one of them."
+  }
+}

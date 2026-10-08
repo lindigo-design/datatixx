@@ -1,0 +1,52 @@
+{
+  "seoTitle": "Partenaires Datixxia™ — Chambres de commerce et traducteurs",
+  "seoDescription": "Chambres de commerce et sociétés de traduction : devenez partenaires de Datixxia™ et apportez aux entreprises une intelligence de marché tournée vers l'avenir.",
+  "hero": {
+    "label": "Partenaires",
+    "title": "Recherche, innovation et portée mondiale",
+    "lead": "Le commerce est la source de toute prospérité : matérielle, par l'échange de biens, ou culturelle, par l'échange d'idées. C'est pourquoi nous invitons les acteurs clés du commerce international, chambres de commerce et sociétés de traduction, à devenir nos partenaires.",
+    "primaryCta": "Devenir partenaire",
+    "secondaryCta": "Nous contacter",
+    "imageAlt": ""
+  },
+  "chambers": {
+    "label": "Pour les chambres de commerce",
+    "titleStart": "Transformez les données",
+    "titleAccent": "en opportunités",
+    "lead": "Conçu pour les chambres de commerce, Datixxia™ montre où va l'économie, des mois voire des années à l'avance. Anticipez les secteurs porteurs, guidez les entreprises locales, attirez les investisseurs et ouvrez de nouvelles sources de revenus pour votre chambre.",
+    "text": "Avec Datixxia™, votre organisation devient une source fiable d'intelligence économique tournée vers l'avenir.",
+    "cta": "Découvrir les avantages du partenariat"
+  },
+  "lsp": {
+    "label": "Pour les sociétés de traduction",
+    "titleStart": "La",
+    "titleAccent": "dimension humaine",
+    "titleEnd": "de Datixxia™",
+    "lead": "Les prestataires de services linguistiques donnent à chaque entreprise accès à Datixxia™, avec l'appui de locuteurs natifs qui connaissent leur marché local et comprennent le commerce international.",
+    "cards": [
+      {
+        "title": "Tests de la plateforme",
+        "text": "Testez l'application pendant sa phase de développement, en éprouvant le terminal avec de vraies requêtes avant le lancement public."
+      },
+      {
+        "title": "Assistance aux abonnés",
+        "text": "Assurez l'assistance de premier niveau aux abonnés en répondant à leurs questions, dans leur langue et avec la connaissance de leur marché local."
+      },
+      {
+        "title": "Signalement des problèmes",
+        "text": "Signalez les problèmes directement à l'équipe Datixxia™ et aidez la plateforme à progresser à chaque version."
+      }
+    ]
+  },
+  "form": {
+    "label": "Nous contacter",
+    "titleStart": "Devenez",
+    "titleAccent": "partenaire",
+    "lead": "Vous souhaitez en savoir plus, ou vous n'avez pas trouvé la réponse à votre question sur le site ? Contactez-nous."
+  },
+  "cta": {
+    "title": "Construisons l'avenir ensemble.",
+    "text": "Rejoignez le réseau de partenaires Datixxia™ : chambres de commerce et sociétés de traduction bienvenues.",
+    "button": "Nous contacter"
+  }
+}

@@ -18,6 +18,8 @@ export function isLocale(value: string | undefined): value is Locale {
 
 /** Шлях на сторінку в потрібній мові: localizePath('/contact/', 'fr') → '/fr/contact/' */
 export function localizePath(path: string, lang: Locale): string {
+  // '#faq' → '/en/#faq' (якір на головній)
+  if (path.startsWith('#')) return `/${lang}/${path}`;
   const clean = path.replace(/^\/+|\/+$/g, '');
   return clean ? `/${lang}/${clean}/` : `/${lang}/`;
 }

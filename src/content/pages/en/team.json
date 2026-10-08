@@ -1,0 +1,39 @@
+{
+  "seoTitle": "The Team Datixxia™ — DataTixx SAS",
+  "seoDescription": "Meet the people behind Datixxia™: built by operators who understand data, languages and public markets.",
+  "hero": {
+    "label": "Team",
+    "title": "The Team Datixxia™",
+    "lead": "Built by operators who understand data, languages and public markets — and who spent years turning a simple observation into a working terminal.",
+    "primaryCta": "About Datixxia™",
+    "secondaryCta": "Contact us",
+    "imageAlt": ""
+  },
+  "origin": {
+    "label": "Origin story",
+    "lead": "Many years ago, while translating tenders by hand, a linguist noted that contract awards defined the economic future of the players involved. It struck him that if contract awards everywhere could be compiled, their economic future in general could be measured…",
+    "text": "At the time, such calculations were impossible — the volume of data and the speed of transmission far surpassed the computing power then available. That is no longer the case; but even so, it took the translator two years of research to solve the technical problems involved.",
+    "punchline": "And the translator became our CEO."
+  },
+  "members": [
+    {
+      "name": "Malcolm Duff",
+      "role": "Chief Executive Officer",
+      "photo": "../../../assets/img/team/malcolm-duff.jpg",
+      "photoAlt": "Portrait of Malcolm Duff",
+      "bio": "Formerly the CEO of two ISO-9001 certified translation companies and senior translator in technology for UNESCO, Paris, Malcolm carried out the 2 years of groundbreaking conceptual and research work that resulted in Datixxia™.\nHe has extensive experience in managing multinational projects, notably with translators from 33 countries for the Inttranet™ — the world’s first multilingual portal, added to the UNESCO Observatory for the Information Society in January 2006. That, and his in-depth knowledge of the Datixxia™ application, make him the ideal leader for its global deployment."
+    },
+    {
+      "name": "Yana Levchenko",
+      "role": "Chief Product Officer",
+      "photo": "../../../assets/img/team/yana-levchenko.jpg",
+      "photoAlt": "Portrait of Yana Levchenko",
+      "bio": "The founder of her own web design company only one year after arriving from Ukraine with her children and pets, Yana has extensive experience in cyber-security and computing, backed by wide-ranging skills in web design for a fast-growing customer base.\nShe also brings to the team her eye for detail and an aesthetic sense of beauty as a professional photographer published in magazines worldwide."
+    }
+  ],
+  "cta": {
+    "title": "Learn more about Datixxia™.",
+    "text": "Discover how the platform delivers real-time market intelligence and 4-year economic forecasts tailored for decision-makers.",
+    "button": "Learn more"
+  }
+}

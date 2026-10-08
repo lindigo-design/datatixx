@@ -1,0 +1,49 @@
+---
+/** «Origin story» — два абзаци і градієнтна фраза-висновок. */
+interface Props {
+  data: { label: string; lead: string; text: string; punchline: string };
+}
+const { data } = Astro.props;
+---
+
+<section class="section origin" aria-label={data.label}>
+  <div class="container origin__inner">
+    <p class="section-label">{data.label}</p>
+    <div class="origin__text">
+      <p class="origin__lead">{data.lead}</p>
+      <p>{data.text}</p>
+    </div>
+    <p class="origin__punchline grad-text">{data.punchline}</p>
+  </div>
+</section>
+
+<style>
+  .origin__inner {
+    display: grid;
+    gap: var(--space-10);
+    max-width: calc(1058px + 2 * var(--gutter));
+  }
+
+  .origin__text {
+    display: grid;
+    gap: var(--space-6);
+    color: var(--color-text-secondary);
+    font-size: var(--fs-body-lg);
+  }
+
+  @media (min-width: 1024px) {
+    .origin__text {
+      margin-left: 27%;
+    }
+  }
+
+  .origin__lead {
+    color: var(--color-text);
+  }
+
+  .origin__punchline {
+    font-size: clamp(2.5rem, 1.8rem + 3vw, 4.25rem);
+    font-weight: var(--fw-bold);
+    line-height: 1.05;
+  }
+</style>

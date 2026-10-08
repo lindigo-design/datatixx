@@ -445,10 +445,196 @@ const benefitsSchema = {
   ),
 };
 
+const heroFields = (label = '1 · Hero') =>
+  fields.object(
+    {
+      label: text('Мітка'),
+      title: text('Заголовок'),
+      lead: longText('Підзаголовок'),
+      ...twoButtons,
+      imageAlt: optional('Опис фону для незрячих (порожньо = декоративний)'),
+    },
+    { label }
+  );
+const ctaFields = (label: string) =>
+  fields.object(
+    {
+      title: text('Великий заголовок'),
+      text: text('Текст'),
+      button: text('Кнопка'),
+    },
+    { label }
+  );
+const titleFields = {
+  label: text('Мітка секції'),
+  titleStart: text('Заголовок — біла частина'),
+  titleAccent: text('Заголовок — кольорова частина'),
+};
+const cardList = (label: string) =>
+  fields.array(
+    fields.object({ title: text('Заголовок'), text: longText('Текст') }),
+    {
+      label,
+      itemLabel: p => p.fields.title.value,
+    }
+  );
+const statList = (label: string) =>
+  fields.array(
+    fields.object({ value: text('Число'), caption: text('Підпис') }),
+    {
+      label,
+      itemLabel: p => `${p.fields.value.value} — ${p.fields.caption.value}`,
+    }
+  );
+
+const partnersSchema = {
+  ...seo,
+  hero: heroFields(),
+  chambers: fields.object(
+    {
+      ...titleFields,
+      lead: longText('Текст'),
+      text: text('Другий абзац'),
+      cta: text('Кнопка'),
+    },
+    { label: '2 · Для торгових палат' }
+  ),
+  lsp: fields.object(
+    {
+      ...titleFields,
+      titleEnd: text('Заголовок — кінець'),
+      lead: longText('Підзаголовок'),
+      cards: cardList('Картки 01/02/03'),
+    },
+    { label: '3 · Для мовних компаній' }
+  ),
+  form: fields.object(
+    { ...titleFields, lead: longText('Текст біля форми') },
+    { label: '4 · Форма' }
+  ),
+  cta: ctaFields('5 · CTA (FAQ редагується на Головній)'),
+};
+
+const chambersSchema = {
+  ...seo,
+  hero: heroFields(),
+  ways: fields.object(
+    {
+      ...titleFields,
+      titleEnd: text('Заголовок — кінець'),
+      lead: text('Підзаголовок'),
+      pillars: fields.array(
+        fields.object({
+          tag: text('Мітка'),
+          title: text('Заголовок'),
+          text: longText('Текст'),
+          vizCaption: optional('Підпис графіка (лише 1-ша картка)'),
+          vizTag: optional('Зелена мітка графіка'),
+        }),
+        { label: '3 головні картки', itemLabel: p => p.fields.title.value }
+      ),
+      moreTitle: text('Заголовок списку'),
+      more: cardList('Ще шість пунктів'),
+    },
+    { label: '2 · Nine ways' }
+  ),
+  outcomes: fields.object(
+    {
+      ...titleFields,
+      stats: statList('Цифри'),
+      note: text('Примітка'),
+      text: longText('Текст'),
+    },
+    { label: '3 · Outcomes' }
+  ),
+  revenue: fields.object(
+    {
+      label: text('Мітка'),
+      title: text('Заголовок'),
+      text: longText('Текст'),
+      stats: statList('Цифри'),
+    },
+    { label: '4 · Postcode / revenue' }
+  ),
+  survey: fields.object(
+    {
+      ...titleFields,
+      text: longText('Текст біля анкети', 'Новий абзац — з нового рядка.'),
+    },
+    { label: '5 · Анкета' }
+  ),
+};
+
+const teamSchema = {
+  ...seo,
+  hero: heroFields(),
+  origin: fields.object(
+    {
+      label: text('Мітка'),
+      lead: longText('Перший абзац'),
+      text: longText('Другий абзац'),
+      punchline: text('Фраза-висновок'),
+    },
+    { label: '2 · Origin story' }
+  ),
+  members: fields.array(
+    fields.object({
+      name: text('Імʼя'),
+      role: text('Посада'),
+      photo: fields.image({
+        label: 'Фото',
+        directory: 'src/assets/img/team',
+        publicPath: '../../../assets/img/team/',
+        validation: { isRequired: true },
+      }),
+      photoAlt: text('Опис фото'),
+      bio: longText('Біографія', 'Новий абзац — з нового рядка.'),
+    }),
+    { label: '3 · Люди', itemLabel: p => p.fields.name.value }
+  ),
+  cta: ctaFields('4 · CTA'),
+};
+
 const contactSchema = {
   ...seo,
-  title: text('Заголовок'),
-  lead: longText('Вступний текст'),
+  hero: fields.object(
+    {
+      label: text('Мітка'),
+      title: text('Заголовок'),
+      lead: longText('Підзаголовок'),
+    },
+    { label: '1 · Hero' }
+  ),
+  map: fields.object(
+    {
+      lat: fields.number({
+        label: 'Широта',
+        step: 0.0001,
+        validation: { isRequired: true },
+      }),
+      lon: fields.number({
+        label: 'Довгота',
+        step: 0.0001,
+        validation: { isRequired: true },
+      }),
+    },
+    { label: '2 · Координати офісу' }
+  ),
+  faq: fields.object(
+    {
+      ...titleFields,
+      button: text('Кнопка'),
+      items: fields.array(
+        fields.object({
+          tag: text('Мітка'),
+          q: text('Питання'),
+          a: longText('Відповідь'),
+        }),
+        { label: 'Короткі відповіді', itemLabel: p => p.fields.q.value }
+      ),
+    },
+    { label: '3 · Quick answers' }
+  ),
 };
 
 const pageSingletons = Object.fromEntries(
@@ -489,6 +675,24 @@ const pageSingletons = Object.fromEntries(
         schema: benefitsSchema,
       }),
     ],
+    ...(
+      [
+        ['partners', 'Partners', partnersSchema],
+        ['chambers', 'Partners — Chambers', chambersSchema],
+        ['team', 'Team', teamSchema],
+      ] as const
+    ).map(
+      ([slug, label, schema]) =>
+        [
+          `${slug}_${lang}`,
+          singleton({
+            label: `${label} · ${lang.toUpperCase()}`,
+            path: `src/content/pages/${lang}/${slug}`,
+            format: { data: 'json' },
+            schema,
+          }),
+        ] as const
+    ),
     [
       `contact_${lang}`,
       singleton({

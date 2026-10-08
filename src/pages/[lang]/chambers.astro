@@ -1,0 +1,44 @@
+---
+/** Сторінка Partners — Chambers of commerce (Figma «Partners — Chambers • Desktop»). */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import NineWays from '@/components/sections/chambers/NineWays.astro';
+import Outcomes from '@/components/sections/chambers/Outcomes.astro';
+import RevenueBand from '@/components/sections/chambers/RevenueBand.astro';
+import FormSection from '@/components/sections/FormSection.astro';
+import SurveyForm from '@/components/sections/SurveyForm.astro';
+import heroImage from '@/assets/img/about/hero-europe.jpg';
+import { locales, localizePath, type Locale } from '@/i18n/utils';
+import { getChambers } from '@/content/helpers';
+
+export function getStaticPaths() {
+  return locales.map(lang => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const page = await getChambers(lang);
+const to = (path: string) => localizePath(path, lang);
+const heroVideo = '';
+---
+
+<BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
+  <PageHero
+    {...page.hero}
+    primaryHref="#form"
+    secondaryHref={to('contact')}
+    image={heroImage}
+    video={heroVideo}
+  />
+  <NineWays data={page.ways} />
+  <Outcomes data={page.outcomes} />
+  <RevenueBand data={page.revenue} />
+  <FormSection
+    label={page.survey.label}
+    titleStart={page.survey.titleStart}
+    titleAccent={page.survey.titleAccent}
+    text={page.survey.text}
+    wide
+  >
+    <SurveyForm lang={lang} />
+  </FormSection>
+</BaseLayout>

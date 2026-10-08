@@ -1,86 +1,22 @@
 ---
+/** Сторінка Contact (Figma «Contact • Desktop (new)»). */
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import ContactForm from '@/components/sections/ContactForm.astro';
-import { locales, useTranslations, type Locale } from '@/i18n/utils';
-import { getPage, getSiteSettings, telHref } from '@/content/helpers';
+import ContactHero from '@/components/sections/contact/ContactHero.astro';
+import ContactSplit from '@/components/sections/contact/ContactSplit.astro';
+import QuickAnswers from '@/components/sections/contact/QuickAnswers.astro';
+import { locales, localizePath, type Locale } from '@/i18n/utils';
+import { getContact } from '@/content/helpers';
 
 export function getStaticPaths() {
   return locales.map(lang => ({ params: { lang } }));
 }
 
 const lang = Astro.params.lang as Locale;
-const t = useTranslations(lang);
-const page = await getPage('contact', lang);
-const site = await getSiteSettings();
-const a = site.address;
+const page = await getContact(lang);
 ---
 
 <BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
-  <section class="section">
-    <div class="container contact">
-      <div class="contact__intro">
-        <h1 class="section-title">{page.title}</h1>
-        <p class="lead contact__lead">{page.lead}</p>
-
-        <p class="contact__heading">{a.city}</p>
-        <address class="contact__address">
-          {site.companyName}
-          <br />
-          {a.street}
-          <br />
-          {a.box}
-          <br />
-          {`${a.postalCode} ${a.city}, ${a.country}`}
-        </address>
-
-        <p class="contact__heading">{t('footer.contact')}</p>
-        <ul role="list" class="contact__list">
-          {site.phone && (
-            <li>
-              <a href={telHref(site.phone)}>{site.phone}</a>
-            </li>
-          )}
-          <li>
-            <a href={`mailto:${site.email}`}>{site.email}</a>
-          </li>
-        </ul>
-      </div>
-
-      <ContactForm lang={lang} />
-    </div>
-  </section>
+  <ContactHero data={page.hero} />
+  <ContactSplit lang={lang} map={page.map} />
+  <QuickAnswers data={page.faq} faqHref={localizePath('#faq', lang)} />
 </BaseLayout>
-
-<style>
-  .contact {
-    display: grid;
-    gap: var(--space-12);
-  }
-
-  @media (min-width: 1024px) {
-    .contact {
-      grid-template-columns: 1fr 1.4fr;
-      gap: var(--space-20);
-    }
-  }
-
-  .contact__lead {
-    margin-block: var(--space-6) var(--space-10);
-    color: var(--color-text-secondary);
-  }
-
-  .contact__heading {
-    font-weight: var(--fw-semibold);
-    margin-bottom: var(--space-2);
-  }
-
-  .contact__address {
-    font-style: normal;
-    margin-bottom: var(--space-6);
-    color: var(--color-text-secondary);
-  }
-
-  .contact__list a {
-    color: var(--color-green);
-  }
-</style>

@@ -1,0 +1,152 @@
+---
+/** «Contact — Split»: форма з темами ліворуч, картки з контактами праворуч. */
+import ContactForm from '@/components/sections/ContactForm.astro';
+import { useTranslations, type Locale } from '@/i18n/utils';
+import { getSiteSettings, telHref } from '@/content/helpers';
+
+interface Props {
+  lang: Locale;
+  map: { lat: number; lon: number };
+}
+const { lang, map } = Astro.props;
+const t = useTranslations(lang);
+const site = await getSiteSettings();
+const a = site.address;
+// Посилання на OpenStreetMap: без cookies і стороннього коду на сторінці
+const mapHref = `https://www.openstreetmap.org/?mlat=${map.lat}&mlon=${map.lon}#map=15/${map.lat}/${map.lon}`;
+const coords = `${map.lat.toFixed(4)}°N · ${map.lon.toFixed(4)}°E`;
+const linkedin = site.social.linkedin;
+---
+
+<section class="section c-split" id="form" aria-label={t('nav.contact')}>
+  <div class="container c-split__inner">
+    <ContactForm lang={lang} page="contact" topics />
+
+    <aside class="c-cards">
+      <div class="c-card">
+        <p class="meta-s accent">{t('contact.hq')}</p>
+        <p class="c-card__big">{site.companyName}</p>
+        <address class="c-card__address">
+          {`${a.street}, ${a.box}`}
+          <br />
+          {`${a.postalCode} ${a.city}, ${a.country}`}
+        </address>
+        <a
+          class="c-card__map"
+          href={mapHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="meta-s num">{coords}</span>
+          <span>{t('contact.map')} ↗</span>
+        </a>
+      </div>
+
+      <div class="c-card">
+        <p class="meta-s accent">{t('contact.email')}</p>
+        <a class="c-card__big" href={`mailto:${site.email}`}>
+          {site.email}
+        </a>
+      </div>
+
+      {site.phone && (
+        <div class="c-card">
+          <p class="meta-s accent">{t('contact.phone')}</p>
+          <a class="c-card__big num" href={telHref(site.phone)}>
+            {site.phone}
+          </a>
+        </div>
+      )}
+
+      {linkedin && (
+        <div class="c-card">
+          <p class="meta-s accent">{t('contact.linkedin')}</p>
+          <a
+            class="c-card__big c-card__link"
+            href={linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+          </a>
+        </div>
+      )}
+    </aside>
+  </div>
+</section>
+
+<style>
+  .accent {
+    color: var(--color-green);
+  }
+
+  .c-split {
+    padding-top: var(--space-12);
+  }
+
+  .c-split__inner {
+    display: grid;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .c-split__inner {
+      grid-template-columns: 772fr 420fr;
+      gap: var(--space-12);
+    }
+  }
+
+  .c-cards {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .c-card {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: 20px;
+    min-width: 0;
+  }
+
+  .c-card__big {
+    font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.875rem);
+    font-weight: var(--fw-semibold);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  a.c-card__big:hover {
+    color: var(--color-green);
+  }
+
+  .c-card__address {
+    font-style: normal;
+    text-transform: uppercase;
+    color: var(--color-text-soft);
+  }
+
+  .c-card__map {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    padding: var(--space-4);
+    border-radius: var(--radius-sm);
+    background:
+      linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / 24px
+        24px,
+      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 /
+        24px 24px,
+      var(--color-bg);
+    color: var(--color-green);
+  }
+
+  .c-card__map:hover {
+    outline: 1px solid var(--color-green);
+  }
+</style>

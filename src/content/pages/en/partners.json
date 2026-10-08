@@ -1,0 +1,52 @@
+{
+  "seoTitle": "Partners — Chambers of commerce and translation companies | Datixxia™",
+  "seoDescription": "Chambers of commerce and Language Service Providers can partner with Datixxia™ to bring forward-looking market intelligence to businesses worldwide.",
+  "hero": {
+    "label": "Partners",
+    "title": "Research, innovation & global reach",
+    "lead": "Trade is the source of all prosperity — material, by exchanging items, or cultural, by exchanging ideas. That is why we are inviting the key players in international business — chambers of commerce and translation companies — to be our partners.",
+    "primaryCta": "Become a partner",
+    "secondaryCta": "Contact us",
+    "imageAlt": ""
+  },
+  "chambers": {
+    "label": "For chambers of commerce",
+    "titleStart": "Turn data",
+    "titleAccent": "into opportunity",
+    "lead": "Designed for Chambers of Commerce, Datixxia™ reveals where the economy is heading — months or even years in advance. Anticipate growth sectors, guide local businesses, attract investors, and unlock new revenue channels for your chamber.",
+    "text": "With Datixxia™, your organization becomes a trusted source of future economic intelligence.",
+    "cta": "Explore the benefits of partnering"
+  },
+  "lsp": {
+    "label": "For translation companies",
+    "titleStart": "The",
+    "titleAccent": "human layer",
+    "titleEnd": "of Datixxia™",
+    "lead": "Language Service Providers give every business access to Datixxia™ — with support by native speakers who know their local market and understand international trade.",
+    "cards": [
+      {
+        "title": "Platform testing",
+        "text": "Test the application during the development phase — stress-testing the terminal with real-world queries before public launch."
+      },
+      {
+        "title": "Subscriber support",
+        "text": "Provide first-line support for subscribers by answering their queries — in their own language, with knowledge of their local market."
+      },
+      {
+        "title": "Issue reporting",
+        "text": "Report issues directly to the Datixxia™ team, helping the platform improve with every release."
+      }
+    ]
+  },
+  "form": {
+    "label": "Contact us",
+    "titleStart": "Become a",
+    "titleAccent": "partner",
+    "lead": "Want more information, or have a question you couldn’t find an answer to on the website? Contact us."
+  },
+  "cta": {
+    "title": "Let’s build the future together.",
+    "text": "Join the Datixxia™ partner network — chambers of commerce and translation companies welcome.",
+    "button": "Contact us"
+  }
+}

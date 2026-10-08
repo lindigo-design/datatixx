@@ -95,14 +95,21 @@ keystatic.config.ts ← які поля є в адмінці
 - Секрети (`config.php`, `.env`) ніколи не потрапляють у Git.
 - Dependabot щотижня пропонує оновлення бібліотек.
 
-## Форма на хостингу
+## Форми на хостингу
+
+- `api/contact.php` — форма зв'язку (Contact, Partners)
+- `api/survey.php` — анкета для торгових палат (Partners — Chambers)
+- `api/_lib.php` — спільний захист (напряму не відкривається)
+
+## Форма на хостингу (налаштування)
 
 На сервері IONOS: скопіювати `api/config.example.php` → `api/config.php`
 і вписати справжню адресу скриньки. Без `config.php` форма відповідає помилкою.
 
 ## Дизайн
 
-Джерело правди — Figma «Datatixx site Relume» → сторінка Redesign → **Home • Desktop**, **About • Desktop**, **Platform • Desktop**, **Benefits • Desktop (new)**.
+Джерело правди — Figma «Datatixx site Relume» → сторінка Redesign → **Home • Desktop**, **About • Desktop**, **Platform • Desktop**, **Benefits • Desktop (new)**, **Partners**, **Partners — Chambers**, **Team**, **Contact**.
+FAQ окремою сторінкою поки не робимо: меню і кнопки «All FAQs» ведуть до блоку FAQ на головній (`/en/#faq`).
 Блоки «What you can do with Datixxia™» і FAQ спільні для Home і Benefits — редагуються на Головній.
 Токени (кольори, шрифти, відступи) — у `src/styles/tokens.css`.
 Мобільної версії в Figma немає: адаптив зроблено в коді (телефон → планшет → десктоп).
@@ -116,6 +123,8 @@ keystatic.config.ts ← які поля є в адмінці
 - [ ] Посилання на соцмережі компанії і команди (поки порожні — іконки сховано)
 - [ ] Перевірити французькі тексти (переклад чорновий)
 - [ ] Відео для hero About: файл MP4 → `public/video/about-hero.mp4`, шлях у `src/pages/[lang]/about.astro` і `platform.astro` (`heroVideo`)
+- [ ] Фото для блоку «Turn data into opportunity» на Partners (зараз фірмова панель з логотипом)
+- [ ] Анкета для палат: дати в тексті (31.12.2025 і 02.01.2026) уже минули — оновити
 - [ ] Сторінки Benefits, Partners, Team, FAQ, Contact — за макетами з Figma
 - [ ] Privacy Policy, Terms of Service, Mentions légales
 - [ ] Hero-зображення у вищій якості для Retina (зараз 1568 px завширшки)

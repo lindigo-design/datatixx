@@ -1,17 +1,28 @@
 ---
 /**
- * Форма зв'язку.
- * Працює і без JavaScript (звичайна відправка), а з JS — без перезавантаження сторінки.
- * Обробник: public/api/contact.php (PHP на хостингу IONOS).
+ * Форма зв'язку (Contact і Partners) — поля як у Figma.
+ * Працює і без JavaScript, а з JS — без перезавантаження сторінки (scripts/forms.ts).
+ * Обробник: public/api/contact.php.
  */
 import Button from '@/components/ui/Button.astro';
 import { useTranslations, type Locale } from '@/i18n/utils';
 
 interface Props {
   lang: Locale;
+  /** Сторінка, на яку повертати після відправки без JS */
+  page: 'contact' | 'partners';
+  /** Показати вибір теми («What is it about?») */
+  topics?: boolean;
 }
-const { lang } = Astro.props;
+const { lang, page, topics = false } = Astro.props;
 const t = useTranslations(lang);
+const topicList = [
+  'demo',
+  'partnership',
+  'provider',
+  'press',
+  'support',
+] as const;
 ---
 
 <form
@@ -19,17 +30,15 @@ const t = useTranslations(lang);
   action="/api/contact.php"
   method="post"
   novalidate
-  data-contact-form
+  data-ajax-form
   data-msg-sending={t('form.sending')}
   data-msg-success={t('form.success')}
   data-msg-error={t('form.error')}
   data-msg-required={t('form.required')}
 >
   <input type="hidden" name="lang" value={lang} />
-  {/* Час відкриття форми: боти відправляють миттєво */}
+  <input type="hidden" name="page" value={page} />
   <input type="hidden" name="ts" value="" data-ts />
-
-  {/* Пастка для ботів: людина це поле не бачить і не заповнює */}
   <div class="form__trap" aria-hidden="true">
     <label>
       Website{' '}
@@ -37,247 +46,104 @@ const t = useTranslations(lang);
     </label>
   </div>
 
-  <div class="form__row">
-    <div class="field">
-      <label for="cf-first">
-        {t('form.firstName')} <span aria-hidden="true">*</span>
-      </label>
-      <input
-        id="cf-first"
-        name="firstName"
-        type="text"
-        autocomplete="given-name"
-        required
-        maxlength="80"
-      />
-    </div>
-    <div class="field">
-      <label for="cf-last">
-        {t('form.lastName')} <span aria-hidden="true">*</span>
-      </label>
-      <input
-        id="cf-last"
-        name="lastName"
-        type="text"
-        autocomplete="family-name"
-        required
-        maxlength="80"
-      />
-    </div>
-  </div>
+  {topics && (
+    <fieldset class="chips field">
+      <legend>{t('form.topic')}</legend>
+      {topicList.map((key, i) => (
+        <label class="chip">
+          <input type="radio" name="topic" value={key} checked={i === 0} />
+          <span>{t(`topic.${key}`)}</span>
+        </label>
+      ))}
+    </fieldset>
+  )}
 
-  <div class="form__row">
-    <div class="field">
-      <label for="cf-email">
-        {t('form.email')} <span aria-hidden="true">*</span>
-      </label>
-      <input
-        id="cf-email"
-        name="email"
-        type="email"
-        autocomplete="email"
-        required
-        maxlength="160"
-      />
+  <div class:list={['form__fields', topics && 'form-card']}>
+    <div class="form__row">
+      <div class="field">
+        <label for={`${page}-first`}>{t('form.firstName')} *</label>
+        <input
+          id={`${page}-first`}
+          name="firstName"
+          type="text"
+          autocomplete="given-name"
+          placeholder={t('form.firstNamePh')}
+          required
+          maxlength="80"
+        />
+      </div>
+      <div class="field">
+        <label for={`${page}-last`}>{t('form.lastName')} *</label>
+        <input
+          id={`${page}-last`}
+          name="lastName"
+          type="text"
+          autocomplete="family-name"
+          placeholder={t('form.lastNamePh')}
+          required
+          maxlength="80"
+        />
+      </div>
     </div>
-    <div class="field">
-      <label for="cf-company">{t('form.company')}</label>
-      <input
-        id="cf-company"
-        name="company"
-        type="text"
-        autocomplete="organization"
-        maxlength="120"
-      />
-    </div>
-  </div>
 
-  <div class="field">
-    <label for="cf-message">
-      {t('form.message')} <span aria-hidden="true">*</span>
+    <div class="form__row">
+      <div class="field">
+        <label for={`${page}-email`}>{t('form.email')} *</label>
+        <input
+          id={`${page}-email`}
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder={t('form.emailPh')}
+          required
+          maxlength="160"
+        />
+      </div>
+      <div class="field">
+        <label for={`${page}-subject`}>{t('form.subject')} *</label>
+        <input
+          id={`${page}-subject`}
+          name="subject"
+          type="text"
+          placeholder={t('form.subjectPh')}
+          required
+          maxlength="160"
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for={`${page}-message`}>{t('form.message')} *</label>
+      <textarea
+        id={`${page}-message`}
+        name="message"
+        rows="5"
+        placeholder={t('form.messagePh')}
+        required
+        minlength="10"
+        maxlength="4000"
+      ></textarea>
+    </div>
+
+    <label class="form__consent">
+      <input type="checkbox" name="consent" value="1" required />
+      <span>{t('form.consent')}</span>
     </label>
-    <textarea
-      id="cf-message"
-      name="message"
-      rows="6"
-      required
-      minlength="10"
-      maxlength="4000"
-    ></textarea>
-  </div>
 
-  <label class="form__consent">
-    <input type="checkbox" name="consent" value="1" required />
-    <span>{t('form.consent')}</span>
-  </label>
-
-  <div class="form__footer">
-    <Button type="submit" data-submit>
-      {t('form.submit')}
-    </Button>
-    <p class="form__status" role="status" aria-live="polite" data-status></p>
+    <div class="form__footer">
+      <Button type="submit">{t('form.submit')}</Button>
+      <p class="form__status" role="status" aria-live="polite" data-status></p>
+    </div>
   </div>
 </form>
 
 <style>
-  .form {
+  .form__fields {
     display: grid;
-    gap: var(--space-6);
-  }
-
-  .form__row {
-    display: grid;
-    gap: var(--space-6);
-  }
-
-  @media (min-width: 640px) {
-    .form__row {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .field {
-    display: grid;
-    gap: var(--space-2);
-  }
-
-  .field label {
-    font-size: var(--fs-small);
-    color: var(--color-text-secondary);
-  }
-
-  .field input,
-  .field textarea {
-    width: 100%;
-    min-height: 48px;
-    padding: var(--space-3) var(--space-4);
-    background: var(--color-surface);
-    border: var(--border);
-    border-radius: var(--radius-sm);
-    font-size: var(--fs-body); /* 16px — iOS не збільшує сторінку */
-    transition: border-color var(--dur-fast) ease;
-  }
-
-  .field textarea {
-    resize: vertical;
-  }
-
-  .field input:hover,
-  .field textarea:hover {
-    border-color: var(--color-text-muted);
-  }
-
-  .field input:focus-visible,
-  .field textarea:focus-visible {
-    border-color: var(--color-green);
-    outline-offset: 0;
-  }
-
-  .field input[aria-invalid='true'],
-  .field textarea[aria-invalid='true'] {
-    border-color: var(--color-error);
-  }
-
-  .form__consent {
-    display: flex;
-    gap: var(--space-3);
-    align-items: flex-start;
-    font-size: var(--fs-small);
-    color: var(--color-text-secondary);
-  }
-
-  .form__consent input {
-    width: 20px;
-    height: 20px;
-    margin-top: 2px;
-    accent-color: var(--color-green);
-    flex-shrink: 0;
-  }
-
-  .form__footer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-4);
-  }
-
-  .form__status:empty {
-    display: none;
-  }
-
-  .form__status.is-success {
-    color: var(--color-success);
-  }
-  .form__status.is-error {
-    color: var(--color-error);
-  }
-
-  .form__trap {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
+    gap: var(--space-5);
   }
 </style>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
-
-  if (form) {
-    const status = form.querySelector<HTMLElement>('[data-status]')!;
-    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
-    const ts = form.querySelector<HTMLInputElement>('[data-ts]')!;
-    ts.value = String(Date.now());
-
-    const show = (text: string, kind: 'success' | 'error' | '') => {
-      status.textContent = text;
-      status.className = `form__status ${kind ? `is-${kind}` : ''}`;
-    };
-
-    // Повернення після відправки без JavaScript (?sent=1 або ?error=1)
-    const params = new URLSearchParams(location.search);
-    if (params.has('sent')) show(form.dataset.msgSuccess ?? '', 'success');
-    if (params.has('error')) show(form.dataset.msgError ?? '', 'error');
-
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
-
-      // Перевірка в браузері — для зручності. Справжня перевірка — на сервері.
-      const fields = form.querySelectorAll<
-        HTMLInputElement | HTMLTextAreaElement
-      >('input, textarea');
-      let firstInvalid: HTMLElement | null = null;
-      fields.forEach(f => {
-        const ok = f.checkValidity();
-        f.setAttribute('aria-invalid', String(!ok));
-        if (!ok && !firstInvalid) firstInvalid = f;
-      });
-      if (firstInvalid) {
-        // Не лише колір: текстове повідомлення для всіх, і для скрінрідерів
-        show(form.dataset.msgRequired ?? '', 'error');
-        (firstInvalid as HTMLElement).focus();
-        return;
-      }
-
-      submit.disabled = true;
-      show(form.dataset.msgSending ?? '', '');
-
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' },
-        });
-        if (!response.ok) throw new Error(String(response.status));
-        form.reset();
-        ts.value = String(Date.now());
-        show(form.dataset.msgSuccess ?? '', 'success');
-      } catch {
-        show(form.dataset.msgError ?? '', 'error');
-      } finally {
-        submit.disabled = false;
-      }
-    });
-  }
+  import '@/scripts/forms';
 </script>

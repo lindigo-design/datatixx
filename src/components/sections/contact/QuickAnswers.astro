@@ -1,0 +1,110 @@
+---
+/** «Quick answers» — три короткі відповіді і кнопка до всіх FAQ. */
+import { Image } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import aurora from '@/assets/img/home/bg-aurora-1.jpg';
+
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    button: string;
+    items: { tag: string; q: string; a: string }[];
+  };
+  faqHref: string;
+}
+const { data, faqHref } = Astro.props;
+---
+
+<section class="section quick" aria-labelledby="quick-title">
+  <Image
+    src={aurora}
+    alt=""
+    class="section-bg quick__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container quick__inner">
+    <header class="quick__head">
+      <div>
+        <p class="section-label">{data.label}</p>
+        <h2 id="quick-title" class="section-title">
+          {`${data.titleStart} `}
+          <span class="grad-text">{data.titleAccent}</span>
+        </h2>
+      </div>
+      <Button href={faqHref} variant="outline">
+        {data.button}
+      </Button>
+    </header>
+    <ul role="list" class="quick__list">
+      {data.items.map(i => (
+        <li class="q-card">
+          <p class="meta-s accent">{i.tag}</p>
+          <h3 class="q-card__q">{i.q}</h3>
+          <p class="q-card__a">{i.a}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .quick__bg {
+    opacity: 0.3;
+  }
+
+  .accent {
+    color: var(--color-green);
+  }
+
+  .quick__inner {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .quick__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .quick__head .section-label {
+    margin-bottom: var(--space-3);
+  }
+
+  .quick__list {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 900px) {
+    .quick__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .q-card {
+    display: grid;
+    align-content: start;
+    gap: var(--space-3);
+    padding: var(--space-8) 26px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: 20px;
+  }
+
+  .q-card__q {
+    font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.75rem);
+    font-weight: var(--fw-semibold);
+    line-height: 1.4;
+  }
+
+  .q-card__a {
+    color: var(--color-text-secondary);
+  }
+</style>

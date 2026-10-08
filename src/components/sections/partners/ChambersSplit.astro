@@ -1,0 +1,141 @@
+---
+/**
+ * «Turn data into opportunity» — зображення ліворуч, текст праворуч.
+ * TODO: у Figma тут заглушка «IMAGE PLACEHOLDER». Поки показуємо фірмову панель із символом логотипа.
+ * Коли буде фото — поклади його в src/assets/img/partners/ і передай через prop image.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Button from '@/components/ui/Button.astro';
+import LogoSymbol from '@/assets/icons/logo-symbol.svg';
+import aurora from '@/assets/img/home/bg-aurora-1.jpg';
+
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    lead: string;
+    text: string;
+    cta: string;
+  };
+  ctaHref: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+}
+const { data, ctaHref, image, imageAlt = '' } = Astro.props;
+---
+
+<section class="section split" aria-labelledby="chambers-title">
+  <Image
+    src={aurora}
+    alt=""
+    class="section-bg split__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container split__inner">
+    <div class="split__media">
+      {image ? (
+        <Image
+          src={image}
+          alt={imageAlt}
+          widths={[520, 1040]}
+          sizes="(min-width: 1024px) 520px, 100vw"
+          loading="lazy"
+        />
+      ) : (
+        <div class="split__panel" aria-hidden="true">
+          <LogoSymbol class="split__symbol" />
+        </div>
+      )}
+    </div>
+    <div class="split__content">
+      <p class="section-label">{data.label}</p>
+      <h2 id="chambers-title" class="section-title">
+        {`${data.titleStart} `}
+        <span class="grad-text">{data.titleAccent}</span>
+      </h2>
+      <p class="split__lead">{data.lead}</p>
+      <p class="split__text">{data.text}</p>
+      <Button href={ctaHref}>{data.cta}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .split__bg {
+    opacity: 0.2;
+  }
+
+  .split__inner {
+    display: grid;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .split__inner {
+      grid-template-columns: 520fr 640fr;
+      gap: var(--space-20);
+    }
+  }
+
+  .split__media {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-hairline);
+    overflow: hidden;
+    aspect-ratio: 520 / 480;
+    background: var(--color-surface);
+  }
+
+  .split__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .split__panel {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        rgb(66 170 57 / 0.22),
+        transparent 55%
+      ),
+      linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px) 0 0 / 40px
+        40px,
+      linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px) 0 0 /
+        40px 40px,
+      var(--color-surface);
+  }
+
+  .split__symbol {
+    width: 28%;
+    height: auto;
+    filter: drop-shadow(0 0 40px rgb(66 170 57 / 0.5));
+  }
+
+  .split__content {
+    display: grid;
+    gap: var(--space-6);
+    justify-items: start;
+  }
+
+  .split__content .section-label {
+    margin-bottom: calc(var(--space-2) * -1);
+  }
+
+  .split__lead {
+    font-size: var(--fs-body-lg);
+    color: var(--color-text-secondary);
+  }
+
+  .split__text {
+    color: var(--color-text-secondary);
+  }
+</style>

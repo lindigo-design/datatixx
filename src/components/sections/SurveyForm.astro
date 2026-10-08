@@ -1,0 +1,205 @@
+---
+/** Анкета для палат і мовних компаній (Figma: «Market Survey»). Обробник: public/api/survey.php. */
+import Button from '@/components/ui/Button.astro';
+import { useTranslations, type Locale } from '@/i18n/utils';
+import { countryOptions } from '@/utils/countries';
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const countries = countryOptions(lang);
+
+type Key = Parameters<typeof t>[0];
+const pairs: [
+  {
+    name: string;
+    label: Key;
+    ph?: Key;
+    required?: boolean;
+    type?: 'text' | 'email' | 'tel' | 'url';
+    auto?: string;
+    max: number;
+  },
+  {
+    name: string;
+    label: Key;
+    ph?: Key;
+    required?: boolean;
+    type?: 'text' | 'email' | 'tel' | 'url';
+    auto?: string;
+    max: number;
+  },
+][] = [
+  [
+    {
+      name: 'city',
+      label: 'survey.city',
+      required: true,
+      auto: 'address-level2',
+      max: 120,
+    },
+    {
+      name: 'district',
+      label: 'survey.district',
+      required: true,
+      auto: 'address-level3',
+      max: 120,
+    },
+  ],
+  [
+    {
+      name: 'postcode',
+      label: 'survey.postcode',
+      required: true,
+      auto: 'postal-code',
+      max: 20,
+    },
+    {
+      name: 'organisation',
+      label: 'survey.organisation',
+      required: true,
+      auto: 'organization',
+      max: 160,
+    },
+  ],
+  [
+    {
+      name: 'address',
+      label: 'survey.address',
+      required: true,
+      auto: 'street-address',
+      max: 240,
+    },
+    {
+      name: 'phone',
+      label: 'survey.phone',
+      required: true,
+      type: 'tel',
+      auto: 'tel',
+      max: 40,
+    },
+  ],
+  [
+    {
+      name: 'email',
+      label: 'survey.email',
+      ph: 'form.emailPh',
+      required: true,
+      type: 'email',
+      auto: 'email',
+      max: 160,
+    },
+    {
+      name: 'websiteUrl',
+      label: 'survey.website',
+      ph: 'survey.websitePh',
+      type: 'url',
+      auto: 'url',
+      max: 200,
+    },
+  ],
+  [
+    {
+      name: 'registration',
+      label: 'survey.registration',
+      ph: 'survey.registrationPh',
+      required: true,
+      max: 80,
+    },
+    { name: 'affiliations', label: 'survey.affiliations', max: 240 },
+  ],
+];
+---
+
+<form
+  class="form form-card"
+  action="/api/survey.php"
+  method="post"
+  novalidate
+  data-ajax-form
+  data-msg-sending={t('form.sending')}
+  data-msg-success={t('form.success')}
+  data-msg-error={t('form.error')}
+  data-msg-required={t('form.required')}
+>
+  <input type="hidden" name="lang" value={lang} />
+  <input type="hidden" name="ts" value="" data-ts />
+  <div class="form__trap" aria-hidden="true">
+    <label>
+      Website{' '}
+      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+    </label>
+  </div>
+
+  <div class="form__row">
+    <div class="field">
+      <label for="sv-country">{t('survey.country')} *</label>
+      <select id="sv-country" name="country" autocomplete="country" required>
+        <option value="">{t('survey.countryPh')}</option>
+        {countries.map(c => (
+          <option value={c.code}>{c.name}</option>
+        ))}
+      </select>
+    </div>
+    <div class="field">
+      <label for="sv-province">{t('survey.province')}</label>
+      <input
+        id="sv-province"
+        name="province"
+        type="text"
+        autocomplete="address-level1"
+        placeholder={t('survey.province')}
+        maxlength="120"
+      />
+    </div>
+  </div>
+
+  {pairs.map(row => (
+    <div class="form__row">
+      {row.map(f => (
+        <div class="field">
+          <label for={`sv-${f.name}`}>
+            {t(f.label)}
+            {f.required ? ' *' : ''}
+          </label>
+          <input
+            id={`sv-${f.name}`}
+            name={f.name}
+            type={f.type ?? 'text'}
+            autocomplete={f.auto}
+            placeholder={t(f.ph ?? f.label)}
+            required={f.required}
+            maxlength={f.max}
+          />
+        </div>
+      ))}
+    </div>
+  ))}
+
+  <div class="field">
+    <label for="sv-comments">{t('survey.comments')}</label>
+    <textarea
+      id="sv-comments"
+      name="comments"
+      rows="4"
+      placeholder={t('survey.commentsPh')}
+      maxlength="4000"
+    ></textarea>
+  </div>
+
+  <label class="form__consent">
+    <input type="checkbox" name="consent" value="1" required />
+    <span>{t('survey.consent')}</span>
+  </label>
+
+  <div class="form__footer">
+    <Button type="submit">{t('form.submit')}</Button>
+    <p class="form__status" role="status" aria-live="polite" data-status></p>
+  </div>
+</form>
+
+<script>
+  import '@/scripts/forms';
+</script>

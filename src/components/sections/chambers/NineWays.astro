@@ -1,0 +1,287 @@
+---
+/** «Nine ways Datixxia™ works for chambers»: три великі картки (bento) + список із шести пунктів. */
+import { Image } from 'astro:assets';
+import aurora from '@/assets/img/home/bg-aurora-1.jpg';
+
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    titleEnd: string;
+    lead: string;
+    pillars: {
+      tag: string;
+      title: string;
+      text: string;
+      vizCaption: string;
+      vizTag: string;
+    }[];
+    moreTitle: string;
+    more: { title: string; text: string }[];
+  };
+}
+const { data } = Astro.props;
+const [main, members, revenue] = data.pillars;
+const num = (i: number) => String(i).padStart(2, '0');
+---
+
+<section class="section nine" aria-labelledby="nine-title">
+  <Image
+    src={aurora}
+    alt=""
+    class="section-bg nine__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container nine__inner">
+    <header class="nine__head">
+      <p class="section-label">{data.label}</p>
+      <h2 id="nine-title" class="section-title">
+        {`${data.titleStart} `}
+        <span class="grad-text">{data.titleAccent}</span>
+        {` ${data.titleEnd}`}
+      </h2>
+      <p class="section-subtitle nine__lead">{data.lead}</p>
+    </header>
+
+    <div class="bento">
+      {main && (
+        <article class="bento__card bento__card--main">
+          <p class="meta-s accent">{`01 — ${main.tag}`}</p>
+          <h3 class="bento__title bento__title--lg">{main.title}</h3>
+          <p class="bento__text">{main.text}</p>
+          <div class="bento__viz" aria-hidden="true">
+            {Array.from({ length: 7 }, (_, j) => (
+              <span class:list={['bento__bar', j >= 5 && 'is-forecast']} />
+            ))}
+          </div>
+          <p class="bento__caption meta-s">
+            <span>{main.vizCaption}</span>
+            <span class="accent">{main.vizTag}</span>
+          </p>
+        </article>
+      )}
+      <div class="bento__stack">
+        {members && (
+          <article class="bento__card">
+            <p class="meta-s accent">{`02 — ${members.tag}`}</p>
+            <h3 class="bento__title">{members.title}</h3>
+            <p class="bento__text">{members.text}</p>
+          </article>
+        )}
+        {revenue && (
+          <article class="bento__card bento__card--grad">
+            <p class="meta-s">{`03 — ${revenue.tag}`}</p>
+            <h3 class="bento__title">{revenue.title}</h3>
+            <p>{revenue.text}</p>
+          </article>
+        )}
+      </div>
+    </div>
+
+    <div class="more">
+      <h3 class="more__title">{data.moreTitle}</h3>
+      <ol role="list" class="more__list">
+        {data.more.map((m, i) => (
+          <li class="more__item">
+            <span class="more__num num accent" aria-hidden="true">
+              {num(i + 4)}
+            </span>
+            <div>
+              <h4 class="more__name">{m.title}</h4>
+              <p class="more__text">{m.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nine__bg {
+    opacity: 0.2;
+    transform: scaleX(-1);
+  }
+
+  .accent {
+    color: var(--color-green);
+  }
+
+  .nine__inner {
+    display: grid;
+    gap: var(--space-16);
+  }
+
+  .nine__head {
+    display: grid;
+    gap: var(--space-4);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .nine__head .section-label {
+    justify-self: start;
+  }
+
+  .nine__lead {
+    color: var(--color-text-secondary);
+  }
+
+  /* ---------- Bento ---------- */
+  .bento {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 1024px) {
+    .bento {
+      grid-template-columns: 736fr 480fr;
+    }
+  }
+
+  .bento__stack {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .bento__card {
+    display: grid;
+    align-content: start;
+    gap: var(--space-4);
+    padding: var(--space-8) 28px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .bento__card--main {
+    padding: var(--space-10) var(--space-10) var(--space-12);
+  }
+
+  .bento__card--grad {
+    background: var(--gradient-band);
+    border-color: transparent;
+  }
+
+  .bento__title {
+    font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.875rem);
+    font-weight: var(--fw-semibold);
+    line-height: 1.3;
+  }
+
+  .bento__title--lg {
+    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.75rem);
+    font-weight: var(--fw-bold);
+    line-height: 1.15;
+  }
+
+  .bento__text {
+    color: var(--color-text-secondary);
+  }
+
+  .bento__viz {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-3);
+    height: 120px;
+    margin-top: var(--space-6);
+  }
+
+  .bento__bar {
+    flex: 1;
+    max-width: 56px;
+    background: #3d444d;
+    border-radius: 2px;
+  }
+
+  .bento__bar.is-forecast {
+    background: linear-gradient(90deg, #42aa39, #27509e);
+  }
+
+  /* висоти стовпчиків — без inline-стилів (CSP) */
+  .bento__bar:nth-child(1) {
+    height: 36%;
+  }
+  .bento__bar:nth-child(2) {
+    height: 56%;
+  }
+  .bento__bar:nth-child(3) {
+    height: 46%;
+  }
+  .bento__bar:nth-child(4) {
+    height: 74%;
+  }
+  .bento__bar:nth-child(5) {
+    height: 60%;
+  }
+  .bento__bar:nth-child(6) {
+    height: 100%;
+  }
+  .bento__bar:nth-child(7) {
+    height: 81%;
+  }
+
+  .bento__caption {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  /* ---------- Ще шість ---------- */
+  .more {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .more__title {
+    font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.875rem);
+    font-weight: var(--fw-semibold);
+  }
+
+  .more__list {
+    display: grid;
+    column-gap: var(--space-12);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  @media (min-width: 900px) {
+    .more__list {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-flow: column;
+      grid-template-rows: repeat(3, auto);
+      border-top: 0;
+    }
+    .more__item {
+      border-top: 1px solid var(--color-hairline);
+    }
+  }
+
+  .more__item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: var(--space-2);
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .more__num {
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    padding-top: var(--space-2);
+  }
+
+  .more__name {
+    font-size: clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem);
+    font-weight: var(--fw-semibold);
+    line-height: 1.3;
+    margin-bottom: var(--space-2);
+  }
+
+  .more__text {
+    font-size: var(--fs-small);
+    color: var(--color-text-secondary);
+  }
+</style>

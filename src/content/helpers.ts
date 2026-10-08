@@ -35,11 +35,36 @@ export async function getBenefits(lang: Locale) {
   return entry.data;
 }
 
-export async function getPage(slug: string, lang: Locale) {
-  const entry = await getEntry('pages', `${lang}/${slug}`);
+export async function getPartners(lang: Locale) {
+  const entry = await getEntry('partners', `${lang}/partners`);
   if (!entry)
     throw new Error(
-      `Немає тексту сторінки: src/content/pages/${lang}/${slug}.json`
+      `Немає тексту Partners: src/content/pages/${lang}/partners.json`
+    );
+  return entry.data;
+}
+
+export async function getChambers(lang: Locale) {
+  const entry = await getEntry('chambers', `${lang}/chambers`);
+  if (!entry)
+    throw new Error(
+      `Немає тексту Chambers: src/content/pages/${lang}/chambers.json`
+    );
+  return entry.data;
+}
+
+export async function getTeam(lang: Locale) {
+  const entry = await getEntry('team', `${lang}/team`);
+  if (!entry)
+    throw new Error(`Немає тексту Team: src/content/pages/${lang}/team.json`);
+  return entry.data;
+}
+
+export async function getContact(lang: Locale) {
+  const entry = await getEntry('contact', `${lang}/contact`);
+  if (!entry)
+    throw new Error(
+      `Немає тексту Contact: src/content/pages/${lang}/contact.json`
     );
   return entry.data;
 }

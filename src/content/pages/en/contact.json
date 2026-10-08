@@ -1,6 +1,36 @@
 {
-  "seoTitle": "Contact — DataTixx",
-  "seoDescription": "Write to the DataTixx team in Rouen, France.",
-  "title": "Contact",
-  "lead": "Tell us what you want to know. We reply by email."
+  "seoTitle": "Contact — DataTixx SAS, Rouen",
+  "seoDescription": "Contact the Datixxia™ team in Rouen, France: platform demo, partnership, service providers, press and support.",
+  "hero": {
+    "label": "Contact",
+    "title": "Let’s talk",
+    "lead": "Want more information, or have a question you couldn’t find an answer to on the website? Contact us."
+  },
+  "map": {
+    "lat": 49.4431,
+    "lon": 1.0993
+  },
+  "faq": {
+    "label": "Before you write",
+    "titleStart": "Quick",
+    "titleAccent": "answers",
+    "button": "All FAQs",
+    "items": [
+      {
+        "tag": "Pricing",
+        "q": "What is the price of the subscription?",
+        "a": "Basic access is free. Standard — €100, Premium — €200 per concurrent user per month."
+      },
+      {
+        "tag": "Product",
+        "q": "How accurate is Datixxia™?",
+        "a": "All figures are sourced directly from government procurement websites — 40–60% of GDP covered daily in most countries."
+      },
+      {
+        "tag": "Support",
+        "q": "Is there a user guide?",
+        "a": "A user guide for each module, presented by AI avatars in over 100 languages."
+      }
+    ]
+  }
 }

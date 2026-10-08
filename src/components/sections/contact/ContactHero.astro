@@ -1,0 +1,59 @@
+---
+/** «Let’s talk» — невеликий центрований hero з авророю. */
+import { Image } from 'astro:assets';
+import aurora from '@/assets/img/home/bg-aurora-3.jpg';
+
+interface Props {
+  data: { label: string; title: string; lead: string };
+}
+const { data } = Astro.props;
+---
+
+<section class="c-hero" aria-labelledby="c-hero-title">
+  <Image
+    src={aurora}
+    alt=""
+    class="section-bg c-hero__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="eager"
+  />
+  <div class="container c-hero__inner">
+    <p class="section-label">{data.label}</p>
+    <h1 id="c-hero-title" class="c-hero__title">
+      {data.title}
+    </h1>
+    <p class="section-subtitle c-hero__lead">{data.lead}</p>
+  </div>
+</section>
+
+<style>
+  .c-hero {
+    position: relative;
+    isolation: isolate;
+    padding-block: clamp(var(--space-16), 7vw, 6.5rem);
+    overflow: hidden;
+  }
+
+  .c-hero__bg {
+    opacity: 0.4;
+  }
+
+  .c-hero__inner {
+    display: grid;
+    gap: var(--space-4);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .c-hero__title {
+    font-size: clamp(3rem, 2.2rem + 3.5vw, 5.25rem);
+    font-weight: var(--fw-semibold);
+    line-height: 1;
+  }
+
+  .c-hero__lead {
+    max-width: 820px;
+    color: var(--color-text-secondary);
+  }
+</style>

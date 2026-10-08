@@ -1,0 +1,94 @@
+---
+/**
+ * Секція «текст ліворуч — форма праворуч».
+ * Partners: «Become a partner» + форма зв'язку. Chambers: «Market survey» + анкета.
+ * id="form" — сюди повертає обробник після відправки без JavaScript.
+ */
+import { paragraphs } from '@/utils/text';
+
+interface Props {
+  label: string;
+  titleStart: string;
+  titleAccent: string;
+  lead?: string;
+  text?: string;
+  /** Ширина колонки з формою: широка для анкети */
+  wide?: boolean;
+}
+const {
+  label,
+  titleStart,
+  titleAccent,
+  lead,
+  text,
+  wide = false,
+} = Astro.props;
+---
+
+<section
+  class:list={['section form-section', wide && 'form-section--wide']}
+  id="form"
+  aria-labelledby="form-title"
+>
+  <div class="container form-section__inner">
+    <div class="form-section__intro">
+      <p class="section-label">{label}</p>
+      <h2 id="form-title" class="section-title">
+        {`${titleStart} `}
+        <span class="grad-text">{titleAccent}</span>
+      </h2>
+      {lead && <p class="section-subtitle form-section__lead">{lead}</p>}
+      {text && (
+        <div class="form-section__text">
+          {paragraphs(text).map(p => (
+            <p>{p}</p>
+          ))}
+        </div>
+      )}
+    </div>
+    <div class="form-section__form">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .form-section__inner {
+    display: grid;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .form-section__inner {
+      grid-template-columns: 620fr 540fr;
+      gap: var(--space-20);
+    }
+    .form-section--wide .form-section__inner {
+      grid-template-columns: 430fr 720fr;
+      gap: var(--space-24, 6rem);
+    }
+  }
+
+  .form-section__intro {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .form-section__lead {
+    color: var(--color-text-secondary);
+  }
+
+  .form-section__text {
+    display: grid;
+    gap: var(--space-6);
+    color: var(--color-text);
+  }
+
+  .form-section__form :global(form:not(.form-card)) {
+    padding: clamp(var(--space-6), 3vw, var(--space-10));
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+  }
+</style>

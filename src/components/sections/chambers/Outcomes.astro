@@ -1,0 +1,109 @@
+---
+/** «A sustainable revenue engine» — три картки-цифри, примітка і текст. */
+import { Image } from 'astro:assets';
+import aurora from '@/assets/img/home/bg-aurora-3.jpg';
+
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    stats: { value: string; caption: string }[];
+    note: string;
+    text: string;
+  };
+}
+const { data } = Astro.props;
+---
+
+<section class="section outcomes" aria-labelledby="outcomes-title">
+  <Image
+    src={aurora}
+    alt=""
+    class="section-bg outcomes__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container outcomes__inner">
+    <header class="outcomes__head">
+      <p class="section-label">{data.label}</p>
+      <h2 id="outcomes-title" class="section-title align-end-lg">
+        {`${data.titleStart} `}
+        <span class="grad-text">{data.titleAccent}</span>
+      </h2>
+    </header>
+
+    <dl class="outcomes__stats">
+      {data.stats.map(s => (
+        <div class="o-card">
+          <dt class="meta-s">{s.caption}</dt>
+          <dd class="o-card__value grad-text num">{s.value}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <p class="meta-s outcomes__note">{data.note}</p>
+    <p class="outcomes__text">{data.text}</p>
+  </div>
+</section>
+
+<style>
+  .outcomes__bg {
+    opacity: 0.4;
+  }
+
+  .outcomes__inner {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .outcomes__head {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .outcomes__stats {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 1024px) {
+    .outcomes__stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .o-card {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--space-3);
+    padding: var(--space-8) 28px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .o-card dt {
+    color: var(--color-text-secondary);
+  }
+
+  .o-card__value {
+    font-size: clamp(3.5rem, 2.9rem + 2.4vw, 5.25rem); /* 56 → 84 */
+    font-weight: var(--fw-semibold);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .outcomes__note {
+    text-align: center;
+  }
+
+  .outcomes__text {
+    max-width: 840px;
+    margin-inline: auto;
+    text-align: center;
+    font-size: var(--fs-body-lg);
+    color: var(--color-text-secondary);
+  }
+</style>

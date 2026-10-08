@@ -254,13 +254,121 @@ const benefits = defineCollection({
   }),
 });
 
-// ---------- Прості сторінки (контакти тощо) ----------
-const pages = defineCollection({
+// ---------- Partners ----------
+const heroSchema = z.object({
+  label: z.string(),
+  title: z.string(),
+  lead: z.string(),
+  imageAlt: z.string(),
+  ...twoCtas,
+});
+const ctaSchema = z.object({
+  title: z.string(),
+  text: z.string(),
+  button: z.string(),
+});
+const card = z.object({ title: z.string(), text: z.string() });
+
+const partners = defineCollection({
+  loader: glob({ pattern: '*/partners.json', base: './src/content/pages' }),
+  schema: z.object({
+    ...seo,
+    hero: heroSchema,
+    chambers: z.object({
+      ...titled,
+      lead: z.string(),
+      text: z.string(),
+      cta: z.string(),
+    }),
+    lsp: z.object({
+      ...titled,
+      titleEnd: z.string(),
+      lead: z.string(),
+      cards: z.array(card),
+    }),
+    form: z.object({ ...titled, lead: z.string() }),
+    cta: ctaSchema,
+  }),
+});
+
+// ---------- Partners — Chambers ----------
+const chambers = defineCollection({
+  loader: glob({ pattern: '*/chambers.json', base: './src/content/pages' }),
+  schema: z.object({
+    ...seo,
+    hero: heroSchema,
+    ways: z.object({
+      ...titled,
+      titleEnd: z.string(),
+      lead: z.string(),
+      pillars: z.array(
+        z.object({
+          tag: z.string(),
+          title: z.string(),
+          text: z.string(),
+          vizCaption: z.string(),
+          vizTag: z.string(),
+        })
+      ),
+      moreTitle: z.string(),
+      more: z.array(card),
+    }),
+    outcomes: z.object({
+      ...titled,
+      stats: z.array(z.object({ value: z.string(), caption: z.string() })),
+      note: z.string(),
+      text: z.string(),
+    }),
+    revenue: z.object({
+      label: z.string(),
+      title: z.string(),
+      text: z.string(),
+      stats: z.array(z.object({ value: z.string(), caption: z.string() })),
+    }),
+    survey: z.object({ ...titled, text: z.string() }),
+  }),
+});
+
+// ---------- Team ----------
+const team = defineCollection({
+  loader: glob({ pattern: '*/team.json', base: './src/content/pages' }),
+  schema: ({ image }) =>
+    z.object({
+      ...seo,
+      hero: heroSchema,
+      origin: z.object({
+        label: z.string(),
+        lead: z.string(),
+        text: z.string(),
+        punchline: z.string(),
+      }),
+      members: z.array(
+        z.object({
+          name: z.string(),
+          role: z.string(),
+          photo: image(),
+          photoAlt: z.string(),
+          bio: z.string(),
+        })
+      ),
+      cta: ctaSchema,
+    }),
+});
+
+// ---------- Contact ----------
+const contact = defineCollection({
   loader: glob({ pattern: '*/contact.json', base: './src/content/pages' }),
   schema: z.object({
     ...seo,
-    title: z.string(),
-    lead: z.string(),
+    hero: z.object({ label: z.string(), title: z.string(), lead: z.string() }),
+    map: z.object({ lat: z.number(), lon: z.number() }),
+    faq: z.object({
+      ...titled,
+      button: z.string(),
+      items: z.array(
+        z.object({ tag: z.string(), q: z.string(), a: z.string() })
+      ),
+    }),
   }),
 });
 
@@ -297,4 +405,14 @@ const site = defineCollection({
   }),
 });
 
-export const collections = { home, about, platform, benefits, pages, site };
+export const collections = {
+  home,
+  about,
+  platform,
+  benefits,
+  partners,
+  chambers,
+  team,
+  contact,
+  site,
+};
