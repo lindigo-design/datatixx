@@ -1,0 +1,150 @@
+---
+import Logo from '@/components/ui/Logo.astro';
+import { localizePath, useTranslations, type Locale } from '@/i18n/utils';
+import { mainNav } from '@/i18n/nav';
+import { getSiteSettings } from '@/content/helpers';
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const site = await getSiteSettings();
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <Logo />
+      <p class="footer__tagline">{site.tagline}</p>
+    </div>
+
+    <nav aria-label={t('nav.main')}>
+      <ul role="list" class="footer__list">
+        {mainNav.map(item => (
+          <li>
+            <a href={localizePath(item.path, lang)}>{t(item.key)}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div>
+      <p class="label">{t('footer.address')}</p>
+      <address class="footer__address">
+        {site.companyName}
+        <br />
+        {site.address.street}
+        <br />
+        {site.address.box}
+        <br />
+        {site.address.postalCode} {site.address.city}, {site.address.country}
+      </address>
+    </div>
+
+    <div>
+      <p class="label">{t('footer.contact')}</p>
+      <ul role="list" class="footer__list">
+        <li>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        {site.phone && (
+          <li>
+            <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>
+          </li>
+        )}
+        <li>
+          <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>
+      © {year} {site.companyName}. {t('footer.rights')}
+    </p>
+    <ul role="list" class="footer__legal">
+      <li>
+        <a href={localizePath('legal', lang)}>{t('footer.legal')}</a>
+      </li>
+      <li>
+        <a href={localizePath('privacy', lang)}>{t('footer.privacy')}</a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: var(--border);
+    padding-top: var(--space-16);
+    color: var(--color-text-secondary);
+    font-size: var(--fs-small);
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .footer__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer__grid {
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+    }
+  }
+
+  .footer__brand {
+    color: var(--color-text);
+  }
+
+  .footer__tagline {
+    margin-top: var(--space-4);
+    color: var(--color-brand-green);
+    font-size: var(--fs-body-lg);
+  }
+
+  .footer__list {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .footer .label {
+    margin-bottom: var(--space-3);
+  }
+
+  .footer a:hover {
+    color: var(--color-text);
+  }
+
+  .footer__address {
+    font-style: normal;
+    line-height: var(--lh-body);
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-12);
+    padding-block: var(--space-6);
+    border-top: var(--border);
+    color: var(--color-text-muted);
+  }
+
+  .footer__legal {
+    display: flex;
+    gap: var(--space-6);
+  }
+</style>

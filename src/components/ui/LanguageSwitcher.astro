@@ -1,0 +1,60 @@
+---
+import {
+  locales,
+  switchLocale,
+  useTranslations,
+  type Locale,
+} from '@/i18n/utils';
+import { localeNames } from '@/i18n/locales.js';
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<nav class="lang" aria-label={t('lang.label')}>
+  <ul role="list" class="lang__list">
+    {locales.map(l => (
+      <li>
+        <a
+          class="lang__link"
+          href={switchLocale(Astro.url.pathname, l)}
+          hreflang={l}
+          lang={l}
+          aria-current={l === lang ? 'true' : undefined}
+          title={localeNames[l]}
+        >
+          {l.toUpperCase()}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .lang__list {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .lang__link {
+    display: inline-grid;
+    place-items: center;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    color: var(--color-text-muted);
+    border-radius: var(--radius-md);
+  }
+
+  .lang__link:hover {
+    color: var(--color-text);
+  }
+
+  .lang__link[aria-current='true'] {
+    color: var(--color-brand-green);
+  }
+</style>

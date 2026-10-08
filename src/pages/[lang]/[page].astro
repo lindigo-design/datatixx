@@ -1,0 +1,48 @@
+---
+/**
+ * ТИМЧАСОВА сторінка-заглушка для розділів, які ще не зверстані.
+ * Коли верстаємо розділ — створюємо окремий файл (напр. about.astro)
+ * і прибираємо його назву зі списку `pending`.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { locales, type Locale } from '@/i18n/utils';
+
+export function getStaticPaths() {
+  const pending = [
+    'about',
+    'platform',
+    'benefits',
+    'partners',
+    'team',
+    'faq',
+    'legal',
+    'privacy',
+  ];
+  return locales.flatMap(lang =>
+    pending.map(page => ({ params: { lang, page } }))
+  );
+}
+
+const lang = Astro.params.lang as Locale;
+const { page } = Astro.params;
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${page} — DataTixx`}
+  description="Page in progress."
+  noindex
+>
+  <section class="section">
+    <div class="container">
+      <p class="label">In progress</p>
+      <h1 class="pending-title">{page}</h1>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .pending-title {
+    text-transform: capitalize;
+  }
+</style>

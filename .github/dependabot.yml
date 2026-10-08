@@ -1,0 +1,16 @@
+# Dependabot раз на тиждень пропонує оновлення бібліотек (особливо з латками безпеки)
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      astro:
+        patterns: ['astro', '@astrojs/*']
+      keystatic:
+        patterns: ['@keystatic/*']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

@@ -1,0 +1,59 @@
+---
+/**
+ * Короткий «бренд-момент» при ПЕРШОМУ візиті за сесію (≈0,9 с).
+ * Не блокує сторінку: вміст завантажується під ним, а сам лоадер зникає через CSS-анімацію.
+ * Не показується, якщо в системі ввімкнено «зменшити рух».
+ * Скрипт, що вмикає лоадер, — у src/scripts/intro.ts (підключений у <head> BaseLayout).
+ */
+---
+
+<div class="intro" aria-hidden="true">
+  <span class="intro__bar"></span>
+</div>
+
+<style>
+  .intro {
+    display: none;
+  }
+
+  :global(html[data-intro]) .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    background: var(--color-bg);
+    pointer-events: none;
+    animation: intro-out 300ms var(--ease-out) 600ms forwards;
+  }
+
+  .intro__bar {
+    width: min(40vw, 240px);
+    height: 2px;
+    background: var(--gradient-data);
+    transform-origin: left;
+    animation: intro-bar 600ms var(--ease-out) forwards;
+  }
+
+  @keyframes intro-bar {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes intro-out {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(html[data-intro]) .intro {
+      display: none;
+    }
+  }
+</style>

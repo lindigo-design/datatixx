@@ -1,0 +1,69 @@
+# =========================================================================
+#  DataTixx — налаштування сервера Apache (IONOS)
+#  Цей файл копіюється в корінь сайту під час збірки.
+# =========================================================================
+
+Options -Indexes
+ServerSignature Off
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. Завжди HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. Без www → з www (один варіант адреси для Google)
+  RewriteCond %{HTTP_HOST} ^datatixx\.com$ [NC]
+  RewriteRule ^ https://www.datatixx.com%{REQUEST_URI} [L,R=301]
+
+  # 3. Корінь «/» → мова браузера (фр. → /fr/, інші → /en/)
+  RewriteCond %{HTTP:Accept-Language} ^fr [NC]
+  RewriteRule ^$ /fr/ [L,R=302]
+  RewriteRule ^$ /en/ [L,R=302]
+
+  # 4. Старі адреси WordPress → нові (доповнимо перед запуском)
+  RewriteRule ^wp-admin(/.*)?$ - [G,L]
+  RewriteRule ^wp-login\.php$ - [G,L]
+  RewriteRule ^xmlrpc\.php$ - [G,L]
+  # RewriteRule ^about-tixx/?$ /en/about/ [L,R=301]
+</IfModule>
+
+# Заборонити доступ до службових файлів
+<FilesMatch "^(config(\.example)?\.php|\.env.*|.*\.(md|log|ini|lock|json))$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  # Безпека
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set X-Frame-Options "DENY"
+  # Основна CSP — у <meta> кожної сторінки (Astro). Тут — те, що meta не вміє:
+  Header always set Content-Security-Policy "frame-ancestors 'none'"
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
+
+  # Кешування: файли з хешем у назві (/_astro/) — назавжди, решта — коротко, HTML — завжди свіжий
+  <If "%{REQUEST_URI} =~ m#^/_astro/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <Else>
+    Header set Cache-Control "public, max-age=3600"
+  </Else>
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# Стиснення
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+ErrorDocument 404 /404.html

@@ -1,0 +1,15 @@
+{
+  "companyName": "DataTixx SaS",
+  "brandName": "Datixxia™",
+  "tagline": "See Tomorrow. Act Today.",
+  "address": {
+    "street": "Passage de la Luciline",
+    "box": "CS 40641",
+    "postalCode": "76000",
+    "city": "Rouen",
+    "country": "France"
+  },
+  "email": "contact@datatixx.com",
+  "phone": "",
+  "linkedin": "https://www.linkedin.com/company/datatixx/"
+}

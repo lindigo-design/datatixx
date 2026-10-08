@@ -1,0 +1,18 @@
+{
+  "seoTitle": "Datixxia™ — Market intelligence and 4-year forecasts",
+  "seoDescription": "DataTixx turns official procurement data from 194 countries into market intelligence and 4-year forecasts.",
+  "heroLabel": "01 / Market intelligence",
+  "heroTitle": "See Tomorrow. Act Today.",
+  "heroLead": "Placeholder text. The real copy will come from Figma. Short sentences, concrete facts, no filler.",
+  "heroCta": "Contact us",
+  "heroImage": null,
+  "heroImageAlt": "",
+  "tickerItems": [
+    { "name": "Tixx™ Global", "change": 1.13 },
+    { "name": "Tixx™ FR", "change": 0.12 },
+    { "name": "Tixx™ US", "change": 0.29 },
+    { "name": "Tixx™ DE", "change": -0.41 },
+    { "name": "Tixx™ 500", "change": 0.87 },
+    { "name": "Tixx™ 1000", "change": -0.08 }
+  ]
+}

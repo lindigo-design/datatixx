@@ -1,0 +1,276 @@
+---
+import Logo from '@/components/ui/Logo.astro';
+import Button from '@/components/ui/Button.astro';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher.astro';
+import { localizePath, useTranslations, type Locale } from '@/i18n/utils';
+import { mainNav } from '@/i18n/nav';
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const current = Astro.url.pathname;
+---
+
+<header class="header" data-header>
+  <div class="container header__inner">
+    <a
+      href={localizePath('', lang)}
+      class="header__logo"
+      aria-label="DataTixx — home"
+    >
+      <Logo />
+    </a>
+
+    <button
+      class="header__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      data-menu-toggle
+      data-label-open={t('menu.open')}
+      data-label-close={t('menu.close')}
+    >
+      <span class="visually-hidden" data-menu-label>
+        {t('menu.open')}
+      </span>
+      <span class="header__burger" aria-hidden="true"></span>
+    </button>
+
+    <div class="header__menu" id="site-menu" data-menu>
+      <nav aria-label={t('nav.main')}>
+        <ul role="list" class="header__nav">
+          {mainNav.map(item => {
+            const href = localizePath(item.path, lang);
+            return (
+              <li>
+                <a
+                  class="header__link"
+                  href={href}
+                  aria-current={current === href ? 'page' : undefined}
+                >
+                  {t(item.key)}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+      <div class="header__actions">
+        <LanguageSwitcher lang={lang} />
+        <Button href={localizePath('contact', lang)}>{t('nav.contact')}</Button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: var(--border);
+  }
+
+  /* Розмитий фон — на псевдоелементі, бо backdrop-filter на самій шапці
+     «замикає» повноекранне мобільне меню в її висоту */
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--header-h);
+    gap: var(--space-6);
+  }
+
+  .header__logo {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ---------- Телефон і планшет: меню на весь екран ---------- */
+  .header__toggle {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+  }
+
+  .header__burger,
+  .header__burger::before,
+  .header__burger::after {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      opacity var(--dur-fast);
+  }
+
+  .header__burger {
+    position: relative;
+  }
+
+  .header__burger::before,
+  .header__burger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .header__burger::before {
+    top: -7px;
+  }
+  .header__burger::after {
+    top: 7px;
+  }
+
+  [aria-expanded='true'] .header__burger {
+    background: transparent;
+  }
+  [aria-expanded='true'] .header__burger::before {
+    transform: translateY(7px) rotate(45deg);
+  }
+  [aria-expanded='true'] .header__burger::after {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .header__menu {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-8);
+    padding: calc(var(--header-h) + var(--space-8)) var(--gutter) var(--space-8);
+    background: var(--color-bg);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out),
+      visibility 0s linear var(--dur-base);
+  }
+
+  .header__menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  .header__nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .header__link {
+    display: block;
+    padding-block: var(--space-2);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    color: var(--color-text-secondary);
+  }
+
+  .header__link:hover,
+  .header__link[aria-current='page'] {
+    color: var(--color-text);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  /* ---------- Десктоп: меню в рядок ---------- */
+  @media (min-width: 1024px) {
+    .header__toggle {
+      display: none;
+    }
+
+    .header__menu {
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      flex: 1;
+      padding: 0;
+      background: none;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      overflow: visible;
+    }
+
+    .header__nav {
+      flex-direction: row;
+      gap: var(--space-6);
+      margin-inline: auto;
+    }
+
+    .header__link {
+      font-size: var(--fs-body);
+      padding-block: var(--space-2);
+    }
+  }
+
+  :global(body.menu-open) {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  const toggle =
+    document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  const label = document.querySelector<HTMLElement>('[data-menu-label]');
+  const desktop = window.matchMedia('(min-width: 1024px)');
+
+  if (toggle && menu && label) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      label.textContent =
+        (open ? toggle.dataset.labelClose : toggle.dataset.labelOpen) ?? '';
+      menu.classList.toggle('is-open', open);
+      document.body.classList.toggle('menu-open', open);
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    // Закрити клавішею Escape і повернути фокус на кнопку
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.classList.contains('is-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // Закрити після кліку по пункту меню
+    menu.addEventListener('click', event => {
+      if ((event.target as HTMLElement).closest('a')) setOpen(false);
+    });
+
+    // Якщо розширили вікно до десктопа — скинути стан
+    desktop.addEventListener('change', () => setOpen(false));
+  }
+</script>

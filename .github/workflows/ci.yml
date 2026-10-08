@@ -1,0 +1,27 @@
+# Перевірка при кожному push і pull request:
+# чи збирається сайт і чи немає помилок у коді.
+# Публікацію на IONOS додасть Deploy Now окремим файлом.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx prettier --check .
+      - run: npm run build
+      - name: Перевірити, що адмінка не потрапила в збірку
+        run: test ! -d dist/keystatic

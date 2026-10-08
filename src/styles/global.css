@@ -1,0 +1,8 @@
+/* Порядок важливий: reset → токени → база → layout → утиліти.
+   Стилі секцій лежать у самих компонентах (.astro) — як partial + css в одному файлі. */
+@import '@fontsource-variable/afacad';
+@import './reset.css';
+@import './tokens.css';
+@import './base.css';
+@import './container.css';
+@import './utilities.css';

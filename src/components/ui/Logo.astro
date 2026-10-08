@@ -1,0 +1,45 @@
+---
+/**
+ * TODO: замінити на справжній векторний логотип з Figma
+ * (компонент «logo tixx fin horz 1», node 85:292 у файлі DATIXXIA).
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<span class:list={['logo', className]}>
+  <svg
+    class="logo__mark"
+    viewBox="0 0 32 32"
+    width="28"
+    height="28"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <defs>
+      <linearGradient id="logo-grad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#42AA39"></stop>
+        <stop offset="1" stop-color="#27509E"></stop>
+      </linearGradient>
+    </defs>
+    <path
+      d="M4 4h10l4 6 4-6h6L21 16l7 12h-6l-4-6-4 6H4l7-12z"
+      fill="url(#logo-grad)"
+    ></path>
+  </svg>
+  <span class="logo__word">DATATIXX</span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: var(--fw-bold);
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+</style>

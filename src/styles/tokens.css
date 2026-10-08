@@ -1,0 +1,80 @@
+/*
+  Дизайн-токени DataTixx.
+  Джерело правди — Figma (брендбук). Коли зчитаємо Figma, оновлюємо ТІЛЬКИ цей файл.
+*/
+:root {
+  /* Бренд */
+  --color-brand-green: #42aa39;
+  --color-brand-blue: #27509e;
+  --gradient-data: linear-gradient(90deg, #42aa39 0%, #27509e 100%);
+
+  /* Поверхні */
+  --color-bg: #0a0e13;
+  --color-surface: #161b22;
+  --color-border: #3d444d;
+
+  /* Текст */
+  --color-text: #ffffff;
+  --color-text-secondary: #babbbd;
+  --color-text-muted: #8b949e;
+
+  /* Стани */
+  --color-success: #57ed4a;
+  --color-warning: #f59e0b;
+  --color-error: #ff5555;
+  --color-focus: #57ed4a;
+
+  /* Типографіка — Afacad, локально (без Google Fonts) */
+  --font-sans:
+    'Afacad Variable', 'Afacad', system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
+
+  /* Плавні розміри: мінімум на телефоні → максимум на десктопі (цілі px) */
+  --fs-display: clamp(3rem, 1.6rem + 6vw, 8.75rem); /* 48 → 140 */
+  --fs-h1: clamp(2.5rem, 1.7rem + 3.6vw, 4.5rem); /* 40 → 72 */
+  --fs-h2: clamp(2rem, 1.5rem + 2.2vw, 3.5rem); /* 32 → 56 */
+  --fs-h3: clamp(1.5rem, 1.3rem + 0.8vw, 2rem); /* 24 → 32 */
+  --fs-body-lg: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem); /* 18 → 20 */
+  --fs-body: 1rem; /* 16 */
+  --fs-small: 0.875rem; /* 14 */
+  --fs-label: 0.8125rem; /* 13 */
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --lh-tight: 1.05;
+  --lh-heading: 1.15;
+  --lh-body: 1.6;
+
+  /* Відступи (крок 4px) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --section-gap: clamp(4rem, 2.5rem + 6vw, 8rem);
+
+  /* Контейнер */
+  --container-max: 1440px;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem); /* 16 → 40 */
+
+  /* Форма */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --border: 1px solid var(--color-border);
+
+  /* Рух */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+
+  --header-h: 72px;
+}

@@ -1,0 +1,18 @@
+{
+  "seoTitle": "Datixxia™ — Intelligence de marché et prévisions à 4 ans",
+  "seoDescription": "DataTixx transforme les données officielles de marchés publics de 194 pays en intelligence de marché et en prévisions à 4 ans.",
+  "heroLabel": "01 / Intelligence de marché",
+  "heroTitle": "See Tomorrow. Act Today.",
+  "heroLead": "Texte provisoire. Le vrai texte viendra de Figma.",
+  "heroCta": "Nous contacter",
+  "heroImage": null,
+  "heroImageAlt": "",
+  "tickerItems": [
+    { "name": "Tixx™ Global", "change": 1.13 },
+    { "name": "Tixx™ FR", "change": 0.12 },
+    { "name": "Tixx™ US", "change": 0.29 },
+    { "name": "Tixx™ DE", "change": -0.41 },
+    { "name": "Tixx™ 500", "change": 0.87 },
+    { "name": "Tixx™ 1000", "change": -0.08 }
+  ]
+}

@@ -1,0 +1,29 @@
+# збірка
+dist/
+.astro/
+
+# залежності
+node_modules/
+
+# секрети — НІКОЛИ не комітити
+.env
+.env.*
+!.env.example
+public/api/config.php
+
+# логи
+npm-debug.log*
+*.log
+
+# система і редактор
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# інсталятори програм не кладемо в Git
+*.msi
+*.exe
+*.dmg

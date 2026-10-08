@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Ticker from '@/components/sections/Ticker.astro';
+import {
+  locales,
+  localizePath,
+  useTranslations,
+  type Locale,
+} from '@/i18n/utils';
+import { getPage } from '@/content/helpers';
+
+export function getStaticPaths() {
+  return locales.map(lang => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const t = useTranslations(lang);
+const page = await getPage('home', lang);
+---
+
+<BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
+  <Hero
+    label={page.heroLabel}
+    title={page.heroTitle ?? ''}
+    lead={page.heroLead}
+    ctaText={page.heroCta}
+    ctaHref={localizePath('contact', lang)}
+    image={page.heroImage}
+    imageAlt={page.heroImageAlt}
+  />
+  {page.tickerItems && (
+    <Ticker items={page.tickerItems} label={t('ticker.label')} />
+  )}
+
+  {/* Далі секції з Figma: Features, Why Tixx™, Forecasting model, Benefits, Team, FAQ, CTA */}
+</BaseLayout>
