@@ -138,6 +138,7 @@ const site = defineCollection({
     email: z.email(),
     phone: z.string(),
     loginUrl: z.string(),
+    showLogin: z.boolean(),
     social: z.object({
       linkedin: z.string(),
       x: z.string(),

@@ -251,9 +251,11 @@ export default config({
         ),
         email: text('Email'),
         phone: optional('Телефон'),
-        loginUrl: optional(
-          'Посилання для кнопки Login (порожньо = кнопку сховано)'
-        ),
+        loginUrl: optional('Посилання для кнопки Login (платформа Datixxia)'),
+        showLogin: fields.checkbox({
+          label: 'Показувати кнопку Login',
+          defaultValue: false,
+        }),
         social: fields.object(
           {
             linkedin: optional('LinkedIn'),

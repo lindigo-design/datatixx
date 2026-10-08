@@ -20,6 +20,8 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const site = await getSiteSettings();
 const current = Astro.url.pathname;
+// Login: заглушка, поки немає точної адреси платформи. Увімкнути — showLogin у settings.json / адмінці.
+const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
 ---
 
 <header class="nav">
@@ -33,8 +35,8 @@ const current = Astro.url.pathname;
     </a>
 
     <div class="nav__actions">
-      {site.loginUrl && (
-        <a class="nav__login" href={site.loginUrl} rel="noopener">
+      {loginHref && (
+        <a class="nav__login" href={loginHref} rel="noopener">
           {t('nav.login')}
         </a>
       )}
@@ -87,8 +89,8 @@ const current = Astro.url.pathname;
 
     <div class="menu__bottom">
       <Button href={localizePath('contact', lang)}>{t('nav.contact')}</Button>
-      {site.loginUrl && (
-        <Button href={site.loginUrl} variant="outline">
+      {loginHref && (
+        <Button href={loginHref} variant="outline">
           {t('nav.login')}
         </Button>
       )}

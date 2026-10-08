@@ -11,7 +11,8 @@
   },
   "email": "contact@datatixx.com",
   "phone": "+33 6 15 57 54 59",
-  "loginUrl": "",
+  "loginUrl": "https://datixxia.com/",
+  "showLogin": false,
   "social": {
     "linkedin": "",
     "x": "",
@@ -20,12 +21,40 @@
     "youtube": ""
   },
   "ticker": [
-    { "name": "Tixx™ Global", "value": 128.42, "change": 1.2 },
-    { "name": "Tixx™ Europe", "value": 112.07, "change": 0.8 },
-    { "name": "Tixx™ Americas", "value": 134.91, "change": -0.3 },
-    { "name": "Tixx™ APAC", "value": 121.55, "change": 2.1 },
-    { "name": "Construction", "value": 98.44, "change": -1.1 },
-    { "name": "Energy", "value": 141.02, "change": 3.4 },
-    { "name": "Healthcare", "value": 119.76, "change": 0.5 }
+    {
+      "name": "Tixx™ Global",
+      "value": 128.42,
+      "change": 1.2
+    },
+    {
+      "name": "Tixx™ Europe",
+      "value": 112.07,
+      "change": 0.8
+    },
+    {
+      "name": "Tixx™ Americas",
+      "value": 134.91,
+      "change": -0.3
+    },
+    {
+      "name": "Tixx™ APAC",
+      "value": 121.55,
+      "change": 2.1
+    },
+    {
+      "name": "Construction",
+      "value": 98.44,
+      "change": -1.1
+    },
+    {
+      "name": "Energy",
+      "value": 141.02,
+      "change": 3.4
+    },
+    {
+      "name": "Healthcare",
+      "value": 119.76,
+      "change": 0.5
+    }
   ]
 }
