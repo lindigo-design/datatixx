@@ -1,0 +1,92 @@
+{
+  "seoTitle": "Benefits of Datixxia™ — Decision-grade intelligence and 4-year forecasts",
+  "seoDescription": "How banks, chambers of commerce, accountants, forecasters, universities and traders use Datixxia™ procurement intelligence and 4-year forecasts.",
+  "hero": {
+    "label": "Benefits",
+    "title": "Benefits of Using Datixxia™",
+    "lead": "Datixxia™ converts today’s procurement signals into decision-grade insights and 4-year forecasts — clear, comparable, and ready for action.",
+    "primaryCta": "Platform",
+    "secondaryCta": "Contact us",
+    "imageAlt": ""
+  },
+  "method": {
+    "label": "Methodology",
+    "titleStart": "The Datixxia™",
+    "titleAccent": "Forecasting",
+    "titleEnd": "Model",
+    "pillars": [
+      {
+        "tag": "Coverage",
+        "title": "Daily, official coverage across 194 countries",
+        "text": "Each working day, Datixxia™ delivers comprehensive public and private procurement award data from 194 countries. Insights begin with current, verifiable signals — delivering unrivalled accuracy and reliability."
+      },
+      {
+        "tag": "Intelligence",
+        "title": "Proprietary calculations → decision-grade intelligence",
+        "text": "Our proprietary calculations transform these sources into market intelligence of unique scope and scale — by sector and by player. Futures are assessed with consistent accuracy and reliability."
+      },
+      {
+        "tag": "For everyone",
+        "title": "Built for every organization",
+        "text": "Companies of all sizes — from MSMEs to listed corporations, in every country — can use Datixxia™’s real-time business intelligence to:"
+      }
+    ]
+  },
+  "audiences": {
+    "label": "Who benefits",
+    "titleStart": "Opening new",
+    "titleAccent": "horizons together",
+    "lead": "Where information and forecasts play a crucial role in decision-making, Datixxia™ offers tools that help every industry come closer to the future.",
+    "cards": [
+      {
+        "tag": "Support for businesses",
+        "title": "Accounting firms",
+        "text": "Provide even more effective advice to corporate clients. It’s not just numbers and data — it’s a new level of service that helps businesses grow and succeed."
+      },
+      {
+        "tag": "At the forefront",
+        "title": "Banks & insurance",
+        "text": "Improve your own investment strategies and assist clients in major financial decisions. A deeper understanding of the market — and confidence even in a changing economy."
+      },
+      {
+        "tag": "Planning for the future",
+        "title": "Chambers of commerce",
+        "text": "A reliable partner for planning the future: evaluate economic trends and respond to changes promptly, supporting the development of communities and businesses."
+      },
+      {
+        "tag": "A look into the future",
+        "title": "Economic forecasters",
+        "text": "Integrate Datixxia™ data into your research for even more accurate, well-founded predictions — forecasts that shape a stable economic environment and support the well-being of clients."
+      },
+      {
+        "tag": "Education & development",
+        "title": "Universities & research centers",
+        "text": "Discover new opportunities through Datixxia™ analytics: support for research and a powerful tool for students planning their careers — learning how to apply knowledge in practice."
+      }
+    ],
+    "wide": {
+      "tag": "Markets in motion",
+      "title": "Stock markets & traders",
+      "text": "Stock markets worldwide receive daily updates from the Tixx™ Trade Index, as well as long-term forecasts such as the Tixx™ 500 and Tixx™ 1000 — making the world of finance more transparent and accessible. Traders find in Datixxia™ a partner for informed investment decisions, with stability and confidence for up to four years ahead.",
+      "indexes": [
+        {
+          "name": "Tixx™ Trade Index",
+          "value": "128.42"
+        },
+        {
+          "name": "Tixx™ 500",
+          "value": "2 941.07"
+        },
+        {
+          "name": "Tixx™ 1000",
+          "value": "1 872.55"
+        }
+      ]
+    }
+  },
+  "cta": {
+    "title": "Ready for action.",
+    "text": "Clear, comparable, decision-grade intelligence — see what Datixxia™ can do for your organization.",
+    "button": "Contact us"
+  }
+}

@@ -1,25 +1,56 @@
 ---
-/** Data — Pillars: «Data quality comes first» + три рядки 01/02/03. */
+/**
+ * Рядки 01/02/03 з великими номерами.
+ * About: «Data quality comes first» (заголовок праворуч + підзаголовок).
+ * Benefits: «The Datixxia™ Forecasting Model» (заголовок по центру, фон-аврора).
+ */
+import { Image } from 'astro:assets';
+import bg from '@/assets/img/home/bg-aurora-1.jpg';
+
 interface Props {
   data: {
     label: string;
     titleStart: string;
     titleAccent: string;
-    lead: string;
+    titleEnd?: string;
+    lead?: string;
     pillars: { tag: string; title: string; text: string }[];
   };
+  centered?: boolean;
 }
-const { data } = Astro.props;
+const { data, centered = false } = Astro.props;
 ---
 
-<section class="section pillars" aria-labelledby="pillars-title">
+<section
+  class:list={['section pillars', centered && 'pillars--centered']}
+  aria-labelledby="pillars-title"
+>
+  {centered && (
+    <Image
+      src={bg}
+      alt=""
+      class="section-bg pillars__bg"
+      widths={[800, 1568]}
+      sizes="100vw"
+      loading="lazy"
+    />
+  )}
   <div class="container pillars__inner">
     <header class="pillars__head">
       <p class="section-label">{data.label}</p>
-      <h2 id="pillars-title" class="section-title align-end-lg">
-        {data.titleStart} <span class="accent">{data.titleAccent}</span>
+      <h2
+        id="pillars-title"
+        class:list={['section-title', !centered && 'align-end-lg']}
+      >
+        {`${data.titleStart} `}
+        <span class={centered ? 'grad-text' : 'accent'}>
+          {data.titleAccent}
+        </span>
+        {data.titleEnd ? ` ${data.titleEnd}` : ''}
       </h2>
-      <p class="section-subtitle indent-first pillars__lead">{data.lead}</p>
+      {data.lead && (
+        <p class="section-subtitle indent-first pillars__lead">{data.lead}</p>
+      )}
     </header>
 
     <ol role="list" class="pillars__list">
@@ -52,6 +83,20 @@ const { data } = Astro.props;
   .pillars__head {
     display: grid;
     gap: var(--space-4);
+  }
+
+  .pillars__bg {
+    opacity: 0.2;
+    transform: scaleX(-1);
+  }
+
+  .pillars--centered .pillars__inner {
+    gap: var(--space-16);
+  }
+
+  .pillars--centered .pillars__head {
+    justify-items: center;
+    text-align: center;
   }
 
   .pillars__lead {

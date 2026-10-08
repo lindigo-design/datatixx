@@ -26,6 +26,15 @@ export async function getPlatform(lang: Locale) {
   return entry.data;
 }
 
+export async function getBenefits(lang: Locale) {
+  const entry = await getEntry('benefits', `${lang}/benefits`);
+  if (!entry)
+    throw new Error(
+      `Немає тексту Benefits: src/content/pages/${lang}/benefits.json`
+    );
+  return entry.data;
+}
+
 export async function getPage(slug: string, lang: Locale) {
   const entry = await getEntry('pages', `${lang}/${slug}`);
   if (!entry)

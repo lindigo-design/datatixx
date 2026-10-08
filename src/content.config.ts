@@ -218,6 +218,42 @@ const platform = defineCollection({
   }),
 });
 
+// ---------- Benefits ----------
+const benefits = defineCollection({
+  loader: glob({ pattern: '*/benefits.json', base: './src/content/pages' }),
+  schema: z.object({
+    ...seo,
+    hero: z.object({
+      label: z.string(),
+      title: z.string(),
+      lead: z.string(),
+      imageAlt: z.string(),
+      ...twoCtas,
+    }),
+    method: z.object({
+      ...titled,
+      titleEnd: z.string(),
+      pillars: z.array(
+        z.object({ tag: z.string(), title: z.string(), text: z.string() })
+      ),
+    }),
+    audiences: z.object({
+      ...titled,
+      lead: z.string(),
+      cards: z.array(
+        z.object({ tag: z.string(), title: z.string(), text: z.string() })
+      ),
+      wide: z.object({
+        tag: z.string(),
+        title: z.string(),
+        text: z.string(),
+        indexes: z.array(z.object({ name: z.string(), value: z.string() })),
+      }),
+    }),
+    cta: z.object({ title: z.string(), text: z.string(), button: z.string() }),
+  }),
+});
+
 // ---------- Прості сторінки (контакти тощо) ----------
 const pages = defineCollection({
   loader: glob({ pattern: '*/contact.json', base: './src/content/pages' }),
@@ -261,4 +297,4 @@ const site = defineCollection({
   }),
 });
 
-export const collections = { home, about, platform, pages, site };
+export const collections = { home, about, platform, benefits, pages, site };

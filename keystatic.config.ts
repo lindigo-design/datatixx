@@ -374,6 +374,77 @@ const platformSchema = {
   ),
 };
 
+const benefitsSchema = {
+  ...seo,
+  hero: fields.object(
+    {
+      label: text('Мітка'),
+      title: text('Заголовок'),
+      lead: longText('Підзаголовок'),
+      ...twoButtons,
+      imageAlt: optional('Опис фону для незрячих (порожньо = декоративний)'),
+    },
+    { label: '1 · Hero' }
+  ),
+  method: fields.object(
+    {
+      label: text('Мітка секції'),
+      titleStart: text('Заголовок — початок'),
+      titleAccent: text('Заголовок — градієнтне слово'),
+      titleEnd: text('Заголовок — кінець'),
+      pillars: fields.array(
+        fields.object({
+          tag: text('Мітка'),
+          title: text('Заголовок'),
+          text: longText('Текст'),
+        }),
+        { label: 'Рядки 01/02/03', itemLabel: p => p.fields.title.value }
+      ),
+    },
+    { label: '2 · Methodology' }
+  ),
+  audiences: fields.object(
+    {
+      label: text('Мітка секції'),
+      titleStart: text('Заголовок — біла частина'),
+      titleAccent: text('Заголовок — градієнтна частина'),
+      lead: longText('Підзаголовок'),
+      cards: fields.array(
+        fields.object({
+          tag: text('Мітка'),
+          title: text('Аудиторія'),
+          text: longText('Текст'),
+        }),
+        { label: 'Картки аудиторій (5)', itemLabel: p => p.fields.title.value }
+      ),
+      wide: fields.object(
+        {
+          tag: text('Мітка'),
+          title: text('Заголовок'),
+          text: longText('Текст'),
+          indexes: fields.array(
+            fields.object({ name: text('Індекс'), value: text('Значення') }),
+            {
+              label: 'Індекси',
+              itemLabel: p => p.fields.name.value,
+            }
+          ),
+        },
+        { label: 'Широка картка (біржі)' }
+      ),
+    },
+    { label: '3 · Who benefits' }
+  ),
+  cta: fields.object(
+    {
+      title: text('Великий заголовок'),
+      text: text('Текст'),
+      button: text('Кнопка'),
+    },
+    { label: '4 · CTA (блоки Benefits by role і FAQ редагуються на Головній)' }
+  ),
+};
+
 const contactSchema = {
   ...seo,
   title: text('Заголовок'),
@@ -407,6 +478,15 @@ const pageSingletons = Object.fromEntries(
         path: `src/content/pages/${lang}/platform`,
         format: { data: 'json' },
         schema: platformSchema,
+      }),
+    ],
+    [
+      `benefits_${lang}`,
+      singleton({
+        label: `Benefits · ${lang.toUpperCase()}`,
+        path: `src/content/pages/${lang}/benefits`,
+        format: { data: 'json' },
+        schema: benefitsSchema,
       }),
     ],
     [

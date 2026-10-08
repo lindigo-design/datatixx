@@ -1,0 +1,206 @@
+---
+/** Audiences — New Horizons: «Opening new horizons together» — картки для 6 аудиторій. */
+import { Image } from 'astro:assets';
+import bg from '@/assets/img/home/bg-aurora-3.jpg';
+
+interface Card {
+  tag: string;
+  title: string;
+  text: string;
+}
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    lead: string;
+    cards: Card[];
+    wide: Card & { indexes: { name: string; value: string }[] };
+  };
+}
+const { data } = Astro.props;
+// Тон картки як у макеті: 3-тя — темно-зелена, 4-та — темно-синя скляна, решта — сірі
+const tone = (i: number) =>
+  i === 2 ? 'aud-card--green' : i === 3 ? 'aud-card--blue' : '';
+---
+
+<section class="section audiences" aria-labelledby="audiences-title">
+  <Image
+    src={bg}
+    alt=""
+    class="section-bg audiences__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container audiences__inner">
+    <header class="audiences__head">
+      <p class="section-label">{data.label}</p>
+      <h2 id="audiences-title" class="section-title align-end-lg">
+        {`${data.titleStart} `}
+        <span class="grad-text">{data.titleAccent}</span>
+      </h2>
+      <p class="section-subtitle indent-first audiences__lead">{data.lead}</p>
+    </header>
+
+    <ul role="list" class="aud-grid">
+      {data.cards.map((c, i) => (
+        <li class:list={['aud-card', tone(i)]}>
+          <p class="meta-s accent">{c.tag}</p>
+          <h3 class="aud-card__title">{c.title}</h3>
+          <p class="aud-card__text">{c.text}</p>
+        </li>
+      ))}
+    </ul>
+
+    <article class="aud-wide">
+      <div class="aud-wide__copy">
+        <p class="meta-s aud-wide__tag">{data.wide.tag}</p>
+        <h3 class="aud-card__title">{data.wide.title}</h3>
+        <p>{data.wide.text}</p>
+      </div>
+      <dl class="aud-wide__indexes">
+        {data.wide.indexes.map(ix => (
+          <div class="idx-row">
+            <dt class="meta-s">{ix.name}</dt>
+            <dd class="num">{ix.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </article>
+  </div>
+</section>
+
+<style>
+  .audiences__bg {
+    opacity: 0.4;
+  }
+
+  .accent {
+    color: var(--color-green);
+  }
+
+  .audiences__inner {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .audiences__head {
+    display: grid;
+    gap: var(--space-4);
+    margin-bottom: clamp(var(--space-6), 3vw, var(--space-10));
+  }
+
+  .audiences__lead {
+    --indent: 27%;
+    color: var(--color-text-secondary);
+  }
+
+  /* 3 картки в першому ряду, 2 широкі в другому */
+  .aud-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .aud-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    .aud-card {
+      grid-column: span 3;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .aud-card:nth-child(-n + 3) {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1099px) {
+    .aud-card:nth-child(3) {
+      grid-column: span 6;
+    }
+  }
+
+  .aud-card {
+    display: grid;
+    align-content: start;
+    gap: var(--space-3);
+    padding: var(--space-8) 28px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-card);
+  }
+
+  .aud-card--green {
+    background: #001a0a;
+  }
+
+  .aud-card--blue {
+    background: var(--color-glass);
+  }
+
+  .aud-card__title {
+    font-size: clamp(1.625rem, 1.45rem + 0.75vw, 2rem);
+    font-weight: var(--fw-bold);
+    line-height: 1.4;
+  }
+
+  .aud-card__text {
+    color: var(--color-text-secondary);
+  }
+
+  /* Широка градієнтна картка для бірж */
+  .aud-wide {
+    display: grid;
+    gap: var(--space-8);
+    align-items: center;
+    margin-top: var(--space-10);
+    padding: clamp(var(--space-6), 3vw, var(--space-10));
+    border-radius: var(--radius-md);
+    background: var(--gradient-band);
+  }
+
+  @media (min-width: 1024px) {
+    .aud-wide {
+      grid-template-columns: 1fr 360px;
+      gap: var(--space-12);
+    }
+  }
+
+  .aud-wide__copy {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .aud-wide__tag {
+    color: var(--color-text);
+  }
+
+  .aud-wide__indexes {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .idx-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-6);
+    min-height: 47px;
+    padding: 10px var(--space-4);
+    background: var(--color-bg);
+    border-radius: 12px;
+  }
+
+  .idx-row dt {
+    color: var(--color-text-secondary);
+  }
+
+  .idx-row dd {
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    color: var(--color-green);
+  }
+</style>

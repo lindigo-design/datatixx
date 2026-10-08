@@ -1,0 +1,41 @@
+---
+/** Сторінка Benefits — порядок секцій як у Figma «Benefits • Desktop (new)». */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import DataPillars from '@/components/sections/about/DataPillars.astro';
+import BenefitsByRole from '@/components/sections/BenefitsByRole.astro';
+import Audiences from '@/components/sections/benefits/Audiences.astro';
+import Faq from '@/components/sections/Faq.astro';
+import CtaBand from '@/components/sections/CtaBand.astro';
+import heroImage from '@/assets/img/about/hero-europe.jpg';
+import { locales, localizePath, type Locale } from '@/i18n/utils';
+import { getBenefits, getHome } from '@/content/helpers';
+
+export function getStaticPaths() {
+  return locales.map(lang => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const page = await getBenefits(lang);
+// «What you can do with Datixxia™» і FAQ — ті самі, що на головній: редагуються в одному місці (Home)
+const home = await getHome(lang);
+const to = (path: string) => localizePath(path, lang);
+
+// Те саме відео, що й на About (див. about.astro)
+const heroVideo = '';
+---
+
+<BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
+  <PageHero
+    {...page.hero}
+    primaryHref={to('platform')}
+    secondaryHref={to('contact')}
+    image={heroImage}
+    video={heroVideo}
+  />
+  <DataPillars data={page.method} centered />
+  <BenefitsByRole data={home.benefits} />
+  <Audiences data={page.audiences} />
+  <Faq data={home.faq} buttonHref={to('contact')} />
+  <CtaBand data={page.cta} href={to('contact')} />
+</BaseLayout>

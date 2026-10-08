@@ -102,7 +102,8 @@ keystatic.config.ts ← які поля є в адмінці
 
 ## Дизайн
 
-Джерело правди — Figma «Datatixx site Relume» → сторінка Redesign → **Home • Desktop**, **About • Desktop**, **Platform • Desktop**.
+Джерело правди — Figma «Datatixx site Relume» → сторінка Redesign → **Home • Desktop**, **About • Desktop**, **Platform • Desktop**, **Benefits • Desktop (new)**.
+Блоки «What you can do with Datixxia™» і FAQ спільні для Home і Benefits — редагуються на Головній.
 Токени (кольори, шрифти, відступи) — у `src/styles/tokens.css`.
 Мобільної версії в Figma немає: адаптив зроблено в коді (телефон → планшет → десктоп).
 Шрифт — **Afacad скрізь**; для цифр увімкнено однакову ширину (`tabular-nums`).

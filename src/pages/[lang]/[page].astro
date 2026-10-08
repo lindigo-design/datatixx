@@ -8,15 +8,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { locales, type Locale } from '@/i18n/utils';
 
 export function getStaticPaths() {
-  const pending = [
-    'benefits',
-    'partners',
-    'team',
-    'faq',
-    'legal',
-    'privacy',
-    'terms',
-  ];
+  const pending = ['partners', 'team', 'faq', 'legal', 'privacy', 'terms'];
   return locales.flatMap(lang =>
     pending.map(page => ({ params: { lang, page } }))
   );
