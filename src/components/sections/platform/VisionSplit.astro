@@ -1,0 +1,105 @@
+---
+/** Vision: «What the world needs is intelligent business» — текст ліворуч, фото праворуч. */
+import { Image } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import bg from '@/assets/img/home/bg-aurora-3.jpg';
+import workshop from '@/assets/img/platform/vision-workshop.jpg';
+
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    lead: string;
+    text: string;
+    cta: string;
+    imageAlt: string;
+  };
+  ctaHref: string;
+}
+const { data, ctaHref } = Astro.props;
+---
+
+<section class="section vision" aria-labelledby="vision-title">
+  <Image
+    src={bg}
+    alt=""
+    class="section-bg vision__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container vision__inner">
+    <div class="vision__content">
+      <p class="section-label">{data.label}</p>
+      <h2 id="vision-title" class="section-title">
+        {`${data.titleStart} `}
+        <span class="grad-text">{data.titleAccent}</span>
+      </h2>
+      <p class="vision__lead">{data.lead}</p>
+      <p class="vision__text">{data.text}</p>
+      <Button href={ctaHref} variant="outline">
+        {data.cta}
+      </Button>
+    </div>
+    <div class="vision__media">
+      <Image
+        src={workshop}
+        alt={data.imageAlt}
+        widths={[600, 900, 1226]}
+        sizes="(min-width: 1024px) 613px, 100vw"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .vision__bg {
+    opacity: 0.4;
+  }
+
+  .vision__inner {
+    display: grid;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .vision__inner {
+      grid-template-columns: 547fr 613fr;
+      gap: var(--space-20);
+    }
+  }
+
+  .vision__content {
+    display: grid;
+    gap: var(--space-6);
+    justify-items: start;
+  }
+
+  .vision__content .section-label {
+    margin-bottom: calc(var(--space-2) * -1);
+  }
+
+  .vision__lead {
+    font-size: var(--fs-body-lg);
+  }
+
+  .vision__text {
+    color: var(--color-text-secondary);
+  }
+
+  .vision__media {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-hairline);
+    overflow: hidden;
+    aspect-ratio: 613 / 521;
+  }
+
+  .vision__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

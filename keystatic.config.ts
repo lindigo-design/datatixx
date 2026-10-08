@@ -284,6 +284,96 @@ const aboutSchema = {
   ),
 };
 
+const platformSchema = {
+  ...seo,
+  hero: fields.object(
+    {
+      label: text('Мітка'),
+      title: text('Заголовок'),
+      lead: longText('Підзаголовок'),
+      ...twoButtons,
+      imageAlt: optional('Опис фону для незрячих (порожньо = декоративний)'),
+    },
+    { label: '1 · Hero' }
+  ),
+  cascade: fields.object(
+    {
+      label: text('Мітка секції'),
+      titleStart: text('Заголовок — біла частина'),
+      titleAccent: text('Заголовок — зелена частина'),
+      lead: longText('Підзаголовок'),
+      imageAlt: text('Опис фото'),
+      steps: fields.array(
+        fields.object({
+          title: text('Крок'),
+          text: longText('Текст'),
+          badge: text('Плашка праворуч'),
+        }),
+        { label: 'Кроки каскаду', itemLabel: p => p.fields.title.value }
+      ),
+    },
+    { label: '2 · Cascade' }
+  ),
+  scale: fields.object(
+    {
+      label: text('Мітка секції'),
+      title: text('Заголовок'),
+      text: longText('Текст', 'Новий абзац — з нового рядка.'),
+      ...twoButtons,
+      stats: fields.array(
+        fields.object({ value: text('Число'), caption: text('Підпис') }),
+        {
+          label: 'Цифри',
+          itemLabel: p => `${p.fields.value.value} — ${p.fields.caption.value}`,
+        }
+      ),
+    },
+    { label: '3 · Data / Scale' }
+  ),
+  vision: fields.object(
+    {
+      label: text('Мітка секції'),
+      titleStart: text('Заголовок — біла частина'),
+      titleAccent: text('Заголовок — градієнтна частина'),
+      lead: text('Перший абзац'),
+      text: longText('Другий абзац'),
+      cta: text('Кнопка'),
+      imageAlt: text('Опис фото'),
+    },
+    { label: '4 · Vision' }
+  ),
+  impact: fields.object(
+    {
+      label: text('Мітка секції'),
+      titleStart: text('Заголовок — біла частина'),
+      titleAccent: text('Заголовок — градієнтна частина'),
+      lead: longText('Підзаголовок'),
+      stats: fields.array(
+        fields.object({
+          value: text('Число'),
+          caption: text('Підпис'),
+          source: optional('Номер джерела (1, 2, 3)'),
+        }),
+        { label: 'Картки-цифри', itemLabel: p => p.fields.value.value }
+      ),
+      text: longText('Текст під картками'),
+      sources: fields.array(text('Джерело'), {
+        label: 'Джерела (по порядку номерів)',
+        itemLabel: p => p.value,
+      }),
+    },
+    { label: '5 · Impact' }
+  ),
+  cta: fields.object(
+    {
+      title: text('Великий заголовок'),
+      text: text('Текст'),
+      button: text('Кнопка'),
+    },
+    { label: '6 · CTA' }
+  ),
+};
+
 const contactSchema = {
   ...seo,
   title: text('Заголовок'),
@@ -308,6 +398,15 @@ const pageSingletons = Object.fromEntries(
         path: `src/content/pages/${lang}/about`,
         format: { data: 'json' },
         schema: aboutSchema,
+      }),
+    ],
+    [
+      `platform_${lang}`,
+      singleton({
+        label: `Platform · ${lang.toUpperCase()}`,
+        path: `src/content/pages/${lang}/platform`,
+        format: { data: 'json' },
+        schema: platformSchema,
       }),
     ],
     [

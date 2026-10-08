@@ -1,0 +1,47 @@
+---
+/** Сторінка Platform — порядок секцій як у Figma «Platform • Desktop». */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import Cascade from '@/components/sections/platform/Cascade.astro';
+import ModelStats from '@/components/sections/ModelStats.astro';
+import VisionSplit from '@/components/sections/platform/VisionSplit.astro';
+import ImpactStats from '@/components/sections/platform/ImpactStats.astro';
+import CtaBand from '@/components/sections/CtaBand.astro';
+import heroImage from '@/assets/img/about/hero-europe.jpg';
+import { locales, localizePath, type Locale } from '@/i18n/utils';
+import { getPlatform } from '@/content/helpers';
+
+export function getStaticPaths() {
+  return locales.map(lang => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const page = await getPlatform(lang);
+const to = (path: string) => localizePath(path, lang);
+
+// Те саме відео, що й на About (див. about.astro)
+const heroVideo = '';
+---
+
+<BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
+  <PageHero
+    {...page.hero}
+    primaryHref="#model"
+    secondaryHref={to('faq')}
+    image={heroImage}
+    video={heroVideo}
+  />
+  <div id="model">
+    <Cascade data={page.cascade} />
+  </div>
+  <ModelStats
+    data={{ ...page.scale, lead: page.scale.text }}
+    primaryHref={to('benefits')}
+    secondaryHref={to('benefits')}
+    indent={false}
+    background={false}
+  />
+  <VisionSplit data={page.vision} ctaHref={to('partners')} />
+  <ImpactStats data={page.impact} />
+  <CtaBand data={page.cta} href={to('benefits')} />
+</BaseLayout>

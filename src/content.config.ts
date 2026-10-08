@@ -171,6 +171,53 @@ const about = defineCollection({
   }),
 });
 
+// ---------- Platform ----------
+const platform = defineCollection({
+  loader: glob({ pattern: '*/platform.json', base: './src/content/pages' }),
+  schema: z.object({
+    ...seo,
+    hero: z.object({
+      label: z.string(),
+      title: z.string(),
+      lead: z.string(),
+      imageAlt: z.string(),
+      ...twoCtas,
+    }),
+    cascade: z.object({
+      ...titled,
+      lead: z.string(),
+      imageAlt: z.string(),
+      steps: z.array(
+        z.object({ title: z.string(), text: z.string(), badge: z.string() })
+      ),
+    }),
+    scale: z.object({
+      label: z.string(),
+      title: z.string(),
+      text: z.string(),
+      ...twoCtas,
+      stats: z.array(z.object({ value: z.string(), caption: z.string() })),
+    }),
+    vision: z.object({
+      ...titled,
+      lead: z.string(),
+      text: z.string(),
+      cta: z.string(),
+      imageAlt: z.string(),
+    }),
+    impact: z.object({
+      ...titled,
+      lead: z.string(),
+      stats: z.array(
+        z.object({ value: z.string(), caption: z.string(), source: z.string() })
+      ),
+      text: z.string(),
+      sources: z.array(z.string()),
+    }),
+    cta: z.object({ title: z.string(), text: z.string(), button: z.string() }),
+  }),
+});
+
 // ---------- Прості сторінки (контакти тощо) ----------
 const pages = defineCollection({
   loader: glob({ pattern: '*/contact.json', base: './src/content/pages' }),
@@ -214,4 +261,4 @@ const site = defineCollection({
   }),
 });
 
-export const collections = { home, about, pages, site };
+export const collections = { home, about, platform, pages, site };

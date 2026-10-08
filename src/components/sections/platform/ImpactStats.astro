@@ -1,0 +1,140 @@
+---
+/** Impact — MSMEs: «The engine of the real economy» + 4 картки-цифри з джерелами. */
+import { Image } from 'astro:assets';
+import bg from '@/assets/img/home/bg-aurora-1.jpg';
+
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    lead: string;
+    stats: { value: string; caption: string; source: string }[];
+    text: string;
+    sources: string[];
+  };
+}
+const { data } = Astro.props;
+const sup = ['¹', '²', '³', '⁴', '⁵'];
+const mark = (n: string) => sup[Number(n) - 1] ?? n;
+---
+
+<section class="section impact" aria-labelledby="impact-title">
+  <Image
+    src={bg}
+    alt=""
+    class="section-bg impact__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container impact__inner">
+    <header class="impact__head">
+      <p class="section-label">{data.label}</p>
+      <h2 id="impact-title" class="section-title align-end-lg">
+        {`${data.titleStart} `}
+        <span class="grad-text">{data.titleAccent}</span>
+      </h2>
+      <p class="section-subtitle indent-first impact__lead">{data.lead}</p>
+    </header>
+
+    <dl class="impact__stats">
+      {data.stats.map(s => (
+        <div class="impact-card">
+          <dt class="impact-card__caption meta-s">
+            {s.caption}
+            {s.source && <sup> {mark(s.source)}</sup>}
+          </dt>
+          <dd class="impact-card__value grad-text num">{s.value}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="impact__foot">
+      <p class="impact__text">{data.text}</p>
+      <p class="impact__sources meta-s">
+        {data.sources.map((s, i) => `${sup[i] ?? i + 1} ${s}`).join('   ·   ')}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .impact__bg {
+    opacity: 0.2;
+    transform: scale(-1, -1);
+  }
+
+  .impact__inner {
+    display: grid;
+    gap: var(--section-gap);
+  }
+
+  .impact__head {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .impact__lead {
+    --indent: 27%;
+    color: var(--color-text-secondary);
+  }
+
+  .impact__stats {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .impact__stats {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .impact__stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .impact-card {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: var(--space-3);
+    min-height: 190px;
+    padding: var(--space-8) 28px;
+    background: var(--color-glass);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .impact-card__value {
+    font-size: clamp(4rem, 3.4rem + 2.2vw, 6.25rem); /* 64 → 100 */
+    font-weight: var(--fw-semibold);
+    line-height: 0.85;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .impact-card__caption {
+    color: var(--color-text-secondary);
+  }
+
+  .impact__foot {
+    display: grid;
+    gap: var(--space-16);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .impact__text {
+    max-width: 884px;
+    font-size: var(--fs-body-lg);
+    color: var(--color-text-secondary);
+  }
+
+  .impact__sources {
+    white-space: pre-wrap;
+  }
+</style>

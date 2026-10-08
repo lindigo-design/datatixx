@@ -17,6 +17,15 @@ export async function getAbout(lang: Locale) {
   return entry.data;
 }
 
+export async function getPlatform(lang: Locale) {
+  const entry = await getEntry('platform', `${lang}/platform`);
+  if (!entry)
+    throw new Error(
+      `Немає тексту Platform: src/content/pages/${lang}/platform.json`
+    );
+  return entry.data;
+}
+
 export async function getPage(slug: string, lang: Locale) {
   const entry = await getEntry('pages', `${lang}/${slug}`);
   if (!entry)

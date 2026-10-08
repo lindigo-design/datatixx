@@ -1,0 +1,110 @@
+{
+  "seoTitle": "Plateforme Datixxia™ — Le modèle de prévision derrière les données",
+  "seoDescription": "Intelligence de marché en temps réel et prévisions à 4 ans, fondées sur les contrats publics et privés publiés chaque jour dans 194 pays.",
+  "hero": {
+    "label": "Plateforme Datixxia™",
+    "title": "Le modèle de prévision Datixxia™",
+    "lead": "Intelligence de marché en temps réel et prévisions à 4 ans, fondées sur les contrats publics et privés publiés chaque jour dans 194 pays.",
+    "primaryCta": "Découvrir",
+    "secondaryCta": "Tarifs",
+    "imageAlt": ""
+  },
+  "cascade": {
+    "label": "Modèle",
+    "titleStart": "Une cascade de",
+    "titleAccent": "faits concrets",
+    "lead": "Dans les économies régulées, les priorités nationales passent des appels d'offres publics aux grandes entreprises, puis aux PME et MPME, et enfin à toute l'économie de consommation.",
+    "imageAlt": "Des analystes autour d'une table, devant de grands écrans affichant des données économiques mondiales",
+    "steps": [
+      {
+        "title": "Appels d'offres publics",
+        "text": "Tous les travaux d'importance nationale (infrastructures, transports, espace, défense, éducation, santé) font l'objet d'appels d'offres.",
+        "badge": "Priorités nationales"
+      },
+      {
+        "title": "Grandes entreprises",
+        "text": "Les grandes entreprises répondent à ces appels d'offres. Ensemble, elles représentent environ 15 % du PIB.",
+        "badge": "≈15 % du PIB"
+      },
+      {
+        "title": "PME et MPME",
+        "text": "Ces entreprises lancent à leur tour leurs propres appels d'offres pour des fournitures et services, auxquels répondent les PME. Les PME font ensuite appel aux MPME pour de plus petites fournitures et prestations. Ensemble, elles représentent environ 20 % du PIB.",
+        "badge": "≈20 % du PIB"
+      },
+      {
+        "title": "Économie de consommation",
+        "text": "Ces marchés publics et privés créent des revenus grâce à l'emploi, et la consommation qui en découle représente le reste du PIB d'un pays.",
+        "badge": "Le reste du PIB"
+      }
+    ]
+  },
+  "scale": {
+    "label": "Données",
+    "title": "Une précision pragmatique, partout dans le monde",
+    "text": "Rien que dans l'UE, les marchés publics représentent un volume annuel de 525 milliards d'euros (2021). Datixxia™ va plus loin : il prend en compte les contrats publics et privés publiés chaque jour dans 194 pays. Cela permet des prévisions d'une précision pragmatique et rend les mouvements quotidiens des marchés mondiaux plus faciles à comprendre.\nAvec une base initiale d'environ 8 millions d'avis d'attribution pour la seule année 2023, chacun valide jusqu'à 4 ans après sa publication, le modèle Datixxia™ calcule précisément ce que l'avenir réserve à tous les secteurs de marché et à leurs acteurs.",
+    "primaryCta": "Découvrir",
+    "secondaryCta": "Avantages",
+    "stats": [
+      {
+        "value": "194",
+        "caption": "Pays, chaque jour"
+      },
+      {
+        "value": "8M+",
+        "caption": "Avis d'attribution (2023)"
+      },
+      {
+        "value": "525 Md€",
+        "caption": "Marchés publics UE / an"
+      },
+      {
+        "value": "4 ans",
+        "caption": "Horizon de validité"
+      }
+    ]
+  },
+  "vision": {
+    "label": "Vision",
+    "titleStart": "Ce dont le monde a besoin, c'est d'une",
+    "titleAccent": "économie intelligente",
+    "lead": "Notre objectif chez Datixxia™ : donner à chaque entreprise dans le monde l'intelligence économique dont elle a besoin.",
+    "text": "Pour y parvenir, avec des partenaires universitaires et économiques, nous invitons quelque 3 000 prestataires de services linguistiques (LSP) à devenir partenaires de Datixxia™. Plus des deux tiers de leur million de clients sont des micro, petites et moyennes entreprises (MPME).",
+    "cta": "Partenaires",
+    "imageAlt": "Un petit atelier d'artisan vu à travers une vitrine au crépuscule, deux personnes au travail sur un établi"
+  },
+  "impact": {
+    "label": "Impact",
+    "titleStart": "Le moteur de",
+    "titleAccent": "l'économie réelle",
+    "lead": "La fragilité des MPME vient d'un premier horizon souvent compté en jours. Elles ne peuvent pas planifier un deuxième ou un troisième horizon, faute des prévisions dont disposent les grandes entreprises.",
+    "stats": [
+      {
+        "value": "70 %",
+        "caption": "de l'emploi dans la plupart des pays de l'OCDE",
+        "source": "1"
+      },
+      {
+        "value": "85 %",
+        "caption": "des nouveaux emplois dans l'UE",
+        "source": "2"
+      },
+      {
+        "value": "2/3",
+        "caption": "de l'emploi privé dans l'UE",
+        "source": "2"
+      },
+      {
+        "value": "~90 %",
+        "caption": "des entreprises dans les pays émergents",
+        "source": "3"
+      }
+    ],
+    "text": "Dans chaque pays, les MPME sont essentielles à la croissance, à l'innovation, à l'emploi et à l'intégration sociale. En leur donnant accès à notre méthode de prévision pragmatique et sectorielle, nous les aidons à anticiper et à sécuriser leur avenir, et celui de leurs salariés.",
+    "sources": ["OCDE, 2023", "Eurofound, 2024", "Banque mondiale, 2024"]
+  },
+  "cta": {
+    "title": "Voyez les faits par vous-même.",
+    "text": "Passez des données brutes à l'action : découvrez comment Datixxia™ transforme les avis de marchés en avantage concurrentiel.",
+    "button": "Découvrir les avantages"
+  }
+}

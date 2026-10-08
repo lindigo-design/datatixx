@@ -3,6 +3,7 @@
 import { Image } from 'astro:assets';
 import Button from '@/components/ui/Button.astro';
 import bg from '@/assets/img/home/bg-aurora-2.jpg';
+import { paragraphs } from '@/utils/text';
 
 interface Props {
   data: {
@@ -15,26 +16,42 @@ interface Props {
   };
   primaryHref: string;
   secondaryHref: string;
+  /** Відступ першого рядка (Home — так, Platform — ні) */
+  indent?: boolean;
+  /** Фонова аврора (Home — так) */
+  background?: boolean;
 }
-const { data, primaryHref, secondaryHref } = Astro.props;
+const {
+  data,
+  primaryHref,
+  secondaryHref,
+  indent = true,
+  background = true,
+} = Astro.props;
 ---
 
 <section class="section model" aria-labelledby="model-title">
-  <Image
-    src={bg}
-    alt=""
-    class="section-bg model__bg"
-    widths={[800, 1568]}
-    sizes="100vw"
-    loading="lazy"
-  />
+  {background && (
+    <Image
+      src={bg}
+      alt=""
+      class="section-bg model__bg"
+      widths={[800, 1568]}
+      sizes="100vw"
+      loading="lazy"
+    />
+  )}
   <div class="container model__inner">
     <header class="model__head">
       <p class="section-label">{data.label}</p>
       <h2 id="model-title" class="section-title align-end-lg">
         {data.title}
       </h2>
-      <p class="lead indent-first model__lead">{data.lead}</p>
+      <div class="model__lead">
+        {paragraphs(data.lead).map(p => (
+          <p class:list={['lead', indent && 'indent-first']}>{p}</p>
+        ))}
+      </div>
       <div class="actions model__actions">
         <Button href={primaryHref}>{data.primaryCta}</Button>
         <Button href={secondaryHref} variant="outline">
@@ -71,6 +88,8 @@ const { data, primaryHref, secondaryHref } = Astro.props;
 
   .model__lead {
     --indent: 33%;
+    display: grid;
+    gap: var(--space-8);
     margin-top: var(--space-2);
   }
 

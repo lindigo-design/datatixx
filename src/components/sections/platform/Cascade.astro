@@ -1,0 +1,186 @@
+---
+/** Model — Cascade: «A cascade of hard facts» — фото ліворуч, 4 кроки каскаду праворуч. */
+import { Image } from 'astro:assets';
+import bg from '@/assets/img/home/bg-aurora-1.jpg';
+import room from '@/assets/img/platform/cascade-room.jpg';
+
+interface Props {
+  data: {
+    label: string;
+    titleStart: string;
+    titleAccent: string;
+    lead: string;
+    imageAlt: string;
+    steps: { title: string; text: string; badge: string }[];
+  };
+}
+const { data } = Astro.props;
+---
+
+<section class="section cascade" aria-labelledby="cascade-title">
+  <Image
+    src={bg}
+    alt=""
+    class="section-bg cascade__bg"
+    widths={[800, 1568]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="container cascade__inner">
+    <header class="cascade__head">
+      <p class="section-label">{data.label}</p>
+      <h2 id="cascade-title" class="section-title align-end-lg">
+        {data.titleStart} <span class="accent">{data.titleAccent}</span>
+      </h2>
+      <p class="section-subtitle indent-first cascade__lead">{data.lead}</p>
+    </header>
+
+    <div class="cascade__body">
+      <div class="cascade__media">
+        <Image
+          src={room}
+          alt={data.imageAlt}
+          widths={[480, 720, 962]}
+          sizes="(min-width: 1024px) 481px, 100vw"
+          loading="lazy"
+        />
+      </div>
+      <ol role="list" class="steps">
+        {data.steps.map((step, i) => (
+          <li
+            class:list={['step', i === 0 ? 'g-card step--lead' : 'step--plain']}
+          >
+            <div class="step__text">
+              <h3 class="step__title">{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+            <p class:list={['step__badge', i === 0 && 'step__badge--outline']}>
+              {step.badge}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cascade__bg {
+    opacity: 0.2;
+  }
+
+  .accent {
+    color: var(--color-green);
+  }
+
+  .cascade__inner {
+    display: grid;
+    gap: var(--section-gap);
+  }
+
+  .cascade__head {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .cascade__lead {
+    --indent: 45%;
+    color: var(--color-text-secondary);
+  }
+
+  .cascade__body {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 1024px) {
+    .cascade__body {
+      grid-template-columns: 481fr 743fr;
+    }
+  }
+
+  .cascade__media {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+
+  @media (min-width: 1024px) {
+    .cascade__media {
+      aspect-ratio: auto;
+    }
+  }
+
+  .cascade__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .step {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+    padding: 28px var(--space-8);
+    border-radius: var(--radius-md);
+  }
+
+  @media (min-width: 640px) {
+    .step {
+      grid-template-columns: 1fr auto;
+      gap: var(--space-10);
+    }
+  }
+
+  .step--lead {
+    background: var(--color-glass);
+  }
+
+  .step--plain {
+    background: var(--color-card);
+    border: 1px solid var(--color-hairline);
+  }
+
+  .step__text {
+    display: grid;
+    gap: var(--space-4);
+    color: var(--color-text-secondary);
+  }
+
+  .step--lead .step__text {
+    color: var(--color-text);
+  }
+
+  .step__title {
+    font-size: clamp(1.625rem, 1.45rem + 0.75vw, 2rem);
+    font-weight: var(--fw-bold);
+    line-height: 1.3;
+    color: var(--color-text);
+  }
+
+  .step__badge {
+    justify-self: start;
+    min-width: 246px;
+    padding: var(--space-2) var(--space-6);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem); /* 18 → 22 */
+    font-weight: var(--fw-medium);
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--color-green);
+    white-space: nowrap;
+  }
+
+  .step__badge--outline {
+    background: transparent;
+    border: 1px solid var(--color-text);
+    color: var(--color-text);
+  }
+</style>

@@ -1,0 +1,110 @@
+{
+  "seoTitle": "Datixxia™ Platform — The forecasting model behind the data",
+  "seoDescription": "Real-time market intelligence and 4-year forecasts built from public and private contracts published daily in 194 countries.",
+  "hero": {
+    "label": "Datixxia™ Platform",
+    "title": "The Datixxia™ Forecasting Model",
+    "lead": "Real-time market intelligence and 4-year forecasts built from the public and private contracts published daily in 194 countries.",
+    "primaryCta": "Explore",
+    "secondaryCta": "Pricing",
+    "imageAlt": ""
+  },
+  "cascade": {
+    "label": "Model",
+    "titleStart": "A cascade of",
+    "titleAccent": "hard facts",
+    "lead": "In regulated economies, national priorities flow from public tenders to large firms, then to SMEs and MSMEs — and finally into the wider consumer economy.",
+    "imageAlt": "Analysts working around a table in front of large screens with world economic data",
+    "steps": [
+      {
+        "title": "Public tenders",
+        "text": "All works of national importance — infrastructure, transport, space, defence, education, health — are the subject of calls for tender.",
+        "badge": "National priorities"
+      },
+      {
+        "title": "Large firms",
+        "text": "Large companies respond to those tenders. Together they represent around 15% of GDP.",
+        "badge": "≈15% of GDP"
+      },
+      {
+        "title": "SMEs & MSMEs",
+        "text": "These companies then launch their own calls for tender for supplies and related services, to which SMEs respond; SMEs in turn call on MSMEs for smaller supplies and services. Together they account for around 20% of GDP.",
+        "badge": "≈20% of GDP"
+      },
+      {
+        "title": "Consumer economy",
+        "text": "These combined public and private markets generate income through employment — and consumer spending that accounts for the rest of a country's GDP.",
+        "badge": "The remainder of GDP"
+      }
+    ]
+  },
+  "scale": {
+    "label": "Data",
+    "title": "Pragmatic precision, worldwide",
+    "text": "Within the EU alone, public procurement represents an annual trade volume of €525 billion (2021). Datixxia™ goes further — it takes into account public and private contracts published daily in 194 countries, enabling forecasts of pragmatic precision and making the daily ebb and flow of markets worldwide easier to understand.\nWith an initial database of some 8 million contract award notices for 2023 alone — each valid for up to 4 years after publication — the Datixxia™ model calculates exactly what the future holds for all market sectors and their players.",
+    "primaryCta": "Explore",
+    "secondaryCta": "Benefits",
+    "stats": [
+      {
+        "value": "194",
+        "caption": "Countries, daily"
+      },
+      {
+        "value": "8M+",
+        "caption": "Award notices (2023)"
+      },
+      {
+        "value": "€525bn",
+        "caption": "EU public procurement / year"
+      },
+      {
+        "value": "4 years",
+        "caption": "Validity horizon"
+      }
+    ]
+  },
+  "vision": {
+    "label": "Vision",
+    "titleStart": "What the world needs is",
+    "titleAccent": "intelligent business",
+    "lead": "Our goal at Datixxia™ is to provide every company around the world with the business intelligence it needs.",
+    "text": "To achieve that, alongside academic and other business partners, we are inviting some 3,000 Language Service Providers (LSPs) to act as partners with Datixxia™. More than two-thirds of their 1 million customers are micro, small and medium-sized enterprises (MSMEs).",
+    "cta": "Partners",
+    "imageAlt": "A small craft workshop seen through a shop window at dusk, two people working at a wooden bench"
+  },
+  "impact": {
+    "label": "Impact",
+    "titleStart": "The engine of the",
+    "titleAccent": "real economy",
+    "lead": "MSMEs' fragility is increased by a first horizon often measured in days — and they cannot plan for a second or third horizon, because they lack the forecasting available to larger companies.",
+    "stats": [
+      {
+        "value": "70%",
+        "caption": "of all employment in most OECD countries",
+        "source": "1"
+      },
+      {
+        "value": "85%",
+        "caption": "of new jobs in the EU",
+        "source": "2"
+      },
+      {
+        "value": "2/3",
+        "caption": "of private-sector employment in the EU",
+        "source": "2"
+      },
+      {
+        "value": "~90%",
+        "caption": "of all businesses in emerging countries",
+        "source": "3"
+      }
+    ],
+    "text": "In every country, MSMEs are key to economic growth, innovation, employment and social integration. By making our pragmatic, sector-specific forecasting methodology available to them all, we help them foresee and secure their own futures — and those of their employees.",
+    "sources": ["OECD, 2023", "Eurofound, 2024", "World Bank, 2024"]
+  },
+  "cta": {
+    "title": "See the facts for yourself.",
+    "text": "Move from raw data to decisive action — see how Datixxia™ turns procurement notices into your competitive advantage.",
+    "button": "Explore the benefits"
+  }
+}

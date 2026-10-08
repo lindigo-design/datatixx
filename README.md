@@ -102,7 +102,7 @@ keystatic.config.ts ← які поля є в адмінці
 
 ## Дизайн
 
-Джерело правди — Figma «Datatixx site Relume» → сторінка Redesign → **Home • Desktop**, **About • Desktop**.
+Джерело правди — Figma «Datatixx site Relume» → сторінка Redesign → **Home • Desktop**, **About • Desktop**, **Platform • Desktop**.
 Токени (кольори, шрифти, відступи) — у `src/styles/tokens.css`.
 Мобільної версії в Figma немає: адаптив зроблено в коді (телефон → планшет → десктоп).
 Шрифт — **Afacad скрізь**; для цифр увімкнено однакову ширину (`tabular-nums`).
@@ -114,8 +114,8 @@ keystatic.config.ts ← які поля є в адмінці
 - [ ] Login: точна адреса платформи Datixxia (`settings.json` → `loginUrl`, зараз заглушка), потім `showLogin: true`
 - [ ] Посилання на соцмережі компанії і команди (поки порожні — іконки сховано)
 - [ ] Перевірити французькі тексти (переклад чорновий)
-- [ ] Відео для hero About: файл MP4 → `public/video/about-hero.mp4`, шлях у `src/pages/[lang]/about.astro` (`heroVideo`)
-- [ ] Сторінки Platform, Benefits, Partners, Team, FAQ, Contact — за макетами з Figma
+- [ ] Відео для hero About: файл MP4 → `public/video/about-hero.mp4`, шлях у `src/pages/[lang]/about.astro` і `platform.astro` (`heroVideo`)
+- [ ] Сторінки Benefits, Partners, Team, FAQ, Contact — за макетами з Figma
 - [ ] Privacy Policy, Terms of Service, Mentions légales
 - [ ] Hero-зображення у вищій якості для Retina (зараз 1568 px завширшки)
 - [ ] Зображення для LinkedIn-превʼю: `public/og-image.png` (1200×630)
