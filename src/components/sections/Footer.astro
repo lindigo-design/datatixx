@@ -17,6 +17,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const site = await getSiteSettings();
 const year = new Date().getFullYear();
+const current = Astro.url.pathname;
 const a = site.address;
 
 // Показуємо лише ті соцмережі, для яких вписано посилання в settings.json
@@ -86,11 +87,19 @@ const socials = [
 
       <nav aria-label={t('nav.main')}>
         <ul role="list" class="footer__menu">
-          {footerNav.map(item => (
-            <li>
-              <a href={localizePath(item.path, lang)}>{t(item.key)}</a>
-            </li>
-          ))}
+          {footerNav.map(item => {
+            const href = localizePath(item.path, lang);
+            return (
+              <li>
+                <a
+                  href={href}
+                  aria-current={current === href ? 'page' : undefined}
+                >
+                  {t(item.key)}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>
@@ -114,6 +123,7 @@ const socials = [
 
 <style>
   .footer {
+    /* щоб лінія на 100vw не давала горизонтальної прокрутки (ширина смуги прокрутки) */
     overflow-x: clip;
     background: var(--color-footer);
     padding-block: clamp(var(--space-12), 5.5vw, var(--space-20))
@@ -218,6 +228,15 @@ const socials = [
   .footer__menu {
     display: grid;
     align-content: start;
+  }
+
+  /* Активна сторінка у футері: зелений текст і риска ліворуч */
+  .footer__menu a[aria-current='page'] {
+    color: var(--color-green);
+  }
+
+  .footer__menu a[aria-current='page']::before {
+    content: '— ';
   }
 
   .footer__menu a {

@@ -69,17 +69,21 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
       <ul role="list" class="menu__list">
         {mainNav.map((item, i) => {
           const href = localizePath(item.path, lang);
+          // Partners підсвічується і тоді, коли відкрита його підсторінка Chambers
+          const childActive = item.children?.some(
+            sub => localizePath(sub.path, lang) === current
+          );
           return (
             <li>
               <a
-                class="menu__link"
+                class:list={['menu__link', childActive && 'is-parent-active']}
                 href={href}
                 aria-current={current === href ? 'page' : undefined}
               >
                 <span class="menu__num num" aria-hidden="true">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                {t(item.key)}
+                <span class="menu__label">{t(item.key)}</span>
               </a>
               {item.children && (
                 <ul role="list" class="menu__sub">
@@ -263,14 +267,47 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
     border-bottom: 1px solid var(--color-hairline);
   }
 
-  .menu__link:hover,
-  .menu__link[aria-current='page'] {
+  .menu__link:hover {
     color: var(--color-text);
   }
 
-  .menu__link:hover .menu__num,
-  .menu__link[aria-current='page'] .menu__num {
+  .menu__link:hover .menu__num {
     color: var(--color-green);
+  }
+
+  /* ---------- Активна сторінка ---------- */
+  /* Зелена смужка ліворуч + зелений номер + назва з фірмовим градієнтом */
+  .menu__link[aria-current='page'] {
+    position: relative;
+    color: var(--color-text);
+  }
+
+  .menu__link[aria-current='page']::before {
+    content: '';
+    position: absolute;
+    left: -14px;
+    top: 20%;
+    bottom: 20%;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--gradient-brand);
+  }
+
+  .menu__link[aria-current='page'] .menu__num,
+  .menu__link.is-parent-active .menu__num {
+    color: var(--color-green);
+  }
+
+  .menu__link[aria-current='page'] .menu__label {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Батьківський пункт, коли відкрита підсторінка: білий, без смужки */
+  .menu__link.is-parent-active {
+    color: var(--color-text);
   }
 
   /* Підпункт (Partners → Chambers of commerce) */
@@ -297,9 +334,21 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
     color: var(--color-green);
   }
 
-  .menu__sublink:hover,
-  .menu__sublink[aria-current='page'] {
+  .menu__sublink:hover {
     color: var(--color-text);
+  }
+
+  /* Активна підсторінка: зелений текст + крапка в кінці */
+  .menu__sublink[aria-current='page'] {
+    color: var(--color-green);
+  }
+
+  .menu__sublink[aria-current='page']::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-green);
   }
 
   .menu__num {
