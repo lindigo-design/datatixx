@@ -31,17 +31,25 @@ const mark = (n: string) => sup[Number(n) - 1] ?? n;
   />
   <div class="container impact__inner">
     <header class="impact__head">
-      <p class="section-label">{data.label}</p>
-      <h2 id="impact-title" class="section-title align-end-lg">
+      <p class="section-label" data-reveal="fade">
+        {data.label}
+      </p>
+      <h2
+        id="impact-title"
+        class="section-title align-end-lg"
+        data-reveal="fade"
+      >
         {`${data.titleStart} `}
         <span class="grad-text">{data.titleAccent}</span>
       </h2>
-      <p class="section-subtitle indent-first impact__lead">{data.lead}</p>
+      <p class="section-subtitle indent-first impact__lead" data-reveal="fade">
+        {data.lead}
+      </p>
     </header>
 
     <dl class="impact__stats">
       {data.stats.map(s => (
-        <div class="impact-card">
+        <div class="impact-card" data-reveal="fade">
           <dt class="impact-card__caption meta-s mono">
             {s.caption}
             {s.source && <sup> {mark(s.source)}</sup>}
@@ -52,8 +60,10 @@ const mark = (n: string) => sup[Number(n) - 1] ?? n;
     </dl>
 
     <div class="impact__foot">
-      <p class="impact__text">{data.text}</p>
-      <p class="impact__sources meta-s mono">
+      <p class="impact__text" data-reveal="fade">
+        {data.text}
+      </p>
+      <p class="impact__sources meta-s mono" data-reveal="fade">
         {data.sources.map((s, i) => `${sup[i] ?? i + 1} ${s}`).join('   ·   ')}
       </p>
     </div>
@@ -137,3 +147,7 @@ const mark = (n: string) => sup[Number(n) - 1] ?? n;
     white-space: pre-wrap;
   }
 </style>
+
+<script>
+  import '@/scripts/reveal';
+</script>

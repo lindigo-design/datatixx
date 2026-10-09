@@ -59,7 +59,7 @@ const linkedin = site.social.linkedin;
       )}
       <div class="c-group c-group--hq">
         <p class="c-label">{t('contact.hq')}</p>
-        <p class="c-value">{site.companyName}</p>
+        <p class="c-value c-value--name">{site.companyName}</p>
         <address class="c-address">
           <span class="c-street">{`${a.street}, ${a.box}`}</span>
           <br />
@@ -166,6 +166,7 @@ const linkedin = site.social.linkedin;
     aspect-ratio: 371 / 169;
     object-fit: cover;
     border-radius: 12px;
+    margin-bottom: 20px; /* + до проміжку між блоками картки */
   }
 
   /* Figma «card — HQ»: фон #babbbd 10%, рамка білим 14%, радіус 20, відступи 36/24, між блоками 24 */
@@ -206,6 +207,12 @@ const linkedin = site.social.linkedin;
     font-weight: var(--fw-bold);
     line-height: 1.4;
     overflow-wrap: anywhere;
+  }
+
+  /* Назва компанії — у 1.5 раза більша: 36 → 48 */
+  .c-value--name {
+    font-size: clamp(2.25rem, 1.95rem + 1.2vw, 3rem);
+    line-height: 1.2;
   }
 
   .c-link:hover {
