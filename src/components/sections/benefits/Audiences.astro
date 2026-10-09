@@ -29,8 +29,8 @@ const tone = (i: number) =>
     src={bg}
     alt=""
     class="section-bg audiences__bg"
-    width={2400}
-    widths={[800, 1600, 2400]}
+    quality={90}
+    widths={[800, 1280, 1920, 2560, 2880]}
     sizes="100vw"
     loading="lazy"
   />
@@ -56,15 +56,15 @@ const tone = (i: number) =>
 
     <article class="aud-wide">
       <div class="aud-wide__copy">
-        <p class="meta-s aud-wide__tag">{data.wide.tag}</p>
+        <p class="meta-s mono aud-wide__tag">{data.wide.tag}</p>
         <h3 class="aud-card__title">{data.wide.title}</h3>
         <p>{data.wide.text}</p>
       </div>
       <dl class="aud-wide__indexes">
         {data.wide.indexes.map(ix => (
           <div class="idx-row">
-            <dt class="meta-s">{ix.name}</dt>
-            <dd class="num">{ix.value}</dd>
+            <dt class="meta-s mono">{ix.name}</dt>
+            <dd class="mono num">{ix.value}</dd>
           </div>
         ))}
       </dl>
@@ -148,21 +148,42 @@ const tone = (i: number) =>
     color: var(--color-text-secondary);
   }
 
-  /* Широка градієнтна картка для бірж */
+  /* Широка картка для бірж (Figma «aud-card-wide — Markets in Motion»):
+     темний фон #0D1117 + градієнтна рамка зелений → синій, відступи 40 */
   .aud-wide {
+    position: relative;
     display: grid;
     gap: var(--space-8);
     align-items: center;
     margin-top: var(--space-10);
     padding: clamp(var(--space-6), 3vw, var(--space-10));
     border-radius: var(--radius-md);
-    background: var(--gradient-band);
+    background: #0d1117;
+  }
+
+  /* градієнтна рамка 1px */
+  .aud-wide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--gradient-brand);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
   }
 
   @media (min-width: 1024px) {
     .aud-wide {
       grid-template-columns: 1fr 360px;
-      gap: var(--space-12);
+      gap: var(--space-12); /* 48 */
     }
   }
 
@@ -196,8 +217,6 @@ const tone = (i: number) =>
   }
 
   .idx-row dd {
-    font-size: var(--fs-label-14);
-    font-weight: var(--fw-medium);
     color: var(--color-green);
   }
 </style>
