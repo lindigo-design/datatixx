@@ -28,18 +28,25 @@ const { data } = Astro.props;
   />
   <div class="container numbered__inner">
     <header class="numbered__head">
-      <p class="section-label">{data.label}</p>
-      <h2 id="lsp-title" class="section-title align-end-lg">
+      <p class="section-label" data-reveal="fade">
+        {data.label}
+      </p>
+      <h2 id="lsp-title" class="section-title align-end-lg" data-reveal="fade">
         {`${data.titleStart} `}
         <span class="grad-text">{data.titleAccent}</span>
         {` ${data.titleEnd}`}
       </h2>
-      <p class="section-subtitle indent-first numbered__lead">{data.lead}</p>
+      <p
+        class="section-subtitle indent-first numbered__lead"
+        data-reveal="fade"
+      >
+        {data.lead}
+      </p>
     </header>
 
     <ol role="list" class="numbered__list">
       {data.cards.map((c, i) => (
-        <li class:list={['n-card', i === 0 && 'is-active']}>
+        <li class:list={['n-card', i === 0 && 'is-active']} data-reveal="fade">
           <span class="n-card__num grad-text num" aria-hidden="true">
             {String(i + 1).padStart(2, '0')}
           </span>
@@ -143,3 +150,7 @@ const { data } = Astro.props;
     color: var(--color-text-secondary);
   }
 </style>
+
+<script>
+  import '@/scripts/reveal';
+</script>
