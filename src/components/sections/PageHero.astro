@@ -6,6 +6,17 @@
 import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Button from '@/components/ui/Button.astro';
+import videoPoster from '@/assets/img/hero/video-poster.jpg';
+
+/*
+  Спільне відео hero для всіх внутрішніх сторінок (6 с, по колу, без звуку).
+  Файли — у public/video/, стиснуті з оригіналу src/assets/video/datixxia connection.mp4.
+  Заставка — перший кадр відео, тож поки відео вантажиться, стрибка картинки немає.
+*/
+const heroVideo = {
+  desktop: '/video/hero-loop-1920.mp4',
+  mobile: '/video/hero-loop-1280.mp4', // телефони й планшети — легша версія
+};
 
 interface Props {
   label: string;
@@ -17,8 +28,8 @@ interface Props {
   secondaryHref: string;
   image: ImageMetadata;
   imageAlt?: string;
-  /** Шлях до відео в public/, напр. '/video/about-hero.mp4'. Порожньо — лише фото. */
-  video?: string;
+  /** Фонове відео (спільне для всіх сторінок). false — лише фото `image`. */
+  video?: boolean;
 }
 const {
   label,
@@ -30,10 +41,10 @@ const {
   secondaryHref,
   image,
   imageAlt = '',
-  video,
+  video = true,
 } = Astro.props;
 const poster = video
-  ? await getImage({ src: image, width: 1568, format: 'webp' })
+  ? await getImage({ src: videoPoster, width: 1920, format: 'webp' })
   : null;
 ---
 
@@ -41,16 +52,23 @@ const poster = video
   {video && poster ? (
     <video
       class="page-hero__bg"
-      src={video}
       poster={poster.src}
       autoplay
       muted
       loop
       playsinline
-      preload="metadata"
+      disablepictureinpicture
+      preload="auto"
       aria-hidden="true"
       data-hero-video
-    />
+    >
+      <source
+        src={heroVideo.mobile}
+        type="video/mp4"
+        media="(max-width: 1023px)"
+      />
+      <source src={heroVideo.desktop} type="video/mp4" />
+    </video>
   ) : (
     <Image
       src={image}

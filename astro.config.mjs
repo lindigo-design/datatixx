@@ -60,6 +60,17 @@ export default defineConfig({
     },
   },
 
+  // Якість картинок: сайт сам робить WebP. Стандартні 80 дають смуги на градієнтах (фони aurora),
+  // тому 90 + smartSubsample (чистіші кольорові краї: зелений/синій не «брудняться»).
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        webp: { quality: 90, smartSubsample: true, effort: 6 },
+      },
+    },
+  },
+
   markdown: {
     syntaxHighlight: false,
   },

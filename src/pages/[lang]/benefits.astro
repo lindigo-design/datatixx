@@ -19,9 +19,6 @@ const page = await getBenefits(lang);
 // «What you can do with Datixxia™» і FAQ — ті самі, що на головній: редагуються в одному місці (Home)
 const home = await getHome(lang);
 const to = (path: string) => localizePath(path, lang);
-
-// Те саме відео, що й на About (див. about.astro)
-const heroVideo = '';
 ---
 
 <BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
@@ -30,7 +27,6 @@ const heroVideo = '';
     primaryHref={to('platform')}
     secondaryHref={to('contact')}
     image={heroImage}
-    video={heroVideo}
   />
   <DataPillars data={page.method} centered />
   <BenefitsByRole data={home.benefits} />
