@@ -4,7 +4,7 @@
   "tagline": "See Tomorrow. Act Today.",
   "address": {
     "city": "Rouen",
-    "street": "Passage de la Luciline",
+    "street": "20 Passage de la Luciline",
     "box": "CS 40641",
     "postalCode": "76000",
     "country": "France"
@@ -13,6 +13,7 @@
   "phone": "+33 6 15 57 54 59",
   "loginUrl": "https://datixxia.com/",
   "showLogin": false,
+  "analyticsId": "GT-5TC3863M",
   "social": {
     "linkedin": "https://www.linkedin.com/company/datixxia/",
     "x": "",

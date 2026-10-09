@@ -232,9 +232,24 @@ function dtx_rate_ok(string $key, int $limit, string $period = 'YmdH'): bool
 {
     $dir = sys_get_temp_dir() . '/dtx-forms';
     if (!is_dir($dir)) @mkdir($dir, 0700, true);
+    dtx_rate_cleanup($dir);
     $file = $dir . '/' . hash('sha256', $key . date($period)); // IP і e-mail не зберігаємо у відкритому вигляді
     $count = is_file($file) ? (int)file_get_contents($file) : 0;
     if ($count >= $limit) return false;
     file_put_contents($file, (string)($count + 1), LOCK_EX);
     return true;
+}
+
+/**
+ * Видаляє лічильники, старші за добу (так обіцяє Privacy Policy: «counters are deleted within 24 hours»).
+ * Перевіряємо не частіше разу на годину — щоб не сканувати папку на кожен запит.
+ */
+function dtx_rate_cleanup(string $dir): void
+{
+    $stamp = $dir . '/.cleanup';
+    if (is_file($stamp) && filemtime($stamp) > time() - 3600) return;
+    @touch($stamp);
+    foreach (glob($dir . '/*') ?: [] as $f) {
+        if (is_file($f) && filemtime($f) < time() - 86400) @unlink($f);
+    }
 }

@@ -401,6 +401,11 @@ const site = defineCollection({
     phone: z.string(),
     loginUrl: link,
     showLogin: z.boolean(),
+    // Google Analytics: G-… або GT-…; порожньо — без аналітики (вмикається лише після згоди в банері cookies)
+    analyticsId: z.union([
+      z.literal(''),
+      z.string().regex(/^(G|GT)-[A-Z0-9]+$/),
+    ]),
     social: z.object({
       linkedin: link,
       x: link,
@@ -414,7 +419,18 @@ const site = defineCollection({
   }),
 });
 
+// ---------- Юридичні сторінки: legal, privacy, cookies (Markdown) ----------
+const legal = defineCollection({
+  loader: glob({ pattern: '*/*.md', base: './src/content/legal' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().max(170),
+    updated: z.coerce.date(),
+  }),
+});
+
 export const collections = {
+  legal,
   home,
   about,
   platform,

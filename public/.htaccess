@@ -28,6 +28,7 @@ AddDefaultCharset UTF-8
   RewriteRule ^wp-admin(/.*)?$ - [G,L]
   RewriteRule ^wp-login\.php$ - [G,L]
   RewriteRule ^xmlrpc\.php$ - [G,L]
+  RewriteRule ^legal-notice-tixx-terms-privacy-compliance/?$ /en/legal/ [L,R=301]
   # RewriteRule ^about-tixx/?$ /en/about/ [L,R=301]
 </IfModule>
 

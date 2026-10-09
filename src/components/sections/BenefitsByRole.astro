@@ -53,7 +53,7 @@ const share = [
 
     <ol role="list" class="roles">
       {data.roles.map((role, i) => (
-        <li class="role">
+        <li class="role" data-reveal="fade" data-reveal-from="left">
           <div class="role__head">
             <p class="meta-s">
               <span>{String(i + 1).padStart(2, '0')}</span>&nbsp;&nbsp;
@@ -421,3 +421,7 @@ const share = [
     font-weight: var(--fw-semibold);
   }
 </style>
+
+<script>
+  import '@/scripts/reveal';
+</script>

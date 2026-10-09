@@ -21,9 +21,15 @@ const { data } = Astro.props;
   />
   <div class="container">
     <div class="manifesto__inner">
-      <p class="section-label">{data.label}</p>
-      <p class="manifesto__text">{data.text}</p>
-      <p class="manifesto__signature grad-text">{data.signature}</p>
+      <p class="section-label" data-reveal="fade">
+        {data.label}
+      </p>
+      <p class="manifesto__text" data-reveal="lines">
+        {data.text}
+      </p>
+      <p class="manifesto__signature grad-text" data-reveal="fade">
+        {data.signature}
+      </p>
     </div>
   </div>
 </section>
@@ -46,4 +52,13 @@ const { data } = Astro.props;
     font-size: var(--fs-lead);
     text-align: center;
   }
+
+  /* Підпис з'являється, коли рядки тексту вже виїхали */
+  .manifesto__signature {
+    --reveal-delay: 1.1s;
+  }
 </style>
+
+<script>
+  import '@/scripts/reveal';
+</script>

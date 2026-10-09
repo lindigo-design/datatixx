@@ -45,18 +45,22 @@ const right = [card(2), card(3)];
   />
   <div class="container">
     <header class="features__head">
-      <p class="section-label">{data.label}</p>
-      <h2 id="features-title" class="section-title">
+      <p class="section-label" data-reveal="fade">
+        {data.label}
+      </p>
+      <h2 id="features-title" class="section-title" data-reveal="fade">
         {data.titleStart}{' '}
         <span class="features__accent">{data.titleAccent}</span>
       </h2>
-      <p class="section-subtitle">{data.subtitle}</p>
+      <p class="section-subtitle" data-reveal="fade">
+        {data.subtitle}
+      </p>
     </header>
 
     <div class="features__grid">
       <ul role="list" class="features__col">
         {left.map(({ Icon, num, label, text }) => (
-          <li class="g-card f-card">
+          <li class="g-card f-card" data-reveal="fade">
             <Icon class="f-card__icon" aria-hidden="true" />
             <h3 class="meta-m">
               <span class="num">{num}</span> {label}
@@ -66,7 +70,7 @@ const right = [card(2), card(3)];
         ))}
       </ul>
 
-      <div class="features__ring" aria-hidden="true">
+      <div class="features__ring" aria-hidden="true" data-reveal="fade">
         <Image
           src={ring}
           alt=""
@@ -78,7 +82,7 @@ const right = [card(2), card(3)];
 
       <ul role="list" class="features__col">
         {right.map(({ Icon, num, label, text }) => (
-          <li class="g-card f-card">
+          <li class="g-card f-card" data-reveal="fade">
             <Icon class="f-card__icon" aria-hidden="true" />
             <h3 class="meta-m">
               <span class="num">{num}</span> {label}
@@ -219,3 +223,7 @@ const right = [card(2), card(3)];
     }
   }
 </style>
+
+<script>
+  import '@/scripts/reveal';
+</script>

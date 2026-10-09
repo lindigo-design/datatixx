@@ -77,6 +77,10 @@ for (const form of document.querySelectorAll<HTMLFormElement>(
   form.addEventListener('change', update);
 
   const finish = () => {
+    // Заявка надіслана — подія для Google Analytics (лише якщо є згода і GA завантажено)
+    window.gtag?.('event', 'generate_lead', {
+      form: form.getAttribute('action'),
+    });
     form.reset();
     openedAt = Date.now();
     show('', '');

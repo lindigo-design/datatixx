@@ -38,9 +38,12 @@ const { data, centered = false } = Astro.props;
   )}
   <div class="container pillars__inner">
     <header class="pillars__head">
-      <p class="section-label">{data.label}</p>
+      <p class="section-label" data-reveal="fade">
+        {data.label}
+      </p>
       <h2
         id="pillars-title"
+        data-reveal="fade"
         class:list={['section-title', !centered && 'align-end-lg']}
       >
         {`${data.titleStart} `}
@@ -50,13 +53,18 @@ const { data, centered = false } = Astro.props;
         {data.titleEnd ? ` ${data.titleEnd}` : ''}
       </h2>
       {data.lead && (
-        <p class="section-subtitle indent-first pillars__lead">{data.lead}</p>
+        <p
+          class="section-subtitle indent-first pillars__lead"
+          data-reveal="fade"
+        >
+          {data.lead}
+        </p>
       )}
     </header>
 
     <ol role="list" class="pillars__list">
       {data.pillars.map((p, i) => (
-        <li class="pillar">
+        <li class="pillar" data-reveal="fade">
           <span class="pillar__num grad-text num" aria-hidden="true">
             {String(i + 1).padStart(2, '0')}
           </span>
@@ -149,3 +157,7 @@ const { data, centered = false } = Astro.props;
     }
   }
 </style>
+
+<script>
+  import '@/scripts/reveal';
+</script>

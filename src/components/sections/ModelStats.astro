@@ -44,16 +44,22 @@ const {
   )}
   <div class="container model__inner">
     <header class="model__head">
-      <p class="section-label">{data.label}</p>
-      <h2 id="model-title" class="section-title align-end-lg">
+      <p class="section-label" data-reveal="fade">
+        {data.label}
+      </p>
+      <h2
+        id="model-title"
+        class="section-title align-end-lg"
+        data-reveal="fade"
+      >
         {data.title}
       </h2>
-      <div class="model__lead">
+      <div class="model__lead" data-reveal="fade">
         {paragraphs(data.lead).map(p => (
           <p class:list={['lead', indent && 'indent-first']}>{p}</p>
         ))}
       </div>
-      <div class="actions model__actions">
+      <div class="actions model__actions" data-reveal="fade">
         <Button href={primaryHref}>{data.primaryCta}</Button>
         <Button href={secondaryHref} variant="outline">
           {data.secondaryCta}
@@ -63,7 +69,7 @@ const {
 
     <dl class="stats">
       {data.stats.map(s => (
-        <div class="stat">
+        <div class="stat" data-reveal="fade">
           <dt class="stat__caption">{s.caption}</dt>
           <dd class="stat__value grad-text num">{s.value}</dd>
         </div>
@@ -170,3 +176,7 @@ const {
     color: var(--color-text-soft);
   }
 </style>
+
+<script>
+  import '@/scripts/reveal';
+</script>

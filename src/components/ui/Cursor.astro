@@ -1,0 +1,216 @@
+---
+/**
+ * Фірмовий курсор: зелене кільце з точкою і світінням (на зразок Kursor, але без бібліотеки).
+ *
+ * - Лише на пристроях з мишею (hover + точний вказівник); на телефонах і планшетах — звичайна поведінка.
+ * - Без JavaScript лишається звичайний курсор (клас .has-cursor ставить скрипт).
+ * - Над посиланнями й кнопками кільце більшає і світиться сильніше.
+ * - У полях введення — звичайний текстовий курсор (так зручніше ставити його в текст).
+ * - Коли відкрите вікно (<dialog>: меню, налаштування cookies) — звичайний курсор,
+ *   бо вікна лежать над усією сторінкою і кільце опинилось би під ними.
+ * - «Зменшити рух» у системі → кільце йде за мишею без запізнення.
+ */
+---
+
+<div class="cursor" aria-hidden="true" data-cursor>
+  <span class="cursor__ring" data-cursor-ring></span>
+  <span class="cursor__dot" data-cursor-dot></span>
+</div>
+
+<style is:global>
+  .cursor {
+    display: none;
+  }
+
+  .has-cursor .cursor {
+    display: block;
+  }
+
+  /* Ховаємо системний курсор лише коли наш працює */
+  .has-cursor,
+  .has-cursor * {
+    cursor: none !important;
+  }
+
+  .has-cursor
+    :is(
+      input:not(
+        [type='checkbox'],
+        [type='radio'],
+        [type='submit'],
+        [type='button']
+      ),
+      textarea,
+      [contenteditable]
+    ) {
+    cursor: text !important;
+  }
+
+  .cursor__ring,
+  .cursor__dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    pointer-events: none;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .cursor.is-visible .cursor__ring,
+  .cursor.is-visible .cursor__dot {
+    opacity: 1;
+  }
+
+  .cursor.is-text .cursor__ring,
+  .cursor.is-text .cursor__dot {
+    opacity: 0;
+  }
+
+  /* Кільце: зелений контур + м'яке світіння зовні й усередині */
+  .cursor__ring {
+    width: 36px;
+    height: 36px;
+    margin: -18px 0 0 -18px;
+    border: 1.5px solid var(--color-green);
+    background: radial-gradient(
+      circle,
+      rgb(66 170 57 / 0.14) 0%,
+      rgb(66 170 57 / 0) 70%
+    );
+    box-shadow:
+      0 0 12px rgb(66 170 57 / 0.55),
+      inset 0 0 8px rgb(66 170 57 / 0.35);
+  }
+
+  .cursor__dot {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: var(--color-green);
+    box-shadow: 0 0 8px 1px rgb(66 170 57 / 0.9);
+  }
+
+  /* transform зайнятий позицією (його задає скрипт), тому розмір змінюємо через width/height */
+  .cursor__ring {
+    transition:
+      opacity 0.2s ease,
+      width 0.25s ease,
+      height 0.25s ease,
+      margin 0.25s ease,
+      background-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  /* Над посиланням / кнопкою */
+  .cursor.is-hover .cursor__ring {
+    width: 56px;
+    height: 56px;
+    margin: -28px 0 0 -28px;
+    background-color: rgb(66 170 57 / 0.1);
+    box-shadow:
+      0 0 22px rgb(66 170 57 / 0.75),
+      inset 0 0 14px rgb(66 170 57 / 0.45);
+  }
+
+  .cursor.is-hover .cursor__dot {
+    opacity: 0;
+  }
+
+  /* Натискання */
+  .cursor.is-down .cursor__ring {
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 -14px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor__ring {
+      transition: opacity 0.2s ease;
+    }
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const cursor = document.querySelector<HTMLElement>('[data-cursor]');
+  const ring = document.querySelector<HTMLElement>('[data-cursor-ring]');
+  const dot = document.querySelector<HTMLElement>('[data-cursor-dot]');
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const still = matchMedia('(prefers-reduced-motion: reduce)');
+
+  const INTERACTIVE =
+    'a, button, [role="button"], label, summary, select, input[type="checkbox"], input[type="radio"], input[type="submit"], input[type="button"]';
+  const TEXT =
+    'input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"]), textarea, [contenteditable]';
+
+  if (cursor && ring && dot) {
+    let x = -100;
+    let y = -100;
+    let rx = x;
+    let ry = y;
+    let frame = 0;
+
+    // Позиція — через transform (працює з CSP: це не inline-стиль у HTML)
+    const place = (el: HTMLElement, px: number, py: number) => {
+      el.style.transform = `translate3d(${px}px, ${py}px, 0)`;
+    };
+
+    // Кільце плавно наздоганяє точку
+    const tick = () => {
+      const k = still.matches ? 1 : 0.2;
+      rx += (x - rx) * k;
+      ry += (y - ry) * k;
+      place(ring, rx, ry);
+      frame =
+        Math.abs(x - rx) + Math.abs(y - ry) > 0.1
+          ? requestAnimationFrame(tick)
+          : 0;
+    };
+
+    const anyDialogOpen = () => !!document.querySelector('dialog[open]');
+
+    // Вмикаємо лише з мишею і коли не відкрите жодне вікно
+    const sync = () => {
+      root.classList.toggle('has-cursor', fine.matches && !anyDialogOpen());
+    };
+    sync();
+    fine.addEventListener('change', sync);
+    new MutationObserver(sync).observe(document.body, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['open'],
+    });
+
+    document.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      x = e.clientX;
+      y = e.clientY;
+      place(dot, x, y);
+      if (!cursor.classList.contains('is-visible')) {
+        rx = x;
+        ry = y;
+        place(ring, x, y);
+        cursor.classList.add('is-visible');
+      }
+      if (!frame) frame = requestAnimationFrame(tick);
+
+      const target = e.target as Element;
+      cursor.classList.toggle('is-text', !!target.closest?.(TEXT));
+      cursor.classList.toggle('is-hover', !!target.closest?.(INTERACTIVE));
+    });
+
+    document.addEventListener('pointerdown', () =>
+      cursor.classList.add('is-down')
+    );
+    document.addEventListener('pointerup', () =>
+      cursor.classList.remove('is-down')
+    );
+
+    // Миша вийшла за межі вікна браузера
+    document.documentElement.addEventListener('mouseleave', () =>
+      cursor.classList.remove('is-visible')
+    );
+  }
+</script>

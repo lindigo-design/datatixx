@@ -180,6 +180,12 @@
   gap: var(--space-4);
 }
 
+/* Головна кнопка в hero — удвічі довша: +3em з кожного боку
+   («Platform» 118 → 236 px; довші написи ростуть трохи менше, щоб влазити на телефоні) */
+.btn--hero {
+  padding-inline: calc(var(--space-6) + 3em);
+}
+
 /* Декоративний фон секції (аврора, 20% непрозорості) */
 .section-bg {
   position: absolute;
@@ -189,4 +195,59 @@
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+}
+
+/* ---------- Поява тексту при прокручуванні (scripts/reveal.ts) ----------
+   Класи ставить скрипт: без JS і з «зменшити рух» текст видно одразу. */
+[data-reveal='lines'].is-ready .reveal__wrap {
+  display: block;
+  overflow: hidden;
+  /* запас, щоб не обрізались хвостики g, y, p і акценти É */
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+
+[data-reveal='lines'].is-ready .reveal__line {
+  display: block;
+  white-space: nowrap;
+  transform: translate3d(0, 110%, 0);
+  color: rgb(255 255 255 / 0.35); /* спершу сірий напівпрозорий… */
+  transition:
+    transform 0.9s var(--ease-out) calc(var(--i, 0) * 0.12s),
+    color 0.9s ease calc(var(--i, 0) * 0.12s + 0.5s);
+}
+
+[data-reveal='lines'].is-in .reveal__line {
+  transform: none;
+  color: inherit; /* …потім звичайний колір */
+}
+
+/* Блоки: виїжджають знизу, спершу сірі напівпрозорі — потім у своїх кольорах */
+[data-reveal='fade'].is-ready {
+  --reveal-at: calc(var(--reveal-delay, 0s) + var(--reveal-stagger, 0s));
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  filter: grayscale(1) brightness(0.75);
+  transition:
+    opacity 0.8s ease var(--reveal-at),
+    transform 0.9s var(--ease-out) var(--reveal-at),
+    filter 0.9s ease calc(var(--reveal-at) + 0.4s);
+}
+
+/* Варіант «зліва»: блок виїжджає зліва направо (картки ролей) */
+[data-reveal='fade'][data-reveal-from='left'].is-ready {
+  transform: translate3d(-40px, 0, 0);
+}
+
+/* Варіант «згори»: блок опускається на місце (секція Cascade на Platform) */
+[data-reveal='fade'][data-reveal-from='top'].is-ready {
+  transform: translate3d(0, -28px, 0);
+}
+
+/* Кінцевий стан: .is-ready.is-in — сильніше за варіанти «зліва» / «згори»,
+   інакше блок лишається зсунутим після анімації */
+[data-reveal='fade'].is-ready.is-in {
+  opacity: 1;
+  transform: none;
+  filter: none;
 }

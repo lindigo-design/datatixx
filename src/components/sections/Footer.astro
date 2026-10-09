@@ -111,10 +111,12 @@ const socials = [
           <a href={localizePath('privacy', lang)}>{t('footer.privacy')}</a>
         </li>
         <li>
-          <a href={localizePath('terms', lang)}>{t('footer.terms')}</a>
+          <a href={localizePath('legal', lang)}>{t('footer.legal')}</a>
         </li>
         <li>
-          <a href={localizePath('legal', lang)}>{t('footer.legal')}</a>
+          <button type="button" class="footer__cookies" data-cookie-open>
+            {t('footer.cookies')}
+          </button>
         </li>
       </ul>
     </div>
@@ -266,8 +268,20 @@ const socials = [
     gap: var(--space-2) var(--space-6);
   }
 
-  .footer__legal a {
+  .footer__legal a,
+  .footer__cookies {
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  /* «Cookies» — кнопка, що виглядає як посилання */
+  .footer__cookies {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .footer__cookies:hover {
+    color: var(--color-green);
   }
 </style>

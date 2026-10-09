@@ -25,15 +25,23 @@ const { data, primaryHref, secondaryHref } = Astro.props;
   <div class="container why__inner">
     <header class="why__head">
       <div class="why__title-row">
-        <p class="section-label">{data.label}</p>
-        <h2 id="why-title" class="section-title align-end-lg">
+        <p class="section-label" data-reveal="fade">
+          {data.label}
+        </p>
+        <h2
+          id="why-title"
+          class="section-title align-end-lg"
+          data-reveal="fade"
+        >
           {data.titleLine1}
           <br />
           <span class="grad-text">{data.titleLine2}</span>
         </h2>
       </div>
-      <p class="section-subtitle indent-first why__lead">{data.lead}</p>
-      <div class="actions">
+      <p class="section-subtitle indent-first why__lead" data-reveal="fade">
+        {data.lead}
+      </p>
+      <div class="actions" data-reveal="fade">
         <Button href={primaryHref}>{data.primaryCta}</Button>
         <Button href={secondaryHref} variant="outline">
           {data.secondaryCta}
@@ -44,13 +52,13 @@ const { data, primaryHref, secondaryHref } = Astro.props;
     <div class="why__body">
       <ul role="list" class="why__cards">
         {data.cards.map(c => (
-          <li class="g-card why-card">
+          <li class="g-card why-card" data-reveal="fade">
             <h3 class="meta-m">{c.title}</h3>
             <p>{c.text}</p>
           </li>
         ))}
       </ul>
-      <div class="why__media">
+      <div class="why__media" data-reveal="fade">
         <Image
           src={dashboard}
           alt={data.imageAlt}
@@ -132,3 +140,7 @@ const { data, primaryHref, secondaryHref } = Astro.props;
     object-position: left top;
   }
 </style>
+
+<script>
+  import '@/scripts/reveal';
+</script>

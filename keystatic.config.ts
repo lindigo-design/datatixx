@@ -748,6 +748,9 @@ export default config({
           label: 'Показувати кнопку Login',
           defaultValue: false,
         }),
+        analyticsId: optional(
+          'Google Analytics: ідентифікатор (G-… або GT-…). Порожньо — без аналітики'
+        ),
         social: fields.object(
           {
             linkedin: optional('LinkedIn'),

@@ -1,0 +1,443 @@
+---
+/**
+ * Cookies (Figma «Redesign v2 (Malcolm)» → «Cookie — Banner» і «Cookie — Preferences»).
+ *
+ * 1. Банер унизу екрана — з'являється, поки людина не зробила вибір.
+ *    «Accept all» і «Reject all» однаково помітні (вимога CNIL/RGPD: відмовитися так само легко, як погодитися).
+ * 2. Вікно «Cookie settings» — 4 категорії з перемикачами. «Strictly necessary» завжди увімкнено.
+ * 3. Повторно відкрити вікно — посилання «Cookies» у футері (будь-який елемент з data-cookie-open).
+ *
+ * Вибір зберігається на 6 місяців (src/scripts/consent.ts).
+ */
+import { localizePath, useTranslations, type Locale } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const policyHref = localizePath('cookies', lang);
+
+const categories = [
+  { id: 'necessary', locked: true },
+  { id: 'analytics', locked: false },
+  { id: 'preferences', locked: false },
+  { id: 'marketing', locked: false },
+] as const;
+---
+
+<!-- Банер -->
+<section
+  class="cc-banner"
+  aria-labelledby="cc-banner-title"
+  data-cc-banner
+  hidden
+>
+  <div class="cc-banner__copy">
+    <h2 id="cc-banner-title" class="cc-title">
+      {t('cookies.title')}
+    </h2>
+    <p class="cc-text">
+      {t('cookies.text')} <a href={policyHref}>{t('cookies.policy')}</a>.
+    </p>
+  </div>
+  <div class="cc-buttons">
+    <button type="button" class="cc-btn" data-cc-accept>
+      {t('cookies.accept')}
+    </button>
+    <button type="button" class="cc-btn" data-cc-reject>
+      {t('cookies.reject')}
+    </button>
+    <button type="button" class="cc-btn" data-cookie-open>
+      {t('cookies.settings')}
+    </button>
+  </div>
+</section>
+
+<!-- Вікно налаштувань -->
+<dialog class="cc-dialog" aria-labelledby="cc-dialog-title" data-cc-dialog>
+  <form method="dialog" class="cc-panel" data-cc-form>
+    <div class="cc-head">
+      <h2 id="cc-dialog-title" class="cc-dialog__title">
+        {t('cookies.settings')}
+      </h2>
+      <button
+        type="button"
+        class="cc-close"
+        aria-label={t('menu.close')}
+        data-cc-close
+      >
+        ✕
+      </button>
+    </div>
+    <p class="cc-text">{t('cookies.intro')}</p>
+
+    <ul role="list" class="cc-list">
+      {categories.map(c => (
+        <li class="cc-cat">
+          <div class="cc-cat__copy">
+            <div class="cc-cat__row">
+              <label class="cc-cat__name" for={`cc-${c.id}`}>
+                {t(`cookies.${c.id}`)}
+              </label>
+              {c.locked && (
+                <span class="cc-chip mono">{t('cookies.alwaysOn')}</span>
+              )}
+            </div>
+            <p class="cc-cat__text" id={`cc-${c.id}-desc`}>
+              {t(`cookies.${c.id}Text`)}
+            </p>
+          </div>
+          <input
+            class="cc-switch"
+            type="checkbox"
+            role="switch"
+            id={`cc-${c.id}`}
+            name={c.id}
+            aria-describedby={`cc-${c.id}-desc`}
+            checked={c.locked}
+            disabled={c.locked}
+          />
+        </li>
+      ))}
+    </ul>
+
+    <div class="cc-buttons cc-buttons--dialog">
+      <button type="button" class="cc-btn" data-cc-save>
+        {t('cookies.save')}
+      </button>
+      <button type="button" class="cc-btn" data-cc-accept>
+        {t('cookies.accept')}
+      </button>
+      <button type="button" class="cc-btn" data-cc-reject>
+        {t('cookies.reject')}
+      </button>
+    </div>
+    <p class="cc-note mono">{t('cookies.note')}</p>
+  </form>
+</dialog>
+
+<style>
+  /* ---------- Банер: картка 1312, радіус 24, відступи 28/36, між текстом і кнопками 48 ---------- */
+  .cc-banner {
+    position: fixed;
+    z-index: 60;
+    left: 50%;
+    bottom: clamp(var(--space-3), 2vw, var(--space-6));
+    transform: translateX(-50%);
+    width: min(1312px, calc(100% - 2 * var(--gutter)));
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+    padding: clamp(var(--space-5), 2vw, 28px) clamp(var(--space-5), 2.5vw, 36px);
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    box-shadow: 0 16px 48px rgb(0 0 0 / 0.45);
+    animation: cc-in var(--dur-base) var(--ease-out);
+  }
+
+  .cc-banner[hidden] {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .cc-banner {
+      grid-template-columns: 1fr auto;
+      gap: var(--space-12);
+    }
+  }
+
+  @keyframes cc-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 16px);
+    }
+  }
+
+  .cc-banner__copy {
+    display: grid;
+    gap: 6px;
+  }
+
+  /* Afacad Bold 32 / 140% */
+  .cc-title {
+    font-size: clamp(1.375rem, 1.2rem + 0.75vw, 2rem);
+    font-weight: var(--fw-bold);
+    line-height: 1.4;
+  }
+
+  .cc-text {
+    color: var(--color-text-secondary);
+  }
+
+  .cc-text a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cc-text a:hover {
+    color: var(--color-green);
+  }
+
+  /* Кнопки однакові (контур білий, 45 px): «Accept» не виділяємо сильніше за «Reject» */
+  .cc-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .cc-btn {
+    min-height: 45px;
+    padding: var(--space-3) var(--space-6);
+    border: 1px solid var(--color-text);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: var(--fw-semibold);
+    line-height: 1.2;
+    cursor: pointer;
+    transition:
+      border-color var(--dur-fast) ease,
+      color var(--dur-fast) ease;
+  }
+
+  .cc-btn:hover {
+    border-color: var(--color-green);
+    color: var(--color-green);
+  }
+
+  /* ---------- Вікно: 720, радіус 24, відступи 36, між блоками 20 ---------- */
+  .cc-dialog {
+    width: min(720px, calc(100% - 2 * var(--gutter)));
+    max-height: calc(100dvh - 2 * var(--space-6));
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    overflow-y: auto;
+  }
+
+  .cc-dialog::backdrop {
+    background: rgb(1 9 18 / 0.7);
+    backdrop-filter: blur(6px);
+  }
+
+  .cc-dialog[open] {
+    animation: cc-pop var(--dur-base) var(--ease-out);
+  }
+
+  @keyframes cc-pop {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+
+  .cc-panel {
+    display: grid;
+    gap: var(--space-5);
+    padding: clamp(var(--space-6), 3vw, 36px);
+  }
+
+  .cc-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  /* Afacad Bold 48 / 100% */
+  .cc-dialog__title {
+    font-size: clamp(2rem, 1.6rem + 1.6vw, 3rem);
+    font-weight: var(--fw-bold);
+    line-height: 1;
+  }
+
+  .cc-close {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    font-size: 1.75rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .cc-close:hover {
+    color: var(--color-text);
+  }
+
+  .cc-list {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  /* Категорія: фон #010912, рамка білим 14%, радіус 16, відступи 16/20 */
+  .cc-cat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    padding: var(--space-4) var(--space-5);
+    background: var(--color-bg);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-sm);
+  }
+
+  .cc-cat__copy {
+    flex: 1;
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .cc-cat__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cc-cat__name {
+    font-size: clamp(1.375rem, 1.2rem + 0.75vw, 2rem);
+    font-weight: var(--fw-bold);
+    line-height: 1.4;
+    cursor: pointer;
+  }
+
+  .cc-cat__text {
+    color: var(--color-text-muted);
+  }
+
+  /* «ALWAYS ON» — зелений контур, IBM Plex Mono 11 */
+  .cc-chip {
+    padding: 2px 10px;
+    border: 1px solid var(--color-green);
+    border-radius: var(--radius-pill);
+    color: var(--color-green);
+  }
+
+  /* ---------- Перемикач 48×28 ---------- */
+  .cc-switch {
+    appearance: none;
+    position: relative;
+    flex-shrink: 0;
+    width: 48px;
+    height: 28px;
+    margin: 0;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    cursor: pointer;
+    transition: background var(--dur-fast) ease;
+  }
+
+  .cc-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-text);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  .cc-switch:checked {
+    border-color: transparent;
+    background: var(--gradient-brand);
+  }
+
+  .cc-switch:checked::after {
+    transform: translateX(20px);
+  }
+
+  /* Завжди увімкнено — сірий, без градієнта */
+  .cc-switch:disabled {
+    background: #3d444d;
+    cursor: not-allowed;
+  }
+
+  .cc-switch:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+
+  .cc-buttons--dialog {
+    padding-top: var(--space-2);
+  }
+
+  .cc-note {
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 639px) {
+    .cc-btn {
+      flex: 1 1 auto;
+    }
+  }
+</style>
+
+<script>
+  import {
+    ALL,
+    NONE,
+    getConsent,
+    saveConsent,
+    type Category,
+    type Choices,
+  } from '@/scripts/consent';
+
+  const banner = document.querySelector<HTMLElement>('[data-cc-banner]');
+  const dialog = document.querySelector<HTMLDialogElement>('[data-cc-dialog]');
+  const form = document.querySelector<HTMLFormElement>('[data-cc-form]');
+
+  if (banner && dialog && form) {
+    const switches = () => [
+      ...form.querySelectorAll<HTMLInputElement>('.cc-switch'),
+    ];
+
+    // Перемикачі у вікні показують збережений вибір (або «все вимкнено»)
+    const fill = (c: Choices) => {
+      for (const s of switches()) s.checked = c[s.name as Category];
+    };
+
+    const decide = (c: Choices) => {
+      saveConsent(c);
+      banner.hidden = true;
+      if (dialog.open) dialog.close();
+    };
+
+    // Банер — тільки якщо вибору ще немає
+    banner.hidden = getConsent() !== null;
+
+    document.addEventListener('click', e => {
+      const el = (e.target as HTMLElement).closest<HTMLElement>(
+        '[data-cc-accept], [data-cc-reject], [data-cc-save], [data-cookie-open], [data-cc-close]'
+      );
+      if (!el) return;
+      if (el.matches('[data-cc-accept]')) decide(ALL);
+      else if (el.matches('[data-cc-reject]')) decide(NONE);
+      else if (el.matches('[data-cc-save]')) {
+        const c = { ...NONE };
+        for (const s of switches()) c[s.name as Category] = s.checked;
+        decide(c);
+      } else if (el.matches('[data-cookie-open]')) {
+        e.preventDefault();
+        fill(getConsent() ?? NONE);
+        dialog.showModal();
+      } else if (el.matches('[data-cc-close]')) dialog.close();
+    });
+
+    // Клік по затемненому фону закриває вікно (без збереження)
+    dialog.addEventListener('click', e => {
+      if (e.target === dialog) dialog.close();
+    });
+  }
+</script>

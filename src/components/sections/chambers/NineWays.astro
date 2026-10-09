@@ -38,18 +38,22 @@ const num = (i: number) => String(i).padStart(2, '0');
   />
   <div class="container nine__inner">
     <header class="nine__head">
-      <p class="section-label">{data.label}</p>
-      <h2 id="nine-title" class="section-title">
+      <p class="section-label" data-reveal="fade">
+        {data.label}
+      </p>
+      <h2 id="nine-title" class="section-title" data-reveal="fade">
         {`${data.titleStart} `}
         <span class="grad-text">{data.titleAccent}</span>
         {` ${data.titleEnd}`}
       </h2>
-      <p class="section-subtitle nine__lead">{data.lead}</p>
+      <p class="section-subtitle nine__lead" data-reveal="fade">
+        {data.lead}
+      </p>
     </header>
 
     <div class="bento">
       {main && (
-        <article class="bento__card bento__card--main">
+        <article class="bento__card bento__card--main" data-reveal="fade">
           <p class="meta-s mono accent">{`01 — ${main.tag}`}</p>
           <h3 class="bento__title bento__title--lg">{main.title}</h3>
           <p class="bento__text">{main.text}</p>
@@ -66,14 +70,14 @@ const num = (i: number) => String(i).padStart(2, '0');
       )}
       <div class="bento__stack">
         {members && (
-          <article class="bento__card">
+          <article class="bento__card" data-reveal="fade">
             <p class="meta-s mono accent">{`02 — ${members.tag}`}</p>
             <h3 class="bento__title">{members.title}</h3>
             <p class="bento__text">{members.text}</p>
           </article>
         )}
         {revenue && (
-          <article class="bento__card bento__card--grad">
+          <article class="bento__card bento__card--grad" data-reveal="fade">
             <p class="meta-s mono bento__tag-light">{`03 — ${revenue.tag}`}</p>
             <h3 class="bento__title">{revenue.title}</h3>
             <p class="bento__text bento__text--light">{revenue.text}</p>
@@ -83,10 +87,12 @@ const num = (i: number) => String(i).padStart(2, '0');
     </div>
 
     <div class="more">
-      <h3 class="more__title">{data.moreTitle}</h3>
+      <h3 class="more__title" data-reveal="fade">
+        {data.moreTitle}
+      </h3>
       <ol role="list" class="more__list">
         {data.more.map((m, i) => (
-          <li class="more__item">
+          <li class="more__item" data-reveal="fade">
             <span class="more__num num accent" aria-hidden="true">
               {num(i + 4)}
             </span>
@@ -303,3 +309,7 @@ const num = (i: number) => String(i).padStart(2, '0');
     color: var(--color-text-muted);
   }
 </style>
+
+<script>
+  import '@/scripts/reveal';
+</script>

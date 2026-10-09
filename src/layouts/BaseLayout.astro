@@ -6,6 +6,8 @@
 import '@/styles/global.css';
 import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
+import CookieConsent from '@/components/ui/CookieConsent.astro';
+import Cursor from '@/components/ui/Cursor.astro';
 import TickerBar from '@/components/sections/TickerBar.astro';
 import IntroLoader from '@/components/ui/IntroLoader.astro';
 import {
@@ -69,6 +71,10 @@ const organizationLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline set:html={introScript} />
     <title>{title}</title>
+    {/* Google Analytics: ідентифікатор для scripts/analytics.ts — вмикається лише після згоди */}
+    {site.analyticsId && (
+      <meta name="dtx-analytics" content={site.analyticsId} />
+    )}
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
@@ -118,5 +124,10 @@ const organizationLd = {
       <slot />
     </main>
     <Footer lang={lang} />
+    <CookieConsent lang={lang} />
+    <Cursor />
+    <script>
+      import '@/scripts/analytics';
+    </script>
   </body>
 </html>

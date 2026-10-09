@@ -94,7 +94,9 @@ const poster = video
     <div class="page-hero__content">
       <p class="page-hero__lead">{lead}</p>
       <div class="actions">
-        <Button href={primaryHref}>{primaryCta}</Button>
+        <Button href={primaryHref} class="btn--hero">
+          {primaryCta}
+        </Button>
         <Button href={secondaryHref} variant="outline">
           {secondaryCta}
         </Button>

@@ -49,14 +49,18 @@ export default defineConfig({
       algorithm: 'SHA-256',
       directives: [
         "default-src 'self'",
-        "img-src 'self' data:",
+        // Google Analytics — лише після згоди в банері cookies (scripts/consent.ts)
+        "img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com",
         "font-src 'self'",
-        "connect-src 'self'",
+        "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
         "form-action 'self'",
         "base-uri 'self'",
         "object-src 'none'",
         'upgrade-insecure-requests',
       ],
+      scriptDirective: {
+        resources: ["'self'", 'https://www.googletagmanager.com'],
+      },
     },
   },
 
