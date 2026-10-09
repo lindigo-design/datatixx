@@ -9,9 +9,15 @@ import { locales, defaultLocale } from './src/i18n/locales.js';
 // У зібраному сайті її немає взагалі — нема сторінки входу, нема чого зламувати.
 const isDev = process.argv.includes('dev');
 
+// Попередній перегляд на GitHub Pages живе в підпапці: lindigo-design.github.io/datatixx/
+// Workflow .github/workflows/pages.yml передає SITE_URL і BASE_PATH.
+// Без них (локально та на IONOS) сайт збирається для кореня домену.
+const site = process.env.SITE_URL || 'https://www.datatixx.com';
+const base = process.env.BASE_PATH || '/';
+
 export default defineConfig({
-  // TODO: замінити на фінальний домен, коли підключимо IONOS
-  site: 'https://www.datatixx.com',
+  site,
+  base,
   output: 'static',
   // у dev — 'ignore', бо адмінка Keystatic звертається до адрес без «/» у кінці
   trailingSlash: isDev ? 'ignore' : 'always',

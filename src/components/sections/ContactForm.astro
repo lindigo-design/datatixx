@@ -6,7 +6,7 @@
  */
 import Button from '@/components/ui/Button.astro';
 import FormDone from '@/components/ui/FormDone.astro';
-import { useTranslations, type Locale } from '@/i18n/utils';
+import { useTranslations, withBase, type Locale } from '@/i18n/utils';
 
 interface Props {
   lang: Locale;
@@ -28,7 +28,7 @@ const topicList = [
 
 <form
   class="form"
-  action="/api/contact.php"
+  action={withBase('/api/contact.php')}
   method="post"
   novalidate
   data-ajax-form

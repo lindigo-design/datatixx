@@ -2,7 +2,7 @@
 /** Анкета для палат і мовних компаній (Figma: «Market Survey»). Обробник: public/api/survey.php. */
 import Button from '@/components/ui/Button.astro';
 import FormDone from '@/components/ui/FormDone.astro';
-import { useTranslations, type Locale } from '@/i18n/utils';
+import { useTranslations, withBase, type Locale } from '@/i18n/utils';
 import { countryOptions } from '@/utils/countries';
 
 interface Props {
@@ -116,7 +116,7 @@ const pairs: [
 
 <form
   class="form form-card"
-  action="/api/survey.php"
+  action={withBase('/api/survey.php')}
   method="post"
   novalidate
   data-ajax-form

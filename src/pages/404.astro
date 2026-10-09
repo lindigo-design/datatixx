@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/ui/Button.astro';
+import { withBase } from '@/i18n/utils';
 ---
 
 <BaseLayout
@@ -15,8 +16,8 @@ import Button from '@/components/ui/Button.astro';
       <h1>This page does not exist.</h1>
       <p lang="fr">Cette page n'existe pas.</p>
       <div class="notfound__actions">
-        <Button href="/en/">Home</Button>
-        <Button href="/fr/" variant="outline">
+        <Button href={withBase('/en/')}>Home</Button>
+        <Button href={withBase('/fr/')} variant="outline">
           Accueil
         </Button>
       </div>

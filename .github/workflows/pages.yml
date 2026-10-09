@@ -1,0 +1,54 @@
+# Попередній перегляд сайту на GitHub Pages:
+# https://lindigo-design.github.io/datatixx/
+#
+# Запускається після кожного push у main (і вручну: Actions → Preview on GitHub Pages → Run workflow).
+# Це лише перегляд: форми тут не надсилають листи (GitHub не вміє PHP),
+# а сторінки сховані від Google (noindex). Справжній сайт буде на IONOS.
+#
+# Один раз у налаштуваннях: Settings → Pages → Source: «GitHub Actions».
+name: Preview on GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# не запускати дві публікації одночасно
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Зібрати сайт для підпапки /datatixx/
+        run: npm run build
+        env:
+          SITE_URL: https://lindigo-design.github.io
+          BASE_PATH: /datatixx
+          PUBLIC_PREVIEW: '1'
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
