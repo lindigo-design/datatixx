@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://www.datatixx.com/sitemap-index.xml
+Sitemap: https://datatixx.com/sitemap-index.xml

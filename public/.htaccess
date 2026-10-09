@@ -15,21 +15,42 @@ AddDefaultCharset UTF-8
   RewriteCond %{HTTP:X-Forwarded-Proto} !=https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # 2. Без www → з www (один варіант адреси для Google)
-  RewriteCond %{HTTP_HOST} ^datatixx\.com$ [NC]
-  RewriteRule ^ https://www.datatixx.com%{REQUEST_URI} [L,R=301]
+  # 2. З www → без www. Основна адреса — https://datatixx.com, як у старого сайту,
+  #    тож Google і LinkedIn не «губляться» після переїзду.
+  RewriteCond %{HTTP_HOST} ^www\.datatixx\.com$ [NC]
+  RewriteRule ^ https://datatixx.com%{REQUEST_URI} [L,R=301]
 
-  # 3. Корінь «/» → мова браузера (фр. → /fr/, інші → /en/)
-  RewriteCond %{HTTP:Accept-Language} ^fr [NC]
-  RewriteRule ^$ /fr/ [L,R=302]
-  RewriteRule ^$ /en/ [L,R=302]
+  # 3. Старі сторінки WordPress → нові (301 = «переїхала назавжди», Google переносить позиції).
+  #    Список зібрано з datatixx.com/sitemap_index.xml 09.10.2026
+  RewriteRule ^about/?$                                  /en/about/      [R=301,L]
+  RewriteRule ^datixia/?$                                /en/platform/   [R=301,L]
+  RewriteRule ^benefits/?$                               /en/benefits/   [R=301,L]
+  RewriteRule ^partners/?$                               /en/partners/   [R=301,L]
+  RewriteRule ^benefit-for-chambers-of-commerce/?$       /en/chambers/   [R=301,L]
+  RewriteRule ^benefit-for-translation-companies/?$      /en/partners/   [R=301,L]
+  RewriteRule ^team/?$                                   /en/team/       [R=301,L]
+  RewriteRule ^contact-datixxia/?$                       /en/contact/    [R=301,L]
+  RewriteRule ^investors/?$                              /en/contact/    [R=301,L]
+  RewriteRule ^legal-notice-tixx-terms-privacy-compliance/?$ /en/legal/  [R=301,L]
+  RewriteRule ^privacy-policy/?$                         /en/privacy/    [R=301,L]
+  # старі карти сайту → нова
+  RewriteRule ^(sitemap_index|page-sitemap|sitemap)\.xml$ /sitemap-index.xml [R=301,L]
+  # старі короткі посилання WordPress (?p=123) → головна
+  RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=\d+
+  RewriteRule ^$ /en/? [R=301,L]
 
-  # 4. Старі адреси WordPress → нові (доповнимо перед запуском)
+  # 4. Службові адреси WordPress — «видалено назавжди» (410), щоб боти перестали їх перевіряти
   RewriteRule ^wp-admin(/.*)?$ - [G,L]
   RewriteRule ^wp-login\.php$ - [G,L]
   RewriteRule ^xmlrpc\.php$ - [G,L]
-  RewriteRule ^legal-notice-tixx-terms-privacy-compliance/?$ /en/legal/ [L,R=301]
-  # RewriteRule ^about-tixx/?$ /en/about/ [L,R=301]
+  RewriteRule ^wp-(content|includes|json)(/.*)?$ - [G,L]
+  RewriteRule ^(elementor-hf|metform-form)(/.*)?$ - [G,L]
+  RewriteRule ^(comments/)?feed/?$ - [G,L]
+
+  # 5. Корінь «/» → мова браузера (фр. → /fr/, інші → /en/)
+  RewriteCond %{HTTP:Accept-Language} ^fr [NC]
+  RewriteRule ^$ /fr/ [L,R=302]
+  RewriteRule ^$ /en/ [L,R=302]
 </IfModule>
 
 # Заборонити доступ до службових файлів

@@ -197,7 +197,7 @@ function dtx_confirm(array $config, string $to, string $firstName, string $lang)
             "Si vous n'avez pas envoyé ce message, ignorez simplement cet e-mail.",
             '',
             "L'équipe DataTixx",
-            'https://www.datatixx.com/fr/',
+            'https://datatixx.com/fr/',
         ];
     } else {
         $subject = 'We have received your message — DataTixx';
@@ -210,7 +210,7 @@ function dtx_confirm(array $config, string $to, string $firstName, string $lang)
             'If you did not send this message, you can simply ignore this email.',
             '',
             'The DataTixx team',
-            'https://www.datatixx.com/en/',
+            'https://datatixx.com/en/',
         ];
     }
 

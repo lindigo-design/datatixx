@@ -12,7 +12,7 @@ const isDev = process.argv.includes('dev');
 // Попередній перегляд на GitHub Pages живе в підпапці: lindigo-design.github.io/datatixx/
 // Workflow .github/workflows/pages.yml передає SITE_URL і BASE_PATH.
 // Без них (локально та на IONOS) сайт збирається для кореня домену.
-const site = process.env.SITE_URL || 'https://www.datatixx.com';
+const site = process.env.SITE_URL || 'https://datatixx.com';
 const base = process.env.BASE_PATH || '/';
 
 export default defineConfig({
