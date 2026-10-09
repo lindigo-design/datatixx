@@ -114,6 +114,7 @@ const socials = [
 
 <style>
   .footer {
+    overflow-x: clip;
     background: var(--color-footer);
     padding-block: clamp(var(--space-12), 5.5vw, var(--space-20))
       var(--space-10);
@@ -135,7 +136,11 @@ const socials = [
   .footer__top::after {
     content: '';
     position: absolute;
-    inset: auto 0 0;
+    bottom: 0;
+    /* лінія на всю ширину екрана, хоча блок усередині контейнера */
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
     height: 1px;
     background: var(--gradient-brand);
   }

@@ -3,8 +3,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ContactHero from '@/components/sections/contact/ContactHero.astro';
 import ContactSplit from '@/components/sections/contact/ContactSplit.astro';
-import QuickAnswers from '@/components/sections/contact/QuickAnswers.astro';
-import { locales, localizePath, type Locale } from '@/i18n/utils';
+import { locales, type Locale } from '@/i18n/utils';
 import { getContact } from '@/content/helpers';
 
 export function getStaticPaths() {
@@ -18,5 +17,4 @@ const page = await getContact(lang);
 <BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
   <ContactHero data={page.hero} />
   <ContactSplit lang={lang} map={page.map} />
-  <QuickAnswers data={page.faq} faqHref={localizePath('#faq', lang)} />
 </BaseLayout>

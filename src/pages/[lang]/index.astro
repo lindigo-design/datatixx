@@ -11,7 +11,6 @@ import ModelStats from '@/components/sections/ModelStats.astro';
 import BenefitsByRole from '@/components/sections/BenefitsByRole.astro';
 import Team from '@/components/sections/Team.astro';
 import CtaBand from '@/components/sections/CtaBand.astro';
-import Faq from '@/components/sections/Faq.astro';
 import {
   locales,
   localizePath,
@@ -49,5 +48,4 @@ const to = (path: string) => localizePath(path, lang);
   <BenefitsByRole data={page.benefits} />
   <Team data={page.team} />
   <CtaBand data={page.cta} href={to('contact')} />
-  <Faq data={page.faq} buttonHref={to('contact')} />
 </BaseLayout>

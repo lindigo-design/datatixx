@@ -5,7 +5,6 @@ import PageHero from '@/components/sections/PageHero.astro';
 import DataPillars from '@/components/sections/about/DataPillars.astro';
 import BenefitsByRole from '@/components/sections/BenefitsByRole.astro';
 import Audiences from '@/components/sections/benefits/Audiences.astro';
-import Faq from '@/components/sections/Faq.astro';
 import CtaBand from '@/components/sections/CtaBand.astro';
 import heroImage from '@/assets/img/about/hero-europe.jpg';
 import { locales, localizePath, type Locale } from '@/i18n/utils';
@@ -36,6 +35,5 @@ const heroVideo = '';
   <DataPillars data={page.method} centered />
   <BenefitsByRole data={home.benefits} />
   <Audiences data={page.audiences} />
-  <Faq data={home.faq} buttonHref={to('contact')} />
   <CtaBand data={page.cta} href={to('contact')} />
 </BaseLayout>
