@@ -140,10 +140,10 @@ const share = [
           <ul role="list" class="cases">
             {role.cases.map(c => (
               <li class="cases__item">
-                <span>{c}</span>
-                <span class="cases__arrow" aria-hidden="true">
-                  →
+                <span class="cases__check" aria-hidden="true">
+                  ✓
                 </span>
+                <span>{c}</span>
               </li>
             ))}
           </ul>
@@ -400,10 +400,11 @@ const share = [
     align-content: start;
   }
 
+  /* Галочка ліворуч — це пункт списку, а не посилання (стрілка праворуч вводила в оману) */
   .cases__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline; /* галочка — на рівні першого рядка тексту */
     gap: var(--space-3);
     min-height: 48px;
     padding: var(--space-3) var(--space-1);
@@ -414,8 +415,9 @@ const share = [
     border-top: 1px solid var(--color-hairline);
   }
 
-  .cases__arrow {
+  .cases__check {
     color: var(--color-green);
     font-size: var(--fs-small);
+    font-weight: var(--fw-semibold);
   }
 </style>
