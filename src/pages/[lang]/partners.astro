@@ -8,6 +8,7 @@ import FormSection from '@/components/sections/FormSection.astro';
 import ContactForm from '@/components/sections/ContactForm.astro';
 import CtaBand from '@/components/sections/CtaBand.astro';
 import heroImage from '@/assets/img/about/hero-europe.jpg';
+import chambersImage from '@/assets/img/partners/partners-hq.jpg';
 import { locales, localizePath, type Locale } from '@/i18n/utils';
 import { getPartners } from '@/content/helpers';
 
@@ -27,7 +28,11 @@ const to = (path: string) => localizePath(path, lang);
     secondaryHref={to('contact')}
     image={heroImage}
   />
-  <ChambersSplit data={page.chambers} ctaHref={to('chambers')} />
+  <ChambersSplit
+    data={page.chambers}
+    ctaHref={to('chambers')}
+    image={chambersImage}
+  />
   <NumberedCards data={page.lsp} />
   <FormSection {...page.form}>
     <ContactForm lang={lang} page="partners" />
