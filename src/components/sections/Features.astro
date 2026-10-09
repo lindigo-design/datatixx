@@ -2,7 +2,7 @@
 /** Layout / 254 / — «Four instruments, one terminal». */
 import { Image } from 'astro:assets';
 import bg from '@/assets/img/home/bg-aurora-1.jpg';
-import ring from '@/assets/img/home/features-ring.jpg';
+import ring from '@/assets/img/home/features-ring.png';
 import LogoSymbol from '@/assets/icons/logo-symbol.svg';
 import IconCalculate from '@/assets/icons/icon-calculate.svg';
 import IconContract from '@/assets/icons/icon-contract.svg';
@@ -70,11 +70,10 @@ const right = [card(2), card(3)];
         <Image
           src={ring}
           alt=""
-          widths={[300, 600, 900]}
-          sizes="(min-width: 1024px) 390px, 280px"
+          widths={[280, 560, 820]}
+          sizes="273px"
           loading="lazy"
         />
-        <LogoSymbol class="features__symbol" />
       </div>
 
       <ul role="list" class="features__col">
@@ -93,10 +92,6 @@ const right = [card(2), card(3)];
 </section>
 
 <style>
-  .features__bg {
-    opacity: 0.2;
-  }
-
   .features__head {
     display: grid;
     gap: var(--space-4);
@@ -124,14 +119,19 @@ const right = [card(2), card(3)];
     }
   }
 
+  /*
+    Усі 4 картки — в одній сітці (списки «розчиняються» через display: contents),
+    рядки карток 1fr → кожна картка має висоту найвищої.
+  */
   .features__grid {
     display: grid;
     gap: var(--space-6);
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: 1fr;
   }
 
   .features__col {
-    display: grid;
-    gap: var(--space-6);
+    display: contents;
   }
 
   .f-card {
@@ -164,14 +164,15 @@ const right = [card(2), card(3)];
     font-weight: var(--fw-semibold);
   }
 
+  /* Кільце — лише на десктопі; на телефоні й планшеті тільки 4 картки */
   .features__ring {
+    display: none;
     position: relative;
     justify-self: center;
-    width: clamp(240px, 60vw, 390px);
+    width: 100%;
     aspect-ratio: 1;
     border-radius: 50%;
     overflow: hidden;
-    order: -1;
     box-shadow: 0 0 80px rgb(66 170 57 / 0.25);
   }
 
@@ -189,33 +190,40 @@ const right = [card(2), card(3)];
     height: auto;
   }
 
-  /* Планшет: кільце зверху, картки 2×2 */
+  /* Планшет: картки 2×2 (ліворуч 01–02, праворуч 03–04) */
   @media (min-width: 640px) {
     .features__grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .features__ring {
-      grid-column: 1 / -1;
+    .features__col:first-child .f-card {
+      grid-column: 1;
+    }
+    .features__col:last-child .f-card {
+      grid-column: 2;
+    }
+    .f-card:first-child {
+      grid-row: 1;
+    }
+    .f-card:last-child {
+      grid-row: 2;
     }
   }
 
-  /* Десктоп: картки | кільце | картки */
+  /* Десктоп: картки | кільце | картки; два рядки однакової висоти */
   @media (min-width: 1024px) {
     .features__grid {
-      grid-template-columns: 1fr minmax(260px, 390px) 1fr;
-      align-items: center;
-      gap: var(--space-12);
+      grid-template-columns: 1fr minmax(182px, 273px) 1fr;
+      grid-template-rows: repeat(2, 1fr);
+      gap: var(--space-10) var(--space-12);
     }
     .features__ring {
-      grid-column: auto;
-      order: 0;
-      width: 100%;
+      display: block;
+      grid-column: 2;
+      grid-row: 1 / -1;
+      align-self: center;
     }
-    .features__col {
-      gap: var(--space-10);
-    }
-    .f-card {
-      min-height: 225px;
+    .features__col:last-child .f-card {
+      grid-column: 3;
     }
   }
 </style>
