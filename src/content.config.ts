@@ -355,6 +355,7 @@ const team = defineCollection({
           photo: image(),
           photoAlt: z.string(),
           bio: z.string(),
+          linkedin: link,
         })
       ),
       cta: ctaSchema,
@@ -368,6 +369,8 @@ const contact = defineCollection({
     ...seo,
     hero: z.object({ label: z.string(), title: z.string(), lead: z.string() }),
     map: z.object({ lat: z.number(), lon: z.number() }),
+    // Блок під формою: «Becoming a DataTixx territorial representative?»
+    territorial: z.object({ title: z.string(), text: z.string() }),
     faq: z.object({
       ...titled,
       button: z.string(),

@@ -589,6 +589,7 @@ const teamSchema = {
       }),
       photoAlt: text('Опис фото'),
       bio: longText('Біографія', 'Новий абзац — з нового рядка.'),
+      linkedin: optional('LinkedIn (посилання https://…)'),
     }),
     { label: '3 · Люди', itemLabel: p => p.fields.name.value }
   ),
@@ -619,6 +620,13 @@ const contactSchema = {
       }),
     },
     { label: '2 · Координати офісу' }
+  ),
+  territorial: fields.object(
+    {
+      title: text('Заголовок'),
+      text: longText('Текст'),
+    },
+    { label: '3 · Блок під формою: територіальний представник' }
   ),
   faq: fields.object(
     {

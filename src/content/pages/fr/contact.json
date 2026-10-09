@@ -1,14 +1,18 @@
 {
   "seoTitle": "Contact — DataTixx SAS, Rouen",
-  "seoDescription": "Contactez l'équipe Datixxia™ à Rouen : démo, partenariat, prestataires, presse et assistance.",
+  "seoDescription": "Contactez l'équipe datixxia™ à Rouen : démo, partenariat, prestataires, presse et assistance.",
   "hero": {
     "label": "Contact",
     "title": "Parlons-en",
-    "lead": "Vous souhaitez en savoir plus, ou vous n'avez pas trouvé la réponse à votre question sur le site ? Contactez-nous."
+    "lead": "Une question sur datixxia™, envie d’une démonstration ou d’échanger sur un partenariat ? Remplissez le formulaire ci-dessous et notre équipe vous répondra."
   },
   "map": {
     "lat": 49.4431,
     "lon": 1.0993
+  },
+  "territorial": {
+    "title": "Devenir représentant territorial DataTixx ?",
+    "text": "Sélectionnez ou saisissez « Représentant territorial » dans le champ Objet et indiquez dans les Commentaires : 1) le site web de votre entreprise, s’il existe ; 2) l’adresse de vos bureaux et le territoire que vous souhaitez représenter."
   },
   "faq": {
     "label": "Avant d'écrire",
@@ -23,7 +27,7 @@
       },
       {
         "tag": "Produit",
-        "q": "Quelle est la précision de Datixxia™ ?",
+        "q": "Quelle est la précision de datixxia™ ?",
         "a": "Tous les chiffres proviennent directement des sites officiels des marchés publics : 40 à 60 % du PIB couverts chaque jour dans la plupart des pays."
       },
       {

@@ -1,11 +1,11 @@
 {
-  "seoTitle": "L'équipe Datixxia™ — DataTixx SAS",
-  "seoDescription": "Découvrez l'équipe derrière Datixxia™ : des praticiens qui connaissent les données, les langues et les marchés publics.",
+  "seoTitle": "L'équipe datixxia™ — DataTixx SAS",
+  "seoDescription": "Découvrez l'équipe derrière datixxia™ : des praticiens qui connaissent les données, les langues et les marchés publics.",
   "hero": {
     "label": "Équipe",
-    "title": "L'équipe Datixxia™",
+    "title": "L'équipe datixxia™",
     "lead": "Une équipe de praticiens qui connaissent les données, les langues et les marchés publics, et qui ont passé des années à transformer une simple observation en terminal opérationnel.",
-    "primaryCta": "À propos de Datixxia™",
+    "primaryCta": "À propos de datixxia™",
     "secondaryCta": "Nous contacter",
     "imageAlt": ""
   },
@@ -21,19 +21,21 @@
       "role": "Président-directeur général",
       "photo": "../../../assets/img/team/malcolm-duff.jpg",
       "photoAlt": "Portrait de Malcolm Duff",
-      "bio": "Ancien PDG de deux sociétés de traduction certifiées ISO 9001 et traducteur technique senior pour l'UNESCO à Paris, Malcolm a mené les deux années de travaux de conception et de recherche qui ont donné naissance à Datixxia™.\nIl a une grande expérience de la gestion de projets multinationaux, notamment avec des traducteurs de 33 pays pour Inttranet™, le premier portail multilingue au monde, ajouté à l'Observatoire de l'UNESCO sur la société de l'information en janvier 2006. Cette expérience et sa connaissance approfondie de l'application Datixxia™ font de lui le dirigeant idéal pour son déploiement mondial."
+      "bio": "Malcolm a fondé et dirigé la première société de traduction en France certifiée ISO 9001, et a été traducteur technique en chef pour l'UNESCO à Paris. Il est à l'origine du concept de datixxia™ et en a posé les bases par ses recherches sur la manière dont les données d'attribution de marchés publics peuvent servir l'intelligence économique et les décisions d'entreprise.\n\nIl a notamment coordonné des projets internationaux avec des traducteurs de 33 pays via Inttranet™, intégré à l'Observatoire de l'UNESCO sur la société de l'information en janvier 2006. Chez DataTixx, il dirige la stratégie de l'entreprise, le développement des partenariats et la préparation du lancement commercial de datixxia™.",
+      "linkedin": "https://www.linkedin.com/in/malcolm-duff-15b321387/"
     },
     {
       "name": "Yana Levchenko",
-      "role": "Directrice produit",
+      "role": "Directrice générale",
       "photo": "../../../assets/img/team/yana-levchenko.jpg",
       "photoAlt": "Portrait de Yana Levchenko",
-      "bio": "Un an seulement après son arrivée d'Ukraine avec ses enfants et ses animaux, Yana a fondé sa propre agence de web design. Elle a une solide expérience en cybersécurité et en informatique, et de larges compétences en web design au service d'une clientèle en forte croissance.\nElle apporte aussi à l'équipe son sens du détail et de l'esthétique de photographe professionnelle, publiée dans des magazines du monde entier."
+      "bio": "Fondatrice de sa propre agence de web design un an seulement après avoir fui la guerre en Ukraine avec ses enfants et ses animaux, Yana possède une solide expérience en cybersécurité et en informatique, ainsi que de larges compétences en web design au service d'une clientèle en forte croissance.\n\nElle apporte aussi à l'équipe son sens du détail et son regard esthétique de photographe professionnelle publiée dans des magazines du monde entier. En tant que directrice générale, elle travaille aux côtés de Malcolm pour développer DataTixx et préparer datixxia™ pour ses utilisateurs.",
+      "linkedin": "https://www.linkedin.com/in/yana-levchenko-ua/"
     }
   ],
   "cta": {
-    "title": "En savoir plus sur Datixxia™.",
-    "text": "Découvrez comment la plateforme fournit une intelligence de marché en temps réel et des prévisions économiques à 4 ans pour les décideurs.",
+    "title": "En savoir plus sur datixxia™.",
+    "text": "Découvrez comment datixxia™ transforme les attributions de marchés publics publiées en analyses économiques concrètes pour votre organisation.",
     "button": "En savoir plus"
   }
 }

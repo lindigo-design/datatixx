@@ -1,11 +1,11 @@
 {
-  "seoTitle": "The Team Datixxia™ — DataTixx SAS",
-  "seoDescription": "Meet the people behind Datixxia™: built by operators who understand data, languages and public markets.",
+  "seoTitle": "The datixxia™ Team — DataTixx SAS",
+  "seoDescription": "Meet the people behind datixxia™: built by operators who understand data, languages and public markets.",
   "hero": {
     "label": "Team",
-    "title": "The Team Datixxia™",
+    "title": "The datixxia™ Team",
     "lead": "Built by operators who understand data, languages and public markets — and who spent years turning a simple observation into a working terminal.",
-    "primaryCta": "About Datixxia™",
+    "primaryCta": "About datixxia™",
     "secondaryCta": "Contact us",
     "imageAlt": ""
   },
@@ -21,19 +21,21 @@
       "role": "Chief Executive Officer",
       "photo": "../../../assets/img/team/malcolm-duff.jpg",
       "photoAlt": "Portrait of Malcolm Duff",
-      "bio": "Formerly the CEO of two ISO-9001 certified translation companies and senior translator in technology for UNESCO, Paris, Malcolm carried out the 2 years of groundbreaking conceptual and research work that resulted in Datixxia™.\nHe has extensive experience in managing multinational projects, notably with translators from 33 countries for the Inttranet™ — the world’s first multilingual portal, added to the UNESCO Observatory for the Information Society in January 2006. That, and his in-depth knowledge of the Datixxia™ application, make him the ideal leader for its global deployment."
+      "bio": "Malcolm founded and led the first translation company in France to obtain ISO 9001 certification and was chief technology translator for UNESCO in Paris. He originated the concept behind datixxia™ and developed its foundations through research into how public contract award data can support economic intelligence and business decisions.\n\nHis experience includes coordinating international projects with translators from 33 countries through Inttranet™, included in the UNESCO Observatory on the Information Society in January 2006. At DataTixx, he leads company strategy, partnership development and the preparation of datixxia™ for commercial launch.",
+      "linkedin": "https://www.linkedin.com/in/malcolm-duff-15b321387/"
     },
     {
       "name": "Yana Levchenko",
-      "role": "Chief Product Officer",
+      "role": "Managing Director",
       "photo": "../../../assets/img/team/yana-levchenko.jpg",
       "photoAlt": "Portrait of Yana Levchenko",
-      "bio": "The founder of her own web design company only one year after arriving from Ukraine with her children and pets, Yana has extensive experience in cyber-security and computing, backed by wide-ranging skills in web design for a fast-growing customer base.\nShe also brings to the team her eye for detail and an aesthetic sense of beauty as a professional photographer published in magazines worldwide."
+      "bio": "The founder of her own web design company only one year after escaping from the war in Ukraine with her children and pets, Yana has extensive experience in cyber-security and computing, backed by wide-ranging skills in web design for a fast-growing customer base.\n\nShe also brings to the team her eye for detail and aesthetic sense of beauty as a professional photographer published in magazines worldwide. As Managing Director, she works alongside Malcolm to develop DataTixx and prepare datixxia™ for its users.",
+      "linkedin": "https://www.linkedin.com/in/yana-levchenko-ua/"
     }
   ],
   "cta": {
-    "title": "Learn more about Datixxia™.",
-    "text": "Discover how the platform delivers real-time market intelligence and 4-year economic forecasts tailored for decision-makers.",
+    "title": "Learn more about datixxia™.",
+    "text": "Discover how datixxia™ turns published public contract award data into practical economic insights for your organisation.",
     "button": "Learn more"
   }
 }

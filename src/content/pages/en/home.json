@@ -1,160 +1,160 @@
 {
-  "seoTitle": "Datixxia™ — Market intelligence and 4-year forecasts",
-  "seoDescription": "Datixxia™ turns daily public and private procurement data from 194 countries into real-time business intelligence and 4-year forecasts.",
+  "seoTitle": "datixxia™ — Market intelligence for informed decisions",
+  "seoDescription": "datixxia™ turns published public contract awards into economic intelligence — explore where public spending is going and what it means for your sector.",
   "hero": {
-    "title": "Datixxia™ market intelligence and 4-year forecasts",
-    "lead": "Datixxia™ is a market intelligence platform that turns daily public and private procurement data into real-time business intelligence and 4-year forecasts for every market sector.",
+    "title": "Market intelligence\nfor informed decisions",
+    "lead": "datixxia™ turns published public contract awards into economic intelligence — explore where public spending is going and what it could mean for your sector.",
     "primaryCta": "Contact us",
     "secondaryCta": "Learn more",
     "imageAlt": ""
   },
   "marquee": [
     "See tomorrow. Act today",
-    "Investments",
-    "M&A",
-    "New locations",
+    "Market research",
+    "Investment",
+    "Locations",
     "Suppliers",
-    "Recruitment",
-    "Risk",
+    "Workforce",
+    "Sectors",
     "Competitors",
-    "Pricing",
-    "Promotion"
+    "Public spending",
+    "Opportunities"
   ],
   "features": {
     "label": "Features",
-    "titleStart": "Four instruments,",
-    "titleAccent": "one terminal",
-    "subtitle": "The essential tools for reading the world's procurement data",
+    "titleStart": "What datixxia™ offers",
+    "titleAccent": "",
+    "subtitle": "Explore where public spending is going — and what it could mean for your sector.",
     "items": [
       {
-        "label": "Calculate value",
-        "text": "Datixxia™ delivers past and current valuations and forecasts any market sector’s value up to 4 years in advance."
+        "label": "Measure market activity",
+        "text": "datixxia™ uses published public contract awards to help you examine recorded spending, compare sectors and suppliers, and track changes in market activity over time."
       },
       {
-        "label": "Empirical forecasts",
-        "text": "The platform provides micro-economic—not macro-economic—forecasts based on future-valid data rather than conjecture."
+        "label": "Evidence-based insights",
+        "text": "Explore economic signals grounded in awarded contracts. Where contract dates and durations are available, they can also provide visibility into activity scheduled for future periods."
       },
       {
         "label": "Economic visibility",
-        "text": "Our model gives financial and economic visibility to Micro, Small, and Medium Enterprises (MSMEs)."
+        "text": "datixxia™ helps micro, small and medium-sized enterprises understand public procurement activity, identify potential opportunities and make better-informed decisions about their markets."
       },
       {
-        "label": "Universal",
-        "text": "Datixxia™ can be used by any business in the world, from banks to bakers."
+        "label": "Multiple perspectives",
+        "text": "Businesses, researchers, journalists and public bodies can explore contract award data through datixxia™, with initial platform coverage focused on France, the United Kingdom and Belgium."
       }
     ]
   },
   "why": {
-    "label": "Why Datixxia™",
+    "label": "Why datixxia™",
     "titleLine1": "Why choose our",
     "titleLine2": "market intelligence platform",
-    "lead": "Datixxia™ is a groundbreaking economic forecasting system. It accurately calculates the past, present, and future relative growth, decline, share, size, and value of any market sector and its players—up to four years in advance.",
+    "lead": "datixxia™ turns published public contract award data into accessible economic intelligence. Explore recorded award values, changes in activity and the distribution of awards across sectors and suppliers to support business decisions, research and investigations.",
     "primaryCta": "Benefits",
     "secondaryCta": "Learn more",
     "cards": [
       {
-        "title": "No AI extrapolation",
-        "text": "We never guess. Statistical models hallucinate. A signed contract does not. Our terminal shows you only what governments and public bodies have already committed to buy."
+        "title": "Patterns in procurement",
+        "text": "The platform draws on historical records and incoming award notices to reveal patterns in public procurement across sectors and suppliers."
       },
       {
-        "title": "Contracts stay valid",
-        "text": "A procurement award notice remains actionable for up to four years after publication. We track every amendment, every euro, until the work is done."
+        "title": "Visibility into future periods",
+        "text": "Where records include reliable contract dates and durations, they can help users examine commitments extending into future periods."
       },
       {
-        "title": "Accurate future value",
-        "text": "You see the exact value, the exact buyer, the exact supplier, and the exact timeframe. This is not a sentiment indicator. It is a ledger of future economic activity. Patent filed with INPI, ref. DSO2023020065."
+        "title": "Evidence, not guarantees",
+        "text": "These insights reflect the available contract data; they are not guarantees of future spending or measures of the entire economy. The first program specification was filed with INPI under reference DSO2023020065 in December 2023."
       }
     ],
-    "imageAlt": "Datixxia™ dashboard: contract award counts, plan and fact values by year and by country"
+    "imageAlt": "datixxia™ dashboard: contract award counts, plan and fact values by year and by country"
   },
   "about": {
     "label": "About",
     "title": "Facts for futures™",
-    "text": "The world's governments publish over eight million contract award notices every year. Each one is a data point containing a buyer, a supplier, a value, and a duration. Most platforms treat this as archival information. We treat it as a live signal. Datixxia™ ingests this firehose of structured data, normalizes it across 194 countries, and surfaces the real economy in motion. No sentiment analysis. No large language models. Just the hard arithmetic of public spending, updated daily.",
+    "text": "Every business decision involves a view of the future. Whether planning investment, allocating resources or exploring a new market, organisations need evidence to understand where activity is developing and what it could mean for them.\n\nPublic contract awards provide part of that evidence: purchases already awarded, the suppliers selected and, where disclosed, the values and periods involved. datixxia™ makes this information easier to explore and interpret — helping users examine market activity, follow changes and identify potential opportunities.",
     "cta": "About us"
   },
   "model": {
     "label": "Model",
-    "title": "Datixxia™ Forecasting Model",
-    "lead": "Public tenders fund a nation's priorities — and set off a chain reaction. One prime contract cascades into subcontracts, supply orders and services that ripple through SMEs and MSMEs for years. Datixxia™ reads these cascades daily across 194 countries and converts them into sector-level outlooks for key market players — with pragmatic precision, anchored to the source document.",
+    "title": "The datixxia™ Intelligence Model",
+    "lead": "Public procurement supports activity across infrastructure, transport, energy, education, health and many other sectors. Awarded contracts identify selected suppliers and can generate demand for subcontractors, materials and services — revealing patterns of economic activity and potential opportunities across supply chains.",
     "primaryCta": "Platform",
     "secondaryCta": "Learn more",
     "stats": [
       {
-        "value": "194",
-        "caption": "Countries covered"
+        "value": "25M+",
+        "caption": "Historical award records"
       },
       {
-        "value": "8M+",
-        "caption": "Award notices tracked"
+        "value": "750",
+        "caption": "Official sources in 194 countries"
       },
       {
-        "value": "€525bn",
-        "caption": "EU procurement monitored"
+        "value": "€616bn",
+        "caption": "EU contracts under procurement rules / year"
       },
       {
-        "value": "4 years",
-        "caption": "Forward forecast horizon"
+        "value": "125K",
+        "caption": "New awards added daily"
       }
     ]
   },
   "benefits": {
     "label": "Benefits",
     "titleStart": "What you can do with",
-    "titleAccent": "Datixxia™",
-    "lead": "Datixxia™ applies proprietary calculations to daily public and private procurement sources to deliver sector- and player-level market intelligence at scale with consistent, verifiable 4-year forecasts.",
-    "note": "Fourteen ways the terminal works for you — find yours by role.",
+    "titleAccent": "datixxia™",
+    "lead": "datixxia™ applies its analytical metrics to published public contract award data — helping users explore activity across sectors and suppliers, compare award values and identify changes over time.",
+    "note": "Fourteen ways datixxia™ works for you — find yours by role.",
     "roles": [
       {
         "audience": "Strategists & analysts",
         "name": "Strategy",
-        "cardTitle": "Size any market, at any level",
-        "cardText": "Market studies from awarded values, not estimates.",
-        "vizCaption": "Sector value 22–27",
-        "vizTag": "Forecast",
+        "cardTitle": "Research any market, at any level",
+        "cardText": "Public procurement activity across available sectors and locations.",
+        "vizCaption": "Sector award activity",
+        "vizTag": "Recorded",
         "cases": [
-          "Select new locations",
-          "Find alternative market sectors",
-          "Compare growth rates for countries & cities"
+          "Compare locations for expansion planning",
+          "Explore alternative sectors for development",
+          "Compare changes across countries & regions"
         ]
       },
       {
         "audience": "Banks, insurers, investors",
         "name": "Finance & risk",
-        "cardTitle": "Verify the future before you buy it",
-        "cardText": "Investments and M&A against contracted revenue.",
-        "vizCaption": "Contracted fwd revenue",
+        "cardTitle": "Inform investment research",
+        "cardText": "Evidence from contract awards — alongside accounts and other market information.",
+        "vizCaption": "Awarded values by year",
         "vizTag": "",
         "cases": [
-          "Identify sectors at risk",
-          "Include stock market data",
-          "Justify credit decisions"
+          "Identify sectors with declining activity",
+          "Compare estimated and awarded values",
+          "Add market context to analysis"
         ]
       },
       {
         "audience": "Procurement & HR",
         "name": "Operations",
-        "cardTitle": "Follow the money down the chain",
-        "cardText": "Every opportunity inside a large public award.",
-        "vizCaption": "One award — full cascade",
+        "cardTitle": "Explore suppliers’ award histories",
+        "cardText": "Identify potential suppliers and partners among awarded companies.",
+        "vizCaption": "One award — supply chain",
         "vizTag": "",
         "cases": [
-          "Find new suppliers",
-          "Find new recruits",
-          "Justify your prices"
+          "Inform workforce planning by sector activity",
+          "Support research into public spending",
+          "Put your awards into market context"
         ]
       },
       {
         "audience": "Sales & marketing",
         "name": "Growth",
-        "cardTitle": "Watch every rival win or lose",
-        "cardText": "Competitor growth and decline, past to future.",
-        "vizCaption": "Share of awards — live",
+        "cardTitle": "Track competitors’ recorded awards",
+        "cardText": "Explore their position within a sector — and changes over time.",
+        "vizCaption": "Share of recorded awards",
         "vizTag": "",
         "cases": [
-          "Identify new competitors",
-          "Promote your Datixxia™ ranking",
-          "Spot demand before the tender"
+          "Identify other suppliers in your sector",
+          "Compare sector activity over time",
+          "Support investigations into spending"
         ]
       }
     ]
@@ -166,21 +166,21 @@
     "members": [
       {
         "name": "Malcolm Duff",
-        "role": "CEO",
+        "role": "Chief Executive Officer",
         "photo": "../../../assets/img/team/malcolm-duff.jpg",
         "photoAlt": "Portrait of Malcolm Duff",
-        "bio": "Formerly the CEO of two ISO-9001 certified translation companies and senior translator in technology for UNESCO, Paris, Malcolm carried out the 2 years of groundbreaking conceptual and research work that resulted in Datixxia™.\nHe has extensive experience in managing multinational projects, notably with translators from 33 countries for the Inttranet™, the world's first multilingual portal (added to the UNESCO Observatory for the Information Society in January 2006). That and his in-depth knowledge of the Datixxia™ application make him the ideal Chief Executive Officer for its global deployment.",
-        "linkedin": "",
+        "bio": "Malcolm founded and led the first translation company in France to obtain ISO 9001 certification and was chief technology translator for UNESCO in Paris. He originated the concept behind datixxia™ and developed its foundations through research into how public contract award data can support economic intelligence and business decisions.\n\nHis experience includes coordinating international projects with translators from 33 countries through Inttranet™, included in the UNESCO Observatory on the Information Society in January 2006. At DataTixx, he leads company strategy, partnership development and the preparation of datixxia™ for commercial launch.",
+        "linkedin": "https://www.linkedin.com/in/malcolm-duff-15b321387/",
         "x": "",
         "dribbble": ""
       },
       {
         "name": "Yana Levchenko",
-        "role": "CPO",
+        "role": "Managing Director",
         "photo": "../../../assets/img/team/yana-levchenko.jpg",
         "photoAlt": "Portrait of Yana Levchenko",
-        "bio": "The founder of her own web design company only one year after escaping from the war in Ukraine with her children and pets, Yana has extensive experience in cyber-security and computing, backed by the wide-ranging skills in web design for a fast-growing customer base. She also brings to the team her eye for detail and aesthetic sense of beauty as a professional photographer published in magazines worldwide.",
-        "linkedin": "",
+        "bio": "The founder of her own web design company only one year after escaping from the war in Ukraine with her children and pets, Yana has extensive experience in cyber-security and computing, backed by wide-ranging skills in web design for a fast-growing customer base.\n\nShe also brings to the team her eye for detail and aesthetic sense of beauty as a professional photographer published in magazines worldwide. As Managing Director, she works alongside Malcolm to develop DataTixx and prepare datixxia™ for its users.",
+        "linkedin": "https://www.linkedin.com/in/yana-levchenko-ua/",
         "x": "",
         "dribbble": ""
       }
@@ -188,7 +188,7 @@
   },
   "cta": {
     "title": "See Tomorrow. Act Today.",
-    "text": "Join the terminal that reads the contracts the future is built on.",
+    "text": "Bring evidence from public contract awards to your decisions.",
     "button": "Contact us"
   },
   "faq": {
@@ -198,7 +198,7 @@
     "items": [
       {
         "q": "Is this AI?",
-        "a": "No. Datixxia™ uses zero artificial intelligence or statistical extrapolation. We read only signed, legally binding procurement contracts that remain valid for years."
+        "a": "No. datixxia™ uses zero artificial intelligence or statistical extrapolation. We read only signed, legally binding procurement contracts that remain valid for years."
       },
       {
         "q": "Where does data come from?",
@@ -213,7 +213,7 @@
         "a": "We offer a Free tier to explore the terminal. Standard is €100 and Premium is €200 per user per month for full access to indexes and forecasts."
       },
       {
-        "q": "Who uses Datixxia™?",
+        "q": "Who uses datixxia™?",
         "a": "Banks, insurers, chambers of commerce, economic analysts, and MSMEs. Anyone who needs to know what the public sector will spend and with whom."
       }
     ]

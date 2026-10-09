@@ -1,10 +1,10 @@
 {
-  "seoTitle": "À propos de Datixxia™ — L'intelligence issue des marchés publics",
-  "seoDescription": "Datixxia™ transforme chaque jour les avis d'attribution de 194 pays en intelligence économique en temps réel et en prévisions fiables à 4 ans.",
+  "seoTitle": "À propos de datixxia™ — L'intelligence issue des marchés publics",
+  "seoDescription": "datixxia™ transforme les attributions de marchés publics publiées en analyses de l'activité du marché, des tendances émergentes et des opportunités d'affaires.",
   "hero": {
-    "label": "À propos de Datixxia™",
+    "label": "À propos de datixxia™",
     "title": "Plateforme d'intelligence de marché",
-    "lead": "Datixxia™ est une plateforme d'intelligence de marché fondée sur les marchés publics. Nous transformons chaque jour les avis d'attribution de 194 pays en intelligence économique en temps réel et en prévisions fiables à 4 ans.",
+    "lead": "datixxia™ transforme les attributions de marchés publics publiées en analyses de l'activité du marché, des tendances émergentes et des opportunités d'affaires.",
     "primaryCta": "Plateforme",
     "secondaryCta": "Avantages",
     "imageAlt": ""
@@ -31,7 +31,7 @@
         "tag": "Acte III",
         "title": "Le défaut de la prévision traditionnelle",
         "text": "La plupart des systèmes de prévision ont le même défaut : ils extrapolent le passé pour deviner un futur possible. Même avec l'intelligence artificielle, l'analyse reste une hypothèse. Les imprévus arrivent, l'incertitude demeure, et plus la prévision porte loin, moins elle est précise.",
-        "stamp": "Pas Datixxia™"
+        "stamp": "Pas datixxia™"
       }
     ]
   },
@@ -41,13 +41,13 @@
     "titleAccent": "pommes",
     "titleEnd": "qui tombent de l'arbre…",
     "lead": "Certaines découvertes naissent de faits si simples qu'on ne les remarque pas.",
-    "text": "C'est le cas de Datixxia™. Utilisé depuis des années par de grands groupes pour suivre leurs concurrents dans certains secteurs et pays, Datixxia™ traite les données de toutes les attributions de marchés publics et privés. Il peut ainsi calculer, avec précision et fiabilité, la valeur future relative de tout secteur de marché et de ses acteurs, jusqu'à 4 ans à l'avance.",
+    "text": "C'est le cas de datixxia™. Utilisé depuis des années par de grands groupes pour suivre leurs concurrents dans certains secteurs et pays, datixxia™ traite les données de toutes les attributions de marchés publics et privés. Il peut ainsi calculer, avec précision et fiabilité, la valeur future relative de tout secteur de marché et de ses acteurs, jusqu'à 4 ans à l'avance.",
     "imageAlt": "Une pomme verte qui tombe, entourée de lignes de mouvement et de mesures physiques"
   },
   "manifesto": {
     "label": "Pourquoi c'est important",
-    "text": "Toute analyse et toute prévision économique gagnent énormément grâce à cette méthode inédite. Quelle que soit sa taille ou sa localisation, chaque entreprise trouve les données concrètes dont elle a besoin sur les perspectives de son marché, pour bâtir une stratégie adaptée à son propre avenir.",
-    "signature": "Seul Datixxia™ fournit ces Facts for Futures™."
+    "text": "Toute décision d'entreprise repose sur une vision de l'avenir. Les attributions de marchés publics en fournissent une partie des preuves : les achats déjà attribués, les fournisseurs retenus et, lorsqu'ils sont publiés, les montants et les durées. datixxia™ rend ces informations plus faciles à explorer et à interpréter — leur valeur dépend de la couverture et de la qualité des données, et du fait que les contrats peuvent être modifiés, retardés ou annulés.",
+    "signature": "Facts for Futures™ — des preuves pour comprendre où l'activité se développe."
   },
   "data": {
     "label": "Données",
@@ -58,7 +58,7 @@
       {
         "tag": "Sources",
         "title": "Des sources officielles et quotidiennes dans 194 pays",
-        "text": "Chaque jour ouvré, Datixxia™ télécharge les données des sites officiels des administrations centrales, régionales et locales de 194 pays, comme l'indiquent les références des contrats. Les sources sont mises à jour en continu pour capter chaque nouvel avis d'attribution."
+        "text": "Chaque jour ouvré, datixxia™ télécharge les données des sites officiels des administrations centrales, régionales et locales de 194 pays, comme l'indiquent les références des contrats. Les sources sont mises à jour en continu pour capter chaque nouvel avis d'attribution."
       },
       {
         "tag": "Normes",
@@ -68,7 +68,7 @@
       {
         "tag": "Méthode",
         "title": "Un complément à la prévision traditionnelle",
-        "text": "La qualité des données dépend aussi de leur usage. Datixxia™ est une couche d'intelligence qui complète les méthodes de prévision traditionnelles : nous fournissons les données, et les outils pour les adapter à vos besoins."
+        "text": "La qualité des données dépend aussi de leur usage. datixxia™ est une couche d'intelligence qui complète les méthodes de prévision traditionnelles : nous fournissons les données, et les outils pour les adapter à vos besoins."
       }
     ]
   },
@@ -76,7 +76,7 @@
     "label": "Outils",
     "titleLine1": "Des outils simples,",
     "titleLine2": "des exports flexibles",
-    "text": "Comme tout outil vraiment utile, les tableaux de bord Grafixx™ sont faciles à comprendre et rapides à utiliser. Les équipes intègrent les résultats dans leurs méthodes de travail sans effort.",
+    "text": "datixxia™ aide à examiner l'activité du marché, à suivre son évolution et à repérer des opportunités — et intègre les résultats à vos propres méthodes de travail.",
     "points": [
       "Téléchargez les données brutes pour votre propre logiciel graphique",
       "Créez des graphiques simples directement dans le tableau de bord",
@@ -88,7 +88,7 @@
   },
   "cta": {
     "title": "Voyez tout l'avantage.",
-    "text": "Passez du reporting réactif à la stratégie anticipée. Les contrats sont déjà signés. Lisez-les en premier.",
+    "text": "L'historique apporte le contexte ; les dates de contrat disponibles éclairent les engagements qui s'étendent sur les périodes à venir.",
     "button": "Nous contacter"
   }
 }

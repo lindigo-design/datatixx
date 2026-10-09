@@ -1,10 +1,10 @@
 {
-  "seoTitle": "Datixxia™ pour les chambres de commerce — Avantages du partenariat",
-  "seoDescription": "Neuf façons dont Datixxia™ sert les chambres de commerce : prévisions économiques, services aux membres et nouvelle source de revenus par code postal.",
+  "seoTitle": "datixxia™ pour les chambres de commerce — Avantages du partenariat",
+  "seoDescription": "Neuf façons dont datixxia™ sert les chambres de commerce : prévisions économiques, services aux membres et nouvelle source de revenus par code postal.",
   "hero": {
     "label": "Partenaires — Chambres de commerce",
     "title": "Ce que le partenariat apporte aux chambres",
-    "lead": "Menez votre région vers l'avenir avec Datixxia™. Plus que des données, Datixxia™ apporte une vision d'avance pour aider les chambres à prévoir, planifier et prospérer. Rejoignez le réseau mondial qui transforme l'information brute en impact mesurable et en croissance durable.",
+    "lead": "Plus que des données — datixxia™ donne à votre chambre les preuves pour planifier, agir et prospérer.",
     "primaryCta": "Remplir l'enquête",
     "secondaryCta": "Nous contacter",
     "imageAlt": ""
@@ -12,7 +12,7 @@
   "ways": {
     "label": "Ce que votre chambre y gagne",
     "titleStart": "Neuf façons dont",
-    "titleAccent": "Datixxia™",
+    "titleAccent": "datixxia™",
     "titleEnd": "sert les chambres",
     "lead": "Trois piliers portent le partenariat : intelligence, membres, revenus. Le reste est inclus.",
     "pillars": [
@@ -26,14 +26,14 @@
       {
         "tag": "Membres",
         "title": "Soutien aux entreprises membres",
-        "text": "Les futurs appels d'offres liés au secteur de chaque membre, des prévisions de demande pour planifier, et des services premium comme « Datixxia™ Insights pour les membres ».",
+        "text": "Les futurs appels d'offres liés au secteur de chaque membre, des prévisions de demande pour planifier, et des services premium comme « datixxia™ Insights pour les membres ».",
         "vizCaption": "",
         "vizTag": ""
       },
       {
         "tag": "Revenus",
         "title": "Stabilité financière et services",
-        "text": "Devenez revendeur agréé Datixxia™ par code postal ou par région. De nouveaux services de données et un avantage pour vos membres, introuvable ailleurs.",
+        "text": "Devenez revendeur agréé datixxia™ par code postal ou par région. De nouveaux services de données et un avantage pour vos membres, introuvable ailleurs.",
         "vizCaption": "",
         "vizTag": ""
       }
@@ -85,7 +85,7 @@
       }
     ],
     "note": "Selon une modélisation pilote et des simulations de déploiement",
-    "text": "Un engagement plus fort des membres, de nouveaux revenus issus des services de données et un impact économique démontrable font de Datixxia™ à la fois un outil de croissance stratégique et un moteur de revenus durable pour les chambres du monde entier."
+    "text": "Un engagement plus fort des membres, de nouveaux revenus issus des services de données et un impact économique démontrable font de datixxia™ à la fois un outil de croissance stratégique et un moteur de revenus durable pour les chambres du monde entier."
   },
   "revenue": {
     "label": "Nouveaux marchés, nouveaux revenus",
@@ -106,6 +106,6 @@
     "label": "Enquête de marché",
     "titleStart": "Pour répondre,",
     "titleAccent": "remplissez le formulaire",
-    "text": "Si vous approuvez le projet Datixxia™, merci de remplir le formulaire ci-dessous (date limite : 31 décembre 2025). Invitez aussi tous les interprètes, traducteurs, sociétés de services linguistiques et associations que vous connaissez à le faire.\nCette enquête nous permettra de trouver les partenaires nécessaires pour financer le développement de l'application Datixxia™. Les résultats vous seront envoyés le 2 janvier 2026.\nSi vous avez des bureaux à plusieurs endroits, merci de remplir le formulaire pour chacun d'eux."
+    "text": "Si vous approuvez le projet datixxia™, merci de remplir le formulaire ci-dessous (date limite : 31 décembre 2025). Invitez aussi tous les interprètes, traducteurs, sociétés de services linguistiques et associations que vous connaissez à le faire.\nCette enquête nous permettra de trouver les partenaires nécessaires pour financer le développement de l'application datixxia™. Les résultats vous seront envoyés le 2 janvier 2026.\nSi vous avez des bureaux à plusieurs endroits, merci de remplir le formulaire pour chacun d'eux."
   }
 }

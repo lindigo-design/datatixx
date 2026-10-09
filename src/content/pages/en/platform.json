@@ -1,19 +1,19 @@
 {
-  "seoTitle": "Datixxia™ Platform — The forecasting model behind the data",
-  "seoDescription": "Real-time market intelligence and 4-year forecasts built from public and private contracts published daily in 194 countries.",
+  "seoTitle": "datixxia™ Platform — The datixxia™ Intelligence Model",
+  "seoDescription": "Insights on market activity, emerging trends and business opportunities — built from published public contract award data.",
   "hero": {
-    "label": "Datixxia™ Platform",
-    "title": "The Datixxia™ Forecasting Model",
-    "lead": "Real-time market intelligence and 4-year forecasts built from the public and private contracts published daily in 194 countries.",
+    "label": "datixxia™ Platform",
+    "title": "The datixxia™ Intelligence Model",
+    "lead": "Insights on market activity, emerging trends and business opportunities — built from published public contract award data.",
     "primaryCta": "Explore",
     "secondaryCta": "Pricing",
     "imageAlt": ""
   },
   "cascade": {
     "label": "Model",
-    "titleStart": "A cascade of",
-    "titleAccent": "hard facts",
-    "lead": "In regulated economies, national priorities flow from public tenders to large firms, then to SMEs and MSMEs — and finally into the wider consumer economy.",
+    "titleStart": "Evidence across the supply chain",
+    "titleAccent": "",
+    "lead": "Public procurement supports activity across infrastructure, transport, energy, education, health and many other sectors. Awarded contracts identify selected suppliers and can generate demand for subcontractors, materials and services.",
     "imageAlt": "Analysts working around a table in front of large screens with world economic data",
     "steps": [
       {
@@ -40,26 +40,26 @@
   },
   "scale": {
     "label": "Data",
-    "title": "Pragmatic precision, worldwide",
-    "text": "Within the EU alone, public procurement represents an annual trade volume of €525 billion (2021). Datixxia™ goes further — it takes into account public and private contracts published daily in 194 countries, enabling forecasts of pragmatic precision and making the daily ebb and flow of markets worldwide easier to understand.\nWith an initial database of some 8 million contract award notices for 2023 alone — each valid for up to 4 years after publication — the Datixxia™ model calculates exactly what the future holds for all market sectors and their players.",
+    "title": "International sources, focused coverage",
+    "text": "In the EU alone, the contracts covered by procurement rules are worth about €616 billion a year — three times the size of the EU budget itself. Globally the number runs into the trillions.\n\nOur database comprises some 25 million historical award records from 750 official sites in 194 countries, updated with as many as 125,000 new awards each day. Initial platform coverage focuses on France, the United Kingdom and Belgium, with additional countries introduced progressively. Where contract dates and durations are available, they offer a view of commitments extending into future periods, alongside analysis of past and current award activity.",
     "primaryCta": "Explore",
     "secondaryCta": "Benefits",
     "stats": [
       {
-        "value": "194",
-        "caption": "Countries, daily"
+        "value": "25M+",
+        "caption": "Historical award records"
       },
       {
-        "value": "8M+",
-        "caption": "Award notices (2023)"
+        "value": "750",
+        "caption": "Official sources in 194 countries"
       },
       {
-        "value": "€525bn",
-        "caption": "EU public procurement / year"
+        "value": "€616bn",
+        "caption": "EU contracts under procurement rules / year"
       },
       {
-        "value": "4 years",
-        "caption": "Validity horizon"
+        "value": "125K",
+        "caption": "New awards added daily"
       }
     ]
   },
@@ -67,8 +67,8 @@
     "label": "Vision",
     "titleStart": "What the world needs is",
     "titleAccent": "intelligent business",
-    "lead": "Our goal at Datixxia™ is to provide every company around the world with the business intelligence it needs.",
-    "text": "To achieve that, alongside academic and other business partners, we are inviting some 3,000 Language Service Providers (LSPs) to act as partners with Datixxia™. More than two-thirds of their 1 million customers are micro, small and medium-sized enterprises (MSMEs).",
+    "lead": "Our goal at datixxia™ is to provide every company around the world with the business intelligence it needs.",
+    "text": "To achieve that, alongside academic and other business partners, we are inviting some 3,000 Language Service Providers (LSPs) to act as partners with datixxia™. More than two-thirds of their 1 million customers are micro, small and medium-sized enterprises (MSMEs).",
     "cta": "Partners",
     "imageAlt": "A small craft workshop seen through a shop window at dusk, two people working at a wooden bench"
   },
@@ -104,7 +104,7 @@
   },
   "cta": {
     "title": "See the facts for yourself.",
-    "text": "Move from raw data to decisive action — see how Datixxia™ turns procurement notices into your competitive advantage.",
+    "text": "Explore where public spending is going — and what it could mean for your sector.",
     "button": "Explore the benefits"
   }
 }

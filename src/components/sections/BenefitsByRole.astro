@@ -199,7 +199,16 @@ const share = [
     }
   }
 
-  /* Картки однакової висоти в одному ряду */
+  .role {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: var(--space-4);
+  }
+
+  /*
+    Картки однакової висоти в одному ряду: заголовок, картка і сценарії кожної ролі
+    стають рядками спільної сітки (subgrid). Має йти ПІСЛЯ .role, інакше той перебиває.
+  */
   @media (min-width: 640px) {
     .roles {
       grid-auto-rows: auto auto auto;
@@ -209,12 +218,6 @@ const share = [
       grid-template-rows: subgrid;
       row-gap: var(--space-4);
     }
-  }
-
-  .role {
-    display: grid;
-    grid-template-rows: auto auto 1fr;
-    gap: var(--space-4);
   }
 
   .role__head {

@@ -1,14 +1,18 @@
 {
   "seoTitle": "Contact — DataTixx SAS, Rouen",
-  "seoDescription": "Contact the Datixxia™ team in Rouen, France: platform demo, partnership, service providers, press and support.",
+  "seoDescription": "Contact the datixxia™ team in Rouen, France: platform demo, partnership, service providers, press and support.",
   "hero": {
     "label": "Contact",
     "title": "Let’s talk",
-    "lead": "Want more information, or have a question you couldn’t find an answer to on the website? Contact us."
+    "lead": "Have a question about datixxia™, interested in a demonstration, or want to discuss a partnership? Complete the form below and our team will get back to you."
   },
   "map": {
     "lat": 49.4431,
     "lon": 1.0993
+  },
+  "territorial": {
+    "title": "Becoming a DataTixx territorial representative?",
+    "text": "Select or enter “Territorial Representative” in the Subject field and include in the Comments: 1) your company website, if available; 2) your office location(s) and the territory you would like to represent."
   },
   "faq": {
     "label": "Before you write",
@@ -23,7 +27,7 @@
       },
       {
         "tag": "Product",
-        "q": "How accurate is Datixxia™?",
+        "q": "How accurate is datixxia™?",
         "a": "All figures are sourced directly from government procurement websites — 40–60% of GDP covered daily in most countries."
       },
       {

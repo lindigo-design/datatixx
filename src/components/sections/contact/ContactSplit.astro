@@ -4,7 +4,11 @@
  * Ліворуч: теми + форма. Праворуч: ОДНА картка — офіс, e-mail, телефон, LinkedIn.
  * На десктопі картка починається на одному рівні з карткою форми і має ту саму висоту
  * (CSS subgrid: форма займає два ряди сітки — «теми» і «картка форми»).
+ * Figma v2: під формою — блок «Becoming a DataTixx territorial representative?»,
+ * у картці праворуч зверху — зображення; картка тягнеться до низу цього блоку.
  */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import ContactForm from '@/components/sections/ContactForm.astro';
 import IconLinkedin from '@/assets/icons/social-linkedin.svg';
 import { useTranslations, type Locale } from '@/i18n/utils';
@@ -14,8 +18,19 @@ interface Props {
   lang: Locale;
   /** Координати офісу — зараз не показуються (карти в новому макеті немає), лишаються в даних */
   map?: { lat: number; lon: number };
+  territorial: { title: string; text: string };
 }
-const { lang } = Astro.props;
+const { lang, territorial } = Astro.props;
+
+// Зображення в картці офісу: src/assets/img/contact/contact-hq.(jpg|jpeg|png|webp).
+// Поки файлу немає — картка просто без зображення, збірка не ламається.
+const found = Object.values(
+  import.meta.glob<{ default: ImageMetadata }>(
+    '/src/assets/img/contact/contact-hq.{jpg,jpeg,png,webp}',
+    { eager: true }
+  )
+)[0];
+const hqImage = found?.default;
 const t = useTranslations(lang);
 const site = await getSiteSettings();
 const a = site.address;
@@ -26,7 +41,22 @@ const linkedin = site.social.linkedin;
   <div class="container c-split__inner">
     <ContactForm lang={lang} page="contact" topics />
 
+    <aside class="c-note">
+      <p class="c-label">{territorial.title}</p>
+      <p class="c-note__text">{territorial.text}</p>
+    </aside>
+
     <aside class="c-card">
+      {hqImage && (
+        <Image
+          src={hqImage}
+          alt=""
+          class="c-card__img"
+          widths={[400, 742, 1113]}
+          sizes="(min-width: 1024px) 371px, 100vw"
+          loading="lazy"
+        />
+      )}
       <div class="c-group c-group--hq">
         <p class="c-label">{t('contact.hq')}</p>
         <p class="c-value">{site.companyName}</p>
@@ -86,7 +116,7 @@ const linkedin = site.social.linkedin;
   @media (min-width: 1024px) {
     .c-split__inner {
       grid-template-columns: 772fr 420fr;
-      grid-template-rows: auto 1fr;
+      grid-template-rows: auto auto auto;
       column-gap: var(--space-12);
       row-gap: var(--space-5);
     }
@@ -105,8 +135,37 @@ const linkedin = site.social.linkedin;
     /* Картка контактів — у другому ряду, на всю висоту картки форми */
     .c-card {
       grid-column: 2;
-      grid-row: 2;
+      grid-row: 2 / span 2;
     }
+  }
+
+  /* Блок під формою (Figma «note — territorial rep»): рамка зелена, радіус 16, відступи 20/24 */
+  .c-note {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-5) var(--space-6);
+    background: var(--color-surface);
+    border: 1px solid var(--color-green);
+    border-radius: var(--radius-sm);
+  }
+
+  .c-note__text {
+    color: var(--color-text-secondary);
+  }
+
+  @media (min-width: 1024px) {
+    .c-note {
+      grid-column: 1;
+      grid-row: 3;
+    }
+  }
+
+  /* Зображення зверху картки: 371×169, радіус 12 */
+  .c-card__img {
+    width: 100%;
+    aspect-ratio: 371 / 169;
+    object-fit: cover;
+    border-radius: 12px;
   }
 
   /* Figma «card — HQ»: фон #babbbd 10%, рамка білим 14%, радіус 20, відступи 36/24, між блоками 24 */

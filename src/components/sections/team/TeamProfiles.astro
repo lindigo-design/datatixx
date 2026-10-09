@@ -2,6 +2,7 @@
 /** «Team — Profiles»: дві великі картки з фото, імʼям, посадою і біографією. */
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import IconLinkedin from '@/assets/icons/social-linkedin.svg';
 import { paragraphs } from '@/utils/text';
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
     photo: ImageMetadata;
     photoAlt: string;
     bio: string;
+    linkedin: string;
   }[];
 }
 const { members } = Astro.props;
@@ -33,7 +35,20 @@ const { members } = Astro.props;
             />
             <div class="profile__head">
               <h2 class="profile__name">{m.name}</h2>
-              <p class="profile__role meta-s">{m.role}</p>
+              <div class="profile__meta">
+                <p class="profile__role meta-s">{m.role}</p>
+                {m.linkedin && (
+                  <a
+                    class="profile__social"
+                    href={m.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${m.name} — LinkedIn`}
+                  >
+                    <IconLinkedin aria-hidden="true" />
+                  </a>
+                )}
+              </div>
             </div>
             <p class="profile__lead">{first}</p>
             {rest.map(p => (
@@ -98,6 +113,30 @@ const { members } = Astro.props;
 
   .profile__role {
     color: var(--color-green);
+  }
+
+  .profile__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  /* Як у блоці Team на головній */
+  .profile__social {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    color: var(--color-text-soft);
+  }
+
+  .profile__social:hover {
+    color: var(--color-green);
+  }
+
+  .profile__social :global(svg) {
+    width: 24px;
+    height: 24px;
   }
 
   .profile__lead {

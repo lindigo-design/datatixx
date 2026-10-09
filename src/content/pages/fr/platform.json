@@ -1,19 +1,19 @@
 {
-  "seoTitle": "Plateforme Datixxia™ — Le modèle de prévision derrière les données",
-  "seoDescription": "Intelligence de marché en temps réel et prévisions à 4 ans, fondées sur les contrats publics et privés publiés chaque jour dans 194 pays.",
+  "seoTitle": "Plateforme datixxia™ — Le modèle d'intelligence datixxia™",
+  "seoDescription": "Analyses de l'activité du marché, des tendances émergentes et des opportunités d'affaires — construites à partir des attributions de marchés publics publiées.",
   "hero": {
-    "label": "Plateforme Datixxia™",
-    "title": "Le modèle de prévision Datixxia™",
-    "lead": "Intelligence de marché en temps réel et prévisions à 4 ans, fondées sur les contrats publics et privés publiés chaque jour dans 194 pays.",
+    "label": "Plateforme datixxia™",
+    "title": "Le modèle d'intelligence datixxia™",
+    "lead": "Analyses de l'activité du marché, des tendances émergentes et des opportunités d'affaires — construites à partir des attributions de marchés publics publiées.",
     "primaryCta": "Découvrir",
     "secondaryCta": "Tarifs",
     "imageAlt": ""
   },
   "cascade": {
     "label": "Modèle",
-    "titleStart": "Une cascade de",
-    "titleAccent": "faits concrets",
-    "lead": "Dans les économies régulées, les priorités nationales passent des appels d'offres publics aux grandes entreprises, puis aux PME et MPME, et enfin à toute l'économie de consommation.",
+    "titleStart": "Des preuves tout au long de la chaîne d'approvisionnement",
+    "titleAccent": "",
+    "lead": "La commande publique soutient l'activité dans les infrastructures, les transports, l'énergie, l'éducation, la santé et bien d'autres secteurs. Les contrats attribués désignent les fournisseurs retenus et peuvent générer une demande de sous-traitants, de matériaux et de services.",
     "imageAlt": "Des analystes autour d'une table, devant de grands écrans affichant des données économiques mondiales",
     "steps": [
       {
@@ -40,26 +40,26 @@
   },
   "scale": {
     "label": "Données",
-    "title": "Une précision pragmatique, partout dans le monde",
-    "text": "Rien que dans l'UE, les marchés publics représentent un volume annuel de 525 milliards d'euros (2021). Datixxia™ va plus loin : il prend en compte les contrats publics et privés publiés chaque jour dans 194 pays. Cela permet des prévisions d'une précision pragmatique et rend les mouvements quotidiens des marchés mondiaux plus faciles à comprendre.\nAvec une base initiale d'environ 8 millions d'avis d'attribution pour la seule année 2023, chacun valide jusqu'à 4 ans après sa publication, le modèle Datixxia™ calcule précisément ce que l'avenir réserve à tous les secteurs de marché et à leurs acteurs.",
+    "title": "Des sources internationales, une couverture ciblée",
+    "text": "Dans la seule UE, les contrats soumis aux règles de la commande publique représentent environ 616 milliards d'euros par an — trois fois le budget de l'UE. À l'échelle mondiale, on parle de milliers de milliards.\n\nNotre base de données compte quelque 25 millions d'attributions historiques issues de 750 sites officiels dans 194 pays, enrichie chaque jour de jusqu'à 125 000 nouvelles attributions. La plateforme couvre d'abord la France, le Royaume-Uni et la Belgique, puis d'autres pays progressivement. Lorsque les dates et durées des contrats sont disponibles, elles donnent une vue des engagements qui s'étendent sur les périodes à venir, en plus de l'analyse de l'activité passée et actuelle.",
     "primaryCta": "Découvrir",
     "secondaryCta": "Avantages",
     "stats": [
       {
-        "value": "194",
-        "caption": "Pays, chaque jour"
+        "value": "25 M+",
+        "caption": "Attributions historiques"
       },
       {
-        "value": "8M+",
-        "caption": "Avis d'attribution (2023)"
+        "value": "750",
+        "caption": "Sources officielles dans 194 pays"
       },
       {
-        "value": "525 Md€",
-        "caption": "Marchés publics UE / an"
+        "value": "616 Md€",
+        "caption": "Marchés de l’UE soumis aux règles / an"
       },
       {
-        "value": "4 ans",
-        "caption": "Horizon de validité"
+        "value": "125 000",
+        "caption": "Nouvelles attributions par jour"
       }
     ]
   },
@@ -67,8 +67,8 @@
     "label": "Vision",
     "titleStart": "Ce dont le monde a besoin, c'est d'une",
     "titleAccent": "économie intelligente",
-    "lead": "Notre objectif chez Datixxia™ : donner à chaque entreprise dans le monde l'intelligence économique dont elle a besoin.",
-    "text": "Pour y parvenir, avec des partenaires universitaires et économiques, nous invitons quelque 3 000 prestataires de services linguistiques (LSP) à devenir partenaires de Datixxia™. Plus des deux tiers de leur million de clients sont des micro, petites et moyennes entreprises (MPME).",
+    "lead": "Notre objectif chez datixxia™ : donner à chaque entreprise dans le monde l'intelligence économique dont elle a besoin.",
+    "text": "Pour y parvenir, avec des partenaires universitaires et économiques, nous invitons quelque 3 000 prestataires de services linguistiques (LSP) à devenir partenaires de datixxia™. Plus des deux tiers de leur million de clients sont des micro, petites et moyennes entreprises (MPME).",
     "cta": "Partenaires",
     "imageAlt": "Un petit atelier d'artisan vu à travers une vitrine au crépuscule, deux personnes au travail sur un établi"
   },
@@ -104,7 +104,7 @@
   },
   "cta": {
     "title": "Voyez les faits par vous-même.",
-    "text": "Passez des données brutes à l'action : découvrez comment Datixxia™ transforme les avis de marchés en avantage concurrentiel.",
+    "text": "Découvrez où va la dépense publique — et ce que cela peut signifier pour votre secteur.",
     "button": "Découvrir les avantages"
   }
 }

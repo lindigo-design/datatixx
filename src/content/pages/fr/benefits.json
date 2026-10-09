@@ -1,34 +1,34 @@
 {
-  "seoTitle": "Avantages de Datixxia™ — Intelligence et prévisions à 4 ans",
-  "seoDescription": "Comment les banques, chambres de commerce, experts-comptables, prévisionnistes, universités et traders utilisent l'intelligence et les prévisions à 4 ans de Datixxia™.",
+  "seoTitle": "Avantages de datixxia™ — Des analyses économiques concrètes",
+  "seoDescription": "Comment les banques, chambres de commerce, experts-comptables, prévisionnistes, universités et traders utilisent l'intelligence et les prévisions à 4 ans de datixxia™.",
   "hero": {
     "label": "Avantages",
-    "title": "Les avantages de Datixxia™",
-    "lead": "Datixxia™ transforme les signaux des marchés publics d'aujourd'hui en informations fiables pour décider et en prévisions à 4 ans : claires, comparables et prêtes à l'emploi.",
+    "title": "Les avantages de datixxia™",
+    "lead": "Des analyses économiques concrètes issues des attributions de marchés publiées — comprenez l'activité du marché et repérez des opportunités pour votre organisation.",
     "primaryCta": "Plateforme",
     "secondaryCta": "Nous contacter",
     "imageAlt": ""
   },
   "method": {
     "label": "Méthode",
-    "titleStart": "Le modèle de",
-    "titleAccent": "prévision",
-    "titleEnd": "Datixxia™",
+    "titleStart": "Le modèle d'intelligence datixxia™",
+    "titleAccent": "",
+    "titleEnd": "",
     "pillars": [
       {
         "tag": "Couverture",
-        "title": "Une couverture officielle et quotidienne dans 194 pays",
-        "text": "Chaque jour ouvré, Datixxia™ fournit les données complètes des attributions de marchés publics et privés de 194 pays. Les analyses partent de signaux actuels et vérifiables, pour une précision et une fiabilité inégalées."
+        "title": "Des sources internationales, une couverture ciblée",
+        "text": "datixxia™ s'appuie sur l'historique et sur les nouveaux avis d'attribution de marchés publics issus de sources internationales. La plateforme couvre d'abord la France, le Royaume-Uni et la Belgique, puis d'autres pays progressivement. La profondeur de l'analyse dépend des données disponibles."
       },
       {
         "tag": "Intelligence",
-        "title": "Calculs exclusifs → intelligence décisionnelle",
-        "text": "Nos calculs exclusifs transforment ces sources en intelligence de marché d'une portée et d'une ampleur uniques, par secteur et par acteur. L'avenir est évalué avec une précision et une fiabilité constantes."
+        "title": "Des calculs propriétaires pour des analyses concrètes",
+        "text": "Nos indicateurs analytiques aident à examiner l'activité du marché, à comparer les évolutions entre secteurs et fournisseurs et à explorer les signaux d'opportunité. Lorsque des dates et durées de contrat fiables sont disponibles, elles éclairent aussi les engagements qui s'étendent sur les périodes à venir."
       },
       {
         "tag": "Pour tous",
-        "title": "Conçu pour toutes les organisations",
-        "text": "Les entreprises de toutes tailles, des MPME aux sociétés cotées, dans tous les pays, peuvent utiliser l'intelligence économique en temps réel de Datixxia™ pour :"
+        "title": "Conçu pour des organisations variées",
+        "text": "Entreprises de toutes tailles, chercheurs, journalistes et organismes publics peuvent utiliser datixxia™ pour explorer les marchés couverts par la plateforme et appuyer leur travail sur les preuves des attributions de marchés publics :"
       }
     ]
   },
@@ -36,38 +36,38 @@
     "label": "Pour qui",
     "titleStart": "Ouvrir ensemble",
     "titleAccent": "de nouveaux horizons",
-    "lead": "Là où l'information et les prévisions jouent un rôle décisif, Datixxia™ propose des outils qui rapprochent chaque secteur de l'avenir.",
+    "lead": "Chaque organisation pose ses propres questions aux données économiques. datixxia™ les aide à explorer les attributions de marchés publics, à comprendre l'évolution de l'activité et à apporter des preuves supplémentaires à leur planification, leurs recherches et leurs analyses.",
     "cards": [
       {
         "tag": "Au service des entreprises",
         "title": "Cabinets d'expertise comptable",
-        "text": "Conseillez encore mieux vos clients. Il ne s'agit pas seulement de chiffres et de données : c'est un nouveau niveau de service qui aide les entreprises à grandir et à réussir."
+        "text": "Les cabinets comptables peuvent utiliser datixxia™ pour enrichir leurs échanges avec leurs clients d'un contexte de marché : examiner l'activité d'attribution dans les secteurs et chez les fournisseurs concernés, explorer des opportunités et soutenir la planification de leurs clients."
       },
       {
         "tag": "En première ligne",
         "title": "Banques et assurances",
-        "text": "Améliorez vos propres stratégies d'investissement et accompagnez vos clients dans leurs grandes décisions financières. Une meilleure compréhension du marché, et de la confiance même quand l'économie change."
+        "text": "Banques et assureurs peuvent explorer l'activité d'attribution pour mieux comprendre les secteurs de leurs clients. Les tendances des attributions enregistrées apportent un contexte supplémentaire, en complément des états financiers, des évaluations de risque et des autres analyses professionnelles."
       },
       {
         "tag": "Préparer l'avenir",
         "title": "Chambres de commerce",
-        "text": "Un partenaire fiable pour préparer l'avenir : évaluez les tendances économiques et réagissez vite aux changements, au service du développement des territoires et des entreprises."
+        "text": "Les chambres de commerce peuvent examiner l'activité de la commande publique par territoire et par secteur — pour nourrir l'information des membres, cibler des sujets à approfondir et éclairer les échanges sur le développement économique et les opportunités dans les chaînes d'approvisionnement."
       },
       {
         "tag": "Un regard vers l'avenir",
         "title": "Prévisionnistes économiques",
-        "text": "Intégrez les données Datixxia™ à vos recherches pour des prévisions encore plus précises et mieux fondées, qui contribuent à un environnement économique stable et au bien-être de vos clients."
+        "text": "Les prévisionnistes peuvent utiliser datixxia™ avec d'autres sources pour étudier les tendances de la commande publique et leur lien avec l'évolution économique générale. L'historique des attributions apporte le contexte ; les durées de contrat disponibles témoignent d'engagements qui s'étendent dans l'avenir."
       },
       {
         "tag": "Éducation et développement",
         "title": "Universités et centres de recherche",
-        "text": "Découvrez de nouvelles possibilités grâce aux analyses Datixxia™ : un appui pour la recherche et un outil puissant pour les étudiants qui préparent leur carrière, pour apprendre à appliquer leurs connaissances."
+        "text": "Universités, centres de recherche et écoles de commerce peuvent explorer la commande publique par l'enseignement pratique et la recherche — comparer les secteurs, examiner l'activité des fournisseurs et apprendre à évaluer la couverture, la qualité et les limites des données."
       }
     ],
     "wide": {
       "tag": "Des marchés en mouvement",
-      "title": "Bourses et traders",
-      "text": "Les bourses du monde entier reçoivent chaque jour les mises à jour de l'indice Tixx™ Trade Index, ainsi que des prévisions à long terme comme le Tixx™ 500 et le Tixx™ 1000, pour une finance plus transparente et plus accessible. Les traders trouvent en Datixxia™ un partenaire pour des décisions d'investissement éclairées, avec stabilité et confiance jusqu'à quatre ans à l'avance.",
+      "title": "Analystes et chercheurs en investissement",
+      "text": "Les analystes peuvent examiner l'évolution de l'activité d'attribution par secteur et par fournisseur, et repérer les tendances qui méritent une étude plus approfondie. Pour les chercheurs en investissement, ces résultats complètent une évaluation plus large, aux côtés des comptes financiers et des autres informations de marché. L'activité d'attribution ne suffit pas à établir la rentabilité, la valorisation d'une entreprise ou les rendements futurs.",
       "indexes": [
         {
           "name": "Tixx™ Trade Index",
@@ -86,7 +86,7 @@
   },
   "cta": {
     "title": "Prêt à agir.",
-    "text": "Une intelligence claire, comparable et fiable : découvrez ce que Datixxia™ peut faire pour votre organisation.",
+    "text": "Des analyses économiques concrètes issues des attributions de marchés publics — découvrez ce que datixxia™ peut faire pour votre organisation.",
     "button": "Nous contacter"
   }
 }

@@ -16,5 +16,5 @@ const page = await getContact(lang);
 
 <BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
   <ContactHero data={page.hero} />
-  <ContactSplit lang={lang} map={page.map} />
+  <ContactSplit lang={lang} map={page.map} territorial={page.territorial} />
 </BaseLayout>

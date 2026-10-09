@@ -30,6 +30,8 @@ interface Props {
   imageAlt?: string;
   /** Фонове відео (спільне для всіх сторінок). false — лише фото `image`. */
   video?: boolean;
+  /** Нижчий hero (Figma: Chambers — 782 px замість 836) */
+  short?: boolean;
 }
 const {
   label,
@@ -42,13 +44,17 @@ const {
   image,
   imageAlt = '',
   video = true,
+  short = false,
 } = Astro.props;
 const poster = video
   ? await getImage({ src: videoPoster, width: 1920, format: 'webp' })
   : null;
 ---
 
-<section class="page-hero" aria-labelledby="page-hero-title">
+<section
+  class:list={['page-hero', short && 'page-hero--short']}
+  aria-labelledby="page-hero-title"
+>
   {video && poster ? (
     <video
       class="page-hero__bg"
@@ -103,7 +109,8 @@ const poster = video
     isolation: isolate;
     display: flex;
     align-items: flex-end;
-    min-height: clamp(560px, 56vw, 810px);
+    /* Figma v2: 836 px на 1440 */
+    min-height: clamp(560px, 58vw, 836px);
     padding-block: clamp(var(--space-20), 12vw, 200px)
       clamp(var(--space-16), 9.7vw, 140px);
     overflow: hidden;
@@ -119,11 +126,18 @@ const poster = video
     object-position: 70% center;
   }
 
+  /* Chambers: 782 px на 1440 */
+  .page-hero--short {
+    min-height: clamp(540px, 54.3vw, 782px);
+  }
+
+  /* Підкладка під текстом (Figma «Rectangle»): починається на рівні мітки
+     і темнішає донизу — 76% висоти блоку */
   .page-hero::after {
     content: '';
     position: absolute;
     inset: auto 0 0;
-    height: 66%;
+    height: 76%;
     z-index: -1;
     background: var(--gradient-hero-fade);
   }

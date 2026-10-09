@@ -1,10 +1,10 @@
 {
-  "seoTitle": "Datixxia™ for chambers of commerce — Partnership benefits",
-  "seoDescription": "Nine ways Datixxia™ works for chambers of commerce: economic forecasting, member services and a new revenue stream by postcode.",
+  "seoTitle": "datixxia™ for chambers of commerce — Partnership benefits",
+  "seoDescription": "Nine ways datixxia™ works for chambers of commerce: economic forecasting, member services and a new revenue stream by postcode.",
   "hero": {
     "label": "Partners — Chambers of commerce",
     "title": "How chambers benefit from partnering",
-    "lead": "Lead your region into the future with Datixxia™. More than just data, Datixxia™ provides foresight — helping chambers predict, plan, and prosper. Join the global network transforming raw information into measurable impact and sustainable growth.",
+    "lead": "More than data — datixxia™ gives your chamber the evidence to plan, act and prosper.",
     "primaryCta": "Fill in the survey",
     "secondaryCta": "Contact us",
     "imageAlt": ""
@@ -12,7 +12,7 @@
   "ways": {
     "label": "What your chamber gains",
     "titleStart": "Nine ways",
-    "titleAccent": "Datixxia™",
+    "titleAccent": "datixxia™",
     "titleEnd": "works for chambers",
     "lead": "Three pillars carry the partnership — intelligence, members, revenue. The rest come built in.",
     "pillars": [
@@ -26,14 +26,14 @@
       {
         "tag": "Members",
         "title": "Support for member companies",
-        "text": "Future tenders relevant to each member’s industry, demand forecasts for planning — and premium services like “Datixxia™ Insights for Members”.",
+        "text": "Future tenders relevant to each member’s industry, demand forecasts for planning — and premium services like “datixxia™ Insights for Members”.",
         "vizCaption": "",
         "vizTag": ""
       },
       {
         "tag": "Revenue",
         "title": "Financial stability & services",
-        "text": "Act as an authorized Datixxia™ reseller by postcode or region. New data services and a membership incentive unavailable elsewhere.",
+        "text": "Act as an authorized datixxia™ reseller by postcode or region. New data services and a membership incentive unavailable elsewhere.",
         "vizCaption": "",
         "vizTag": ""
       }
@@ -85,7 +85,7 @@
       }
     ],
     "note": "Based on pilot modelling and scaling simulations",
-    "text": "Higher member engagement, new data-service revenues, and demonstrable economic impact make Datixxia™ both a strategic growth tool and a sustainable revenue engine for chambers worldwide."
+    "text": "Higher member engagement, new data-service revenues, and demonstrable economic impact make datixxia™ both a strategic growth tool and a sustainable revenue engine for chambers worldwide."
   },
   "revenue": {
     "label": "New markets, new revenue",
@@ -106,6 +106,6 @@
     "label": "Market survey",
     "titleStart": "To reply,",
     "titleAccent": "fill in the form",
-    "text": "If you approve the Datixxia™ project, please fill in the form below (deadline: 31 December 2025). Please invite all the interpreters, translators, language service companies and associations you know to do likewise.\nThe survey will allow us to find the partners needed to finance the development of the Datixxia™ application. The results will be sent to you on 2 January 2026.\nIf you have offices in several locations, please fill the form for each one of them."
+    "text": "If you approve the datixxia™ project, please fill in the form below (deadline: 31 December 2025). Please invite all the interpreters, translators, language service companies and associations you know to do likewise.\nThe survey will allow us to find the partners needed to finance the development of the datixxia™ application. The results will be sent to you on 2 January 2026.\nIf you have offices in several locations, please fill the form for each one of them."
   }
 }

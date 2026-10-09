@@ -1,34 +1,34 @@
 {
-  "seoTitle": "Benefits of Datixxia™ — Decision-grade intelligence, 4-year forecasts",
-  "seoDescription": "How banks, chambers of commerce, accountants, forecasters, universities and traders use Datixxia™ procurement intelligence and 4-year forecasts.",
+  "seoTitle": "Benefits of datixxia™ — Practical economic insights",
+  "seoDescription": "How banks, chambers of commerce, accountants, forecasters, universities and traders use datixxia™ procurement intelligence and 4-year forecasts.",
   "hero": {
     "label": "Benefits",
-    "title": "Benefits of Using Datixxia™",
-    "lead": "Datixxia™ converts today’s procurement signals into decision-grade insights and 4-year forecasts — clear, comparable, and ready for action.",
+    "title": "Benefits of Using datixxia™",
+    "lead": "Practical economic insights from published contract awards — understand market activity and spot potential opportunities for your organisation.",
     "primaryCta": "Platform",
     "secondaryCta": "Contact us",
     "imageAlt": ""
   },
   "method": {
     "label": "Methodology",
-    "titleStart": "The Datixxia™",
-    "titleAccent": "Forecasting",
-    "titleEnd": "Model",
+    "titleStart": "The datixxia™ Intelligence Model",
+    "titleAccent": "",
+    "titleEnd": "",
     "pillars": [
       {
         "tag": "Coverage",
-        "title": "Daily, official coverage across 194 countries",
-        "text": "Each working day, Datixxia™ delivers comprehensive public and private procurement award data from 194 countries. Insights begin with current, verifiable signals — delivering unrivalled accuracy and reliability."
+        "title": "International sources, focused platform coverage",
+        "text": "datixxia™ draws on historical records and incoming public contract award notices from international sources. Initial platform coverage focuses on France, the United Kingdom and Belgium, with additional countries to follow progressively. The depth of analysis depends on the available records."
       },
       {
         "tag": "Intelligence",
-        "title": "Proprietary calculations → decision-grade intelligence",
-        "text": "Our proprietary calculations transform these sources into market intelligence of unique scope and scale — by sector and by player. Futures are assessed with consistent accuracy and reliability."
+        "title": "Proprietary calculations for practical insights",
+        "text": "Our analytical metrics help users examine market activity, compare changes across sectors and suppliers, and explore opportunity signals. Where reliable contract dates and durations are available, they also provide context for commitments extending into future periods."
       },
       {
         "tag": "For everyone",
-        "title": "Built for every organization",
-        "text": "Companies of all sizes — from MSMEs to listed corporations, in every country — can use Datixxia™’s real-time business intelligence to:"
+        "title": "Built for a range of organisations",
+        "text": "Businesses of different sizes, researchers, journalists and public bodies can use datixxia™ to explore the markets covered by the platform and bring evidence from public contract awards to their work:"
       }
     ]
   },
@@ -36,38 +36,38 @@
     "label": "Who benefits",
     "titleStart": "Opening new",
     "titleAccent": "horizons together",
-    "lead": "Where information and forecasts play a crucial role in decision-making, Datixxia™ offers tools that help every industry come closer to the future.",
+    "lead": "Different organisations ask different questions of economic data. datixxia™ helps them explore public contract awards, understand changes in market activity and bring additional evidence to business planning, research and analysis.",
     "cards": [
       {
         "tag": "Support for businesses",
         "title": "Accounting firms",
-        "text": "Provide even more effective advice to corporate clients. It’s not just numbers and data — it’s a new level of service that helps businesses grow and succeed."
+        "text": "Accounting firms can use datixxia™ to add market context to conversations with corporate clients: examine award activity across relevant sectors and suppliers, explore potential opportunities and support clients’ business planning."
       },
       {
         "tag": "At the forefront",
         "title": "Banks & insurance",
-        "text": "Improve your own investment strategies and assist clients in major financial decisions. A deeper understanding of the market — and confidence even in a changing economy."
+        "text": "Banks and insurance companies can explore award activity to better understand the sectors their clients operate in. Patterns in recorded awards offer additional context that complements financial statements, risk assessments and other professional analysis."
       },
       {
         "tag": "Planning for the future",
         "title": "Chambers of commerce",
-        "text": "A reliable partner for planning the future: evaluate economic trends and respond to changes promptly, supporting the development of communities and businesses."
+        "text": "Chambers of commerce can examine procurement activity across available locations and sectors — supporting member briefings, identifying areas for further research and informing discussions about business development and supply-chain opportunities."
       },
       {
         "tag": "A look into the future",
         "title": "Economic forecasters",
-        "text": "Integrate Datixxia™ data into your research for even more accurate, well-founded predictions — forecasts that shape a stable economic environment and support the well-being of clients."
+        "text": "Economic forecasters can explore datixxia™ alongside other sources to investigate procurement trends and their relationship with wider economic developments. Historical awards provide context, while available contract periods offer evidence of commitments extending into the future."
       },
       {
         "tag": "Education & development",
         "title": "Universities & research centers",
-        "text": "Discover new opportunities through Datixxia™ analytics: support for research and a powerful tool for students planning their careers — learning how to apply knowledge in practice."
+        "text": "Universities, research centres and business schools can explore public procurement through practical teaching and research — comparing sectors, examining supplier activity and learning to assess data coverage, quality and limitations."
       }
     ],
     "wide": {
       "tag": "Markets in motion",
-      "title": "Stock markets & traders",
-      "text": "Stock markets worldwide receive daily updates from the Tixx™ Trade Index, as well as long-term forecasts such as the Tixx™ 500 and Tixx™ 1000 — making the world of finance more transparent and accessible. Traders find in Datixxia™ a partner for informed investment decisions, with stability and confidence for up to four years ahead.",
+      "title": "Analysts & investment researchers",
+      "text": "Analysts can examine how recorded award activity changes across sectors and suppliers, identifying patterns that merit closer investigation. For investment researchers, these findings contribute to a broader assessment alongside financial accounts and other market information. Award activity alone does not establish profitability, company valuation or future investment returns.",
       "indexes": [
         {
           "name": "Tixx™ Trade Index",
@@ -86,7 +86,7 @@
   },
   "cta": {
     "title": "Ready for action.",
-    "text": "Clear, comparable, decision-grade intelligence — see what Datixxia™ can do for your organization.",
+    "text": "Practical economic insights from published public contract awards — see what datixxia™ can do for your organisation.",
     "button": "Contact us"
   }
 }

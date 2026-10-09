@@ -39,6 +39,6 @@ foreach ($f as $k => $v) {
 $lines[] = '';
 $lines[] = $f['comments'] !== '' ? $f['comments'] : '(no comments)';
 
-$sent = dtx_mail($config, "Market survey: {$f['organisation']} ({$f['country']})", $lines, $f['email']);
+$sent = dtx_mail($config, "[Website · Market survey] {$f['organisation']} ({$f['country']})", $lines, $f['email']);
 if ($sent) dtx_confirm($config, $f['email'], '', $lang);
 dtx_respond($sent ? 200 : 502, $sent ? 'ok' : 'send_failed', $lang, $page);

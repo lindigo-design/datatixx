@@ -1,10 +1,10 @@
 {
-  "seoTitle": "Partners — Chambers of commerce and translation companies | Datixxia™",
-  "seoDescription": "Chambers of commerce and Language Service Providers can partner with Datixxia™ to bring forward-looking market intelligence to businesses worldwide.",
+  "seoTitle": "Partners — Chambers of commerce and translation companies | datixxia™",
+  "seoDescription": "Chambers of commerce and Language Service Providers can partner with datixxia™ to bring forward-looking market intelligence to businesses worldwide.",
   "hero": {
     "label": "Partners",
     "title": "Research, innovation & global reach",
-    "lead": "Trade is the source of all prosperity — material, by exchanging items, or cultural, by exchanging ideas. That is why we are inviting the key players in international business — chambers of commerce and translation companies — to be our partners.",
+    "lead": "Trade is the source of all prosperity — so we are inviting its key players, chambers of commerce and translation companies, to be our partners.",
     "primaryCta": "Become a partner",
     "secondaryCta": "Contact us",
     "imageAlt": ""
@@ -13,16 +13,16 @@
     "label": "For chambers of commerce",
     "titleStart": "Turn data",
     "titleAccent": "into opportunity",
-    "lead": "Designed for Chambers of Commerce, Datixxia™ reveals where the economy is heading — months or even years in advance. Anticipate growth sectors, guide local businesses, attract investors, and unlock new revenue channels for your chamber.",
-    "text": "With Datixxia™, your organization becomes a trusted source of future economic intelligence.",
+    "lead": "Designed for Chambers of Commerce, datixxia™ reveals where the economy is heading — months or even years in advance. Anticipate growth sectors, guide local businesses, attract investors, and unlock new revenue channels for your chamber.",
+    "text": "With datixxia™, your organization becomes a trusted source of future economic intelligence.",
     "cta": "Explore the benefits of partnering"
   },
   "lsp": {
     "label": "For translation companies",
     "titleStart": "The",
     "titleAccent": "human layer",
-    "titleEnd": "of Datixxia™",
-    "lead": "Language Service Providers give every business access to Datixxia™ — with support by native speakers who know their local market and understand international trade.",
+    "titleEnd": "of datixxia™",
+    "lead": "Language Service Providers give every business access to datixxia™ — with support by native speakers who know their local market and understand international trade.",
     "cards": [
       {
         "title": "Platform testing",
@@ -34,7 +34,7 @@
       },
       {
         "title": "Issue reporting",
-        "text": "Report issues directly to the Datixxia™ team, helping the platform improve with every release."
+        "text": "Report issues directly to the datixxia™ team, helping the platform improve with every release."
       }
     ]
   },
@@ -46,7 +46,7 @@
   },
   "cta": {
     "title": "Let’s build the future together.",
-    "text": "Join the Datixxia™ partner network — chambers of commerce and translation companies welcome.",
+    "text": "Join the datixxia™ partner network — chambers of commerce and translation companies welcome.",
     "button": "Contact us"
   }
 }

@@ -23,6 +23,7 @@ const to = (path: string) => localizePath(path, lang);
 <BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
   <PageHero
     {...page.hero}
+    short
     primaryHref="#form"
     secondaryHref={to('contact')}
     image={heroImage}

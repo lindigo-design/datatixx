@@ -117,6 +117,12 @@ const { data } = Astro.props;
     opacity: 1;
   }
 
+  /* Перша картка (Figma: role-card 01) — темно-синє скло #00162E 60% замість сірого */
+  .n-card.is-active {
+    background: var(--color-glass);
+    border-color: transparent;
+  }
+
   /* Цифра: Afacad SemiBold 100 / 80%, градієнт по ширині самої цифри */
   .n-card__num {
     justify-self: start;

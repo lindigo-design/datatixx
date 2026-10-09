@@ -1,160 +1,160 @@
 {
-  "seoTitle": "Datixxia™ — Intelligence de marché et prévisions à 4 ans",
-  "seoDescription": "Datixxia™ transforme chaque jour les données des marchés publics et privés de 194 pays en intelligence économique en temps réel et en prévisions à 4 ans.",
+  "seoTitle": "datixxia™ — Intelligence de marché pour des décisions éclairées",
+  "seoDescription": "datixxia™ transforme les attributions de marchés publics en intelligence économique : voyez où va la dépense publique et ce qu'elle signifie pour votre secteur.",
   "hero": {
-    "title": "Datixxia™ : intelligence de marché et prévisions à 4 ans",
-    "lead": "Datixxia™ est une plateforme d'intelligence de marché. Elle transforme chaque jour les données des marchés publics et privés en intelligence économique en temps réel et en prévisions à 4 ans pour chaque secteur.",
+    "title": "Intelligence de marché\npour des décisions éclairées",
+    "lead": "datixxia™ transforme les attributions de marchés publics publiées en intelligence économique — découvrez où va la dépense publique et ce que cela peut signifier pour votre secteur.",
     "primaryCta": "Nous contacter",
     "secondaryCta": "En savoir plus",
     "imageAlt": ""
   },
   "marquee": [
-    "See tomorrow. Act today",
-    "Investissements",
-    "Fusions-acquisitions",
-    "Nouvelles implantations",
+    "Voir demain. Agir aujourd'hui",
+    "Études de marché",
+    "Investissement",
+    "Implantations",
     "Fournisseurs",
-    "Recrutement",
-    "Risques",
+    "Effectifs",
+    "Secteurs",
     "Concurrents",
-    "Prix",
-    "Promotion"
+    "Dépense publique",
+    "Opportunités"
   ],
   "features": {
     "label": "Fonctionnalités",
-    "titleStart": "Quatre instruments,",
-    "titleAccent": "un seul terminal",
-    "subtitle": "Les outils essentiels pour lire les données mondiales des marchés publics",
+    "titleStart": "Ce que propose datixxia™",
+    "titleAccent": "",
+    "subtitle": "Découvrez où va la dépense publique — et ce que cela peut signifier pour votre secteur.",
     "items": [
       {
-        "label": "Calculer la valeur",
-        "text": "Datixxia™ donne la valeur passée et actuelle de tout secteur de marché, et la prévoit jusqu'à 4 ans à l'avance."
+        "label": "Mesurer l'activité du marché",
+        "text": "datixxia™ s'appuie sur les attributions de marchés publics publiées pour examiner les dépenses enregistrées, comparer secteurs et fournisseurs, et suivre l'évolution de l'activité dans le temps."
       },
       {
-        "label": "Prévisions empiriques",
-        "text": "La plateforme fournit des prévisions micro-économiques, et non macro-économiques, fondées sur des données valides pour l'avenir plutôt que sur des hypothèses."
+        "label": "Des analyses fondées sur des preuves",
+        "text": "Explorez des signaux économiques ancrés dans des contrats attribués. Lorsque les dates et durées des contrats sont disponibles, elles donnent aussi de la visibilité sur l'activité prévue pour les périodes à venir."
       },
       {
         "label": "Visibilité économique",
-        "text": "Notre modèle donne une visibilité financière et économique aux micro, petites et moyennes entreprises (MPME)."
+        "text": "datixxia™ aide les micro, petites et moyennes entreprises à comprendre l'activité des marchés publics, à repérer des opportunités et à prendre des décisions mieux éclairées sur leurs marchés."
       },
       {
-        "label": "Universel",
-        "text": "Datixxia™ s'adresse à toutes les entreprises du monde, des banques aux boulangeries."
+        "label": "Plusieurs points de vue",
+        "text": "Entreprises, chercheurs, journalistes et organismes publics peuvent explorer les données d'attribution avec datixxia™ ; la plateforme couvre d'abord la France, le Royaume-Uni et la Belgique."
       }
     ]
   },
   "why": {
-    "label": "Pourquoi Datixxia™",
+    "label": "Pourquoi datixxia™",
     "titleLine1": "Pourquoi choisir notre",
     "titleLine2": "plateforme d'intelligence de marché",
-    "lead": "Datixxia™ est un système de prévision économique inédit. Il calcule avec précision la croissance, le déclin, la part, la taille et la valeur passés, présents et futurs de tout secteur de marché et de ses acteurs, jusqu'à quatre ans à l'avance.",
+    "lead": "datixxia™ transforme les données publiées d'attribution de marchés publics en intelligence économique accessible. Explorez les montants attribués, l'évolution de l'activité et la répartition des attributions entre secteurs et fournisseurs pour éclairer vos décisions, recherches et enquêtes.",
     "primaryCta": "Avantages",
     "secondaryCta": "En savoir plus",
     "cards": [
       {
-        "title": "Aucune extrapolation par l'IA",
-        "text": "Nous ne devinons jamais. Les modèles statistiques peuvent se tromper. Un contrat signé, non. Notre terminal montre uniquement ce que les États et les organismes publics se sont déjà engagés à acheter."
+        "title": "Les tendances de la commande publique",
+        "text": "La plateforme s'appuie sur l'historique et sur les nouveaux avis d'attribution pour révéler les tendances de la commande publique par secteur et par fournisseur."
       },
       {
-        "title": "Des contrats qui restent valides",
-        "text": "Un avis d'attribution reste exploitable jusqu'à quatre ans après sa publication. Nous suivons chaque avenant, chaque euro, jusqu'à la fin des travaux."
+        "title": "Visibilité sur les périodes à venir",
+        "text": "Lorsque les données comportent des dates et durées de contrat fiables, elles permettent d'examiner les engagements qui s'étendent sur les périodes à venir."
       },
       {
-        "title": "Une valeur future exacte",
-        "text": "Vous voyez la valeur exacte, l'acheteur exact, le fournisseur exact et le calendrier exact. Ce n'est pas un indicateur de sentiment. C'est un registre de l'activité économique future. Brevet déposé à l'INPI, réf. DSO2023020065."
+        "title": "Des preuves, pas des garanties",
+        "text": "Ces analyses reflètent les données contractuelles disponibles ; elles ne garantissent pas les dépenses futures et ne mesurent pas l'ensemble de l'économie. La première spécification du programme a été déposée à l'INPI sous la référence DSO2023020065 en décembre 2023."
       }
     ],
-    "imageAlt": "Tableau de bord Datixxia™ : nombre d'attributions, valeurs prévues et réelles par année et par pays"
+    "imageAlt": "Tableau de bord datixxia™ : nombre d'attributions, valeurs prévues et réelles par année et par pays"
   },
   "about": {
     "label": "À propos",
     "title": "Facts for futures™",
-    "text": "Les États du monde publient plus de huit millions d'avis d'attribution de marchés chaque année. Chacun contient un acheteur, un fournisseur, une valeur et une durée. La plupart des plateformes les traitent comme des archives. Nous les traitons comme un signal vivant. Datixxia™ absorbe ce flux de données structurées, l'harmonise dans 194 pays et montre l'économie réelle en mouvement. Pas d'analyse de sentiment. Pas de grands modèles de langage. Seulement l'arithmétique de la dépense publique, mise à jour chaque jour.",
+    "text": "Toute décision d'entreprise repose sur une vision de l'avenir. Qu'il s'agisse de planifier un investissement, d'allouer des ressources ou d'explorer un nouveau marché, les organisations ont besoin de preuves pour comprendre où l'activité se développe et ce que cela peut signifier pour elles.\n\nLes attributions de marchés publics fournissent une partie de ces preuves : les achats déjà attribués, les fournisseurs retenus et, lorsqu'ils sont publiés, les montants et les durées. datixxia™ rend ces informations plus faciles à explorer et à interpréter — pour examiner l'activité du marché, suivre son évolution et repérer des opportunités.",
     "cta": "Qui sommes-nous"
   },
   "model": {
     "label": "Modèle",
-    "title": "Le modèle de prévision Datixxia™",
-    "lead": "Les appels d'offres publics financent les priorités d'un pays et déclenchent une réaction en chaîne. Un contrat principal se divise en sous-contrats, commandes et services qui irriguent les PME et les MPME pendant des années. Datixxia™ lit ces cascades chaque jour dans 194 pays et les transforme en perspectives sectorielles pour les principaux acteurs du marché, avec une précision pragmatique, toujours liée au document source.",
+    "title": "Le modèle d'intelligence datixxia™",
+    "lead": "La commande publique soutient l'activité dans les infrastructures, les transports, l'énergie, l'éducation, la santé et bien d'autres secteurs. Les contrats attribués désignent les fournisseurs retenus et peuvent générer une demande de sous-traitants, de matériaux et de services — révélant des tendances de l'activité économique et des opportunités tout au long des chaînes d'approvisionnement.",
     "primaryCta": "Plateforme",
     "secondaryCta": "En savoir plus",
     "stats": [
       {
-        "value": "194",
-        "caption": "Pays couverts"
+        "value": "25 M+",
+        "caption": "Attributions historiques"
       },
       {
-        "value": "8M+",
-        "caption": "Avis d'attribution suivis"
+        "value": "750",
+        "caption": "Sources officielles dans 194 pays"
       },
       {
-        "value": "525 Md€",
-        "caption": "Marchés publics de l'UE suivis"
+        "value": "616 Md€",
+        "caption": "Marchés de l’UE soumis aux règles / an"
       },
       {
-        "value": "4 ans",
-        "caption": "Horizon de prévision"
+        "value": "125 000",
+        "caption": "Nouvelles attributions par jour"
       }
     ]
   },
   "benefits": {
     "label": "Avantages",
     "titleStart": "Ce que vous pouvez faire avec",
-    "titleAccent": "Datixxia™",
-    "lead": "Datixxia™ applique des calculs exclusifs aux sources quotidiennes des marchés publics et privés. Résultat : une intelligence de marché par secteur et par acteur, à grande échelle, avec des prévisions à 4 ans cohérentes et vérifiables.",
-    "note": "Quatorze façons dont le terminal travaille pour vous — trouvez la vôtre selon votre métier.",
+    "titleAccent": "datixxia™",
+    "lead": "datixxia™ applique ses indicateurs analytiques aux données publiées d'attribution de marchés publics — pour explorer l'activité par secteur et par fournisseur, comparer les montants attribués et repérer les évolutions dans le temps.",
+    "note": "Quatorze façons dont datixxia™ travaille pour vous — trouvez la vôtre selon votre rôle.",
     "roles": [
       {
         "audience": "Stratèges et analystes",
         "name": "Stratégie",
-        "cardTitle": "Mesurez tout marché, à tout niveau",
-        "cardText": "Des études de marché fondées sur les montants attribués, pas sur des estimations.",
-        "vizCaption": "Valeur du secteur 22–27",
-        "vizTag": "Prévision",
+        "cardTitle": "Étudiez n'importe quel marché, à tous les niveaux",
+        "cardText": "Activité de la commande publique par secteur et par territoire disponibles.",
+        "vizCaption": "Activité d’attribution par secteur",
+        "vizTag": "Enregistré",
         "cases": [
-          "Choisir de nouvelles implantations",
-          "Trouver d'autres secteurs de marché",
-          "Comparer la croissance des pays et des villes"
+          "Comparer des territoires pour préparer une implantation",
+          "Explorer d’autres secteurs de développement",
+          "Comparer les évolutions entre pays et régions"
         ]
       },
       {
         "audience": "Banques, assureurs, investisseurs",
         "name": "Finance et risque",
-        "cardTitle": "Vérifiez l'avenir avant d'investir",
-        "cardText": "Investissements et fusions-acquisitions face au chiffre d'affaires contracté.",
-        "vizCaption": "CA futur contracté",
+        "cardTitle": "Éclairer la recherche d'investissement",
+        "cardText": "Des preuves issues des attributions — en complément des comptes et des autres informations de marché.",
+        "vizCaption": "Montants attribués par année",
         "vizTag": "",
         "cases": [
-          "Repérer les secteurs à risque",
-          "Intégrer les données boursières",
-          "Justifier les décisions de crédit"
+          "Repérer les secteurs dont l’activité recule",
+          "Comparer montants estimés et attribués",
+          "Ajouter le contexte du marché à vos analyses"
         ]
       },
       {
         "audience": "Achats et RH",
         "name": "Opérations",
-        "cardTitle": "Suivez l'argent tout au long de la chaîne",
-        "cardText": "Toutes les opportunités au sein d'un grand marché public.",
-        "vizCaption": "Un marché — toute la cascade",
+        "cardTitle": "Explorez l’historique des attributions des fournisseurs",
+        "cardText": "Repérez des fournisseurs et partenaires potentiels parmi les entreprises attributaires.",
+        "vizCaption": "Une attribution — chaîne d’approvisionnement",
         "vizTag": "",
         "cases": [
-          "Trouver de nouveaux fournisseurs",
-          "Trouver de nouvelles recrues",
-          "Justifier vos prix"
+          "Planifier les effectifs selon l’activité du secteur",
+          "Appuyer la recherche sur la dépense publique",
+          "Situer vos attributions dans leur marché"
         ]
       },
       {
         "audience": "Ventes et marketing",
         "name": "Croissance",
-        "cardTitle": "Voyez chaque concurrent gagner ou perdre",
-        "cardText": "Croissance et déclin des concurrents, du passé au futur.",
-        "vizCaption": "Part des attributions — en direct",
+        "cardTitle": "Suivez les attributions de vos concurrents",
+        "cardText": "Explorez leur position dans un secteur — et son évolution dans le temps.",
+        "vizCaption": "Part des attributions enregistrées",
         "vizTag": "",
         "cases": [
-          "Identifier de nouveaux concurrents",
-          "Mettre en avant votre classement Datixxia™",
-          "Repérer la demande avant l'appel d'offres"
+          "Repérer les autres fournisseurs de votre secteur",
+          "Comparer l'activité du secteur dans le temps",
+          "Appuyer les enquêtes sur la dépense"
         ]
       }
     ]
@@ -166,21 +166,21 @@
     "members": [
       {
         "name": "Malcolm Duff",
-        "role": "PDG",
+        "role": "Président-directeur général",
         "photo": "../../../assets/img/team/malcolm-duff.jpg",
         "photoAlt": "Portrait de Malcolm Duff",
-        "bio": "Ancien PDG de deux sociétés de traduction certifiées ISO 9001 et traducteur technique senior pour l'UNESCO à Paris, Malcolm a mené deux années de travaux de conception et de recherche qui ont donné naissance à Datixxia™.\nIl a une grande expérience de la gestion de projets multinationaux, notamment avec des traducteurs de 33 pays pour Inttranet™, le premier portail multilingue au monde (ajouté à l'Observatoire de l'UNESCO sur la société de l'information en janvier 2006). Cette expérience et sa connaissance approfondie de l'application Datixxia™ font de lui le PDG idéal pour son déploiement mondial.",
-        "linkedin": "",
+        "bio": "Malcolm a fondé et dirigé la première société de traduction en France certifiée ISO 9001, et a été traducteur technique en chef pour l'UNESCO à Paris. Il est à l'origine du concept de datixxia™ et en a posé les bases par ses recherches sur la manière dont les données d'attribution de marchés publics peuvent servir l'intelligence économique et les décisions d'entreprise.\n\nIl a notamment coordonné des projets internationaux avec des traducteurs de 33 pays via Inttranet™, intégré à l'Observatoire de l'UNESCO sur la société de l'information en janvier 2006. Chez DataTixx, il dirige la stratégie de l'entreprise, le développement des partenariats et la préparation du lancement commercial de datixxia™.",
+        "linkedin": "https://www.linkedin.com/in/malcolm-duff-15b321387/",
         "x": "",
         "dribbble": ""
       },
       {
         "name": "Yana Levchenko",
-        "role": "CPO",
+        "role": "Directrice générale",
         "photo": "../../../assets/img/team/yana-levchenko.jpg",
         "photoAlt": "Portrait de Yana Levchenko",
-        "bio": "Un an seulement après avoir fui la guerre en Ukraine avec ses enfants et ses animaux, Yana a fondé sa propre agence de web design. Elle a une solide expérience en cybersécurité et en informatique, et de larges compétences en web design au service d'une clientèle en forte croissance. Elle apporte aussi à l'équipe son sens du détail et de l'esthétique de photographe professionnelle, publiée dans des magazines du monde entier.",
-        "linkedin": "",
+        "bio": "Fondatrice de sa propre agence de web design un an seulement après avoir fui la guerre en Ukraine avec ses enfants et ses animaux, Yana possède une solide expérience en cybersécurité et en informatique, ainsi que de larges compétences en web design au service d'une clientèle en forte croissance.\n\nElle apporte aussi à l'équipe son sens du détail et son regard esthétique de photographe professionnelle publiée dans des magazines du monde entier. En tant que directrice générale, elle travaille aux côtés de Malcolm pour développer DataTixx et préparer datixxia™ pour ses utilisateurs.",
+        "linkedin": "https://www.linkedin.com/in/yana-levchenko-ua/",
         "x": "",
         "dribbble": ""
       }
@@ -188,7 +188,7 @@
   },
   "cta": {
     "title": "See Tomorrow. Act Today.",
-    "text": "Rejoignez le terminal qui lit les contrats sur lesquels l'avenir se construit.",
+    "text": "Appuyez vos décisions sur les preuves des attributions de marchés publics.",
     "button": "Nous contacter"
   },
   "faq": {
@@ -198,7 +198,7 @@
     "items": [
       {
         "q": "Est-ce de l'IA ?",
-        "a": "Non. Datixxia™ n'utilise ni intelligence artificielle ni extrapolation statistique. Nous lisons uniquement des contrats publics signés et juridiquement contraignants, valides pendant des années."
+        "a": "Non. datixxia™ n'utilise ni intelligence artificielle ni extrapolation statistique. Nous lisons uniquement des contrats publics signés et juridiquement contraignants, valides pendant des années."
       },
       {
         "q": "D'où viennent les données ?",
@@ -213,7 +213,7 @@
         "a": "Une offre gratuite permet de découvrir le terminal. L'offre Standard coûte 100 € et l'offre Premium 200 € par utilisateur et par mois, avec un accès complet aux indices et aux prévisions."
       },
       {
-        "q": "Qui utilise Datixxia™ ?",
+        "q": "Qui utilise datixxia™ ?",
         "a": "Les banques, les assureurs, les chambres de commerce, les analystes économiques et les MPME. Toute personne qui doit savoir ce que le secteur public va dépenser, et avec qui."
       }
     ]

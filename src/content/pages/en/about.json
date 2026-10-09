@@ -1,10 +1,10 @@
 {
-  "seoTitle": "About Datixxia™ — Market intelligence from procurement data",
-  "seoDescription": "Datixxia™ turns daily contract award notices from 194 countries into real-time business intelligence and reliable 4-year forecasts.",
+  "seoTitle": "About datixxia™ — Market intelligence from procurement data",
+  "seoDescription": "datixxia™ turns published public contract awards into insights on market activity, emerging trends and business opportunities.",
   "hero": {
-    "label": "About Datixxia™",
+    "label": "About datixxia™",
     "title": "Market intelligence platform",
-    "lead": "Datixxia™ is a procurement-based market intelligence platform. We turn daily contract award notices from 194 countries into real-time business intelligence and reliable 4-year forecasts.",
+    "lead": "datixxia™ turns published public contract awards into insights on market activity, emerging trends and business opportunities.",
     "primaryCta": "Platform",
     "secondaryCta": "Benefits",
     "imageAlt": ""
@@ -31,7 +31,7 @@
         "tag": "Act III",
         "title": "The flaw in traditional forecasting",
         "text": "Most forecasting systems share one inherent flaw: they extrapolate past data to infer a possible future. Even with artificial intelligence, the analysis remains conjectural. Contingencies intervene, uncertainty persists — and the farther a forecast projects, the less precise it becomes.",
-        "stamp": "Not Datixxia™"
+        "stamp": "Not datixxia™"
       }
     ]
   },
@@ -41,13 +41,13 @@
     "titleAccent": "apples",
     "titleEnd": "falling from a tree…",
     "lead": "Some discoveries stem from everyday facts so simple they go unnoticed.",
-    "text": "So it was with Datixxia™. Used for years by majors to monitor competitors in specific market sectors and countries, Datixxia™ processes the data in all the public and private contract awards. As a result, it can accurately and reliably calculate the relative future value of any market sector — and of its players — up to 4 years in advance.",
+    "text": "So it was with datixxia™. Used for years by majors to monitor competitors in specific market sectors and countries, datixxia™ processes the data in all the public and private contract awards. As a result, it can accurately and reliably calculate the relative future value of any market sector — and of its players — up to 4 years in advance.",
     "imageAlt": "A green apple falling, with motion lines and physics measurements around it"
   },
   "manifesto": {
     "label": "Why it matters",
-    "text": "Every form of economic analysis and forecasting is exponentially improved by this ground-breaking methodology. Whatever its size or location, every company finds the hard data it needs about the prospects for its specific market — to form a strategy for its own, unique future.",
-    "signature": "Only Datixxia™ provides those Facts for Futures™."
+    "text": "Every business decision involves a view of the future. Public contract awards provide part of the evidence: purchases already awarded, the suppliers selected and, where disclosed, the values and periods involved. datixxia™ makes this information easier to explore and interpret — its value depends on the coverage and quality of the underlying records, and on recognising that contracts can be amended, delayed or cancelled.",
+    "signature": "Facts for Futures™ — evidence to understand where activity is developing."
   },
   "data": {
     "label": "Data",
@@ -58,7 +58,7 @@
       {
         "tag": "Sources",
         "title": "Official, daily sources across 194 countries",
-        "text": "Datixxia™ downloads data each working day from official central, regional and local government websites in 194 countries, as indicated in the contract references. Sources are refreshed continuously to capture new award notices."
+        "text": "datixxia™ downloads data each working day from official central, regional and local government websites in 194 countries, as indicated in the contract references. Sources are refreshed continuously to capture new award notices."
       },
       {
         "tag": "Standards",
@@ -68,7 +68,7 @@
       {
         "tag": "Method",
         "title": "A complementary layer to traditional forecasting",
-        "text": "Data quality also depends on how you use it. Datixxia™ serves as a supplemental intelligence layer alongside traditional forecasting methods: we supply the data — and the tools to shape it to your needs."
+        "text": "Data quality also depends on how you use it. datixxia™ serves as a supplemental intelligence layer alongside traditional forecasting methods: we supply the data — and the tools to shape it to your needs."
       }
     ]
   },
@@ -76,7 +76,7 @@
     "label": "Tools",
     "titleLine1": "Simple tools,",
     "titleLine2": "flexible exports",
-    "text": "Like any truly useful tools, the Grafixx™ dashboards are easy to understand and quick to use — so teams integrate insights into existing workflows with minimal friction.",
+    "text": "datixxia™ helps users examine market activity, follow changes and identify potential opportunities — and brings the findings into your own workflow.",
     "points": [
       "Download raw data for your own graphics app",
       "Create basic charts directly in the dashboard",
@@ -88,7 +88,7 @@
   },
   "cta": {
     "title": "See the full advantage.",
-    "text": "Move from reactive reporting to pre-emptive strategy. The contracts are already signed. Read them first.",
+    "text": "Historical patterns provide context, while available contract dates illuminate commitments extending into future periods.",
     "button": "Contact us"
   }
 }

@@ -142,10 +142,12 @@
   border-color: var(--color-green);
 }
 
+/* Вибрана тема — суцільний фірмовий зелений (градієнт лишається тільки на кнопці Send).
+   Текст темний: білий на зеленому має контраст лише 2.98:1, темний — 6.7:1 (WCAG AA). */
 .chip input:checked + span {
-  background: var(--gradient-brand);
-  border-color: transparent;
-  color: var(--color-text);
+  background: var(--color-green);
+  border-color: var(--color-green);
+  color: var(--color-bg);
 }
 
 .chip input:focus-visible + span {
