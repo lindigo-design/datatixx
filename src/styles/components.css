@@ -165,8 +165,18 @@
   color: #0d1117;
 }
 
+/* Біла кнопка в смузі CTA: при наведенні — невеликий зум */
+.btn--light {
+  transition-duration: var(--dur-base);
+}
+
 .btn--light:hover {
   background: var(--color-paper);
+  transform: scale(1.06);
+}
+
+.btn--light:hover:active {
+  transform: scale(1.03);
 }
 
 .btn[disabled] {

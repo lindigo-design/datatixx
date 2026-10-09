@@ -38,8 +38,8 @@ const to = (path: string) => localizePath(path, lang);
     primaryHref={to('benefits')}
     secondaryHref={to('about')}
   />
-  <PartnersStrip label={t('partners.label')} />
   <About data={page.about} ctaHref={to('about')} />
+  <PartnersStrip label={t('partners.label')} />
   <ModelStats
     data={page.model}
     primaryHref={to('platform')}

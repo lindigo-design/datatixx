@@ -36,17 +36,34 @@ const tone = (i: number) =>
   />
   <div class="container audiences__inner">
     <header class="audiences__head">
-      <p class="section-label">{data.label}</p>
-      <h2 id="audiences-title" class="section-title align-end-lg">
+      <p class="section-label" data-reveal="fade" data-reveal-from="top">
+        {data.label}
+      </p>
+      <h2
+        id="audiences-title"
+        class="section-title align-end-lg"
+        data-reveal="fade"
+        data-reveal-from="top"
+      >
         {`${data.titleStart} `}
         <span class="grad-text">{data.titleAccent}</span>
       </h2>
-      <p class="section-subtitle indent-first audiences__lead">{data.lead}</p>
+      <p
+        class="section-subtitle indent-first audiences__lead"
+        data-reveal="fade"
+        data-reveal-from="top"
+      >
+        {data.lead}
+      </p>
     </header>
 
     <ul role="list" class="aud-grid">
       {data.cards.map((c, i) => (
-        <li class:list={['aud-card', tone(i)]}>
+        <li
+          class:list={['aud-card', tone(i)]}
+          data-reveal="fade"
+          data-reveal-from="top"
+        >
           <p class="meta-s accent">{c.tag}</p>
           <h3 class="aud-card__title">{c.title}</h3>
           <p class="aud-card__text">{c.text}</p>
@@ -54,7 +71,7 @@ const tone = (i: number) =>
       ))}
     </ul>
 
-    <article class="aud-wide">
+    <article class="aud-wide" data-reveal="fade" data-reveal-from="top">
       <div class="aud-wide__copy">
         <p class="meta-s mono aud-wide__tag">{data.wide.tag}</p>
         <h3 class="aud-card__title">{data.wide.title}</h3>
@@ -220,3 +237,7 @@ const tone = (i: number) =>
     color: var(--color-green);
   }
 </style>
+
+<script>
+  import '@/scripts/reveal';
+</script>

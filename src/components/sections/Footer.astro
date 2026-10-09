@@ -128,8 +128,8 @@ const socials = [
     /* щоб лінія на 100vw не давала горизонтальної прокрутки (ширина смуги прокрутки) */
     overflow-x: clip;
     background: var(--color-footer);
-    padding-block: clamp(var(--space-12), 5.5vw, var(--space-20))
-      var(--space-10);
+    /* зверху 48 → 80, знизу 20 */
+    padding-block: clamp(var(--space-12), 5.5vw, var(--space-20)) var(--space-5);
     font-size: var(--fs-small);
     color: var(--color-text-soft);
   }
