@@ -1,8 +1,12 @@
 ---
 /**
- * Logos — смуга логотипів партнерів.
+ * Logos — смуга логотипів партнерів: один рядок, безкінечна прокрутка (на всіх екранах).
+ *
  * TODO: ЗАРАЗ ЗАГЛУШКИ з шаблону (Webflow, Relume, OpenAI). Перед запуском —
  * замінити на справжніх партнерів або прибрати секцію з головної.
+ *
+ * Як додати партнера: імпортувати SVG-логотип і дописати рядок у `partners`.
+ * `url` — адреса сайту партнера: є → логотип стає посиланням (нова вкладка), порожньо → просто логотип.
  */
 import Partner1 from '@/assets/icons/partner-1.svg';
 import Partner2 from '@/assets/icons/partner-2.svg';
@@ -12,17 +16,59 @@ interface Props {
   label: string;
 }
 const { label } = Astro.props;
-const logos = [Partner1, Partner2, Partner1, Partner2, PartnerOpenai];
+
+const partners = [
+  { name: 'Webflow', Logo: Partner1, url: '' },
+  { name: 'Relume', Logo: Partner2, url: '' },
+  { name: 'Webflow', Logo: Partner1, url: '' },
+  { name: 'Relume', Logo: Partner2, url: '' },
+  { name: 'OpenAI', Logo: PartnerOpenai, url: '' },
+];
+
+// Стрічка має бути ширшою за найширший екран, інакше під час прокрутки видно «діру».
+// Тому набір повторюємо, поки в половині стрічки не буде щонайменше 12 логотипів.
+// Перший набір — справжній (його читає скрінрідер, по ньому ходить Tab), решта — лише для ока.
+const repeats = Math.max(1, Math.ceil(12 / partners.length));
+const half = Array.from({ length: repeats }, (_, r) =>
+  partners.map(p => ({ ...p, decorative: r > 0 }))
+).flat();
 ---
 
 <section class="partners" aria-label={label}>
-  <ul role="list" class="partners__list">
-    {logos.map(Logo => (
-      <li>
-        <Logo class="partners__logo" aria-hidden="true" />
-      </li>
+  <div class="partners__track">
+    {[0, 1].map(copy => (
+      <ul
+        role="list"
+        class="partners__list"
+        aria-hidden={copy === 1 ? 'true' : undefined}
+      >
+        {half.map(({ name, Logo, url, decorative }) => {
+          const hidden = copy === 1 || decorative;
+          return (
+            <li aria-hidden={hidden && copy === 0 ? 'true' : undefined}>
+              {url ? (
+                <a
+                  class="partners__item"
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={hidden ? undefined : name}
+                  tabindex={hidden ? -1 : undefined}
+                >
+                  <Logo class="partners__logo" aria-hidden="true" />
+                </a>
+              ) : (
+                <span class="partners__item">
+                  <Logo class="partners__logo" aria-hidden="true" />
+                  {!hidden && <span class="visually-hidden">{name}</span>}
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ul>
     ))}
-  </ul>
+  </div>
 </section>
 
 <style>
@@ -32,14 +78,40 @@ const logos = [Partner1, Partner2, Partner1, Partner2, PartnerOpenai];
     overflow: hidden;
   }
 
+  .partners__track {
+    display: flex;
+    width: max-content;
+    /* ~3 с на логотип; якщо логотипів стане значно більше — збільшити */
+    animation: partners-scroll 45s linear infinite;
+  }
+
+  /* навели мишу / торкнулись — зупинка */
+  .partners:hover .partners__track,
+  .partners:focus-within .partners__track {
+    animation-play-state: paused;
+  }
+
   .partners__list {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-8);
+    gap: var(--space-8);
     min-height: 56px;
-    padding-inline: var(--gutter);
+    padding-right: var(
+      --space-8
+    ); /* такий самий проміжок на стику двох половин */
+  }
+
+  .partners__item {
+    display: flex;
+    align-items: center;
+  }
+
+  a.partners__item {
+    transition: opacity var(--dur-fast) ease;
+  }
+
+  a.partners__item:hover {
+    opacity: 0.75;
   }
 
   .partners__logo {
@@ -50,6 +122,22 @@ const logos = [Partner1, Partner2, Partner1, Partner2, PartnerOpenai];
   @media (max-width: 639px) {
     .partners__logo {
       height: 32px;
+    }
+  }
+
+  @keyframes partners-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* «Зменшити рух» — без автопрокрутки, стрічку гортають вручну */
+  @media (prefers-reduced-motion: reduce) {
+    .partners {
+      overflow-x: auto;
+    }
+    .partners__track {
+      animation: none;
     }
   }
 </style>

@@ -64,7 +64,16 @@ const mark = (n: string) => sup[Number(n) - 1] ?? n;
         {data.text}
       </p>
       <p class="impact__sources meta-s mono" data-reveal="fade">
-        {data.sources.map((s, i) => `${sup[i] ?? i + 1} ${s}`).join('   ·   ')}
+        {data.sources.map((s, i) => (
+          <>
+            {i > 0 && (
+              <span class="impact__sep" aria-hidden="true">
+                ·
+              </span>
+            )}
+            <span class="impact__source">{`${sup[i] ?? i + 1} ${s}`}</span>
+          </>
+        ))}
       </p>
     </div>
   </div>
@@ -143,8 +152,17 @@ const mark = (n: string) => sup[Number(n) - 1] ?? n;
     color: var(--color-text-secondary);
   }
 
+  /* Кожне джерело — нерозривне: «³ World Bank, 2024» не розривається, переноситься цілим */
   .impact__sources {
-    white-space: pre-wrap;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+  }
+
+  .impact__source {
+    white-space: nowrap;
   }
 </style>
 
