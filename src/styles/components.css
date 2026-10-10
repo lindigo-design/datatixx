@@ -221,6 +221,10 @@
     white-space: normal;
     text-align: center;
   }
+  /* .actions--full — виняток: одна кнопка на всю ширину (довгий напис, як у Chambers на Partners) */
+  .actions--full:not(.hero .actions, .page-hero .actions) > .btn:only-child {
+    flex-basis: 100%;
+  }
   /* смуга CTA внизу сторінок — так само 60% */
   .cta__band > .btn {
     width: 60%;
