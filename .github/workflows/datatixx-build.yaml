@@ -41,6 +41,16 @@ jobs:
           npm ci
           npm run build
 
+      # Шаблони з .deploy-now/datatixx (напр. api/_smtp_password.template) → у dist.
+      # Без цього кроку «Render templates» у deploy-to-ionos.yaml нічого не підставляє
+      # (він обробляє лише файли зі списку .template-renderer-data, який створює цей крок).
+      - name: Render templates
+        uses: ionos-deploy-now/template-renderer-action@v2
+        with:
+          input-directory: .deploy-now/datatixx
+          output-directory: ${{ env.DEPLOYMENT_FOLDER }}
+          intermediate-data-file: ${{ env.DEPLOYMENT_FOLDER }}/.template-renderer-data
+
 # Please do not touch the following action
       - name: Store deployment content
         uses: ionos-deploy-now/artifact-action@v1
