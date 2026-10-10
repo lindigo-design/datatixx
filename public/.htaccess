@@ -21,7 +21,7 @@ AddDefaultCharset UTF-8
   RewriteRule ^ https://datatixx.com%{REQUEST_URI} [L,R=301]
 
   # 3. Старі сторінки WordPress → нові (301 = «переїхала назавжди», Google переносить позиції).
-  #    Список зібрано з datatixx.com/sitemap_index.xml 09.10.2026
+  #    Список зібрано з datatixx.com/sitemap_index.xml 09.10.2026 — див. docs/old-site-urls.md
   RewriteRule ^about/?$                                  /en/about/      [R=301,L]
   RewriteRule ^datixia/?$                                /en/platform/   [R=301,L]
   RewriteRule ^benefits/?$                               /en/benefits/   [R=301,L]
@@ -60,7 +60,8 @@ AddDefaultCharset UTF-8
 
 <IfModule mod_headers.c>
   # Безпека
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  # без includeSubDomains: піддомени (newsletter.datatixx.com тощо) живуть окремо, не нав'язуємо їм HTTPS
+  Header always set Strict-Transport-Security "max-age=31536000"
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
