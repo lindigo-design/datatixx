@@ -32,11 +32,7 @@ function dtx_guard(string $page): array
 {
     $lang = in_array($_POST['lang'] ?? '', DTX_LANGS, true) ? $_POST['lang'] : 'en';
 
-    $configFile = __DIR__ . '/config.php';
-    if (!is_file($configFile)) {
-        dtx_respond(500, 'not_configured', $lang, $page);
-    }
-    $config = require $configFile;
+    $config = dtx_config();
 
     if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
         header('Allow: POST');
@@ -146,21 +142,145 @@ function dtx_mailbox_key(string $email): string
     return $local . '@' . $domain;
 }
 
-/** Надсилає простий текстовий лист. Reply-To — адреса відвідувача. */
+/**
+ * Налаштування: _settings.php (у Git, без паролів) + config.php (необов'язковий, перекриває).
+ * Пароль SMTP — окремо, з файлу _smtp_password (його створює IONOS під час публікації).
+ */
+function dtx_config(): array
+{
+    $config = require __DIR__ . '/_settings.php';
+    $local = __DIR__ . '/config.php';
+    if (is_file($local)) {
+        $config = array_replace($config, require $local);
+    }
+    $config['smtp']['password'] = $config['smtp']['password'] ?? dtx_smtp_password();
+    return $config;
+}
+
+/** Пароль з файлу _smtp_password. Порожньо, якщо файлу немає або секрет у GitHub не додано. */
+function dtx_smtp_password(): string
+{
+    $file = __DIR__ . '/_smtp_password';
+    if (!is_file($file)) return '';
+    $value = trim((string)file_get_contents($file));
+    // Секрету немає → IONOS залишає назву змінної як є
+    return str_starts_with($value, '$DTX_') ? '' : $value;
+}
+
+/** Надсилає простий текстовий лист DataTixx. Reply-To — адреса відвідувача. */
 function dtx_mail(array $config, string $subject, array $lines, string $replyTo): bool
 {
-    $encoded = mb_encode_mimeheader($subject, 'UTF-8', 'B', "\r\n");
-    $headers = implode("\r\n", [
-        'From: ' . $config['mail_from'],
-        'Reply-To: ' . $replyTo,
-        'MIME-Version: 1.0',
-        'Content-Type: text/plain; charset=UTF-8',
-        'Content-Transfer-Encoding: 8bit',
-        'X-Mailer: datatixx-website',
+    $ok = dtx_send($config, $config['mail_to'], $subject, implode("\n", $lines), [
+        'Reply-To' => $replyTo,
     ]);
-    $body = implode("\n", $lines);
-    $ok = mail($config['mail_to'], $encoded, $body, $headers, '-f' . $config['mail_envelope_from']);
-    if (!$ok) error_log('[forms] mail() failed: ' . $subject);
+    if (!$ok) error_log('[forms] mail failed: ' . $subject);
+    return $ok;
+}
+
+/**
+ * Відправка листа. Є пароль SMTP → через поштовий сервер IONOS (надійніше, менше спаму).
+ * Немає → звичайна PHP mail().
+ */
+function dtx_send(array $config, string $to, string $subject, string $body, array $extraHeaders = []): bool
+{
+    $headers = [
+        'From' => $config['mail_from'],
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding' => '8bit',
+        'X-Mailer' => 'datatixx-website',
+    ] + $extraHeaders;
+
+    $smtp = $config['smtp'] ?? [];
+    if (($smtp['password'] ?? '') !== '' && ($smtp['host'] ?? '') !== '') {
+        return dtx_smtp_send($smtp, $config['mail_envelope_from'], $to, $subject, $body, $headers);
+    }
+
+    $lines = [];
+    foreach ($headers as $k => $v) $lines[] = "{$k}: {$v}";
+    return mail(
+        $to,
+        mb_encode_mimeheader($subject, 'UTF-8', 'B', "\r\n"),
+        $body,
+        implode("\r\n", $lines),
+        '-f' . $config['mail_envelope_from']
+    );
+}
+
+/**
+ * Мінімальний SMTP-клієнт (без бібліотек): SSL (порт 465) або STARTTLS (587), вхід AUTH LOGIN.
+ * Усі значення, що потрапляють у заголовки, вже очищені від переносів рядків (dtx_line / dtx_email).
+ */
+function dtx_smtp_send(array $smtp, string $from, string $to, string $subject, string $body, array $headers): bool
+{
+    $host = (string)$smtp['host'];
+    $port = (int)($smtp['port'] ?? 465);
+    $remote = ($port === 465 ? 'ssl://' : 'tcp://') . $host . ':' . $port;
+    $verify = (bool)($smtp['verify'] ?? true); // false — лише для локальних тестів
+    $ctx = stream_context_create(['ssl' => [
+        'peer_name' => $host,
+        'verify_peer' => $verify,
+        'verify_peer_name' => $verify,
+    ]]);
+    $fp = @stream_socket_client($remote, $errno, $errstr, 15, STREAM_CLIENT_CONNECT, $ctx);
+    if (!$fp) {
+        error_log("[forms] SMTP connect failed: {$errstr} ({$errno})");
+        return false;
+    }
+    stream_set_timeout($fp, 15);
+
+    $read = static function () use ($fp): string {
+        $data = '';
+        while (($line = fgets($fp, 1024)) !== false) {
+            $data .= $line;
+            if (strlen($line) < 4 || $line[3] === ' ') break; // останній рядок відповіді: «250 ...»
+        }
+        return $data;
+    };
+    $cmd = static function (string $line, array $expect, string $label = '') use ($fp, $read): bool {
+        if ($line !== '') fwrite($fp, $line . "\r\n");
+        $reply = $read();
+        if (!in_array((int)substr($reply, 0, 3), $expect, true)) {
+            // У журнал — лише назва команди, без пароля й тексту листа
+            $shown = $label !== '' ? $label
+                : (preg_match('/^(EHLO|STARTTLS|AUTH LOGIN|MAIL FROM|RCPT TO|DATA)/', $line, $m) ? $m[1] : 'connect');
+            error_log('[forms] SMTP ' . $shown . ' → ' . trim($reply));
+            return false;
+        }
+        return true;
+    };
+
+    $me = gethostname() ?: 'datatixx.com';
+    $ok = $cmd('', [220]) && $cmd("EHLO {$me}", [250]);
+    if ($ok && $port !== 465) {
+        $ok = $cmd('STARTTLS', [220])
+            && stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)
+            && $cmd("EHLO {$me}", [250]);
+    }
+    $ok = $ok
+        && $cmd('AUTH LOGIN', [334])
+        && $cmd(base64_encode((string)$smtp['user']), [334], 'login (user)')
+        && $cmd(base64_encode((string)$smtp['password']), [235], 'login (password)')
+        && $cmd("MAIL FROM:<{$from}>", [250])
+        && $cmd("RCPT TO:<{$to}>", [250, 251])
+        && $cmd('DATA', [354]);
+
+    if ($ok) {
+        $domain = substr($from, strrpos($from, '@') + 1);
+        $all = [
+            'Date' => date(DATE_RFC2822),
+            'Message-ID' => '<' . bin2hex(random_bytes(12)) . '@' . $domain . '>',
+            'To' => $to,
+            'Subject' => mb_encode_mimeheader($subject, 'UTF-8', 'B', "\r\n"),
+        ] + $headers;
+        $msg = '';
+        foreach ($all as $k => $v) $msg .= "{$k}: {$v}\r\n";
+        $text = preg_replace("/\r\n|\r|\n/", "\r\n", $body) ?? $body;
+        $text = preg_replace('/^\./m', '..', $text) ?? $text; // крапка на початку рядка — подвоюємо (RFC 5321)
+        $ok = $cmd($msg . "\r\n" . $text . "\r\n.", [250], 'message');
+    }
+    @fwrite($fp, "QUIT\r\n");
+    fclose($fp);
     return $ok;
 }
 
@@ -214,17 +334,11 @@ function dtx_confirm(array $config, string $to, string $firstName, string $lang)
         ];
     }
 
-    $headers = implode("\r\n", [
-        'From: ' . $config['mail_from'],
-        'Reply-To: ' . ($config['reply_to'] ?? $config['mail_to']),
-        'MIME-Version: 1.0',
-        'Content-Type: text/plain; charset=UTF-8',
-        'Content-Transfer-Encoding: 8bit',
-        'Auto-Submitted: auto-replied',
-        'X-Mailer: datatixx-website',
+    $ok = dtx_send($config, $to, $subject, implode("\n", $lines), [
+        'Reply-To' => $config['reply_to'] ?? $config['mail_to'],
+        'Auto-Submitted' => 'auto-replied',
     ]);
-    $ok = mail($to, mb_encode_mimeheader($subject, 'UTF-8', 'B', "\r\n"),implode("\n", $lines), $headers, '-f' . $config['mail_envelope_from']);
-    if (!$ok) error_log('[forms] confirmation mail() failed');
+    if (!$ok) error_log('[forms] confirmation mail failed');
 }
 
 /** Лічильник: не більше $limit спроб для ключа (IP або e-mail) за годину ('YmdH') чи добу ('Ymd'). */

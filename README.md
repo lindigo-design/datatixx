@@ -103,8 +103,12 @@ keystatic.config.ts ← які поля є в адмінці
 
 ## Форма на хостингу (налаштування)
 
-На сервері IONOS: скопіювати `api/config.example.php` → `api/config.php`
-і вписати справжню адресу скриньки. Без `config.php` форма відповідає помилкою.
+- Адреси й поштовий сервер — у `public/api/_settings.php` (у Git, без паролів).
+- Пароль від скриньки — секрет GitHub **`DTX_SMTP_PASSWORD`**
+  (Settings → Secrets and variables → Actions). Під час публікації IONOS Deploy Now
+  створює з шаблону `api/_smtp_password.template` файл `api/_smtp_password`.
+- Без пароля сайт пробує звичайну PHP `mail()`.
+- Помилки відправки — у журналі PHP (Deploy Now → проєкт → логи), з позначкою `[forms]`.
 
 ## Дизайн
 

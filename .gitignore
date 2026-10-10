@@ -10,6 +10,7 @@ node_modules/
 .env.*
 !.env.example
 public/api/config.php
+public/api/_smtp_password
 
 # логи
 npm-debug.log*
