@@ -34,7 +34,7 @@ $r = [
     'smtp_user' => (string)($smtp['user'] ?? ''),
 ];
 
-// 1. Пароль: файл, який Deploy Now має створити з _smtp_password.template
+// 1. Пароль: файл, який Deploy Now має створити з .deploy-now/datatixx/api/_smtp_password.template
 $pwFile = __DIR__ . '/_smtp_password';
 if (!is_file($pwFile)) {
     $r['password_file'] = 'missing';
@@ -42,7 +42,6 @@ if (!is_file($pwFile)) {
     $v = trim((string)file_get_contents($pwFile));
     $r['password_file'] = $v === '' ? 'empty' : (str_starts_with($v, '$DTX_') ? 'not_rendered' : 'ok');
 }
-$r['template_file'] = is_file(__DIR__ . '/_smtp_password.template') ? 'present' : 'absent';
 $password = (string)($smtp['password'] ?? '');
 
 // 2. З'єднання з поштовим сервером (лист не надсилаємо)

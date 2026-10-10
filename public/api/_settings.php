@@ -4,8 +4,10 @@
  *
  * Пароль від поштової скриньки зберігається в GitHub:
  *   Settings → Secrets and variables → Actions → секрет DTX_SMTP_PASSWORD.
- * Під час публікації IONOS Deploy Now сам створює з шаблону _smtp_password.template
- * файл _smtp_password з паролем (див. dtx_smtp_password() у _lib.php).
+ * Під час публікації IONOS Deploy Now сам створює з шаблону
+ * .deploy-now/datatixx/api/_smtp_password.template файл api/_smtp_password з паролем
+ * (див. dtx_smtp_password() у _lib.php). Шаблони Deploy Now обробляє ЛИШЕ з папки
+ * .deploy-now/<проєкт>/ — у public/ вони копіюються як звичайні файли, без підстановки.
  *
  * Локально (або на іншому хостингу) можна покласти поруч config.php
  * з тими самими ключами — він перекриє ці значення. config.php у Git не потрапляє.
