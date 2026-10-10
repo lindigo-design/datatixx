@@ -129,6 +129,14 @@ const num = (i: number) => String(i).padStart(2, '0');
     justify-self: start;
   }
 
+  /* Телефон: заголовок і текст під ним — по лівому краю (на десктопі по центру, як у макеті) */
+  @media (max-width: 639px) {
+    .nine__head {
+      justify-items: start;
+      text-align: left;
+    }
+  }
+
   .nine__lead {
     color: var(--color-text-secondary);
   }
