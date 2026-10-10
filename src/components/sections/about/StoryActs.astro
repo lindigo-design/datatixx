@@ -64,6 +64,14 @@ const { data } = Astro.props;
     justify-self: start;
   }
 
+  /* Телефон: заголовок і текст під ним — по лівому краю (на десктопі по центру, як у макеті) */
+  @media (max-width: 639px) {
+    .story__head {
+      justify-items: start;
+      text-align: left;
+    }
+  }
+
   .story__subtitle {
     color: var(--color-text-secondary);
     max-width: 975px;

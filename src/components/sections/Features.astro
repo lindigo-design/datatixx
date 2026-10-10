@@ -108,6 +108,14 @@ const right = [card(2), card(3)];
     justify-self: start;
   }
 
+  /* Телефон: заголовок і текст під ним — по лівому краю (на десктопі по центру, як у макеті) */
+  @media (max-width: 639px) {
+    .features__head {
+      justify-items: start;
+      text-align: left;
+    }
+  }
+
   .features__accent {
     color: var(--color-green);
   }

@@ -103,6 +103,14 @@ const { data, centered = false } = Astro.props;
     text-align: center;
   }
 
+  /* Телефон: заголовок і текст під ним — по лівому краю (на десктопі по центру, як у макеті) */
+  @media (max-width: 639px) {
+    .pillars--centered .pillars__head {
+      justify-items: start;
+      text-align: left;
+    }
+  }
+
   .pillars__lead {
     --indent: 44%;
     color: var(--color-text-secondary);
