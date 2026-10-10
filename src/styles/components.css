@@ -190,6 +190,59 @@
   gap: var(--space-4);
 }
 
+/* Телефон, перший екран (Hero, PageHero): кнопки одна під одною на всю ширину */
+@media (max-width: 639px) {
+  .hero .actions,
+  .page-hero .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero .actions > .btn,
+  .page-hero .actions > .btn {
+    width: 100%;
+  }
+}
+
+/* Телефон: дві кнопки поруч — 60% і 40% ширини, щоб у них було зручно влучати пальцем.
+   Крім першого екрана (Hero, PageHero). Довгий напис переноситься всередині кнопки. */
+@media (max-width: 639px) {
+  /* блок кнопок — на весь рядок, навіть якщо батько вирівнює вміст ліворуч (justify-items: start) */
+  .actions:not(.hero .actions, .page-hero .actions) {
+    flex-wrap: nowrap;
+    gap: var(--space-3);
+    width: 100%;
+    justify-self: stretch;
+  }
+  /* одна кнопка в блоці — 60% ширини */
+  .actions:not(.hero .actions, .page-hero .actions) > .btn:only-child {
+    flex: 0 1 60%;
+    min-width: 0;
+    padding-inline: var(--space-3);
+    white-space: normal;
+    text-align: center;
+  }
+  /* смуга CTA внизу сторінок — так само 60% */
+  .cta__band > .btn {
+    width: 60%;
+  }
+  .actions:not(.hero .actions, .page-hero .actions)
+    > .btn:first-child:nth-last-child(2) {
+    flex: 0 1 60%;
+  }
+  .actions:not(.hero .actions, .page-hero .actions)
+    > .btn:last-child:nth-child(2) {
+    flex: 0 1 40%;
+  }
+  .actions:not(.hero .actions, .page-hero .actions) > .btn:nth-last-child(2),
+  .actions:not(.hero .actions, .page-hero .actions)
+    > .btn:last-child:nth-child(2) {
+    min-width: 0;
+    padding-inline: var(--space-3);
+    white-space: normal;
+    text-align: center;
+  }
+}
+
 /* Головна кнопка в hero — удвічі довша: +3em з кожного боку
    («Platform» 118 → 236 px; довші написи ростуть трохи менше, щоб влазити на телефоні) */
 .btn--hero {

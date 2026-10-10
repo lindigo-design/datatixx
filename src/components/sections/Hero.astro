@@ -98,6 +98,14 @@ const {
     text-shadow: 0 2px 24px rgb(1 9 18 / 0.5);
   }
 
+  @media (max-width: 639px) {
+    .hero__title {
+      max-width: none;
+      white-space: normal;
+      text-wrap: balance;
+    }
+  }
+
   .hero__content {
     display: grid;
     gap: var(--space-8);

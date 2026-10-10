@@ -67,14 +67,28 @@ const {
       </div>
     </header>
 
-    <dl class="stats">
-      {data.stats.map(s => (
-        <div class="stat" data-reveal="fade">
-          <dt class="stat__caption">{s.caption}</dt>
-          <dd class="stat__value grad-text num">{s.value}</dd>
+    {/* На телефоні — безкінечна стрічка: другий ряд (копія) робить прокрутку без розриву.
+        Копія лише для око — скрінрідери її пропускають. */}
+    <div class="stats-marquee" data-reveal="fade">
+      <div class="stats-track">
+        <dl class="stats">
+          {data.stats.map(s => (
+            <div class="stat" data-reveal="fade">
+              <dt class="stat__caption">{s.caption}</dt>
+              <dd class="stat__value grad-text num">{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <div class="stats stats--clone" aria-hidden="true">
+          {data.stats.map(s => (
+            <div class="stat">
+              <p class="stat__caption">{s.caption}</p>
+              <p class="stat__value grad-text num">{s.value}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </dl>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -179,6 +193,98 @@ const {
     line-height: 1.4;
     text-transform: uppercase;
     color: var(--color-text-soft);
+  }
+
+  /* ---------- Планшет і десктоп: звичайна сітка, без копії ---------- */
+  .stats--clone {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    /* обгортка тут не анімується — поява лише в кожної цифри окремо */
+    .stats-marquee[data-reveal].is-ready {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+
+  /* ---------- Телефон: безкінечна горизонтальна стрічка ---------- */
+  @media (max-width: 639px) {
+    .stats-marquee {
+      overflow: hidden;
+      margin-inline: calc(-1 * var(--gutter)); /* від краю до краю екрана */
+      mask-image: linear-gradient(
+        90deg,
+        transparent,
+        #000 8%,
+        #000 92%,
+        transparent
+      );
+    }
+
+    .stats-track {
+      display: flex;
+      width: max-content;
+      animation: stats-scroll 28s linear infinite;
+    }
+
+    /* палець на стрічці — зупинка, щоб спокійно прочитати */
+    .stats-marquee:hover .stats-track,
+    .stats-marquee:active .stats-track {
+      animation-play-state: paused;
+    }
+
+    .stats,
+    .stats--clone {
+      display: flex;
+      gap: 0;
+    }
+
+    .stats .stat {
+      flex: 0 0 auto;
+      max-width: 15rem;
+      padding-inline: var(--space-6);
+    }
+
+    /* лінія-розділювач перед кожною цифрою, і в копії теж */
+    .stats .stat::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, #42aa39, #2e509d);
+    }
+
+    /* поява — у всієї стрічки разом (окремі цифри за краєм екрана інакше лишались би прозорими) */
+    .stats-marquee .stat[data-reveal].is-ready {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+
+  @keyframes stats-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* «Зменшити рух» — без автопрокрутки: стрічку гортають пальцем, копія не потрібна */
+  @media (max-width: 639px) and (prefers-reduced-motion: reduce) {
+    .stats-marquee {
+      overflow-x: auto;
+      mask-image: none;
+    }
+    .stats-track {
+      animation: none;
+    }
+    .stats--clone {
+      display: none;
+    }
   }
 </style>
 

@@ -29,9 +29,11 @@ const { data, ctaHref } = Astro.props;
       </h2>
       <p class="vision__lead">{data.lead}</p>
       <p class="vision__text">{data.text}</p>
-      <Button href={ctaHref} variant="outline">
-        {data.cta}
-      </Button>
+      <div class="actions">
+        <Button href={ctaHref} variant="outline">
+          {data.cta}
+        </Button>
+      </div>
     </div>
     <div class="vision__media">
       <Image

@@ -51,7 +51,9 @@ const { data, ctaHref, image, imageAlt = '' } = Astro.props;
       </h2>
       <p class="split__lead">{data.lead}</p>
       <p class="split__text">{data.text}</p>
-      <Button href={ctaHref}>{data.cta}</Button>
+      <div class="actions">
+        <Button href={ctaHref}>{data.cta}</Button>
+      </div>
     </div>
   </div>
 </section>

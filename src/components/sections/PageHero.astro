@@ -157,6 +157,12 @@ const poster = video
     text-wrap: balance;
   }
 
+  @media (max-width: 639px) {
+    .page-hero__title {
+      font-size: clamp(2.25rem, 1.1rem + 5vw, 2.75rem); /* 36 → 44 */
+    }
+  }
+
   .page-hero__content {
     display: grid;
     gap: var(--space-6);

@@ -114,9 +114,15 @@ const socials = (m: Member) =>
     }
   }
 
+  /* Телефон і планшет — на всю ширину; вузько (18ch) лише в колонці на десктопі */
   .team__intro {
     color: var(--color-heading);
-    max-width: 18ch;
+  }
+
+  @media (min-width: 1024px) {
+    .team__intro {
+      max-width: 18ch;
+    }
   }
 
   .team__list {

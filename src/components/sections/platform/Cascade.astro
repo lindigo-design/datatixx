@@ -70,9 +70,7 @@ const { data } = Astro.props;
               <h3 class="step__title">{step.title}</h3>
               <p>{step.text}</p>
             </div>
-            <p class:list={['step__badge', i === 0 && 'step__badge--outline']}>
-              {step.badge}
-            </p>
+            <p class="step__badge">{step.badge}</p>
           </li>
         ))}
       </ol>
@@ -176,24 +174,34 @@ const { data } = Astro.props;
     color: var(--color-text);
   }
 
+  /* Бейдж — у стилі рядків індексів (div.idx-row на Benefits), однаковий для всіх кроків:
+     темна плашка, радіус 12, відступи 10/16, IBM Plex Mono 11, зелений */
   .step__badge {
     justify-self: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-width: 246px;
-    padding: var(--space-2) var(--space-6);
-    border-radius: var(--radius-pill);
+    min-height: 47px;
+    padding: 10px var(--space-4);
+    border-radius: 12px;
     background: var(--color-bg);
-    font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem); /* 18 → 22 */
-    font-weight: var(--fw-medium);
-    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-green);
     white-space: nowrap;
   }
 
-  .step__badge--outline {
-    background: transparent;
-    border: 1px solid var(--color-text);
-    color: var(--color-text);
+  /* Телефон: бейдж під текстом — на всю ширину картки */
+  @media (max-width: 639px) {
+    .step__badge {
+      justify-self: stretch;
+      min-width: 0;
+    }
   }
 </style>
 
