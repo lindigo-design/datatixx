@@ -280,6 +280,15 @@ const partners = defineCollection({
   schema: z.object({
     ...seo,
     hero: heroSchema,
+    // «Four key partners» — одразу під hero
+    fourPartners: z.object({
+      label: z.string(),
+      title: z.string(),
+      intro: z.string(),
+      cards: z.array(card).length(4),
+      note: z.object({ label: z.string(), text: z.string() }),
+      imageAlt: z.string(),
+    }),
     chambers: z.object({
       ...titled,
       lead: z.string(),

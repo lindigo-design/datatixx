@@ -2,6 +2,7 @@
 /** Сторінка Partners — порядок секцій як у Figma «Partners • Desktop (new)». */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHero from '@/components/sections/PageHero.astro';
+import FourPartners from '@/components/sections/partners/FourPartners.astro';
 import ChambersSplit from '@/components/sections/partners/ChambersSplit.astro';
 import NumberedCards from '@/components/sections/partners/NumberedCards.astro';
 import FormSection from '@/components/sections/FormSection.astro';
@@ -9,6 +10,7 @@ import ContactForm from '@/components/sections/ContactForm.astro';
 import CtaBand from '@/components/sections/CtaBand.astro';
 import heroImage from '@/assets/img/about/hero-europe.jpg';
 import chambersImage from '@/assets/img/partners/partners-hq.jpg';
+import fourPartnersImage from '@/assets/img/partners/partners_2-hq.jpg';
 import { locales, localizePath, type Locale } from '@/i18n/utils';
 import { getPartners } from '@/content/helpers';
 
@@ -28,12 +30,13 @@ const to = (path: string) => localizePath(path, lang);
     secondaryHref={to('contact')}
     image={heroImage}
   />
+  <FourPartners data={page.fourPartners} image={fourPartnersImage} />
+  <NumberedCards data={page.lsp} />
   <ChambersSplit
     data={page.chambers}
     ctaHref={to('chambers')}
     image={chambersImage}
   />
-  <NumberedCards data={page.lsp} />
   <FormSection {...page.form}>
     <ContactForm lang={lang} page="partners" />
   </FormSection>

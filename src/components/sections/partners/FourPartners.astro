@@ -1,0 +1,154 @@
+---
+/**
+ * «Four key partners» (Figma «Partners • Desktop (v3 — 4 partners)»): шапка ліворуч,
+ * під нею дві однакові колонки — 4 картки (перша «активна», у 4-й примітка) і фото на всю висоту.
+ * Картки — спільний стиль .n-card з styles/components.css (той самий, що в NumberedCards).
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  data: {
+    label: string;
+    title: string;
+    intro: string;
+    cards: { title: string; text: string }[];
+    note: { label: string; text: string };
+    imageAlt: string;
+  };
+  image: ImageMetadata;
+}
+const { data, image } = Astro.props;
+const last = data.cards.length - 1;
+---
+
+<section class="section four" aria-labelledby="four-partners-title">
+  <div class="container four__inner">
+    <header class="four__head">
+      <p class="section-label" data-reveal="fade">
+        {data.label}
+      </p>
+      <h2 id="four-partners-title" class="section-title" data-reveal="fade">
+        {data.title}
+      </h2>
+      <p class="section-subtitle four__intro" data-reveal="fade">
+        {data.intro}
+      </p>
+    </header>
+
+    <div class="four__grid">
+      <ul role="list" class="four__cards">
+        {data.cards.map((c, i) => (
+          <li
+            class:list={['n-card', 'four__card', i === 0 && 'is-active']}
+            data-reveal="fade"
+          >
+            <h3 class="n-card__title">{c.title}</h3>
+            <p class="n-card__text">{c.text}</p>
+            {i === last && (
+              <div class="four__note">
+                <p class="section-label">{data.note.label}</p>
+                <p class="n-card__text">{data.note.text}</p>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <div class="four__media" data-reveal="fade">
+        <Image
+          src={image}
+          alt={data.imageAlt}
+          widths={[600, 900, 1216]}
+          sizes="(min-width: 1024px) 608px, 100vw"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Суцільний фон сторінки (#010912), без картинки-фону */
+  .four {
+    background: var(--color-bg);
+  }
+
+  .four__inner {
+    display: grid;
+    gap: var(--space-16); /* шапка → сітка: 64 */
+  }
+
+  .four__head {
+    display: grid;
+    gap: var(--space-4); /* мітка → заголовок: 16 */
+  }
+
+  .four__intro {
+    color: var(--color-text-secondary);
+  }
+
+  /* Дві однакові колонки однакової висоти: картки ліворуч, фото праворуч */
+  .four__grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 1024px) {
+    .four__grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+  }
+
+  .four__cards {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  /* Картка: відступи 32 з усіх боків (у NumberedCards — 32/28) */
+  .four__card {
+    padding: var(--space-8);
+  }
+
+  /* 4-та картка: роздільник на всю ширину, потім мітка і текст примітки */
+  .four__note {
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  /* Фото: на десктопі — на всю висоту колонки (не розтягує її само); на меншому — 4:3 */
+  .four__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-hairline);
+    aspect-ratio: 4 / 3;
+    max-height: 420px;
+  }
+
+  .four__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1024px) {
+    .four__media {
+      aspect-ratio: auto;
+      max-height: none;
+    }
+
+    .four__media img {
+      position: absolute;
+      inset: 0;
+    }
+  }
+</style>
+
+<script>
+  import '@/scripts/reveal';
+</script>

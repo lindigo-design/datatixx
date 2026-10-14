@@ -4,10 +4,38 @@
   "hero": {
     "label": "Partners",
     "title": "Research, innovation & global reach",
-    "lead": "Trade is the source of all prosperity — so we are inviting its key players, chambers of commerce and translation companies, to be our partners.",
+    "lead": "We partner with those who move the economy forward: trade, education, the press and economic advisory.",
     "primaryCta": "Become a partner",
     "secondaryCta": "Contact us",
     "imageAlt": ""
+  },
+  "fourPartners": {
+    "label": "Our partners",
+    "title": "Four key partners for a smart economy",
+    "intro": "We invite four categories of partners to join us.",
+    "cards": [
+      {
+        "title": "Chambers of commerce",
+        "text": "Because the exchange of goods, services and ideas is the source of all prosperity."
+      },
+      {
+        "title": "Business schools",
+        "text": "Because without education there is no future — and without research there is no progress."
+      },
+      {
+        "title": "Journalist organisations",
+        "text": "Because without a free press there is no democracy."
+      },
+      {
+        "title": "Economic consulting firms",
+        "text": "Because beyond “business intelligence”, the world needs intelligent businesses."
+      }
+    ],
+    "note": {
+      "label": "Country representatives",
+      "text": "We invite them to become our representatives in every country."
+    },
+    "imageAlt": "Historic stone building next to a modern glass façade"
   },
   "chambers": {
     "label": "For chambers of commerce",

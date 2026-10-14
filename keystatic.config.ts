@@ -490,6 +490,27 @@ const statList = (label: string) =>
 const partnersSchema = {
   ...seo,
   hero: heroFields(),
+  fourPartners: fields.object(
+    {
+      label: text('Мітка секції'),
+      title: text('Заголовок'),
+      intro: longText('Підзаголовок'),
+      cards: fields.array(
+        fields.object({ title: text('Заголовок'), text: longText('Текст') }),
+        {
+          label: '4 картки',
+          itemLabel: p => p.fields.title.value,
+          validation: { length: { min: 4, max: 4 } },
+        }
+      ),
+      note: fields.object(
+        { label: text('Мітка'), text: longText('Текст') },
+        { label: 'Примітка в 4-й картці' }
+      ),
+      imageAlt: text('Опис фото'),
+    },
+    { label: '2 · Four key partners' }
+  ),
   chambers: fields.object(
     {
       ...titleFields,
@@ -497,7 +518,7 @@ const partnersSchema = {
       text: text('Другий абзац'),
       cta: text('Кнопка'),
     },
-    { label: '2 · Для торгових палат' }
+    { label: '4 · Для торгових палат' }
   ),
   lsp: fields.object(
     {
@@ -510,9 +531,9 @@ const partnersSchema = {
   ),
   form: fields.object(
     { ...titleFields, lead: longText('Текст біля форми') },
-    { label: '4 · Форма' }
+    { label: '5 · Форма' }
   ),
-  cta: ctaFields('5 · CTA (FAQ редагується на Головній)'),
+  cta: ctaFields('6 · CTA (FAQ редагується на Головній)'),
 };
 
 const chambersSchema = {

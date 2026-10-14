@@ -4,10 +4,38 @@
   "hero": {
     "label": "Partenaires",
     "title": "Recherche, innovation et portée mondiale",
-    "lead": "Le commerce est la source de toute prospérité — c’est pourquoi nous invitons ses acteurs clés, chambres de commerce et sociétés de traduction, à devenir nos partenaires.",
+    "lead": "Nous nous associons à ceux qui font avancer l'économie : le commerce, l'éducation, la presse et le conseil économique.",
     "primaryCta": "Devenir partenaire",
     "secondaryCta": "Nous contacter",
     "imageAlt": ""
+  },
+  "fourPartners": {
+    "label": "Nos partenaires",
+    "title": "Quatre partenaires clés pour une économie intelligente",
+    "intro": "Nous invitons quatre catégories de partenaires à nous rejoindre.",
+    "cards": [
+      {
+        "title": "Les chambres de commerce",
+        "text": "Parce que l’échange de produits, de services et d’idées est la source de toute prospérité."
+      },
+      {
+        "title": "Les écoles de commerce",
+        "text": "Parce que sans éducation, il n’y a pas d’avenir, et sans recherche, il n’y a pas de progrès."
+      },
+      {
+        "title": "Les organisations de journalistes",
+        "text": "Parce que sans presse libre, il n’y a pas de démocratie."
+      },
+      {
+        "title": "Les cabinets de conseil économique",
+        "text": "Parce qu’au-delà de l’« intelligence entreprise », le monde a besoin d’entreprises intelligentes."
+      }
+    ],
+    "note": {
+      "label": "Représentants nationaux",
+      "text": "Ils sont invités à devenir nos représentants dans chaque pays."
+    },
+    "imageAlt": "Bâtiment historique en pierre à côté d’une façade de verre moderne"
   },
   "chambers": {
     "label": "Pour les chambres de commerce",
