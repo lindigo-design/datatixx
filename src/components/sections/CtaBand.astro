@@ -33,9 +33,11 @@ const { data, href } = Astro.props;
 </section>
 
 <style>
+  /* Figma: фон #010912; зверху 64, знизу 96, по боках 64 (на телефоні ~48 / ~48) */
   .cta {
-    /* зверху і знизу однаково: 48px на телефоні → 96px на десктопі */
-    padding-block: clamp(var(--space-12), 6.6vw, 6rem);
+    background: var(--color-bg);
+    padding-top: clamp(var(--space-12), 4.4vw, var(--space-16));
+    padding-bottom: clamp(var(--space-12), 6.6vw, 6rem);
     padding-inline: clamp(var(--space-4), 4.4vw, var(--space-16));
   }
 
@@ -62,7 +64,7 @@ const { data, href } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.25;
+    opacity: 0.2; /* Figma: текстура 20% */
     mix-blend-mode: soft-light;
   }
 
@@ -73,11 +75,16 @@ const { data, href } = Astro.props;
     letter-spacing: -0.015em;
     text-transform: uppercase;
     text-wrap: balance;
+    /* ширина під 2 рядки на всіх сторінках (перевірено EN/FR, 1440/768/390): довгі заголовки
+       ділиться на 2 рядки, короткі лишаються в 1, без «одинокого» слова */
+    max-width: 11em;
   }
 
+  /* Figma: Regular 20 / 28, на всю внутрішню ширину стрічки; рядки рівні на вужчих екранах */
   .cta__text {
     font-size: var(--fs-meta-m);
     line-height: 1.4;
-    max-width: 52ch;
+    max-width: 100%;
+    text-wrap: balance;
   }
 </style>
