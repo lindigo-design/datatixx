@@ -516,9 +516,10 @@ const partnersSchema = {
       ...titleFields,
       lead: longText('Текст'),
       text: text('Другий абзац'),
+      closing: optional('Третій абзац (необовʼязково)'),
       cta: text('Кнопка'),
     },
-    { label: '4 · Для торгових палат' }
+    { label: '3 · Intelligence partners (фото хмарочосів)' }
   ),
   lsp: fields.object(
     {
@@ -527,7 +528,7 @@ const partnersSchema = {
       lead: longText('Підзаголовок'),
       cards: cardList('Картки 01/02/03'),
     },
-    { label: '3 · Для мовних компаній' }
+    { label: '4 · How it works (картки 01–03)' }
   ),
   form: fields.object(
     { ...titleFields, lead: longText('Текст біля форми') },

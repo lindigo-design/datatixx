@@ -293,6 +293,7 @@ const partners = defineCollection({
       ...titled,
       lead: z.string(),
       text: z.string(),
+      closing: z.string().optional(), // третій абзац (необов'язковий)
       cta: z.string(),
     }),
     lsp: z.object({

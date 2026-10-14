@@ -9,6 +9,7 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Button from '@/components/ui/Button.astro';
 import LogoSymbol from '@/assets/icons/logo-symbol.svg';
+import { paragraphs } from '@/utils/text';
 
 interface Props {
   data: {
@@ -17,6 +18,8 @@ interface Props {
     titleAccent: string;
     lead: string;
     text: string;
+    /** Третій абзац (необовʼязковий), стиль як у text */
+    closing?: string;
     cta: string;
   };
   ctaHref: string;
@@ -49,8 +52,12 @@ const { data, ctaHref, image, imageAlt = '' } = Astro.props;
         {`${data.titleStart} `}
         <span class="grad-text">{data.titleAccent}</span>
       </h2>
-      <p class="split__lead">{data.lead}</p>
+      {/* Новий рядок у тексті — новий абзац */}
+      {paragraphs(data.lead).map(p => (
+        <p class="split__lead">{p}</p>
+      ))}
       <p class="split__text">{data.text}</p>
+      {data.closing && <p class="split__text">{data.closing}</p>}
       <div class="actions actions--full">
         <Button href={ctaHref}>{data.cta}</Button>
       </div>

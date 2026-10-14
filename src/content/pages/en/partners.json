@@ -1,6 +1,6 @@
 {
-  "seoTitle": "Partners — Chambers of commerce and translation companies | datixxia™",
-  "seoDescription": "Chambers of commerce and Language Service Providers can partner with datixxia™ to bring forward-looking market intelligence to businesses worldwide.",
+  "seoTitle": "Partners — Chambers of commerce, business schools, press and consulting | datixxia™",
+  "seoDescription": "Chambers of commerce, business schools, journalist organisations and consulting firms can partner with datixxia™ to bring forward-looking intelligence to their networks.",
   "hero": {
     "label": "Partners",
     "title": "Research, innovation & global reach",
@@ -35,34 +35,35 @@
       "label": "Country representatives",
       "text": "We invite them to become our representatives in every country."
     },
-    "imageAlt": "Historic stone building next to a modern glass façade"
+    "imageAlt": ""
   },
   "chambers": {
-    "label": "For chambers of commerce",
+    "label": "For our intelligence partners",
     "titleStart": "Turn data",
     "titleAccent": "into opportunity",
-    "lead": "Designed for Chambers of Commerce, datixxia™ reveals where the economy is heading — months or even years in advance. Anticipate growth sectors, guide local businesses, attract investors, and unlock new revenue channels for your chamber.",
-    "text": "With datixxia™, your organization becomes a trusted source of future economic intelligence.",
+    "lead": "By analysing awarded public contracts, datixxia™ helps you understand economic commitments for the months and years ahead. Support businesses, enrich teaching and research, open new lines of investigation or inform your clients’ decisions.",
+    "text": "As an intelligence partner, share these possibilities with your networks and develop a new source of revenue for your organisation.",
+    "closing": "With datixxia™, put economic intelligence at the service of your mission.",
     "cta": "Explore the benefits of partnering"
   },
   "lsp": {
-    "label": "For translation companies",
+    "label": "How it works",
     "titleStart": "The",
-    "titleAccent": "human layer",
+    "titleAccent": "human network",
     "titleEnd": "of datixxia™",
-    "lead": "Language Service Providers give every business access to datixxia™ — with support by native speakers who know their local market and understand international trade.",
+    "lead": "Our partners bring datixxia™ to their own networks — with local knowledge that no dataset can replace.",
     "cards": [
       {
-        "title": "Platform testing",
-        "text": "Test the application during the development phase — stress-testing the terminal with real-world queries before public launch."
+        "title": "Join the network",
+        "text": "Choose your partner category and agree with us on the framework of our collaboration."
       },
       {
-        "title": "Subscriber support",
-        "text": "Provide first-line support for subscribers by answering their queries — in their own language, with knowledge of their local market."
+        "title": "Share with your network",
+        "text": "Introduce datixxia™ to the people and organisations you work with — in their language, with your local expertise."
       },
       {
-        "title": "Issue reporting",
-        "text": "Report issues directly to the datixxia™ team, helping the platform improve with every release."
+        "title": "Shape the platform",
+        "text": "Share feedback from the field and help datixxia™ improve with every release."
       }
     ]
   },
@@ -74,7 +75,7 @@
   },
   "cta": {
     "title": "Let’s build the future together.",
-    "text": "Join the datixxia™ partner network — chambers of commerce and translation companies welcome.",
+    "text": "Join the datixxia™ intelligence partner network: chambers of commerce, business schools, journalist organisations and economic consulting firms.",
     "button": "Contact us"
   }
 }

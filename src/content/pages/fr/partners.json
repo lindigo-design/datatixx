@@ -1,6 +1,6 @@
 {
-  "seoTitle": "Partenaires datixxia™ — Chambres de commerce et traducteurs",
-  "seoDescription": "Chambres de commerce et sociétés de traduction : devenez partenaires de datixxia™ et apportez aux entreprises une intelligence de marché tournée vers l'avenir.",
+  "seoTitle": "Partenaires — chambres de commerce, écoles, presse et conseil | datixxia™",
+  "seoDescription": "Chambres de commerce, écoles de commerce, presse et cabinets de conseil : devenez partenaire de datixxia™ et partagez une intelligence économique tournée vers l'avenir.",
   "hero": {
     "label": "Partenaires",
     "title": "Recherche, innovation et portée mondiale",
@@ -35,34 +35,35 @@
       "label": "Représentants nationaux",
       "text": "Ils sont invités à devenir nos représentants dans chaque pays."
     },
-    "imageAlt": "Bâtiment historique en pierre à côté d’une façade de verre moderne"
+    "imageAlt": ""
   },
   "chambers": {
-    "label": "Pour les chambres de commerce",
+    "label": "Pour nos partenaires intelligence",
     "titleStart": "Transformez les données",
     "titleAccent": "en opportunités",
-    "lead": "Conçu pour les chambres de commerce, datixxia™ montre où va l'économie, des mois voire des années à l'avance. Anticipez les secteurs porteurs, guidez les entreprises locales, attirez les investisseurs et ouvrez de nouvelles sources de revenus pour votre chambre.",
-    "text": "Avec datixxia™, votre organisation devient une source fiable d'intelligence économique tournée vers l'avenir.",
+    "lead": "Grâce à l’analyse des marchés publics attribués, datixxia™ vous aide à comprendre les engagements économiques pour les mois et les années à venir. Accompagnez les entreprises, enrichissez l’enseignement et la recherche, ouvrez de nouvelles pistes d’investigation ou éclairez les décisions de vos clients.",
+    "text": "En devenant partenaire intelligence, partagez ces possibilités avec vos réseaux et développez une nouvelle source de revenus pour votre organisation.",
+    "closing": "Avec datixxia™, mettez l’intelligence économique au service de votre mission.",
     "cta": "Découvrir les avantages du partenariat"
   },
   "lsp": {
-    "label": "Pour les sociétés de traduction",
-    "titleStart": "La",
-    "titleAccent": "dimension humaine",
+    "label": "Comment ça marche",
+    "titleStart": "Le",
+    "titleAccent": "réseau humain",
     "titleEnd": "de datixxia™",
-    "lead": "Les prestataires de services linguistiques donnent à chaque entreprise accès à datixxia™, avec l'appui de locuteurs natifs qui connaissent leur marché local et comprennent le commerce international.",
+    "lead": "Nos partenaires font connaître datixxia™ au sein de leurs propres réseaux — avec une connaissance du terrain qu'aucune donnée ne remplace.",
     "cards": [
       {
-        "title": "Tests de la plateforme",
-        "text": "Testez l'application pendant sa phase de développement, en éprouvant le terminal avec de vraies requêtes avant le lancement public."
+        "title": "Rejoignez le réseau",
+        "text": "Choisissez votre catégorie de partenaire et définissons ensemble le cadre de notre collaboration."
       },
       {
-        "title": "Assistance aux abonnés",
-        "text": "Assurez l'assistance de premier niveau aux abonnés en répondant à leurs questions, dans leur langue et avec la connaissance de leur marché local."
+        "title": "Partagez avec votre réseau",
+        "text": "Faites découvrir datixxia™ aux personnes et aux organisations avec lesquelles vous travaillez — dans leur langue, avec votre expertise locale."
       },
       {
-        "title": "Signalement des problèmes",
-        "text": "Signalez les problèmes directement à l'équipe datixxia™ et aidez la plateforme à progresser à chaque version."
+        "title": "Faites évoluer la plateforme",
+        "text": "Partagez vos retours du terrain et aidez datixxia™ à progresser à chaque version."
       }
     ]
   },
@@ -74,7 +75,7 @@
   },
   "cta": {
     "title": "Construisons l'avenir ensemble.",
-    "text": "Rejoignez le réseau de partenaires datixxia™ : chambres de commerce et sociétés de traduction bienvenues.",
+    "text": "Rejoignez le réseau de partenaires intelligence datixxia™ : chambres de commerce, écoles de commerce, organisations de journalistes et cabinets de conseil économique.",
     "button": "Nous contacter"
   }
 }
