@@ -21,6 +21,10 @@
   .form__row {
     grid-template-columns: 1fr 1fr;
   }
+  /* поля в одному рядку — на одній лінії, навіть якщо підпис сусіда в 2 рядки */
+  .form__row > .field {
+    align-content: end;
+  }
 }
 
 .field {

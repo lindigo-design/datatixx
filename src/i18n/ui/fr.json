@@ -71,7 +71,7 @@
   "contact.map": "Ouvrir la carte",
   "form.optional": "facultatif",
   "nav.chambers": "Chambres de commerce",
-  "form.hint": "Remplissez tous les champs marqués d'un * et le bouton deviendra actif. Champs restants : {n}.",
+  "form.hint": "Remplissez tous les champs marqués d'un * et le bouton deviendra actif. Champs restants : {n}.",
   "form.doneTitle": "Votre message a bien été envoyé",
   "form.doneText": "Merci ! Nous l'avons bien reçu et vous répondrons rapidement. Nous vous avons aussi envoyé une courte confirmation par e-mail — pensez à vérifier vos spams.",
   "form.doneAgain": "Envoyer un autre message",

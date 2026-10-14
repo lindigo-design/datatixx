@@ -64,9 +64,10 @@ const {
       grid-template-columns: 620fr 540fr;
       gap: var(--space-20);
     }
+    /* Анкета (Chambers): до 1199px — текст над формою, щоб поля не були завузькими */
     .form-section--wide .form-section__inner {
-      grid-template-columns: 440fr 720fr;
-      gap: var(--space-20);
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
     }
     /* «To reply, fill in / the form» — перенос як у макеті, без вирівнювання рядків */
     .form-section--wide .section-title {
@@ -77,6 +78,15 @@ const {
     }
   }
 
+  /* Анкета, Figma: текст 505, проміжок 60, форма 675; форма +10px (495/685),
+     щоб довгі підписи полів вміщалися в один рядок — лише на широких екранах */
+  @media (min-width: 1200px) {
+    .form-section--wide .form-section__inner {
+      grid-template-columns: 495fr 685fr;
+      gap: 60px;
+    }
+  }
+
   .form-section__intro {
     display: grid;
     gap: var(--space-5);
@@ -84,12 +94,17 @@ const {
 
   .form-section__lead {
     color: var(--color-text-secondary);
+    text-wrap: pretty; /* без поодинокого слова в кінці абзацу */
   }
 
   .form-section__text {
     display: grid;
     gap: var(--space-6);
     color: var(--color-text);
+  }
+
+  .form-section__text p {
+    text-wrap: pretty;
   }
 
   .form-section__form :global(form:not(.form-card)) {

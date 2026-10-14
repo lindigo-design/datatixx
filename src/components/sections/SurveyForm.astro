@@ -137,7 +137,7 @@ const pairs: [
 
   <div class="form__row">
     <div class="field">
-      <label for="sv-country">{t('survey.country')} *</label>
+      <label for="sv-country">{t('survey.country')} *</label>
       <select id="sv-country" name="country" autocomplete="country" required>
         <option value="">{t('survey.countryPh')}</option>
         {countries.map(c => (
@@ -164,7 +164,7 @@ const pairs: [
         <div class="field">
           <label for={`sv-${f.name}`}>
             {t(f.label)}
-            {f.required ? ' *' : ''}
+            {f.required ? ' *' : ''}
           </label>
           <input
             id={`sv-${f.name}`}
