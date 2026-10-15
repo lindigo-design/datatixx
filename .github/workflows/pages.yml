@@ -39,7 +39,7 @@ jobs:
           DTX_SITE_URL: https://lindigo-design.github.io
           BASE_PATH: /datatixx
           PUBLIC_PREVIEW: '1'
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
