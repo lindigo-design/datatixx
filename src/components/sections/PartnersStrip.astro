@@ -1,28 +1,42 @@
 ---
 /**
- * Logos — смуга логотипів партнерів: один рядок, безкінечна прокрутка (на всіх екранах).
+ * Logos — стрічка логотипів (Figma «Home • Desktop» → «Logos», node 10369:669).
+ * Один рядок, безкінечна прокрутка; ліворуч і праворуч логотипи напівпрозорі.
  *
- * TODO: ЗАРАЗ ЗАГЛУШКИ з шаблону (Webflow, Relume, OpenAI). Перед запуском —
- * замінити на справжніх партнерів або прибрати секцію з головної.
+ * Розміри — з Figma (висота логотипа, ширина за пропорціями SVG):
+ * Tenderwell 21, OpenAI 31, itransition 22, DevelopmentAid 32 px; на телефоні ~80%.
+ * Різні висоти навмисні: у OpenAI і DevelopmentAid є круглий знак, тож їхня рамка вища за текст.
  *
- * Як додати партнера: імпортувати SVG-логотип і дописати рядок у `partners`.
- * `url` — адреса сайту партнера: є → логотип стає посиланням (нова вкладка), порожньо → просто логотип.
+ * Tenderwell з'явиться сам, щойно в src/assets/icons/ буде tenderwell-logo-on-dark.svg
+ * (світлий напис). Наявний tenderwell-logo-on-light.svg — темний, на цьому фоні невидимий.
+ *
+ * `url` — адреса сайту: є → логотип стає посиланням (нова вкладка), порожньо → просто логотип.
  */
-import Partner1 from '@/assets/icons/partner-1.svg';
-import Partner2 from '@/assets/icons/partner-2.svg';
-import PartnerOpenai from '@/assets/icons/partner-openai.svg';
+import type { ImageMetadata } from 'astro';
+import LogoOpenai from '@/assets/icons/partner-openai.svg';
+import LogoItransition from '@/assets/icons/itransition_logo_white.svg';
+import LogoDevAid from '@/assets/icons/logo-centered-fullcolor-developmentaid.svg';
 
 interface Props {
   label: string;
 }
 const { label } = Astro.props;
 
+type SvgComponent = typeof LogoOpenai;
+const tenderwell = Object.values(
+  import.meta.glob<{ default: SvgComponent | ImageMetadata }>(
+    '/src/assets/icons/tenderwell-logo-on-dark.svg',
+    { eager: true }
+  )
+)[0]?.default as SvgComponent | undefined;
+
 const partners = [
-  { name: 'Webflow', Logo: Partner1, url: '' },
-  { name: 'Relume', Logo: Partner2, url: '' },
-  { name: 'Webflow', Logo: Partner1, url: '' },
-  { name: 'Relume', Logo: Partner2, url: '' },
-  { name: 'OpenAI', Logo: PartnerOpenai, url: '' },
+  ...(tenderwell
+    ? [{ name: 'Tenderwell', Logo: tenderwell, size: 'tw', url: '' }]
+    : []),
+  { name: 'OpenAI', Logo: LogoOpenai, size: 'openai', url: '' },
+  { name: 'itransition', Logo: LogoItransition, size: 'itr', url: '' },
+  { name: 'DevelopmentAid', Logo: LogoDevAid, size: 'devaid', url: '' },
 ];
 
 // Стрічка має бути ширшою за найширший екран, інакше під час прокрутки видно «діру».
@@ -34,6 +48,7 @@ const half = Array.from({ length: repeats }, (_, r) =>
 ).flat();
 ---
 
+{/* TODO: підпис для скрінрідерів — поки «Organisations» (i18n partners.label), доки власник не підтвердить */}
 <section class="partners" aria-label={label}>
   <div class="partners__track">
     {[0, 1].map(copy => (
@@ -42,26 +57,35 @@ const half = Array.from({ length: repeats }, (_, r) =>
         class="partners__list"
         aria-hidden={copy === 1 ? 'true' : undefined}
       >
-        {half.map(({ name, Logo, url, decorative }) => {
+        {half.map(({ name, Logo, size, url, decorative }) => {
           const hidden = copy === 1 || decorative;
           return (
-            <li aria-hidden={hidden && copy === 0 ? 'true' : undefined}>
+            <li
+              class="partners__item"
+              aria-hidden={hidden && copy === 0 ? 'true' : undefined}
+            >
               {url ? (
                 <a
-                  class="partners__item"
+                  class="partners__link"
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={hidden ? undefined : name}
                   tabindex={hidden ? -1 : undefined}
                 >
-                  <Logo class="partners__logo" aria-hidden="true" />
+                  <Logo
+                    class={`partners__logo partners__logo--${size}`}
+                    aria-hidden="true"
+                  />
                 </a>
               ) : (
-                <span class="partners__item">
-                  <Logo class="partners__logo" aria-hidden="true" />
+                <>
+                  <Logo
+                    class={`partners__logo partners__logo--${size}`}
+                    aria-hidden="true"
+                  />
                   {!hidden && <span class="visually-hidden">{name}</span>}
-                </span>
+                </>
               )}
             </li>
           );
@@ -72,20 +96,33 @@ const half = Array.from({ length: repeats }, (_, r) =>
 </section>
 
 <style>
+  /* Фон темний (#001A0A, Figma) — логотипи мають бути СВІТЛИМИ варіантами, темні тут невидимі */
   .partners {
-    background: var(--gradient-band);
+    background: #001a0a;
     padding-block: var(--space-2);
+    min-height: 72px;
+    display: flex;
+    align-items: center;
     overflow: hidden;
+    /* ліворуч і праворуч логотипи напівпрозорі, по центру — повністю видимі */
+    mask-image: linear-gradient(
+      90deg,
+      rgb(0 0 0 / 0.2),
+      #000 20%,
+      #000 80%,
+      rgb(0 0 0 / 0.2)
+    );
   }
 
   .partners__track {
     display: flex;
     width: max-content;
+    flex-shrink: 0; /* інакше стрічка стискається до ширини екрана, а логотипи — до кількох px */
     /* ~3 с на логотип; якщо логотипів стане значно більше — збільшити */
-    animation: partners-scroll 45s linear infinite;
+    animation: partners-scroll 36s linear infinite;
   }
 
-  /* навели мишу / торкнулись — зупинка */
+  /* навели мишу / фокус клавіатурою — зупинка */
   .partners:hover .partners__track,
   .partners:focus-within .partners__track {
     animation-play-state: paused;
@@ -94,34 +131,64 @@ const half = Array.from({ length: repeats }, (_, r) =>
   .partners__list {
     display: flex;
     align-items: center;
-    gap: var(--space-8);
-    min-height: 56px;
+    gap: var(--space-8); /* 32, Figma */
     padding-right: var(
       --space-8
     ); /* такий самий проміжок на стику двох половин */
   }
 
+  /* Обгортка: padding 10, однакова висота для всіх (у Figma 50/56 — неточність макета) */
   .partners__item {
     display: flex;
     align-items: center;
+    min-height: 52px;
+    padding: 10px;
   }
 
-  a.partners__item {
+  .partners__link {
+    display: flex;
+    align-items: center;
     transition: opacity var(--dur-fast) ease;
   }
 
-  a.partners__item:hover {
+  .partners__link:hover {
     opacity: 0.75;
   }
 
+  /* Задаємо лише висоту — ширина за пропорціями SVG */
   .partners__logo {
-    height: 40px;
     width: auto;
+    flex-shrink: 0;
+  }
+  .partners__logo--tw {
+    height: 21px;
+  }
+  .partners__logo--openai {
+    height: 31px;
+  }
+  .partners__logo--itr {
+    height: 22px;
+  }
+  .partners__logo--devaid {
+    height: 32px;
   }
 
   @media (max-width: 639px) {
-    .partners__logo {
-      height: 32px;
+    .partners__list {
+      gap: var(--space-6);
+      padding-right: var(--space-6);
+    }
+    .partners__logo--tw {
+      height: 17px;
+    }
+    .partners__logo--openai {
+      height: 25px;
+    }
+    .partners__logo--itr {
+      height: 18px;
+    }
+    .partners__logo--devaid {
+      height: 26px;
     }
   }
 
