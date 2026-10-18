@@ -89,9 +89,9 @@ const { members } = Astro.props;
 
   .profile__photo {
     width: 100%;
-    aspect-ratio: 550 / 420;
+    aspect-ratio: 1; /* Figma «Team • Desktop (new)»: рамка 550 × 550 */
     object-fit: cover;
-    object-position: center 25%;
+    object-position: 50% 50%;
     border-radius: var(--radius-md);
     border: 1px solid var(--color-hairline);
     margin-bottom: var(--space-2);
