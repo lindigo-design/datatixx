@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
+import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 import { locales, defaultLocale } from './src/i18n/locales.js';
 
@@ -38,6 +39,7 @@ export default defineConfig({
         locales: Object.fromEntries(locales.map(l => [l, l])),
       },
     }),
+    markdoc(), // статті блогу (.mdoc)
     ...(isDev ? [react(), keystatic()] : []),
   ],
 

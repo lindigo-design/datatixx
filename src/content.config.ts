@@ -439,7 +439,114 @@ const legal = defineCollection({
   }),
 });
 
+// ---------- Блог: статті (Markdoc) ----------
+export const blogCategories = [
+  'market-insights',
+  'public-procurement',
+  'sector-forecasts',
+  'guides-methods',
+  'building-datixxia',
+] as const;
+
+const blog = defineCollection({
+  loader: glob({ pattern: '*/*.mdoc', base: './src/content/blog' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(), // повна назва — «dek» у hero і заголовок у картках
+      displayTitle: z.string(), // короткий журнальний заголовок H1 статті
+      translationKey: z.string(), // однаковий у EN і FR версіях однієї статті
+      category: z.enum(blogCategories),
+      date: z.coerce.date(),
+      updated: z.coerce.date().nullish(),
+      excerpt: z.string().max(170),
+      lead: z.string(),
+      cover: image(),
+      coverAlt: z.string(),
+      author: z.string().default('DataTixx team'),
+      authorBio: z.string().nullish(),
+      tags: z.array(z.string()).default([]),
+      linkedinUrl: link.nullish(),
+      draft: z.boolean().default(true),
+    }),
+});
+
+// ---------- Блог: тексти сторінки (src/content/pages/<мова>/blog.json) ----------
+const blogPage = defineCollection({
+  loader: glob({ pattern: '*/blog.json', base: './src/content/pages' }),
+  schema: ({ image }) =>
+    z.object({
+      ...seo,
+      hero: z.object({
+        label: z.string(),
+        title: z.string(),
+        lead: z.string(),
+        latest: z.string(),
+        readArticle: z.string(),
+      }),
+      topics: z.object({
+        label: z.string(),
+        title: z.string(),
+        browseAll: z.string(),
+        articles: z.string(),
+        prev: z.string(),
+        next: z.string(),
+      }),
+      latest: z.object({
+        label: z.string(),
+        title: z.string(),
+        searchPlaceholder: z.string(),
+        all: z.string(),
+        loadMore: z.string(),
+        empty: z.string(),
+        clear: z.string(),
+        results: z.string(),
+        comingSoon: z.string(),
+      }),
+      newsletter: z.object({
+        label: z.string(),
+        title: z.string(),
+        text: z.string(),
+        placeholder: z.string(),
+        button: z.string(),
+        note: z.string(),
+        noteLink: z.string(),
+        soon: z.string(),
+      }),
+      article: z.object({
+        back: z.string(),
+        share: z.string(),
+        copyLink: z.string(),
+        copied: z.string(),
+        writtenBy: z.string(),
+        inThisArticle: z.string(),
+        minRead: z.string(),
+        keyTakeaway: z.string(),
+        takeawayFootnote: z.string(),
+        authorBio: z.string(),
+        keepReading: z.string(),
+        allArticles: z.string(),
+        discussTitle: z.string(),
+        discussText: z.string(),
+        discussLinkedin: z.string(),
+        askQuestion: z.string(),
+      }),
+      categories: z
+        .array(
+          z.object({
+            key: z.enum(blogCategories),
+            name: z.string(),
+            description: z.string(),
+            image: image(),
+            imageAlt: z.string(),
+          })
+        )
+        .length(5),
+    }),
+});
+
 export const collections = {
+  blog,
+  blogPage,
   legal,
   home,
   about,

@@ -1,4 +1,5 @@
-import { config, fields, singleton } from '@keystatic/core';
+import { collection, config, fields, singleton } from '@keystatic/core';
+import { block, wrapper } from '@keystatic/core/content-components';
 import { locales } from './src/i18n/locales.js';
 
 /*
@@ -735,6 +736,249 @@ const pageSingletons = Object.fromEntries(
   ])
 );
 
+// ---------- Блог ----------
+const blogCategoryOptions = [
+  { label: 'Market insights / Analyses de marché', value: 'market-insights' },
+  {
+    label: 'Public procurement / Marchés publics',
+    value: 'public-procurement',
+  },
+  {
+    label: 'Sector forecasts / Prévisions sectorielles',
+    value: 'sector-forecasts',
+  },
+  { label: 'Guides & methods / Guides et méthodes', value: 'guides-methods' },
+  {
+    label: 'Building datixxia™ / Construire datixxia™',
+    value: 'building-datixxia',
+  },
+] as const;
+
+// Зображення статей: завантажуються в src/assets/img/blog/ і оптимізуються Astro
+const blogImageDir = 'src/assets/img/blog';
+
+const blogCollection = (lang: (typeof locales)[number]) =>
+  collection({
+    label: `Blog (${lang.toUpperCase()})`,
+    path: `src/content/blog/${lang}/*`,
+    slugField: 'title',
+    format: { contentField: 'body' },
+    entryLayout: 'content',
+    columns: ['displayTitle', 'date'],
+    schema: {
+      title: fields.slug({
+        name: {
+          label: 'Повна назва (dek у hero, заголовок у картках)',
+          validation: { length: { min: 1 } },
+        },
+        slug: { label: 'Адреса статті (slug)' },
+      }),
+      displayTitle: text('Короткий заголовок H1 статті'),
+      translationKey: text(
+        'Ключ перекладу',
+        'Однаковий у EN і FR версіях однієї статті — так сайт знаходить переклад'
+      ),
+      category: fields.select({
+        label: 'Категорія',
+        options: [...blogCategoryOptions],
+        defaultValue: 'market-insights',
+      }),
+      date: fields.date({
+        label: 'Дата публікації',
+        validation: { isRequired: true },
+      }),
+      updated: fields.date({ label: 'Оновлено (необовʼязково)' }),
+      excerpt: fields.text({
+        label: 'Короткий опис (≤ 170 символів)',
+        description: 'Картки, опис для Google і «In this article» у hero',
+        multiline: true,
+        validation: { length: { min: 1, max: 170 } },
+      }),
+      lead: longText('Вступ (великий текст перед статтею)'),
+      cover: fields.image({
+        label: 'Обкладинка',
+        directory: blogImageDir,
+        publicPath: '../../../assets/img/blog/',
+        validation: { isRequired: true },
+      }),
+      coverAlt: text('Опис обкладинки для незрячих'),
+      author: fields.text({
+        label: 'Автор',
+        defaultValue: lang === 'fr' ? 'L’équipe DataTixx' : 'DataTixx team',
+      }),
+      authorBio: optional('Про автора (необовʼязково)'),
+      tags: fields.array(text('Тег'), {
+        label: 'Теги',
+        itemLabel: p => p.value,
+      }),
+      linkedinUrl: fields.url({
+        label: 'Пост у LinkedIn про цю статтю (необовʼязково)',
+      }),
+      draft: fields.checkbox({
+        label: 'Чернетка (не показувати на сайті)',
+        defaultValue: true,
+      }),
+      body: fields.markdoc({
+        label: 'Текст статті',
+        options: {
+          image: {
+            directory: blogImageDir,
+            publicPath: '/src/assets/img/blog/',
+          },
+        },
+        components: {
+          split: wrapper({
+            label: 'Текст + зображення',
+            description: 'Абзаци всередині блоку — текст біля зображення',
+            schema: {
+              label: optional('Мітка (напр. «01 — The data»)'),
+              title: text('Заголовок'),
+              titleAccent: optional('Частина заголовка з градієнтом'),
+              image: fields.image({
+                label: 'Зображення',
+                directory: blogImageDir,
+                publicPath: '/src/assets/img/blog/',
+                validation: { isRequired: true },
+              }),
+              imageAlt: text('Опис зображення'),
+              reverse: fields.checkbox({
+                label: 'Зображення ліворуч',
+                defaultValue: false,
+              }),
+            },
+          }),
+          takeaway: block({
+            label: 'Key takeaway',
+            description: 'Темна смуга з головною думкою',
+            schema: {
+              label: optional(
+                'Мітка (порожньо = «Key takeaway» / «À retenir»)'
+              ),
+              text: longText('Головна думка'),
+              footnote: optional('Примітка (порожньо — стандартна)'),
+            },
+          }),
+        },
+      }),
+    },
+  });
+
+const blogCollections = Object.fromEntries(
+  locales.map(lang => [`blog_${lang}`, blogCollection(lang)])
+);
+
+// Тексти сторінки блогу (src/content/pages/<мова>/blog.json)
+const blogPageSchema = {
+  ...seo,
+  hero: fields.object(
+    {
+      label: text('Мітка'),
+      title: text('Заголовок H1'),
+      lead: longText('Текст праворуч'),
+      latest: text('Мітка «Latest» на картці'),
+      readArticle: text('Кнопка «Read article →»'),
+    },
+    { label: '1 · Hero' }
+  ),
+  topics: fields.object(
+    {
+      label: text('Мітка'),
+      title: text('Заголовок'),
+      browseAll: text('Кнопка «Browse all articles»'),
+      articles: text('Кількість статей ({n} — число)'),
+      prev: text('Кнопка ← (для скрінрідерів)'),
+      next: text('Кнопка → (для скрінрідерів)'),
+    },
+    { label: '2 · Topics' }
+  ),
+  latest: fields.object(
+    {
+      label: text('Мітка'),
+      title: text('Заголовок'),
+      searchPlaceholder: text('Підказка в полі пошуку'),
+      all: text('Фільтр «All»'),
+      loadMore: text('Кнопка «Load more»'),
+      empty: text('Нічого не знайдено'),
+      clear: text('Кнопка «Clear filters»'),
+      results: text('Знайдено ({n} — число)'),
+      comingSoon: text('Ще немає статей'),
+    },
+    { label: '3 · Latest articles' }
+  ),
+  newsletter: fields.object(
+    {
+      label: text('Мітка'),
+      title: text('Заголовок'),
+      text: longText('Текст'),
+      placeholder: text('Підказка в полі e-mail'),
+      button: text('Кнопка'),
+      note: text('Примітка під формою'),
+      noteLink: text(
+        'Частина примітки, що стає посиланням на Privacy Policy',
+        'Має точно збігатися з текстом у примітці'
+      ),
+      soon: text('Повідомлення «скоро відкриємо»'),
+    },
+    { label: '4 · Newsletter' }
+  ),
+  article: fields.object(
+    {
+      back: text('«← Blog»'),
+      share: text('«Share»'),
+      copyLink: text('«Copy link»'),
+      copied: text('«Link copied»'),
+      writtenBy: text('«Written by»'),
+      inThisArticle: text('«In this article:»'),
+      minRead: text('«min read»'),
+      keyTakeaway: text('Мітка «Key takeaway»'),
+      takeawayFootnote: text('Стандартна примітка під «Key takeaway»'),
+      authorBio: text('Стандартний опис автора'),
+      keepReading: text('«Keep reading»'),
+      allArticles: text('«All articles»'),
+      discussTitle: text('«Join the discussion»'),
+      discussText: longText('Текст блоку обговорення'),
+      discussLinkedin: text('Кнопка «Discuss on LinkedIn»'),
+      askQuestion: text('Кнопка «Ask a question»'),
+    },
+    { label: '5 · Сторінка статті' }
+  ),
+  categories: fields.array(
+    fields.object({
+      key: fields.select({
+        label: 'Категорія',
+        options: [...blogCategoryOptions],
+        defaultValue: 'market-insights',
+      }),
+      name: text('Назва'),
+      description: longText('Опис (зʼявляється при наведенні)'),
+      image: fields.image({
+        label: 'Зображення картки',
+        directory: blogImageDir,
+        publicPath: '../../../assets/img/blog/',
+        validation: { isRequired: true },
+      }),
+      imageAlt: text('Опис зображення'),
+    }),
+    {
+      label: '6 · Категорії (5)',
+      itemLabel: p => p.fields.name.value,
+      validation: { length: { min: 5, max: 5 } },
+    }
+  ),
+};
+
+const blogPageSingletons = Object.fromEntries(
+  locales.map(lang => [
+    `blog_page_${lang}`,
+    singleton({
+      label: `Blog page · ${lang.toUpperCase()}`,
+      path: `src/content/pages/${lang}/blog`,
+      format: { data: 'json' },
+      schema: blogPageSchema,
+    }),
+  ])
+);
+
 export default config({
   storage: { kind: 'local' },
   ui: {
@@ -742,8 +986,13 @@ export default config({
     navigation: {
       Компанія: ['settings'],
       Сторінки: Object.keys(pageSingletons),
+      Блог: [
+        ...Object.keys(blogCollections),
+        ...Object.keys(blogPageSingletons),
+      ],
     },
   },
+  collections: blogCollections,
   singletons: {
     settings: singleton({
       label: 'Дані компанії, соцмережі, тікер',
@@ -805,5 +1054,6 @@ export default config({
       },
     }),
     ...pageSingletons,
+    ...blogPageSingletons,
   },
 });

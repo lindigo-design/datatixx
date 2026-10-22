@@ -29,6 +29,17 @@ interface Props {
   ogImage?: string;
   /** Сховати сторінку від Google (для чернеток) */
   noindex?: boolean;
+  /**
+   * Версії сторінки іншими мовами (для hreflang), якщо адреси відрізняються —
+   * статті блогу мають різні slug. Без цього: та сама адреса з іншою мовою.
+   */
+  alternates?: Partial<Record<Locale, string>>;
+  /** Куди веде перемикач мов, якщо перекладу немає (напр. на блог іншою мовою) */
+  langLinks?: Partial<Record<Locale, string>>;
+  /** Клас для <main>: 'theme-light' — світла тема блогу */
+  mainClass?: string;
+  /** Тип сторінки для LinkedIn/Facebook */
+  ogType?: 'website' | 'article';
 }
 
 const {
@@ -37,7 +48,14 @@ const {
   description,
   ogImage = '/og-image.png',
   noindex: noindexProp = false,
+  alternates = Object.fromEntries(
+    locales.map(l => [l, switchLocale(Astro.url.pathname, l)])
+  ) as Partial<Record<Locale, string>>,
+  langLinks = alternates,
+  ogType = 'website',
+  mainClass,
 } = Astro.props;
+const alternateLinks = Object.entries(alternates) as [Locale, string][];
 // Попередній перегляд на GitHub Pages ховаємо від Google, щоб він не конкурував з datatixx.com
 const noindex = noindexProp || import.meta.env.PUBLIC_PREVIEW === '1';
 const t = useTranslations(lang);
@@ -80,25 +98,23 @@ const organizationLd = {
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     {/* Та сама сторінка іншими мовами — для Google */}
-    {locales.map(l => (
+    {alternateLinks.map(([l, path]) => (
+      <link rel="alternate" hreflang={l} href={new URL(path, Astro.site)} />
+    ))}
+    {alternates.en && (
       <link
         rel="alternate"
-        hreflang={l}
-        href={new URL(switchLocale(Astro.url.pathname, l), Astro.site)}
+        hreflang="x-default"
+        href={new URL(alternates.en, Astro.site)}
       />
-    ))}
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={new URL(switchLocale(Astro.url.pathname, 'en'), Astro.site)}
-    />
+    )}
 
     <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
     <meta name="theme-color" content="#010912" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
     {/* Як сторінка виглядає при поширенні в LinkedIn */}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.brandName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -118,9 +134,9 @@ const organizationLd = {
       {t('skipToContent')}
     </a>
     <IntroLoader />
-    <Header lang={lang} />
+    <Header lang={lang} langLinks={langLinks} />
     <TickerBar lang={lang} />
-    <main id="main" tabindex="-1">
+    <main id="main" tabindex="-1" class={mainClass}>
       <slot />
     </main>
     <Footer lang={lang} />

@@ -94,14 +94,39 @@ const socials = [
         <ul role="list" class="footer__menu">
           {items.map(item => {
             const href = localizePath(item.path, lang);
+            // Partners підсвічується і тоді, коли відкрита його підсторінка Chambers
+            const childActive = item.children?.some(
+              sub => localizePath(sub.path, lang) === current
+            );
             return (
               <li>
                 <a
+                  class:list={[childActive && 'is-parent-active']}
                   href={href}
                   aria-current={isCurrent(item.path, href) ? 'page' : undefined}
                 >
                   {t(item.key)}
                 </a>
+                {item.children && (
+                  <ul role="list" class="footer__sub">
+                    {item.children.map(sub => {
+                      const subHref = localizePath(sub.path, lang);
+                      return (
+                        <li>
+                          <a
+                            class="footer__sublink"
+                            href={subHref}
+                            aria-current={
+                              current === subHref ? 'page' : undefined
+                            }
+                          >
+                            {t(sub.key)}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
               </li>
             );
           })}
@@ -173,7 +198,8 @@ const socials = [
 
   @media (min-width: 1200px) {
     .footer__top {
-      grid-template-columns: 517fr 371fr 256fr;
+      /* меню — рівно за найдовшим пунктом, решту ділять логотип і контакти */
+      grid-template-columns: minmax(0, 517fr) minmax(0, 371fr) max-content;
       gap: var(--space-16);
     }
     .footer__logo {
@@ -239,29 +265,46 @@ const socials = [
     align-content: start;
   }
 
-  /* 9 пунктів: на широких екранах — 2 колонки по 5 */
-  @media (min-width: 64em) {
-    .footer__menu {
-      grid-template-rows: repeat(5, auto);
-      grid-auto-flow: column;
-      column-gap: var(--space-8);
-    }
-  }
-
-  /* Активна сторінка у футері: зелений текст і риска ліворуч */
-  .footer__menu a[aria-current='page'] {
+  /* Активна сторінка у футері: зелений текст і риска ліворуч.
+     Батьківський пункт (Partners на сторінці Chambers) — лише зелений, без риски. */
+  .footer__menu > li > a[aria-current='page'],
+  .footer__menu > li > a.is-parent-active {
     color: var(--color-green);
   }
 
-  .footer__menu a[aria-current='page']::before {
+  .footer__menu > li > a[aria-current='page']::before {
     content: '— ';
   }
 
-  .footer__menu a {
+  .footer__menu > li > a {
     display: block;
     padding-block: var(--space-2);
     font-size: var(--fs-body);
     font-weight: var(--fw-semibold);
+    white-space: nowrap;
+  }
+
+  /* Підпункт (Chambers під Partners): менший, світліший, з відступом і стрілкою ↳ */
+  .footer__sublink {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-block: var(--space-1) var(--space-2);
+    padding-left: var(--space-4);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+  }
+
+  .footer__sublink::before {
+    content: '↳';
+    color: var(--color-green);
+  }
+
+  .footer__sublink:hover,
+  .footer__sublink[aria-current='page'] {
+    color: var(--color-green);
   }
 
   .footer__bottom {

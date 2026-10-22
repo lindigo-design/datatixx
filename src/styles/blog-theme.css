@@ -1,0 +1,75 @@
+/*
+  Світла тема блогу: <main class="theme-light"> (шапка й футер лишаються темними).
+  Кольори — токени --light-* у tokens.css.
+*/
+.theme-light {
+  --color-focus: var(--light-label);
+  /* Заголовки блогу: H2 48 px, назви карток */
+  --fs-blog-h2: clamp(2rem, 1.6rem + 1.8vw, 3rem); /* 32 → 48 */
+
+  color-scheme: light;
+  background: var(--light-bg);
+  color: var(--light-text);
+}
+
+.theme-light ::selection {
+  background: var(--color-green);
+  color: var(--light-surface);
+}
+
+/* Мітка секції на світлому: Afacad Medium 16 / 150 %, +16 %, великими, зелена темніша */
+.theme-light .section-label {
+  line-height: var(--lh-body);
+  color: var(--light-label);
+}
+
+.theme-light .section-title {
+  color: var(--light-ink);
+}
+
+/* Мітка категорії в картках і списках: Medium 12, +12 %, великими */
+.post-category {
+  font-size: var(--fs-meta-s);
+  font-weight: var(--fw-medium);
+  line-height: 1.33;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--light-label);
+}
+
+/* Мета статті: «15 OCT 2026 • 8 MIN READ» — IBM Plex Mono 12, +6 % */
+.post-meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta-s);
+  line-height: 1.33;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--light-muted);
+}
+
+/* Контурна кнопка-«пігулка» на світлому фоні */
+.pill-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--light-border-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--light-ink);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) ease,
+    background-color var(--dur-fast) ease;
+}
+
+.pill-outline:hover {
+  border-color: var(--light-ink);
+  background: var(--light-surface);
+}

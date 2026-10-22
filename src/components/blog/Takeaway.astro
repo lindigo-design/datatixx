@@ -1,0 +1,24 @@
+---
+/**
+ * Темна смуга «Key takeaway» — Markdoc-тег {% takeaway text="…" /%}.
+ * Підпис і примітка за замовчуванням — з blog.json (article.keyTakeaway / article.takeawayFootnote).
+ * Дизайн за Figma «Blog Article • Desktop (light)» — етап 3.
+ */
+import { getBlogPage } from '@/content/blog';
+import { isLocale } from '@/i18n/utils';
+
+interface Props {
+  label?: string;
+  text: string;
+  footnote?: string;
+}
+const { label, text, footnote } = Astro.props;
+const lang = isLocale(Astro.currentLocale) ? Astro.currentLocale : 'en';
+const page = await getBlogPage(lang);
+---
+
+<aside class="takeaway" aria-label={label || page.article.keyTakeaway}>
+  <p class="takeaway__label">{label || page.article.keyTakeaway}</p>
+  <p class="takeaway__text">{text}</p>
+  <p class="takeaway__footnote">{footnote || page.article.takeawayFootnote}</p>
+</aside>

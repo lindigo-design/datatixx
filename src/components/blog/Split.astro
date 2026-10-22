@@ -1,0 +1,62 @@
+---
+/**
+ * Блок статті «текст + зображення» — Markdoc-тег {% split %} (див. markdoc.config.mjs).
+ * Абзаци — вміст тегу (slot). Зображення — шлях у src/assets/img/…, оптимізується Astro.
+ * Дизайн за Figma «Blog Article • Desktop (light)» — етап 3.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  label?: string;
+  title: string;
+  titleAccent?: string;
+  image: string;
+  imageAlt?: string;
+  reverse?: boolean;
+}
+const {
+  label,
+  title,
+  titleAccent,
+  image,
+  imageAlt = '',
+  reverse,
+} = Astro.props;
+
+// Підвантажуємо лише потрібне зображення (не всі картинки сайту)
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/img/**/*.{jpg,jpeg,png,webp}'
+);
+const key = image.startsWith('/') ? image : `/${image}`;
+const src = images[key] ? (await images[key]()).default : undefined;
+if (!src) {
+  throw new Error(`Блок split: зображення не знайдено — ${image}`);
+}
+---
+
+<section class:list={['split-block', reverse && 'split-block--reverse']}>
+  <div class="split-block__text">
+    {label && <p class="split-block__label">{label}</p>}
+    <h2 class="split-block__title">
+      {title}
+      {titleAccent && (
+        <>
+          {' '}
+          <span class="split-block__accent">{titleAccent}</span>
+        </>
+      )}
+    </h2>
+    <div class="split-block__body">
+      <slot />
+    </div>
+  </div>
+  <Image
+    src={src}
+    alt={imageAlt}
+    class="split-block__image"
+    widths={[560, 1120]}
+    sizes="(min-width: 1024px) 560px, 100vw"
+    loading="lazy"
+  />
+</section>

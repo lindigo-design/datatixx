@@ -37,6 +37,21 @@
   --color-green-10: rgb(66 170 57 / 0.1);
   --color-ticker-bg: rgb(22 27 34 / 0.2);
 
+  /* Світла тема блогу (main.theme-light) — Figma «Blog • Desktop (light)» */
+  --light-bg: #f3f4f6;
+  --light-surface: #ffffff;
+  --light-ink: #0d1117; /* заголовки */
+  --light-text: #374151; /* текст статті */
+  --light-text-strong: #1f2937; /* перший абзац блоку split */
+  --light-text-secondary: #4b5563;
+  --light-muted: #6b7280; /* дати, мета */
+  --light-divider: rgb(13 17 23 / 0.1);
+  --light-border: rgb(13 17 23 / 0.12); /* чипи, поля */
+  --light-border-strong: rgb(13 17 23 / 0.2); /* контурні кнопки */
+  --light-label: #2e8a27; /* зелений темніший за брендовий — для контрасту на світлому */
+  --color-green-soft: #7cd46f; /* зелений на темних фото */
+  --color-text-faint: #8a919c;
+
   /* Градієнти */
   --gradient-brand: linear-gradient(90deg, #42aa39 0%, #2e509d 100%);
   --gradient-band: linear-gradient(90deg, #42aa39 0%, #27509e 100%);

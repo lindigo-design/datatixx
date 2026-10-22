@@ -32,8 +32,11 @@ export const footerNav: readonly NavItem[] = [
   { key: 'nav.about', path: 'about' },
   { key: 'nav.platform', path: 'platform' },
   { key: 'nav.benefits', path: 'benefits' },
-  { key: 'nav.partners', path: 'partners' },
-  { key: 'nav.chambers', path: 'chambers' },
+  {
+    key: 'nav.partners',
+    path: 'partners',
+    children: [{ key: 'nav.chambers', path: 'chambers' }],
+  },
   { key: 'nav.blog', path: 'blog', requires: 'blog' },
   { key: 'nav.team', path: 'team' },
   { key: 'nav.contact', path: 'contact' },

@@ -15,8 +15,10 @@ import { getSiteSettings, hasPublishedPosts } from '@/content/helpers';
 
 interface Props {
   lang: Locale;
+  /** Куди веде перемикач мов (для статей блогу — на переклад статті) */
+  langLinks?: Partial<Record<Locale, string>>;
 }
-const { lang } = Astro.props;
+const { lang, langLinks } = Astro.props;
 const t = useTranslations(lang);
 const site = await getSiteSettings();
 const current = Astro.url.pathname;
@@ -46,7 +48,7 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
           {t('nav.login')}
         </a>
       )}
-      <LanguageSwitcher lang={lang} />
+      <LanguageSwitcher lang={lang} links={langLinks} />
       <button
         class="nav__burger"
         type="button"

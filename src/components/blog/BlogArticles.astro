@@ -1,0 +1,592 @@
+---
+/**
+ * «Latest articles» (id="articles"): пошук, фільтр за категорією, «Load more».
+ * Звичайний вигляд — велика картка 2-ї статті + список наступних 4 (1-ша — у hero).
+ * Обрано категорію або є запит — сітка карток з усіх статей (разом з hero), по 6.
+ * Без JavaScript видно всі статті (фільтри просто не працюють).
+ * Стан у адресі: ?category=…&q=…
+ */
+import { Image } from 'astro:assets';
+import SearchIcon from '@/assets/icons/search.svg';
+import PostCard from '@/components/blog/PostCard.astro';
+import { postMeta, postUrl, type Post } from '@/content/blog';
+import { normalizeSearch } from '@/scripts/normalize';
+
+interface Props {
+  posts: Post[];
+  latest: {
+    label: string;
+    title: string;
+    searchPlaceholder: string;
+    all: string;
+    loadMore: string;
+    empty: string;
+    clear: string;
+    results: string;
+  };
+  filterLabel: string;
+  minRead: string;
+  categories: { key: string; name: string }[];
+}
+
+const { posts, latest, filterLabel, minRead, categories } = Astro.props;
+const PER_PAGE = 6;
+const nameOf = (key: string) => categories.find(c => c.key === key)?.name ?? '';
+
+// 1-ша — у hero, 2-га — велика картка, 3–6 — список; решта — у сітці під ними
+const featured = posts[1];
+const list = posts.slice(2, 6);
+const defaultCount = Math.min(posts.length, 6);
+
+const searchText = (post: Post) =>
+  normalizeSearch(
+    [
+      post.data.title,
+      post.data.displayTitle,
+      post.data.excerpt,
+      ...post.data.tags,
+      nameOf(post.data.category),
+    ].join(' ')
+  );
+---
+
+<section
+  id="articles"
+  class="articles"
+  aria-labelledby="articles-title"
+  data-articles
+  data-per-page={PER_PAGE}
+  data-default-count={defaultCount}
+  data-results={latest.results}
+>
+  <div class="container articles__inner">
+    <div class="articles__head">
+      <div class="articles__titles">
+        <p class="section-label">{latest.label}</p>
+        <h2 id="articles-title" class="articles__title">
+          {latest.title}
+        </h2>
+      </div>
+      <form class="search" role="search" data-search-form>
+        <label class="visually-hidden" for="blog-search">
+          {latest.searchPlaceholder}
+        </label>
+        <SearchIcon class="search__icon" aria-hidden="true" />
+        <input
+          id="blog-search"
+          class="search__input"
+          type="search"
+          name="q"
+          placeholder={latest.searchPlaceholder}
+          autocomplete="off"
+          data-search
+        />
+      </form>
+    </div>
+
+    <div class="filters" role="group" aria-label={filterLabel}>
+      <button
+        class="filter"
+        type="button"
+        aria-pressed="true"
+        data-filter="all"
+      >
+        {latest.all}
+      </button>
+      {categories.map(c => (
+        <button
+          class="filter"
+          type="button"
+          aria-pressed="false"
+          data-filter={c.key}
+        >
+          {c.name}
+        </button>
+      ))}
+    </div>
+
+    <p class="visually-hidden" aria-live="polite" data-status></p>
+
+    {featured && (
+      <div class="overview" data-overview>
+        <a class="big-card" href={postUrl(featured)}>
+          <Image
+            class="big-card__img"
+            src={featured.data.cover}
+            alt=""
+            widths={[600, 740, 1480]}
+            sizes="(min-width: 1440px) 740px, (min-width: 1024px) 58vw, 100vw"
+            loading="lazy"
+          />
+          <span class="big-card__chip">
+            <span class="big-card__dot" aria-hidden="true" />
+            {nameOf(featured.data.category)}
+          </span>
+          <h3 class="big-card__title">{featured.data.title}</h3>
+          <span class="big-card__meta">{postMeta(featured, minRead)}</span>
+        </a>
+
+        {list.length > 0 && (
+          <ul role="list" class="rows">
+            {list.map(post => (
+              <li>
+                <a class="row" href={postUrl(post)}>
+                  <Image
+                    class="row__img"
+                    src={post.data.cover}
+                    alt=""
+                    widths={[112, 224]}
+                    sizes="112px"
+                    loading="lazy"
+                  />
+                  <span class="row__text">
+                    <span class="post-category">
+                      {nameOf(post.data.category)}
+                    </span>
+                    <h3 class="row__title">{post.data.title}</h3>
+                    <span class="post-meta">{postMeta(post, minRead)}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    )}
+
+    <ul role="list" class="grid" data-grid>
+      {posts.map((post, i) => (
+        <li
+          data-item
+          data-category={post.data.category}
+          data-text={searchText(post)}
+          hidden={i < defaultCount}
+        >
+          <PostCard
+            post={post}
+            categoryName={nameOf(post.data.category)}
+            minRead={minRead}
+          />
+        </li>
+      ))}
+    </ul>
+
+    <div class="empty" hidden data-empty>
+      <p>{latest.empty}</p>
+      <button class="pill-outline" type="button" data-clear>
+        {latest.clear}
+      </button>
+    </div>
+
+    <button class="pill-outline more" type="button" hidden data-more>
+      {latest.loadMore}
+    </button>
+  </div>
+</section>
+
+<style>
+  .articles {
+    padding-bottom: clamp(4rem, 3.11rem + 3.95vw, 7rem); /* 64 → 112 */
+    scroll-margin-top: var(--nav-h);
+  }
+
+  .articles__inner {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .articles__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .articles__titles {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .articles__title {
+    font-size: var(--fs-blog-h2);
+    font-weight: var(--fw-bold);
+    line-height: 1;
+    color: var(--light-ink);
+  }
+
+  /* ---------- Пошук ---------- */
+  .search {
+    position: relative;
+    width: min(460px, 100%);
+  }
+
+  .search__icon {
+    position: absolute;
+    top: 50%;
+    left: var(--space-5);
+    width: 20px;
+    height: 20px;
+    color: var(--light-muted);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .search__input {
+    width: 100%;
+    height: 52px;
+    padding: 14px var(--space-5) 14px 52px;
+    border: 1px solid var(--light-border);
+    border-radius: var(--radius-pill);
+    background: var(--light-surface);
+    color: var(--light-ink);
+    font: inherit;
+    font-size: var(--fs-body);
+  }
+
+  .search__input::placeholder {
+    color: var(--light-muted);
+    opacity: 1;
+  }
+
+  .search__input:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Фільтри ---------- */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: calc(-1 * var(--space-4)); /* ближче до шапки секції */
+  }
+
+  .filter {
+    min-height: 44px;
+    padding: 10px 18px;
+    border: 1px solid var(--light-border);
+    border-radius: var(--radius-pill);
+    background: var(--light-surface);
+    color: var(--light-ink);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-medium);
+    line-height: 1.3;
+    cursor: pointer;
+    transition:
+      background-color var(--dur-fast) ease,
+      border-color var(--dur-fast) ease,
+      color var(--dur-fast) ease;
+  }
+
+  .filter:hover {
+    border-color: var(--light-ink);
+  }
+
+  .filter[aria-pressed='true'] {
+    border-color: var(--light-ink);
+    background: var(--light-ink);
+    color: var(--light-surface);
+  }
+
+  /* Без JavaScript фільтри не працюють — не показуємо їх і пошук */
+  .articles:not(.is-ready) .search,
+  .articles:not(.is-ready) .filters {
+    display: none;
+  }
+
+  /* ---------- Звичайний вигляд: велика картка + список ---------- */
+  .overview {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  @media (min-width: 1024px) {
+    .overview {
+      grid-template-columns: minmax(0, 740fr) minmax(0, 460fr);
+      align-items: start;
+    }
+  }
+
+  .big-card {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 14px;
+    min-height: clamp(26rem, 19rem + 18vw, 37.5rem); /* 416 → 600 */
+    padding: var(--space-8);
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    background: var(--color-bg);
+  }
+
+  .big-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      180deg,
+      rgb(1 9 18 / 0) 40%,
+      rgb(1 9 18 / 0.9) 100%
+    );
+  }
+
+  .big-card__img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms var(--ease-out);
+  }
+
+  .big-card:hover .big-card__img,
+  .big-card:focus-visible .big-card__img {
+    transform: scale(1.03);
+  }
+
+  .big-card__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 6px 14px 6px 12px;
+    border-radius: var(--radius-pill);
+    background: rgb(255 255 255 / 0.92);
+    color: var(--light-ink);
+    font-size: var(--fs-label-14);
+    font-weight: var(--fw-medium);
+    line-height: 1.3;
+  }
+
+  .big-card__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-green);
+  }
+
+  .big-card__title {
+    font-size: clamp(1.5rem, 1.2rem + 1.3vw, 2.25rem); /* 24 → 36 */
+    font-weight: var(--fw-semibold);
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  .big-card__meta {
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-s);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.8);
+  }
+
+  .rows > li + li {
+    border-top: 1px solid var(--light-divider);
+  }
+
+  .rows > li:first-child .row {
+    padding-top: 0;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding-block: var(--space-5);
+    color: var(--light-ink);
+  }
+
+  .row__img {
+    flex: 0 0 auto;
+    width: 112px;
+    height: 112px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+  }
+
+  .row__text {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .row__title {
+    font-size: 1.25rem; /* 20 */
+    font-weight: var(--fw-semibold);
+    line-height: 1.25;
+    transition: color var(--dur-fast) ease;
+  }
+
+  .row:hover .row__title,
+  .row:focus-visible .row__title {
+    color: var(--color-blue);
+  }
+
+  /* ---------- Сітка результатів ---------- */
+  .grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .grid:not(:has(> li:not([hidden]))) {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .empty {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-4);
+    font-size: var(--fs-body-lg);
+    color: var(--light-text-secondary);
+  }
+
+  .overview[hidden],
+  .empty[hidden],
+  .more[hidden] {
+    display: none;
+  }
+
+  .more {
+    justify-self: center;
+    padding: 14px 28px;
+    font-size: var(--fs-body-lg);
+  }
+</style>
+
+<script>
+  import { normalizeSearch } from '@/scripts/normalize';
+
+  const root = document.querySelector<HTMLElement>('[data-articles]');
+  if (root) {
+    const perPage = Number(root.dataset.perPage) || 6;
+    const defaultCount = Number(root.dataset.defaultCount) || 0;
+    const resultsText = root.dataset.results ?? '{n}';
+    const input = root.querySelector<HTMLInputElement>('[data-search]');
+    const form = root.querySelector<HTMLFormElement>('[data-search-form]');
+    const filters = [
+      ...root.querySelectorAll<HTMLButtonElement>('[data-filter]'),
+    ];
+    const items = [...root.querySelectorAll<HTMLElement>('[data-item]')];
+    const overview = root.querySelector<HTMLElement>('[data-overview]');
+    const empty = root.querySelector<HTMLElement>('[data-empty]');
+    const more = root.querySelector<HTMLButtonElement>('[data-more]');
+    const status = root.querySelector<HTMLElement>('[data-status]');
+    const known = new Set(filters.map(b => b.dataset.filter));
+
+    let category = 'all';
+    let query = '';
+    let shown = perPage;
+
+    // Стан з адреси (?category=…&q=…) — працюють картки тем і кнопка «Назад»
+    const readUrl = () => {
+      const params = new URLSearchParams(location.search);
+      const c = params.get('category') ?? 'all';
+      category = known.has(c) ? c : 'all';
+      query = params.get('q') ?? '';
+      if (input) input.value = query;
+    };
+
+    const writeUrl = () => {
+      const url = new URL(location.href);
+      if (category === 'all') url.searchParams.delete('category');
+      else url.searchParams.set('category', category);
+      if (query.trim()) url.searchParams.set('q', query.trim());
+      else url.searchParams.delete('q');
+      history.replaceState(history.state, '', url);
+    };
+
+    const render = (announce: boolean) => {
+      const words = normalizeSearch(query).split(' ').filter(Boolean);
+      const filtering = category !== 'all' || words.length > 0;
+
+      for (const b of filters)
+        b.setAttribute('aria-pressed', String(b.dataset.filter === category));
+
+      // У звичайному вигляді перші статті вже показані вгорі — у сітці лише решта
+      const pool = filtering
+        ? items.filter(
+            el =>
+              (category === 'all' || el.dataset.category === category) &&
+              words.every(w => (el.dataset.text ?? '').includes(w))
+          )
+        : items.slice(defaultCount);
+
+      for (const el of items) el.hidden = true;
+      pool.slice(0, shown).forEach(el => (el.hidden = false));
+
+      if (overview) overview.hidden = filtering;
+      if (empty) empty.hidden = !(filtering && pool.length === 0);
+      if (more) more.hidden = pool.length <= shown;
+      if (status && announce)
+        status.textContent = filtering
+          ? resultsText.replace('{n}', String(pool.length))
+          : '';
+    };
+
+    let timer: number | undefined;
+    input?.addEventListener('input', () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        query = input.value;
+        shown = perPage;
+        writeUrl();
+        render(true);
+      }, 150);
+    });
+    form?.addEventListener('submit', e => e.preventDefault());
+
+    for (const b of filters)
+      b.addEventListener('click', () => {
+        category = b.dataset.filter ?? 'all';
+        shown = perPage;
+        writeUrl();
+        render(true);
+      });
+
+    more?.addEventListener('click', () => {
+      // Фокус — на першу щойно показану картку, щоб клавіатура не губилася
+      const firstNew = shown;
+      shown += perPage;
+      render(false);
+      const visible = items.filter(el => !el.hidden);
+      visible[firstNew]?.querySelector<HTMLElement>('a')?.focus();
+    });
+
+    root.querySelector('[data-clear]')?.addEventListener('click', () => {
+      category = 'all';
+      query = '';
+      if (input) input.value = '';
+      shown = perPage;
+      writeUrl();
+      render(true);
+      input?.focus();
+    });
+
+    window.addEventListener('popstate', () => {
+      readUrl();
+      shown = perPage;
+      render(false);
+    });
+
+    readUrl();
+    render(false);
+    root.classList.add('is-ready');
+  }
+</script>

@@ -1,0 +1,95 @@
+{
+  "seoTitle": "Blog — les analyses datixxia™",
+  "seoDescription": "Analyses, guides et signaux de marché fondés sur des marchés publics réellement attribués.",
+  "hero": {
+    "label": "Blog",
+    "title": "datixxia™ insights",
+    "lead": "Analyses, guides et signaux de marché — fondés sur des marchés publics réellement attribués.",
+    "latest": "Dernier article",
+    "readArticle": "Lire l'article →"
+  },
+  "topics": {
+    "label": "Thèmes",
+    "title": "Explorer par thème",
+    "browseAll": "Voir tous les articles",
+    "articles": "{n} articles",
+    "prev": "Thèmes précédents",
+    "next": "Thèmes suivants"
+  },
+  "latest": {
+    "label": "Tous les articles",
+    "title": "Derniers articles",
+    "searchPlaceholder": "Rechercher par thème ou mot-clé",
+    "all": "Tous",
+    "loadMore": "Plus d'articles",
+    "empty": "Aucun article ne correspond à votre recherche.",
+    "clear": "Effacer les filtres",
+    "results": "{n} articles trouvés",
+    "comingSoon": "Les articles arrivent bientôt."
+  },
+  "newsletter": {
+    "label": "Newsletter",
+    "title": "Recevez les analyses datixxia™ par e-mail",
+    "text": "De nouvelles analyses et des signaux de marché, dès leur publication. Pas de spam — désabonnement en un clic.",
+    "placeholder": "Votre adresse e-mail",
+    "button": "S'abonner",
+    "note": "En vous abonnant, vous acceptez notre Politique de confidentialité.",
+    "noteLink": "Politique de confidentialité",
+    "soon": "Les inscriptions ouvriront bientôt."
+  },
+  "article": {
+    "back": "← Blog",
+    "share": "Partager",
+    "copyLink": "Copier le lien",
+    "copied": "Lien copié",
+    "writtenBy": "Écrit par",
+    "inThisArticle": "Dans cet article :",
+    "minRead": "min de lecture",
+    "keyTakeaway": "À retenir",
+    "takeawayFootnote": "Facts for Futures™ — des éléments concrets pour comprendre où l’activité se développe.",
+    "authorBio": "Intelligence économique à partir des marchés publics attribués · Rouen, France",
+    "keepReading": "À lire aussi",
+    "allArticles": "Tous les articles",
+    "discussTitle": "Rejoignez la discussion",
+    "discussText": "Commentez cet article sur LinkedIn ou posez-nous votre question sur cette analyse.",
+    "discussLinkedin": "Discuter sur LinkedIn",
+    "askQuestion": "Poser une question"
+  },
+  "categories": [
+    {
+      "key": "market-insights",
+      "name": "Analyses de marché",
+      "description": "Où vont les marchés — d'après les marchés publics attribués.",
+      "image": "../../../assets/img/about/hero-europe.jpg",
+      "imageAlt": "L'Europe de nuit vue de l'espace, avec les lumières des villes"
+    },
+    {
+      "key": "public-procurement",
+      "name": "Marchés publics",
+      "description": "Comment fonctionnent les achats publics, et ce qu'ils révèlent de l'économie.",
+      "image": "../../../assets/img/platform/cascade-room.jpg",
+      "imageAlt": "Une salle de réunion avec des personnes autour d’une table"
+    },
+    {
+      "key": "sector-forecasts",
+      "name": "Prévisions sectorielles",
+      "description": "Les secteurs qui devraient progresser dans les mois et les années à venir.",
+      "image": "../../../assets/img/home/dashboard.png",
+      "imageAlt": "Le tableau de bord datixxia™ avec des graphiques"
+    },
+    {
+      "key": "guides-methods",
+      "name": "Guides et méthodes",
+      "description": "Comment lire les données des marchés : des explications claires, pas à pas.",
+      "image": "../../../assets/img/about/discovery-apple.jpg",
+      "imageAlt": "Des pommes qui tombent d’un arbre"
+    },
+    {
+      "key": "building-datixxia",
+      "name": "Construire datixxia™",
+      "description": "Comment nous construisons la plateforme, ce qui évolue, et comment participer au test du MVP.",
+      "image": "../../../assets/img/platform/vision-workshop.jpg",
+      "imageAlt": "Un petit atelier vu à travers une vitrine"
+    }
+  ]
+}

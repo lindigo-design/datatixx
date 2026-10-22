@@ -1,0 +1,250 @@
+---
+/**
+ * Смуга «Newsletter» — на сторінці блогу і в кінці статті.
+ * Етап 2: лише форма і перевірка e-mail. Надсилання в Brevo — етап 4;
+ * до того після «Subscribe» показуємо «Subscriptions will open soon.».
+ * method="dialog": без JavaScript форма нікуди не відправляє дані.
+ */
+import { Image } from 'astro:assets';
+import dashboard from '@/assets/img/home/dashboard.png';
+import { getBlogPage } from '@/content/blog';
+import { localizePath, type Locale } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const { newsletter: nl } = await getBlogPage(lang);
+// «…our Privacy Policy.» — частина noteLink стає посиланням
+const [noteBefore, noteAfter] = nl.note.includes(nl.noteLink)
+  ? nl.note.split(nl.noteLink)
+  : [nl.note, undefined];
+const id = `newsletter-${lang}`;
+---
+
+<section class="newsletter" aria-labelledby={`${id}-title`}>
+  <div class="container">
+    <div class="newsletter__band">
+      <div class="newsletter__text">
+        <p class="section-label newsletter__label">{nl.label}</p>
+        <h2 id={`${id}-title`} class="newsletter__title">
+          {nl.title}
+        </h2>
+        <p class="newsletter__lead">{nl.text}</p>
+        <form class="nl-form" method="dialog" data-newsletter>
+          <label class="visually-hidden" for={`${id}-email`}>
+            {nl.placeholder}
+          </label>
+          <input
+            id={`${id}-email`}
+            class="nl-form__input"
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+            maxlength="254"
+            placeholder={nl.placeholder}
+          />
+          <button class="btn btn--primary nl-form__btn" type="submit">
+            {nl.button}
+          </button>
+        </form>
+        <p class="newsletter__status" role="status" data-newsletter-status></p>
+        <p class="newsletter__note" data-soon={nl.soon}>
+          {noteBefore}
+          {noteAfter !== undefined && (
+            <>
+              <a href={localizePath('privacy', lang)}>{nl.noteLink}</a>
+              {noteAfter}
+            </>
+          )}
+        </p>
+      </div>
+      <div class="newsletter__media">
+        <Image
+          class="newsletter__img"
+          src={dashboard}
+          alt=""
+          widths={[520, 1040]}
+          sizes="520px"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter {
+    padding-bottom: clamp(4rem, 3.11rem + 3.95vw, 7rem); /* 64 → 112 */
+  }
+
+  .newsletter__band {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-items: center;
+    gap: var(--space-12);
+    padding: clamp(2rem, 1rem + 4.4vw, 4.5rem)
+      clamp(1.25rem, 0.4rem + 3.7vw, 3.5rem) clamp(2rem, 1rem + 4.4vw, 4.5rem)
+      clamp(1.25rem, 0.1rem + 5vw, 4.5rem);
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    color: var(--color-text);
+    background:
+      radial-gradient(
+        60% 80% at 100% 30%,
+        rgb(39 80 158 / 0.55),
+        transparent 70%
+      ),
+      radial-gradient(
+        50% 60% at 0% 100%,
+        rgb(66 170 57 / 0.35),
+        transparent 70%
+      ),
+      var(--color-bg);
+  }
+
+  @media (min-width: 1024px) {
+    .newsletter__band {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+    }
+  }
+
+  .newsletter__text {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-5);
+  }
+
+  .newsletter__label {
+    color: var(--color-green);
+  }
+
+  .newsletter__title {
+    font-size: var(--fs-blog-h2);
+    font-weight: var(--fw-bold);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  .newsletter__lead {
+    max-width: 520px;
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body);
+    color: var(--color-text-secondary);
+  }
+
+  /* Біла «пігулка»: поле e-mail і кнопка всередині */
+  .nl-form {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: min(500px, 100%);
+    min-height: 60px;
+    padding: 6px 6px 6px 22px;
+    border-radius: var(--radius-pill);
+    background: var(--light-surface);
+  }
+
+  .nl-form:focus-within {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+  }
+
+  .nl-form__input {
+    flex: 1;
+    min-width: 0;
+    height: 48px;
+    border: 0;
+    background: transparent;
+    color: var(--light-ink);
+    font: inherit;
+    font-size: var(--fs-body);
+  }
+
+  .nl-form__input::placeholder {
+    color: var(--light-muted);
+    opacity: 1;
+  }
+
+  /* Рамка фокусу — на всій «пігулці» (вище) */
+  .nl-form__input:focus-visible {
+    outline: none;
+  }
+
+  .nl-form__btn {
+    flex: 0 0 auto;
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--fs-body-lg);
+  }
+
+  .newsletter__status {
+    color: var(--color-green-soft);
+    font-weight: var(--fw-medium);
+  }
+
+  .newsletter__status:empty {
+    display: none;
+  }
+
+  .newsletter__note {
+    font-size: var(--fs-label-14);
+    color: var(--color-text-faint);
+  }
+
+  .newsletter__note a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .newsletter__note a:hover {
+    color: var(--color-text);
+  }
+
+  .newsletter__img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 520 / 380;
+    object-fit: cover;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 20px;
+    box-shadow: 0 24px 60px rgb(0 0 0 / 0.45);
+  }
+
+  /* Телефон: зображення не показуємо */
+  @media (max-width: 639px) {
+    .newsletter__media {
+      display: none;
+    }
+    .nl-form {
+      flex-wrap: wrap;
+      padding: 6px;
+      border-radius: var(--radius-md);
+    }
+    .nl-form__input {
+      padding-inline: var(--space-4);
+    }
+    .nl-form__btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // До етапу 4 (Brevo) форма нікуди не надсилає дані — лише повідомляє, що підписка скоро
+  for (const form of document.querySelectorAll<HTMLFormElement>(
+    '[data-newsletter]'
+  )) {
+    const box = form.parentElement;
+    const status = box?.querySelector<HTMLElement>('[data-newsletter-status]');
+    const soon =
+      box?.querySelector<HTMLElement>('[data-soon]')?.dataset.soon ?? '';
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      if (status) status.textContent = soon;
+    });
+  }
+</script>

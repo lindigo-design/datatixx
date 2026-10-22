@@ -1,0 +1,381 @@
+---
+/**
+ * «Explore by topic»: карусель 5 категорій. Картки виходять за правий край екрана.
+ * Картка веде на /blog/?category=<key>#articles. При наведенні/фокусі — опис і кількість статей.
+ */
+import { Image } from 'astro:assets';
+import ArrowLeft from '@/assets/icons/arrow-left.svg';
+import ArrowRight from '@/assets/icons/arrow-right.svg';
+import ArrowUpRight from '@/assets/icons/arrow-up-right.svg';
+import { localizePath, type Locale } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+  topics: {
+    label: string;
+    title: string;
+    browseAll: string;
+    articles: string;
+    prev: string;
+    next: string;
+  };
+  categories: {
+    key: string;
+    name: string;
+    description: string;
+    image: ImageMetadata;
+    imageAlt: string;
+  }[];
+  counts: Record<string, number>;
+}
+
+const { lang, topics, categories, counts } = Astro.props;
+const blog = localizePath('blog', lang);
+---
+
+<section class="topics" aria-labelledby="topics-title" data-topics>
+  <div class="container topics__head">
+    <div class="topics__titles">
+      <p class="section-label">{topics.label}</p>
+      <h2 id="topics-title" class="topics__title">
+        {topics.title}
+      </h2>
+    </div>
+    <div class="topics__controls">
+      <button
+        class="topics__arrow"
+        type="button"
+        aria-label={topics.prev}
+        data-topics-prev
+        disabled
+      >
+        <ArrowLeft aria-hidden="true" />
+      </button>
+      <button
+        class="topics__arrow"
+        type="button"
+        aria-label={topics.next}
+        data-topics-next
+      >
+        <ArrowRight aria-hidden="true" />
+      </button>
+      <a class="pill-outline" href="#articles">
+        {topics.browseAll}
+      </a>
+    </div>
+  </div>
+
+  <ul role="list" class="topics__track" data-topics-track>
+    {categories.map(c => (
+      <li class="topics__item">
+        <a
+          class="topic"
+          href={`${blog}?category=${c.key}#articles`}
+          data-category-link={c.key}
+        >
+          <Image
+            class="topic__img"
+            src={c.image}
+            alt={c.imageAlt}
+            widths={[380, 760]}
+            sizes="380px"
+            loading="lazy"
+          />
+          <span class="topic__go" aria-hidden="true">
+            <ArrowUpRight />
+          </span>
+          <span class="topic__body">
+            <span class="topic__name">{c.name}</span>
+            <span class="topic__more">
+              <span class="topic__more-in">
+                <span class="topic__desc">{c.description}</span>
+                <span class="topic__count">
+                  {topics.articles.replace('{n}', String(counts[c.key] ?? 0))}
+                </span>
+              </span>
+            </span>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .topics {
+    padding-bottom: clamp(4rem, 3.11rem + 3.95vw, 7rem); /* 64 → 112 */
+  }
+
+  .topics__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .topics__titles {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .topics__title {
+    font-size: var(--fs-blog-h2);
+    font-weight: var(--fw-bold);
+    line-height: 1;
+    color: var(--light-ink);
+  }
+
+  .topics__controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .topics__arrow {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--light-border-strong);
+    border-radius: 50%;
+    color: var(--light-ink);
+    cursor: pointer;
+    transition:
+      opacity var(--dur-fast) ease,
+      border-color var(--dur-fast) ease;
+  }
+
+  .topics__arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .topics__arrow:hover:not(:disabled) {
+    border-color: var(--light-ink);
+  }
+
+  .topics__arrow:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  /* Без JavaScript стрілки нічого не роблять — ховаємо (гортання пальцем/тачпадом працює) */
+  .topics:not(.is-ready) .topics__arrow {
+    display: none;
+  }
+
+  /* ---------- Стрічка: ліворуч — по краю контейнера, праворуч — до краю екрана ---------- */
+  .topics__track {
+    --edge: max(var(--gutter), calc((100% - var(--container-max)) / 2));
+
+    display: flex;
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+    padding-inline: var(--edge) var(--gutter);
+    padding-block: var(--space-2); /* місце для рамки фокусу */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--edge);
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .topics__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .topics__item {
+    flex: 0 0 auto;
+    width: min(380px, 78vw);
+    scroll-snap-align: start;
+  }
+
+  .topic {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: clamp(25rem, 22rem + 10vw, 30rem); /* 400 → 480 */
+    padding: 28px;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    background: var(--color-bg);
+  }
+
+  .topic__img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Затемнення: два шари, щоб плавно перейти до сильнішого при наведенні */
+  .topic::before,
+  .topic::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transition: opacity var(--dur-base) ease;
+  }
+
+  .topic::before {
+    background: linear-gradient(
+      180deg,
+      rgb(1 9 18 / 0) 50%,
+      rgb(1 9 18 / 0.75) 100%
+    );
+  }
+
+  .topic::after {
+    background: linear-gradient(
+      180deg,
+      rgb(1 9 18 / 0) 15%,
+      rgb(1 9 18 / 0.9) 100%
+    );
+    opacity: 0;
+  }
+
+  .topic__go {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-text);
+    color: var(--light-ink);
+    transition:
+      background-color var(--dur-base) ease,
+      color var(--dur-base) ease;
+  }
+
+  .topic__go :global(svg) {
+    width: 18px;
+    height: 18px;
+  }
+
+  .topic__body {
+    display: grid;
+  }
+
+  .topic__name {
+    font-size: clamp(1.625rem, 1.5rem + 0.5vw, 2rem); /* 26 → 32 */
+    font-weight: var(--fw-bold);
+    line-height: 1.2;
+  }
+
+  /* Опис і кількість: приховані, розкриваються плавно (висота 0fr → 1fr) */
+  .topic__more {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      grid-template-rows 250ms var(--ease-out),
+      opacity 250ms ease,
+      transform 250ms var(--ease-out);
+  }
+
+  .topic__more-in {
+    display: grid;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .topic__desc {
+    padding-top: var(--space-3);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  .topic__count {
+    padding-top: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-s);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-green-soft);
+  }
+
+  .topic:hover::after,
+  .topic:focus-visible::after {
+    opacity: 1;
+  }
+
+  .topic:hover::before,
+  .topic:focus-visible::before {
+    opacity: 0;
+  }
+
+  .topic:hover .topic__go,
+  .topic:focus-visible .topic__go {
+    background: var(--color-green);
+    color: var(--color-text);
+  }
+
+  .topic:hover .topic__more,
+  .topic:focus-visible .topic__more {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Сенсорні екрани: наведення немає — опис видно завжди */
+  @media (hover: none) {
+    .topic::before {
+      opacity: 0;
+    }
+    .topic::after {
+      opacity: 1;
+    }
+    .topic__more {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // Стрілки ← / →: гортають на одну картку; вимикаються на початку і в кінці
+  for (const root of document.querySelectorAll<HTMLElement>('[data-topics]')) {
+    const track = root.querySelector<HTMLElement>('[data-topics-track]');
+    const prev = root.querySelector<HTMLButtonElement>('[data-topics-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-topics-next]');
+    if (!track || !prev || !next) continue;
+    root.classList.add('is-ready');
+
+    const step = () => {
+      const item = track.querySelector<HTMLElement>('li');
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return item ? item.offsetWidth + gap : track.clientWidth;
+    };
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const go = (dir: number) =>
+      track.scrollBy({
+        left: dir * step(),
+        behavior: reduce.matches ? 'auto' : 'smooth',
+      });
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+    };
+
+    prev.addEventListener('click', () => go(-1));
+    next.addEventListener('click', () => go(1));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+</script>

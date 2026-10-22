@@ -12,8 +12,10 @@ import { localeNames } from '@/i18n/locales.js';
 
 interface Props {
   lang: Locale;
+  /** Готові адреси для кожної мови (інакше — та сама сторінка іншою мовою) */
+  links?: Partial<Record<Locale, string>>;
 }
-const { lang } = Astro.props;
+const { lang, links = {} } = Astro.props;
 const t = useTranslations(lang);
 const flags = { en: FlagUk, fr: FlagFr } as const;
 const Current = flags[lang];
@@ -34,7 +36,7 @@ const Current = flags[lang];
         <li>
           <a
             class="lang__link"
-            href={switchLocale(Astro.url.pathname, l)}
+            href={links[l] ?? switchLocale(Astro.url.pathname, l)}
             hreflang={l}
             lang={l}
             aria-current={l === lang ? 'true' : undefined}

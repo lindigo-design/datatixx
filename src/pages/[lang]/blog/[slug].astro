@@ -1,0 +1,129 @@
+---
+/**
+ * Сторінка статті блогу. Статті — src/content/blog/<мова>/<slug>.mdoc
+ * (Keystatic: «Blog (EN)» / «Blog (FR)»). Чернетки будуються лише в `npm run dev`.
+ * Етап 1 — базова розмітка; дизайн статті (світла тема, поширення, «Keep reading») — етап 3.
+ */
+import { getImage, Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { locales, localizePath, type Locale } from '@/i18n/utils';
+import {
+  getBlogPage,
+  getPosts,
+  getTranslation,
+  issueNumber,
+  postSlug,
+  readingTime,
+  type Post,
+} from '@/content/blog';
+
+export async function getStaticPaths() {
+  const paths = await Promise.all(
+    locales.map(async lang =>
+      (await getPosts(lang)).map(post => ({
+        params: { lang, slug: postSlug(post) },
+        props: { post },
+      }))
+    )
+  );
+  return paths.flat();
+}
+
+const { post } = Astro.props as { post: Post };
+const lang = Astro.params.lang as Locale;
+const page = await getBlogPage(lang);
+const { Content } = await render(post);
+const issue = await issueNumber(post);
+const minutes = readingTime(post);
+const category = page.categories.find(c => c.key === post.data.category);
+
+// Мовні версії: переклад з тим самим translationKey; якщо його немає —
+// перемикач мов веде на блог іншою мовою, а hreflang не додається.
+const alternates: Partial<Record<Locale, string>> = {};
+const langLinks: Partial<Record<Locale, string>> = {};
+for (const l of locales) {
+  const target = l === lang ? post : await getTranslation(post, l);
+  if (target) alternates[l] = localizePath(`blog/${postSlug(target)}`, l);
+  langLinks[l] = alternates[l] ?? localizePath('blog', l);
+}
+
+// Обкладинка для LinkedIn/Facebook (шлях без підпапки — її додає BaseLayout)
+const og = await getImage({ src: post.data.cover, width: 1200, format: 'jpg' });
+const ogImage = og.src.slice(
+  import.meta.env.BASE_URL.replace(/\/?$/, '/').length - 1
+);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${post.data.title} — DataTixx`}
+  description={post.data.excerpt}
+  ogImage={ogImage}
+  ogType="article"
+  alternates={alternates}
+  langLinks={langLinks}
+  noindex={post.data.draft}
+>
+  <article class="article section">
+    <div class="container">
+      <a href={localizePath('blog', lang)}>{page.article.back}</a>
+      <p class="mono">
+        No. {issue} · {category?.name} ·{' '}
+        <time datetime={post.data.date.toISOString().slice(0, 10)}>
+          {formatDate(post.data.date)}
+        </time>{' '}
+        · {`${minutes} ${page.article.minRead}`}
+      </p>
+      <h1>{post.data.displayTitle}</h1>
+      <p class="article__dek">{post.data.title}</p>
+      <Image
+        class="article__cover"
+        src={post.data.cover}
+        alt={post.data.coverAlt}
+        widths={[720, 1440]}
+        sizes="(min-width: 1280px) 1200px, 100vw"
+        loading="eager"
+      />
+      <p class="article__lead">{post.data.lead}</p>
+      <div class="article__body">
+        <Content />
+      </div>
+      <p class="mono">{`${page.article.writtenBy} ${post.data.author}`}</p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article__dek,
+  .article__lead {
+    max-width: 720px;
+    margin-block: var(--space-4);
+  }
+
+  .article__cover {
+    width: 100%;
+    height: auto;
+    margin-block: var(--space-6);
+  }
+
+  .article__body {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 720px;
+    margin-block: var(--space-6);
+  }
+
+  .article__body :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

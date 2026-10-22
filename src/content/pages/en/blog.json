@@ -1,0 +1,95 @@
+{
+  "seoTitle": "Blog — datixxia™ insights",
+  "seoDescription": "Analyses, guides and market signals based on real, awarded public contracts.",
+  "hero": {
+    "label": "Blog",
+    "title": "datixxia™ insights",
+    "lead": "Analyses, guides and market signals — based on real, awarded public contracts.",
+    "latest": "Latest",
+    "readArticle": "Read article →"
+  },
+  "topics": {
+    "label": "Topics",
+    "title": "Explore by topic",
+    "browseAll": "Browse all articles",
+    "articles": "{n} articles",
+    "prev": "Previous topics",
+    "next": "Next topics"
+  },
+  "latest": {
+    "label": "All articles",
+    "title": "Latest articles",
+    "searchPlaceholder": "Search by topic or keyword",
+    "all": "All",
+    "loadMore": "Load more articles",
+    "empty": "No articles match your search.",
+    "clear": "Clear filters",
+    "results": "{n} articles found",
+    "comingSoon": "Articles are coming soon."
+  },
+  "newsletter": {
+    "label": "Newsletter",
+    "title": "Get datixxia™ insights in your inbox",
+    "text": "New analyses and market signals when we publish them. No spam — unsubscribe in one click.",
+    "placeholder": "Your e-mail address",
+    "button": "Subscribe",
+    "note": "By subscribing, you agree to our Privacy Policy.",
+    "noteLink": "Privacy Policy",
+    "soon": "Subscriptions will open soon."
+  },
+  "article": {
+    "back": "← Blog",
+    "share": "Share",
+    "copyLink": "Copy link",
+    "copied": "Link copied",
+    "writtenBy": "Written by",
+    "inThisArticle": "In this article:",
+    "minRead": "min read",
+    "keyTakeaway": "Key takeaway",
+    "takeawayFootnote": "Facts for Futures™ — evidence to understand where activity is developing.",
+    "authorBio": "Market intelligence from awarded public contracts · Rouen, France",
+    "keepReading": "Keep reading",
+    "allArticles": "All articles",
+    "discussTitle": "Join the discussion",
+    "discussText": "Comment on this article on LinkedIn, or send us your question about the analysis.",
+    "discussLinkedin": "Discuss on LinkedIn",
+    "askQuestion": "Ask a question"
+  },
+  "categories": [
+    {
+      "key": "market-insights",
+      "name": "Market insights",
+      "description": "Where markets are heading — read from awarded public contracts.",
+      "image": "../../../assets/img/about/hero-europe.jpg",
+      "imageAlt": "Europe at night seen from space, with city lights"
+    },
+    {
+      "key": "public-procurement",
+      "name": "Public procurement",
+      "description": "How public buying works, and what it reveals about the economy.",
+      "image": "../../../assets/img/platform/cascade-room.jpg",
+      "imageAlt": "A meeting room with people around a table"
+    },
+    {
+      "key": "sector-forecasts",
+      "name": "Sector forecasts",
+      "description": "Which sectors are set to grow in the months and years ahead.",
+      "image": "../../../assets/img/home/dashboard.png",
+      "imageAlt": "The datixxia™ dashboard with charts"
+    },
+    {
+      "key": "guides-methods",
+      "name": "Guides & methods",
+      "description": "How to read contract data: clear, step-by-step explanations.",
+      "image": "../../../assets/img/about/discovery-apple.jpg",
+      "imageAlt": "Apples falling from a tree"
+    },
+    {
+      "key": "building-datixxia",
+      "name": "Building datixxia™",
+      "description": "How we build the platform, what changes, and how to join the MVP test.",
+      "image": "../../../assets/img/platform/vision-workshop.jpg",
+      "imageAlt": "A small workshop seen through a shop window"
+    }
+  ]
+}
