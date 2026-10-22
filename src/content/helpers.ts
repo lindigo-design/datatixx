@@ -1,4 +1,4 @@
-import { getEntry } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import type { Locale } from '@/i18n/utils';
 
 export async function getHome(lang: Locale) {
@@ -77,3 +77,19 @@ export async function getSiteSettings() {
 
 /** Номер телефону для посилання tel: (без пробілів) */
 export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, '')}`;
+
+/**
+ * Чи є в мові хоча б одна опублікована (не чернетка) стаття блогу.
+ * Від цього залежить пункт «Blog» у меню і футері. Немає колекції блогу — false.
+ */
+export async function hasPublishedPosts(lang: Locale): Promise<boolean> {
+  try {
+    const posts = await getCollection(
+      'blog',
+      p => p.id.startsWith(`${lang}/`) && p.data.draft !== true
+    );
+    return posts.length > 0;
+  } catch {
+    return false;
+  }
+}

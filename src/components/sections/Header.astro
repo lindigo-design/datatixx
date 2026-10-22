@@ -11,7 +11,7 @@ import MenuIcon from '@/assets/icons/menu.svg';
 import CloseIcon from '@/assets/icons/close.svg';
 import { localizePath, useTranslations, type Locale } from '@/i18n/utils';
 import { mainNav } from '@/i18n/nav';
-import { getSiteSettings } from '@/content/helpers';
+import { getSiteSettings, hasPublishedPosts } from '@/content/helpers';
 
 interface Props {
   lang: Locale;
@@ -20,6 +20,12 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const site = await getSiteSettings();
 const current = Astro.url.pathname;
+// Blog підсвічується і на сторінці статті (/blog/<slug>/)
+const isCurrent = (path: string, href: string) =>
+  current === href || (path === 'blog' && current.startsWith(href));
+// Blog — лише коли в мові є опубліковані статті; номери 01, 02… ідуть підряд після фільтра
+const showBlog = await hasPublishedPosts(lang);
+const items = mainNav.filter(i => i.requires !== 'blog' || showBlog);
 // Login: заглушка, поки немає точної адреси платформи. Увімкнути — showLogin у settings.json / адмінці.
 const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
 ---
@@ -67,7 +73,7 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
 
     <nav aria-label={t('nav.main')}>
       <ul role="list" class="menu__list">
-        {mainNav.map((item, i) => {
+        {items.map((item, i) => {
           const href = localizePath(item.path, lang);
           // Partners підсвічується і тоді, коли відкрита його підсторінка Chambers
           const childActive = item.children?.some(
@@ -78,7 +84,7 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
               <a
                 class:list={['menu__link', childActive && 'is-parent-active']}
                 href={href}
-                aria-current={current === href ? 'page' : undefined}
+                aria-current={isCurrent(item.path, href) ? 'page' : undefined}
               >
                 <span class="menu__num num" aria-hidden="true">
                   {String(i + 1).padStart(2, '0')}

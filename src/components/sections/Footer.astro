@@ -8,7 +8,7 @@ import IconLinkedin from '@/assets/icons/social-linkedin.svg';
 import IconYoutube from '@/assets/icons/social-youtube.svg';
 import { localizePath, useTranslations, type Locale } from '@/i18n/utils';
 import { footerNav } from '@/i18n/nav';
-import { getSiteSettings, telHref } from '@/content/helpers';
+import { getSiteSettings, hasPublishedPosts, telHref } from '@/content/helpers';
 
 interface Props {
   lang: Locale;
@@ -18,6 +18,11 @@ const t = useTranslations(lang);
 const site = await getSiteSettings();
 const year = new Date().getFullYear();
 const current = Astro.url.pathname;
+// Blog підсвічується і на сторінці статті (/blog/<slug>/)
+const isCurrent = (path: string, href: string) =>
+  current === href || (path === 'blog' && current.startsWith(href));
+const showBlog = await hasPublishedPosts(lang);
+const items = footerNav.filter(i => i.requires !== 'blog' || showBlog);
 const a = site.address;
 
 // Показуємо лише ті соцмережі, для яких вписано посилання в settings.json
@@ -87,13 +92,13 @@ const socials = [
 
       <nav aria-label={t('nav.main')}>
         <ul role="list" class="footer__menu">
-          {footerNav.map(item => {
+          {items.map(item => {
             const href = localizePath(item.path, lang);
             return (
               <li>
                 <a
                   href={href}
-                  aria-current={current === href ? 'page' : undefined}
+                  aria-current={isCurrent(item.path, href) ? 'page' : undefined}
                 >
                   {t(item.key)}
                 </a>
@@ -232,6 +237,15 @@ const socials = [
   .footer__menu {
     display: grid;
     align-content: start;
+  }
+
+  /* 9 пунктів: на широких екранах — 2 колонки по 5 */
+  @media (min-width: 64em) {
+    .footer__menu {
+      grid-template-rows: repeat(5, auto);
+      grid-auto-flow: column;
+      column-gap: var(--space-8);
+    }
   }
 
   /* Активна сторінка у футері: зелений текст і риска ліворуч */
