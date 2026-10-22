@@ -747,7 +747,10 @@ const blogCategoryOptions = [
     label: 'Sector forecasts / Prévisions sectorielles',
     value: 'sector-forecasts',
   },
-  { label: 'Guides & methods / Guides et méthodes', value: 'guides-methods' },
+  {
+    label: 'Forecasting explained / La prévision expliquée',
+    value: 'guides-methods',
+  },
   {
     label: 'Building datixxia™ / Construire datixxia™',
     value: 'building-datixxia',

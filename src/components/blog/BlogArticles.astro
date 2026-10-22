@@ -33,10 +33,14 @@ const { posts, latest, filterLabel, minRead, categories } = Astro.props;
 const PER_PAGE = 6;
 const nameOf = (key: string) => categories.find(c => c.key === key)?.name ?? '';
 
-// 1-ша — у hero, 2-га — велика картка, 3–6 — список; решта — у сітці під ними
-const featured = posts[1];
-const list = posts.slice(2, 6);
-const defaultCount = Math.min(posts.length, 6);
+// 1-ша — у hero, 2-га — велика картка, 3–6 — список; решта — у сітці під ними.
+// Поки статей менше 3, велика картка + список виглядають порожньо —
+// тоді «All» показує сіткою всі статті (разом з тією, що в hero).
+const MIN_FOR_OVERVIEW = 3;
+const hasOverview = posts.length >= MIN_FOR_OVERVIEW;
+const featured = hasOverview ? posts[1] : undefined;
+const list = hasOverview ? posts.slice(2, 6) : [];
+const defaultCount = hasOverview ? Math.min(posts.length, 6) : 0;
 
 const searchText = (post: Post) =>
   normalizeSearch(
