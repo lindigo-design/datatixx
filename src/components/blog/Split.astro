@@ -57,10 +57,10 @@ if (!src) {
 </section>
 
 <style>
+  /* < 900 px: одна колонка — текст, під ним фото (і для reverse теж) */
   .split-block {
     display: grid;
     gap: var(--space-8);
-    padding-bottom: clamp(4rem, 3.11rem + 3.95vw, 7rem); /* 64 → 112 */
   }
 
   .split-block__text {
@@ -101,7 +101,6 @@ if (!src) {
   }
 
   .split-block__image {
-    order: -1; /* на вузьких екранах — зображення зверху */
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
@@ -109,18 +108,18 @@ if (!src) {
     border-radius: var(--radius-md);
   }
 
-  @media (min-width: 1024px) {
+  /* ≥ 900 px: дві колонки в пропорції Figma (текст 608 : фото 560) — фото зменшується разом з екраном */
+  @media (min-width: 900px) {
     .split-block {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+      grid-template-columns: minmax(0, 608fr) minmax(0, 560fr);
       align-items: center;
-      gap: 72px;
+      column-gap: clamp(32px, 5vw, 72px);
     }
     .split-block__image {
-      order: 0;
       aspect-ratio: 560 / 520;
     }
     .split-block--reverse {
-      grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 560fr) minmax(0, 608fr);
     }
     .split-block--reverse .split-block__image {
       order: -1;

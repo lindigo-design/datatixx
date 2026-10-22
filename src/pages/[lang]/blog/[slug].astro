@@ -147,40 +147,52 @@ const blogPostingLd = {
 
 <style>
   /*
-    Сітка статті: текст — колонка 760 по центру, блок split — ширина контейнера 1240,
+    Ширини: текст — колонка 760 по центру, блок split — ширина контейнера 1240,
     «Key takeaway» — на всю ширину екрана.
+    Тіло статті — звичайний потік (block), щоб відступи сусідніх блоків
+    «схлопувалися» до більшого, а не додавалися.
   */
-  .article,
-  .article__body {
-    --side: max(var(--gutter), calc((100% - var(--container-max)) / 2));
-
-    display: grid;
-    grid-template-columns:
-      [full-start] var(--side)
-      [wide-start] minmax(0, 1fr)
-      [content-start] minmax(0, 760px)
-      [content-end] minmax(0, 1fr)
-      [wide-end] var(--side)
-      [full-end];
+  .article {
+    --gap-split: clamp(
+      56px,
+      7vw,
+      96px
+    ); /* текст ↔ split, кінець тексту → футер */
+    --gap-band: clamp(64px, 8vw, 112px); /* split → split, будь-що ↔ takeaway */
   }
 
   .article__lead,
   .article__footer,
   .article__body > :global(*) {
-    grid-column: content;
-  }
-
-  .article__body {
-    grid-column: full;
-    grid-template-columns: subgrid;
+    width: min(760px, 100% - 2 * var(--gutter));
+    margin-inline: auto;
   }
 
   .article__body > :global(.split-block) {
-    grid-column: wide;
+    width: min(var(--container-max), 100% - 2 * var(--gutter));
+    margin-block: var(--gap-split);
+  }
+
+  .article__body > :global(.split-block + .split-block) {
+    margin-top: var(--gap-band);
   }
 
   .article__body > :global(.takeaway) {
-    grid-column: full;
+    width: 100%;
+    margin-block: var(--gap-band);
+  }
+
+  .article__body > :global(:first-child) {
+    margin-top: 0;
+  }
+
+  .article__body > :global(:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Кінець тексту статті → теги, share, автор */
+  .article__footer > :global(.a-foot) {
+    padding-top: var(--gap-split);
   }
 
   /* ---------- Вступ ---------- */
@@ -221,12 +233,6 @@ const blogPostingLd = {
     line-height: 1.1;
     color: var(--light-ink);
     text-wrap: balance;
-  }
-
-  /* Після смуги чи блоку split — без зайвого верхнього відступу */
-  .article__body > :global(:is(.split-block, .takeaway) + h2),
-  .article__body > :global(h2:first-child) {
-    margin-top: 0;
   }
 
   .article__body > :global(h3) {

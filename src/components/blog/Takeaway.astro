@@ -28,7 +28,6 @@ const page = await getBlogPage(lang);
     justify-items: center;
     gap: var(--space-8);
     padding: clamp(4rem, 2.6rem + 6.2vw, 7.5rem) var(--gutter); /* 64 → 120 */
-    margin-bottom: clamp(4rem, 3.11rem + 3.95vw, 7rem);
     text-align: center;
     color: var(--color-text);
     background:
@@ -66,6 +65,7 @@ const page = await getBlogPage(lang);
   .takeaway__footnote {
     font-size: var(--fs-body-lg);
     line-height: var(--lh-body);
+    max-width: 524px;
     background: linear-gradient(
       90deg,
       var(--color-green),
@@ -74,5 +74,17 @@ const page = await getBlogPage(lang);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  /* Телефон: головний текст і примітка однакової ширини — на всю смугу */
+  @media (max-width: 767px) {
+    .takeaway__text,
+    .takeaway__footnote {
+      width: 100%;
+      max-width: none;
+    }
+    .takeaway__text {
+      text-wrap: wrap;
+    }
   }
 </style>

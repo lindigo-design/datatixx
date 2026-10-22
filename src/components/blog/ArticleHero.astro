@@ -59,11 +59,19 @@ const isoDate = post.data.date.toISOString().slice(0, 10);
     <a class="a-hero__back" href={localizePath('blog', lang)}>
       {a.back}
     </a>
-    <span class="a-hero__category">{categoryName}</span>
-    <time class="a-hero__meta" datetime={isoDate}>
-      {formatShortDate(post.data.date, lang)}
-    </time>
-    <span class="a-hero__meta">{`${readingTime(post)} ${a.minRead}`}</span>
+    <div class="hero-meta">
+      <span class="a-hero__category">{categoryName}</span>
+      <span class="hero-meta__dot" aria-hidden="true">
+        ·
+      </span>
+      <time class="a-hero__meta" datetime={isoDate}>
+        {formatShortDate(post.data.date, lang)}
+      </time>
+      <span class="hero-meta__dot" aria-hidden="true">
+        ·
+      </span>
+      <span class="a-hero__meta">{`${readingTime(post)} ${a.minRead}`}</span>
+    </div>
   </div>
 
   <div class="a-hero__middle">
@@ -171,6 +179,41 @@ const isoDate = post.data.date.toISOString().slice(0, 10);
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3) var(--space-6);
+  }
+
+  /* Категорія · дата · час читання: переноситься лише цілими частинами */
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+  }
+
+  .hero-meta > * {
+    white-space: nowrap;
+  }
+
+  .hero-meta__dot {
+    color: rgb(255 255 255 / 0.6);
+  }
+
+  /* < 768 px: «← Blog» окремим рядком, під ним група мета-даних */
+  @media (max-width: 767px) {
+    .a-hero__top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+
+  /* ≥ 768 px: як раніше — усі частини в одному рядку, розставлені по ширині */
+  @media (min-width: 768px) {
+    .hero-meta {
+      display: contents;
+    }
+    .hero-meta__dot {
+      display: none;
+    }
   }
 
   .a-hero__back {
