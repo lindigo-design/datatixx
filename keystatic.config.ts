@@ -868,7 +868,8 @@ const blogCollections = Object.fromEntries(
 );
 
 // Тексти сторінки блогу (src/content/pages/<мова>/blog.json)
-const blogPageSchema = {
+// Картинки категорій — окрема папка для кожної мови (інакше EN і FR перезаписують одна одну)
+const blogPageSchema = (lang: (typeof locales)[number]) => ({
   ...seo,
   hero: fields.object(
     {
@@ -962,8 +963,8 @@ const blogPageSchema = {
       description: longText('Опис (зʼявляється при наведенні)'),
       image: fields.image({
         label: 'Зображення картки',
-        directory: blogImageDir,
-        publicPath: '../../../assets/img/blog/',
+        directory: `${blogImageDir}/page-${lang}`,
+        publicPath: `../../../assets/img/blog/page-${lang}/`,
         validation: { isRequired: true },
       }),
       imageAlt: text('Опис зображення'),
@@ -974,7 +975,7 @@ const blogPageSchema = {
       validation: { length: { min: 5, max: 5 } },
     }
   ),
-};
+});
 
 const blogPageSingletons = Object.fromEntries(
   locales.map(lang => [
@@ -983,7 +984,7 @@ const blogPageSingletons = Object.fromEntries(
       label: `Blog page · ${lang.toUpperCase()}`,
       path: `src/content/pages/${lang}/blog`,
       format: { data: 'json' },
-      schema: blogPageSchema,
+      schema: blogPageSchema(lang),
     }),
   ])
 );

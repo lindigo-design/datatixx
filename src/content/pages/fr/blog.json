@@ -65,35 +65,35 @@
       "key": "market-insights",
       "name": "Analyses de marché",
       "description": "Où vont les marchés — d'après les marchés publics attribués.",
-      "image": "../../../assets/img/about/hero-europe.jpg",
+      "image": "../../../assets/img/blog/page-fr/categories/0/image.jpg",
       "imageAlt": "L'Europe de nuit vue de l'espace, avec les lumières des villes"
     },
     {
       "key": "public-procurement",
       "name": "Marchés publics",
       "description": "Comment fonctionnent les achats publics, et ce qu'ils révèlent de l'économie.",
-      "image": "../../../assets/img/platform/cascade-room.jpg",
+      "image": "../../../assets/img/blog/page-fr/categories/1/image.jpg",
       "imageAlt": "Une salle de réunion avec des personnes autour d’une table"
     },
     {
       "key": "sector-forecasts",
       "name": "Prévisions sectorielles",
       "description": "Les secteurs qui devraient progresser dans les mois et les années à venir.",
-      "image": "../../../assets/img/home/dashboard.png",
+      "image": "../../../assets/img/blog/page-fr/categories/2/image.png",
       "imageAlt": "Le tableau de bord datixxia™ avec des graphiques"
     },
     {
       "key": "guides-methods",
       "name": "Guides et méthodes",
       "description": "Comment lire les données des marchés : des explications claires, pas à pas.",
-      "image": "../../../assets/img/about/discovery-apple.jpg",
+      "image": "../../../assets/img/blog/page-fr/categories/3/image.jpg",
       "imageAlt": "Des pommes qui tombent d’un arbre"
     },
     {
       "key": "building-datixxia",
       "name": "Construire datixxia™",
       "description": "Comment nous construisons la plateforme, ce qui évolue, et comment participer au test du MVP.",
-      "image": "../../../assets/img/platform/vision-workshop.jpg",
+      "image": "../../../assets/img/blog/page-fr/categories/4/image.jpg",
       "imageAlt": "Un petit atelier vu à travers une vitrine"
     }
   ]
