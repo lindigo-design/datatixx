@@ -1,0 +1,366 @@
+---
+/**
+ * Hero статті — журнальна верстка на всю ширину (Figma «Blog Article • Desktop (light)»).
+ * Обкладинка — кольорова, трохи приглушена фільтром CSS; поверх — затемнення (::after).
+ * Зверху: ← Blog · категорія · дата · час читання. Посередині: «Share» і картка з повною назвою.
+ * Внизу: «No. 01» + H1 (displayTitle) і «© DataTixx рік».
+ */
+import { Image } from 'astro:assets';
+import { formatShortDate, readingTime, type Post } from '@/content/blog';
+import { localizePath, type Locale } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+  post: Post;
+  issue: string;
+  categoryName: string;
+  shareUrl: string;
+  article: {
+    back: string;
+    share: string;
+    copyLink: string;
+    copied: string;
+    shareOn: string;
+    writtenBy: string;
+    inThisArticle: string;
+    minRead: string;
+    issue: string;
+    copyright: string;
+  };
+}
+
+const { lang, post, issue, categoryName, shareUrl, article: a } = Astro.props;
+const url = encodeURIComponent(shareUrl);
+const shareLinks = [
+  {
+    name: 'LinkedIn',
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+  },
+  {
+    name: 'Facebook',
+    href: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+  },
+];
+const isoDate = post.data.date.toISOString().slice(0, 10);
+---
+
+<header class="a-hero">
+  <Image
+    class="a-hero__img"
+    src={post.data.cover}
+    alt={post.data.coverAlt}
+    widths={[768, 1440, 2160]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+  />
+
+  <div class="a-hero__top">
+    <a class="a-hero__back" href={localizePath('blog', lang)}>
+      {a.back}
+    </a>
+    <span class="a-hero__category">{categoryName}</span>
+    <time class="a-hero__meta" datetime={isoDate}>
+      {formatShortDate(post.data.date, lang)}
+    </time>
+    <span class="a-hero__meta">{`${readingTime(post)} ${a.minRead}`}</span>
+  </div>
+
+  <div class="a-hero__middle">
+    <div class="a-hero__share" data-share>
+      <p class="a-hero__share-label">{a.share}</p>
+      <ul role="list" class="a-hero__share-list">
+        {shareLinks.map(s => (
+          <li>
+            <a
+              class="a-hero__share-link"
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={a.shareOn.replace('{network}', s.name)}
+            >
+              {s.name}
+            </a>
+          </li>
+        ))}
+        <li>
+          <button
+            class="a-hero__share-link"
+            type="button"
+            data-copy-link={shareUrl}
+            data-copied={a.copied}
+          >
+            {a.copyLink}
+          </button>
+        </li>
+      </ul>
+      <p class="a-hero__copied" aria-live="polite" data-copy-status></p>
+    </div>
+
+    <div class="a-hero__dek">
+      <p class="a-hero__dek-title">{post.data.title}</p>
+      <div class="a-hero__dek-cols">
+        <p class="a-hero__byline">
+          <span class="a-hero__dim">{a.writtenBy}</span>
+          <span class="a-hero__author">{post.data.author}</span>
+        </p>
+        <p class="a-hero__summary">
+          {`${a.inThisArticle} ${post.data.excerpt}`}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="a-hero__bottom">
+    <div class="a-hero__heading">
+      <p class="a-hero__issue">{a.issue.replace('{n}', issue)}</p>
+      <h1 class="a-hero__title">{post.data.displayTitle}</h1>
+    </div>
+    <p class="a-hero__copy">
+      {a.copyright.replace('{year}', String(post.data.date.getUTCFullYear()))}
+    </p>
+  </div>
+</header>
+
+<script>
+  import '@/scripts/copy-link';
+</script>
+
+<style>
+  .a-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    min-height: clamp(640px, 62.5vw, 900px);
+    padding: var(--space-10) clamp(1rem, 0.2rem + 3.6vw, 3.5rem) var(--space-12);
+    overflow: hidden;
+    color: var(--color-text);
+    background: var(--color-bg);
+  }
+
+  .a-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      180deg,
+      rgb(1 9 18 / 0.55) 0%,
+      rgb(1 9 18 / 0.25) 45%,
+      rgb(1 9 18 / 0.9) 100%
+    );
+  }
+
+  .a-hero__img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* Кольорове, трохи приглушене (Figma: Saturation −15, Contrast +17, Exposure −10) */
+    filter: saturate(0.85) contrast(1.15) brightness(0.9);
+  }
+
+  /* ---------- Верхній рядок ---------- */
+  .a-hero__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-6);
+  }
+
+  .a-hero__back {
+    font-size: var(--fs-body-lg);
+    font-weight: var(--fw-medium);
+  }
+
+  .a-hero__back:hover {
+    color: var(--color-green-soft);
+  }
+
+  .a-hero__category,
+  .a-hero__meta {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem; /* 13 */
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .a-hero__category {
+    color: var(--color-green-soft);
+  }
+
+  .a-hero__meta {
+    color: rgb(255 255 255 / 0.8);
+  }
+
+  /* ---------- Середній рядок: Share | картка з назвою ---------- */
+  .a-hero__middle {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-8);
+    margin-top: auto;
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-12);
+  }
+
+  .a-hero__share {
+    display: grid;
+    gap: 2px;
+  }
+
+  .a-hero__share-label {
+    margin-bottom: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-s);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.6);
+  }
+
+  .a-hero__share-link {
+    font-size: 1.375rem; /* 22 */
+    font-weight: var(--fw-semibold);
+    line-height: 1.3;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: opacity var(--dur-fast) ease;
+  }
+
+  /* Наведення на один пункт — інші стають тьмянішими */
+  .a-hero__share-list:hover .a-hero__share-link:not(:hover),
+  .a-hero__share-list:has(:focus-visible)
+    .a-hero__share-link:not(:focus-visible) {
+    opacity: 0.55;
+  }
+
+  .a-hero__copied {
+    min-height: 1.5em;
+    font-size: var(--fs-label-14);
+    color: var(--color-green-soft);
+  }
+
+  .a-hero__dek {
+    display: grid;
+    gap: 28px;
+    width: min(520px, 100%);
+    padding: var(--space-5);
+    border-radius: 20px;
+    background: var(--color-glass);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .a-hero__dek-title {
+    font-size: var(--fs-h3); /* 20 → 24 */
+    font-weight: var(--fw-semibold);
+    line-height: 1.25;
+  }
+
+  .a-hero__dek-cols {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: var(--space-8);
+    font-size: var(--fs-body);
+  }
+
+  .a-hero__byline {
+    display: grid;
+    align-content: start;
+  }
+
+  .a-hero__dim {
+    color: rgb(255 255 255 / 0.55);
+  }
+
+  .a-hero__author {
+    font-weight: var(--fw-semibold);
+  }
+
+  .a-hero__summary {
+    line-height: 1.4;
+    color: rgb(255 255 255 / 0.75);
+  }
+
+  /* ---------- Нижній рядок: No. + H1 | © ---------- */
+  .a-hero__bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .a-hero__heading {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-6);
+    min-width: 0;
+  }
+
+  .a-hero__issue {
+    flex: 0 0 auto;
+    padding-bottom: 0.6em;
+    font-family: var(--font-mono);
+    font-size: var(--fs-label-14);
+    letter-spacing: 0.06em;
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  .a-hero__title {
+    font-size: clamp(56px, 9.7vw, 140px);
+    font-weight: var(--fw-semibold);
+    line-height: 0.86;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+
+  .a-hero__copy {
+    flex: 0 0 auto;
+    font-size: var(--fs-body-lg);
+    font-weight: var(--fw-medium);
+    color: rgb(255 255 255 / 0.8);
+  }
+
+  /* < 1024 px: усе стовпчиком — картка на всю ширину, Share рядком під нею, H1 нижче */
+  @media (max-width: 1023px) {
+    .a-hero__middle {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      gap: var(--space-6);
+      padding-bottom: var(--space-8);
+    }
+    .a-hero__dek {
+      width: 100%;
+    }
+    .a-hero__share-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2) var(--space-6);
+    }
+    .a-hero__share-link {
+      font-size: var(--fs-body-lg);
+    }
+    .a-hero__bottom,
+    .a-hero__heading {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    .a-hero__issue {
+      padding-bottom: 0;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .a-hero__dek-cols {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+  }
+</style>

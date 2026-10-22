@@ -1,0 +1,310 @@
+---
+/**
+ * Кінець статті: теги + поширення, автор, картка «Join the discussion».
+ * Коментарів на сайті немає — картка лише веде в LinkedIn або на форму контактів.
+ */
+import IconLinkedin from '@/assets/icons/social-linkedin.svg';
+import IconFacebook from '@/assets/icons/social-facebook.svg';
+import IconCopy from '@/assets/icons/copy.svg';
+import LogoSymbol from '@/assets/icons/logo-symbol.svg';
+import type { Post } from '@/content/blog';
+import { getSiteSettings } from '@/content/helpers';
+import { localizePath, type Locale } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+  post: Post;
+  shareUrl: string;
+  article: {
+    share: string;
+    copyLink: string;
+    copied: string;
+    shareOn: string;
+    authorBio: string;
+    tags: string;
+    discussTitle: string;
+    discussText: string;
+    discussLinkedin: string;
+    askQuestion: string;
+  };
+}
+
+const { lang, post, shareUrl, article: a } = Astro.props;
+const site = await getSiteSettings();
+const url = encodeURIComponent(shareUrl);
+const shares = [
+  {
+    name: 'LinkedIn',
+    Icon: IconLinkedin,
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+  },
+  {
+    name: 'Facebook',
+    Icon: IconFacebook,
+    href: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+  },
+];
+// Пост у LinkedIn про статтю; якщо його немає — сторінка компанії з налаштувань сайту
+const discussHref = post.data.linkedinUrl || site.social.linkedin;
+---
+
+<section class="a-foot" aria-label={a.discussTitle}>
+  <div class="a-foot__row">
+    {post.data.tags.length > 0 && (
+      <ul role="list" class="a-foot__tags" aria-label={a.tags}>
+        {post.data.tags.map(tag => (
+          <li class="a-foot__tag">#{tag}</li>
+        ))}
+      </ul>
+    )}
+    <div class="a-foot__share" data-share>
+      <span class="a-foot__share-label">{a.share}</span>
+      {shares.map(({ name, Icon, href }) => (
+        <a
+          class="a-foot__icon"
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={a.shareOn.replace('{network}', name)}
+        >
+          <Icon aria-hidden="true" />
+        </a>
+      ))}
+      <button
+        class="a-foot__icon"
+        type="button"
+        aria-label={a.copyLink}
+        data-copy-link={shareUrl}
+        data-copied={a.copied}
+      >
+        <IconCopy aria-hidden="true" />
+      </button>
+      <span class="a-foot__copied" aria-live="polite" data-copy-status></span>
+    </div>
+  </div>
+
+  <hr class="a-foot__line" />
+
+  <div class="a-foot__author">
+    <LogoSymbol class="a-foot__logo" aria-hidden="true" />
+    <p class="a-foot__author-text">
+      <span class="a-foot__name">{post.data.author}</span>
+      <span class="a-foot__bio">{post.data.authorBio || a.authorBio}</span>
+    </p>
+  </div>
+
+  <div class="a-foot__discuss">
+    <div class="a-foot__discuss-text">
+      <h2 class="a-foot__discuss-title">{a.discussTitle}</h2>
+      <p>{a.discussText}</p>
+    </div>
+    <div class="a-foot__actions">
+      {discussHref && (
+        <a
+          class="a-foot__btn a-foot__btn--dark"
+          href={discussHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {a.discussLinkedin}
+        </a>
+      )}
+      <a
+        class="a-foot__btn pill-outline"
+        href={localizePath('contact', lang) + '#form'}
+      >
+        {a.askQuestion}
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '@/scripts/copy-link';
+</script>
+
+<style>
+  .a-foot {
+    display: grid;
+    gap: var(--space-8);
+    padding-block: clamp(4rem, 3.4rem + 2.6vw, 6rem); /* 64 → 96 */
+  }
+
+  .a-foot__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .a-foot__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .a-foot__tag {
+    padding: var(--space-2) 14px;
+    border: 1px solid var(--light-border);
+    border-radius: var(--radius-pill);
+    background: var(--light-surface);
+    color: var(--light-ink);
+    font-size: var(--fs-label-14);
+    font-weight: var(--fw-medium);
+    line-height: 1.3;
+  }
+
+  .a-foot__share {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .a-foot__share-label {
+    margin-right: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta-s);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--light-muted);
+  }
+
+  .a-foot__icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(13 17 23 / 0.15);
+    border-radius: 50%;
+    color: var(--light-ink);
+    cursor: pointer;
+    transition:
+      border-color var(--dur-fast) ease,
+      background-color var(--dur-fast) ease;
+  }
+
+  .a-foot__icon :global(svg) {
+    width: 18px;
+    height: 18px;
+  }
+
+  .a-foot__icon:hover {
+    border-color: var(--light-ink);
+    background: var(--light-surface);
+  }
+
+  .a-foot__copied {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    right: 0;
+    font-size: var(--fs-label-14);
+    color: var(--light-label);
+    white-space: nowrap;
+  }
+
+  .a-foot__line {
+    height: 1px;
+    border: 0;
+    background: var(--light-divider);
+  }
+
+  .a-foot__author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .a-foot__logo {
+    flex: 0 0 auto;
+    width: 56px;
+    height: 56px;
+  }
+
+  .a-foot__author-text {
+    display: grid;
+  }
+
+  .a-foot__name {
+    font-size: var(--fs-body-lg);
+    font-weight: var(--fw-semibold);
+    color: var(--light-ink);
+  }
+
+  .a-foot__bio {
+    font-size: var(--fs-body);
+    color: var(--light-muted);
+  }
+
+  /* ---------- «Join the discussion» ---------- */
+  .a-foot__discuss {
+    display: grid;
+    align-items: center;
+    gap: var(--space-6);
+    padding: 28px var(--space-8);
+    border: 1px solid rgb(13 17 23 / 0.08);
+    border-radius: var(--radius-md);
+    background: var(--light-surface);
+  }
+
+  @media (min-width: 768px) {
+    .a-foot__discuss {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+  }
+
+  .a-foot__discuss-text {
+    display: grid;
+    gap: 6px;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--light-text-secondary);
+  }
+
+  .a-foot__discuss-title {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    line-height: 1.2;
+    color: var(--light-ink);
+  }
+
+  .a-foot__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .a-foot__btn {
+    min-height: 48px;
+    padding: var(--space-3) 22px;
+  }
+
+  .a-foot__btn--dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-pill);
+    background: var(--light-ink);
+    color: var(--light-surface);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-semibold);
+    line-height: 1.2;
+    white-space: nowrap;
+    transition: background-color var(--dur-fast) ease;
+  }
+
+  .a-foot__btn--dark:hover {
+    background: var(--color-blue);
+  }
+
+  /* Телефон: кнопки під текстом на всю ширину */
+  @media (max-width: 767px) {
+    .a-foot__actions {
+      flex-direction: column;
+    }
+    .a-foot__btn {
+      width: 100%;
+    }
+  }
+</style>

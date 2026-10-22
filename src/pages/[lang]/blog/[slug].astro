@@ -1,12 +1,18 @@
 ---
 /**
- * Сторінка статті блогу. Статті — src/content/blog/<мова>/<slug>.mdoc
- * (Keystatic: «Blog (EN)» / «Blog (FR)»). Чернетки будуються лише в `npm run dev`.
- * Етап 1 — базова розмітка; дизайн статті (світла тема, поширення, «Keep reading») — етап 3.
+ * Сторінка статті — Figma «Blog Article • Desktop (light)».
+ * Hero → вступ (lead) → текст (абзаци, split, takeaway) → кінець статті → Keep reading → Newsletter.
+ * Статті — src/content/blog/<мова>/<slug>.mdoc (Keystatic: «Blog (EN)» / «Blog (FR)»).
+ * Чернетки будуються лише в `npm run dev`. Шапка — без біжучого рядка.
  */
-import { getImage, Image } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import { render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArticleHero from '@/components/blog/ArticleHero.astro';
+import ArticleFooter from '@/components/blog/ArticleFooter.astro';
+import KeepReading from '@/components/blog/KeepReading.astro';
+import NewsletterBand from '@/components/blog/NewsletterBand.astro';
+import { getSiteSettings } from '@/content/helpers';
 import { locales, localizePath, type Locale } from '@/i18n/utils';
 import {
   getBlogPage,
@@ -14,7 +20,6 @@ import {
   getTranslation,
   issueNumber,
   postSlug,
-  readingTime,
   type Post,
 } from '@/content/blog';
 
@@ -33,10 +38,13 @@ export async function getStaticPaths() {
 const { post } = Astro.props as { post: Post };
 const lang = Astro.params.lang as Locale;
 const page = await getBlogPage(lang);
+const site = await getSiteSettings();
+const posts = await getPosts(lang);
 const { Content } = await render(post);
 const issue = await issueNumber(post);
-const minutes = readingTime(post);
-const category = page.categories.find(c => c.key === post.data.category);
+const categoryName =
+  page.categories.find(c => c.key === post.data.category)?.name ?? '';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 // Мовні версії: переклад з тим самим translationKey; якщо його немає —
 // перемикач мов веде на блог іншою мовою, а hreflang не додається.
@@ -53,77 +61,232 @@ const og = await getImage({ src: post.data.cover, width: 1200, format: 'jpg' });
 const ogImage = og.src.slice(
   import.meta.env.BASE_URL.replace(/\/?$/, '/').length - 1
 );
+const published = post.data.date.toISOString();
+const modified = (post.data.updated ?? post.data.date).toISOString();
 
-const formatDate = (d: Date) =>
-  d.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'UTC',
-  });
+const organization = {
+  '@type': 'Organization',
+  name: site.companyName,
+  url: Astro.site?.href,
+};
+const blogPostingLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.excerpt,
+  image: new URL(og.src, Astro.site).href,
+  datePublished: published,
+  dateModified: modified,
+  author: organization,
+  publisher: organization,
+  inLanguage: lang,
+  mainEntityOfPage: canonical,
+  keywords: post.data.tags.join(', ') || undefined,
+};
 ---
 
 <BaseLayout
   lang={lang}
-  title={`${post.data.title} — DataTixx`}
+  title={`${post.data.title}${page.article.titleSuffix}`}
   description={post.data.excerpt}
   ogImage={ogImage}
   ogType="article"
   alternates={alternates}
   langLinks={langLinks}
   noindex={post.data.draft}
+  mainClass="theme-light"
+  ticker={false}
 >
-  <article class="article section">
-    <div class="container">
-      <a href={localizePath('blog', lang)}>{page.article.back}</a>
-      <p class="mono">
-        No. {issue} · {category?.name} ·{' '}
-        <time datetime={post.data.date.toISOString().slice(0, 10)}>
-          {formatDate(post.data.date)}
-        </time>{' '}
-        · {`${minutes} ${page.article.minRead}`}
-      </p>
-      <h1>{post.data.displayTitle}</h1>
-      <p class="article__dek">{post.data.title}</p>
-      <Image
-        class="article__cover"
-        src={post.data.cover}
-        alt={post.data.coverAlt}
-        widths={[720, 1440]}
-        sizes="(min-width: 1280px) 1200px, 100vw"
-        loading="eager"
-      />
+  <Fragment slot="head">
+    <meta property="article:published_time" content={published} />
+    <meta property="article:modified_time" content={modified} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(blogPostingLd).replace(/</g, '\\u003c')}
+      is:inline
+    />
+  </Fragment>
+
+  <article>
+    <ArticleHero
+      lang={lang}
+      post={post}
+      issue={issue}
+      categoryName={categoryName}
+      shareUrl={canonical}
+      article={page.article}
+    />
+
+    <div class="article">
       <p class="article__lead">{post.data.lead}</p>
       <div class="article__body">
         <Content />
       </div>
-      <p class="mono">{`${page.article.writtenBy} ${post.data.author}`}</p>
+      <div class="article__footer">
+        <ArticleFooter
+          lang={lang}
+          post={post}
+          shareUrl={canonical}
+          article={page.article}
+        />
+      </div>
     </div>
   </article>
+
+  <KeepReading
+    lang={lang}
+    current={post}
+    posts={posts}
+    categories={page.categories}
+    keepReading={page.article.keepReading}
+    allArticles={page.article.allArticles}
+    minRead={page.article.minRead}
+  />
+  <NewsletterBand lang={lang} />
 </BaseLayout>
 
 <style>
-  .article__dek,
-  .article__lead {
-    max-width: 720px;
-    margin-block: var(--space-4);
+  /*
+    Сітка статті: текст — колонка 760 по центру, блок split — ширина контейнера 1240,
+    «Key takeaway» — на всю ширину екрана.
+  */
+  .article,
+  .article__body {
+    --side: max(var(--gutter), calc((100% - var(--container-max)) / 2));
+
+    display: grid;
+    grid-template-columns:
+      [full-start] var(--side)
+      [wide-start] minmax(0, 1fr)
+      [content-start] minmax(0, 760px)
+      [content-end] minmax(0, 1fr)
+      [wide-end] var(--side)
+      [full-end];
   }
 
-  .article__cover {
-    width: 100%;
-    height: auto;
-    margin-block: var(--space-6);
+  .article__lead,
+  .article__footer,
+  .article__body > :global(*) {
+    grid-column: content;
   }
 
   .article__body {
-    display: grid;
-    gap: var(--space-4);
-    max-width: 720px;
-    margin-block: var(--space-6);
+    grid-column: full;
+    grid-template-columns: subgrid;
   }
 
-  .article__body :global(img) {
-    max-width: 100%;
-    height: auto;
+  .article__body > :global(.split-block) {
+    grid-column: wide;
+  }
+
+  .article__body > :global(.takeaway) {
+    grid-column: full;
+  }
+
+  /* ---------- Вступ ---------- */
+  .article__lead {
+    padding-top: clamp(4rem, 3.11rem + 3.95vw, 7rem); /* 64 → 112 */
+    padding-bottom: clamp(
+      3rem,
+      2.4rem + 2.6vw,
+      5rem
+    ); /* 48 → 80 (+ відступ абзацу = 96) */
+    font-size: var(--fs-lead); /* 20 → 28 */
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    color: var(--light-ink);
+  }
+
+  /* ---------- Текст статті ---------- */
+  .article__body > :global(p),
+  .article__body > :global(:is(ul, ol)) > :global(li) {
+    font-size: 1.25rem; /* 20 */
+    line-height: 1.6;
+    color: var(--light-text);
+  }
+
+  .article__body > :global(p),
+  .article__body > :global(ul),
+  .article__body > :global(ol),
+  .article__body > :global(blockquote),
+  .article__body > :global(h3) {
+    margin-bottom: var(--space-6);
+  }
+
+  .article__body > :global(h2) {
+    margin-top: var(--space-16);
+    margin-bottom: var(--space-6);
+    font-size: clamp(2rem, 1.8rem + 0.9vw, 2.5rem); /* 32 → 40 */
+    font-weight: var(--fw-bold);
+    line-height: 1.1;
+    color: var(--light-ink);
+    text-wrap: balance;
+  }
+
+  /* Після смуги чи блоку split — без зайвого верхнього відступу */
+  .article__body > :global(:is(.split-block, .takeaway) + h2),
+  .article__body > :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .article__body > :global(h3) {
+    margin-top: var(--space-10);
+    font-size: clamp(1.5rem, 1.4rem + 0.5vw, 1.75rem); /* 24 → 28 */
+    font-weight: var(--fw-semibold);
+    line-height: 1.2;
+    color: var(--light-ink);
+  }
+
+  .article__body :global(a) {
+    color: var(--light-label);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .article__body :global(a:hover) {
+    color: var(--color-blue);
+  }
+
+  .article__body :global(strong) {
+    font-weight: var(--fw-semibold);
+    color: var(--light-ink);
+  }
+
+  .article__body > :global(ul),
+  .article__body > :global(ol) {
+    display: grid;
+    gap: var(--space-2);
+    padding-left: 1.4em;
+  }
+
+  .article__body > :global(ul) {
+    list-style: disc;
+  }
+
+  .article__body > :global(ol) {
+    list-style: decimal;
+  }
+
+  .article__body :global(li::marker) {
+    color: var(--light-label);
+  }
+
+  .article__body > :global(blockquote) {
+    padding-left: var(--space-6);
+    border-left: 3px solid;
+    border-image: linear-gradient(180deg, var(--color-green), var(--color-blue))
+      1;
+  }
+
+  .article__body > :global(blockquote) :global(p) {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    color: var(--light-ink);
+  }
+
+  /* Зображення в тексті — у власному рядку */
+  .article__body > :global(p:has(> .prose-figure)) {
+    margin-block: var(--space-4) var(--space-8);
   }
 </style>

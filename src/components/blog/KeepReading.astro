@@ -1,0 +1,98 @@
+---
+/**
+ * «Keep reading»: 3 статті — спершу з тієї самої категорії, потім найновіші.
+ * Поточної статті тут немає; якщо інших статей немає — блок не показується.
+ */
+import PostCard from '@/components/blog/PostCard.astro';
+import type { Post } from '@/content/blog';
+import { localizePath, type Locale } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+  current: Post;
+  posts: Post[];
+  categories: { key: string; name: string }[];
+  keepReading: string;
+  allArticles: string;
+  minRead: string;
+}
+
+const { lang, current, posts, categories, keepReading, allArticles, minRead } =
+  Astro.props;
+// posts уже від найновішої до найстарішої
+const others = posts.filter(p => p.id !== current.id);
+const picks = [
+  ...others.filter(p => p.data.category === current.data.category),
+  ...others.filter(p => p.data.category !== current.data.category),
+].slice(0, 3);
+const nameOf = (key: string) => categories.find(c => c.key === key)?.name ?? '';
+---
+
+{picks.length > 0 && (
+  <section class="keep" aria-labelledby="keep-title">
+    <div class="container keep__inner">
+      <div class="keep__head">
+        <h2 id="keep-title" class="keep__title">
+          {keepReading}
+        </h2>
+        <a class="pill-outline" href={localizePath('blog', lang)}>
+          {allArticles}
+        </a>
+      </div>
+      <ul role="list" class="keep__grid">
+        {picks.map(post => (
+          <li>
+            <PostCard
+              post={post}
+              categoryName={nameOf(post.data.category)}
+              minRead={minRead}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<style>
+  .keep {
+    padding-bottom: clamp(4rem, 3.11rem + 3.95vw, 7rem); /* 64 → 112 */
+  }
+
+  .keep__inner {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .keep__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .keep__title {
+    font-size: var(--fs-blog-h2);
+    font-weight: var(--fw-bold);
+    line-height: 1;
+    color: var(--light-ink);
+  }
+
+  .keep__grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .keep__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .keep__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

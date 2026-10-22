@@ -924,15 +924,24 @@ const blogPageSchema = {
   article: fields.object(
     {
       back: text('«← Blog»'),
+      titleSuffix: fields.text({
+        label: 'Кінець заголовка вкладки браузера (« — datixxia™ blog»)',
+      }),
       share: text('«Share»'),
       copyLink: text('«Copy link»'),
       copied: text('«Link copied»'),
+      shareOn: text(
+        'Підказка кнопок поширення ({network} — LinkedIn / Facebook)'
+      ),
       writtenBy: text('«Written by»'),
       inThisArticle: text('«In this article:»'),
       minRead: text('«min read»'),
+      issue: text('Номер випуску ({n} — число)'),
+      copyright: text('«© DataTixx {year}» у hero статті'),
       keyTakeaway: text('Мітка «Key takeaway»'),
       takeawayFootnote: text('Стандартна примітка під «Key takeaway»'),
       authorBio: text('Стандартний опис автора'),
+      tags: text('Підпис списку тегів (для скрінрідерів)'),
       keepReading: text('«Keep reading»'),
       allArticles: text('«All articles»'),
       discussTitle: text('«Join the discussion»'),

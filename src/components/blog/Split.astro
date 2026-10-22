@@ -2,10 +2,10 @@
 /**
  * Блок статті «текст + зображення» — Markdoc-тег {% split %} (див. markdoc.config.mjs).
  * Абзаци — вміст тегу (slot). Зображення — шлях у src/assets/img/…, оптимізується Astro.
- * Дизайн за Figma «Blog Article • Desktop (light)» — етап 3.
+ * Ширший за колонку тексту (1240), reverse — зображення ліворуч. < 1024 px — зображення зверху.
  */
 import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import { resolveAssetImage } from './resolve-image';
 
 interface Props {
   label?: string;
@@ -24,12 +24,7 @@ const {
   reverse,
 } = Astro.props;
 
-// Підвантажуємо лише потрібне зображення (не всі картинки сайту)
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/img/**/*.{jpg,jpeg,png,webp}'
-);
-const key = image.startsWith('/') ? image : `/${image}`;
-const src = images[key] ? (await images[key]()).default : undefined;
+const src = await resolveAssetImage(image);
 if (!src) {
   throw new Error(`Блок split: зображення не знайдено — ${image}`);
 }
@@ -37,7 +32,7 @@ if (!src) {
 
 <section class:list={['split-block', reverse && 'split-block--reverse']}>
   <div class="split-block__text">
-    {label && <p class="split-block__label">{label}</p>}
+    {label && <p class="section-label split-block__label">{label}</p>}
     <h2 class="split-block__title">
       {title}
       {titleAccent && (
@@ -60,3 +55,75 @@ if (!src) {
     loading="lazy"
   />
 </section>
+
+<style>
+  .split-block {
+    display: grid;
+    gap: var(--space-8);
+    padding-bottom: clamp(4rem, 3.11rem + 3.95vw, 7rem); /* 64 → 112 */
+  }
+
+  .split-block__text {
+    display: grid;
+    align-content: center;
+    gap: var(--space-5);
+  }
+
+  .split-block__title {
+    font-size: clamp(2.25rem, 1.75rem + 2.2vw, 3.5rem); /* 36 → 56 */
+    font-weight: var(--fw-bold);
+    line-height: 1;
+    color: var(--light-ink);
+    text-wrap: balance;
+  }
+
+  .split-block__accent {
+    background: linear-gradient(90deg, var(--light-label), var(--color-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .split-block__body {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .split-block__body :global(p) {
+    font-size: var(--fs-body-lg);
+    line-height: 1.6;
+    color: var(--light-text-secondary);
+  }
+
+  .split-block__body :global(p:first-child) {
+    font-size: 1.25rem; /* 20 */
+    color: var(--light-text-strong);
+  }
+
+  .split-block__image {
+    order: -1; /* на вузьких екранах — зображення зверху */
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  @media (min-width: 1024px) {
+    .split-block {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+      align-items: center;
+      gap: 72px;
+    }
+    .split-block__image {
+      order: 0;
+      aspect-ratio: 560 / 520;
+    }
+    .split-block--reverse {
+      grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+    }
+    .split-block--reverse .split-block__image {
+      order: -1;
+    }
+  }
+</style>

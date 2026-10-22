@@ -1,8 +1,21 @@
 // Markdoc для статей блогу (src/content/blog/<мова>/<slug>.mdoc).
 // Власні блоки в тексті статті — ті самі, що в меню «Вставити» адмінки Keystatic (keystatic.config.ts).
-import { defineMarkdocConfig, component } from '@astrojs/markdoc/config';
+import { defineMarkdocConfig, component, nodes } from '@astrojs/markdoc/config';
 
 export default defineMarkdocConfig({
+  nodes: {
+    // Без обгортки <article>: блоки тексту — прямі дочірні елементи сітки статті
+    // (так split і «Key takeaway» можуть бути ширшими за колонку тексту)
+    document: {
+      ...nodes.document,
+      render: null,
+    },
+    // Зображення в тексті: ![опис](шлях "підпис") — оптимізується Astro, підпис під зображенням
+    image: {
+      ...nodes.image,
+      render: component('./src/components/blog/ProseImage.astro'),
+    },
+  },
   tags: {
     // «Текст + зображення»: {% split … %}абзаци{% /split %}
     split: {

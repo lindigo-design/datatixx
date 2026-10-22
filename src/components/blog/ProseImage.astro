@@ -1,0 +1,64 @@
+---
+/**
+ * Зображення в тексті статті (Markdown ![опис](шлях "підпис")).
+ * Підпис — необовʼязковий «title» зображення. Markdoc ставить зображення всередину абзацу,
+ * тому обгортка — <span> (а не <figure>).
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { resolveAssetImage } from './resolve-image';
+
+interface Props {
+  src: string | ImageMetadata;
+  alt?: string;
+  title?: string;
+}
+const { src, alt = '', title } = Astro.props;
+const local =
+  typeof src === 'string'
+    ? await resolveAssetImage(src)
+    : (src as ImageMetadata);
+if (!local && typeof src === 'string' && !/^https:\/\//.test(src)) {
+  throw new Error(`Зображення в статті не знайдено — ${src}`);
+}
+---
+
+<span class="prose-figure">
+  {local ? (
+    <Image
+      class="prose-figure__img"
+      src={local}
+      alt={alt}
+      widths={[760, 1520]}
+      sizes="(min-width: 800px) 760px, 100vw"
+      loading="lazy"
+    />
+  ) : (
+    <img
+      class="prose-figure__img"
+      src={src as string}
+      alt={alt}
+      loading="lazy"
+    />
+  )}
+  {title && <span class="prose-figure__caption">{title}</span>}
+</span>
+
+<style>
+  .prose-figure {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .prose-figure__img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+  }
+
+  .prose-figure__caption {
+    font-size: var(--fs-label-14);
+    line-height: var(--lh-body);
+    color: var(--light-muted);
+  }
+</style>

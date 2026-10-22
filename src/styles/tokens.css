@@ -51,6 +51,7 @@
   --light-label: #2e8a27; /* зелений темніший за брендовий — для контрасту на світлому */
   --color-green-soft: #7cd46f; /* зелений на темних фото */
   --color-text-faint: #8a919c;
+  --color-blue-light: #4f7fd9; /* кінець градієнта примітки «Key takeaway» */
 
   /* Градієнти */
   --gradient-brand: linear-gradient(90deg, #42aa39 0%, #2e509d 100%);

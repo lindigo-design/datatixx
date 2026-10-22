@@ -1,8 +1,7 @@
 ---
 /**
- * Темна смуга «Key takeaway» — Markdoc-тег {% takeaway text="…" /%}.
+ * Темна смуга «Key takeaway» на всю ширину екрана — Markdoc-тег {% takeaway text="…" /%}.
  * Підпис і примітка за замовчуванням — з blog.json (article.keyTakeaway / article.takeawayFootnote).
- * Дизайн за Figma «Blog Article • Desktop (light)» — етап 3.
  */
 import { getBlogPage } from '@/content/blog';
 import { isLocale } from '@/i18n/utils';
@@ -22,3 +21,58 @@ const page = await getBlogPage(lang);
   <p class="takeaway__text">{text}</p>
   <p class="takeaway__footnote">{footnote || page.article.takeawayFootnote}</p>
 </aside>
+
+<style>
+  .takeaway {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-8);
+    padding: clamp(4rem, 2.6rem + 6.2vw, 7.5rem) var(--gutter); /* 64 → 120 */
+    margin-bottom: clamp(4rem, 3.11rem + 3.95vw, 7rem);
+    text-align: center;
+    color: var(--color-text);
+    background:
+      radial-gradient(60% 90% at 0% 0%, rgb(66 170 57 / 0.28), transparent 70%),
+      var(--color-bg);
+  }
+
+  .takeaway__label {
+    font-size: var(--fs-label-14);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-body);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-green);
+  }
+
+  /* Текст «згасає» донизу: білий до ~35 %, далі сіріший */
+  .takeaway__text {
+    max-width: 900px;
+    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem); /* 28 → 40 */
+    font-weight: var(--fw-medium);
+    line-height: 1.2;
+    text-wrap: balance;
+    background: linear-gradient(
+      180deg,
+      #fff 0%,
+      #fff 35%,
+      rgb(186 187 189 / 0.55) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .takeaway__footnote {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body);
+    background: linear-gradient(
+      90deg,
+      var(--color-green),
+      var(--color-blue-light)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+</style>
