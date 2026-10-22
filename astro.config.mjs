@@ -87,6 +87,23 @@ export default defineConfig({
   },
 
   vite: {
+    // Адмінка Keystatic (лише dev): React і Keystatic збираємо заздалегідь,
+    // інакше Vite знаходить їх уже під час завантаження сторінки, перебудовує
+    // залежності — і браузер отримує «504 Outdated Optimize Dep» (біла сторінка).
+    optimizeDeps: isDev
+      ? {
+          include: [
+            'react',
+            'react-dom',
+            'react-dom/client',
+            'react/jsx-runtime',
+            'react/jsx-dev-runtime',
+            '@keystatic/core',
+            '@keystatic/core/ui',
+            '@keystatic/core/content-components',
+          ],
+        }
+      : undefined,
     build: {
       sourcemap: false, // не віддаємо вихідний код у продакшен
       assetsInlineLimit: 0, // жодних data:-вставок — усе окремими файлами (сувора CSP)
