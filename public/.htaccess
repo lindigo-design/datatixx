@@ -53,8 +53,9 @@ AddDefaultCharset UTF-8
   RewriteRule ^$ /en/ [L,R=302]
 </IfModule>
 
-# Заборонити доступ до службових файлів
-<FilesMatch "^(_.*|config(\.example)?\.php|\.env.*|\.template-renderer-data|.*\.(md|log|ini|lock|json))$">
+# Заборонити доступ до службових файлів (api/_lib.php, _settings.php, пароль SMTP…).
+# Виняток: .css і .js — Astro називає стилі сторінок за шаблоном, напр. [slug].astro → _slug_.….css
+<FilesMatch "^(_(?!.*\.(css|js)$).*|config(\.example)?\.php|\.env.*|\.template-renderer-data|.*\.(md|log|ini|lock|json))$">
   Require all denied
 </FilesMatch>
 
