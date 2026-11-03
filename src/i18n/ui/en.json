@@ -28,7 +28,7 @@
   "form.error": "Something went wrong. Please try again or write to us by email.",
   "form.required": "Please fill in the fields marked with *.",
   "ticker.label": "Tixx™ indexes (illustrative values)",
-  "nav.login": "Login",
+  "nav.signIn": "Sign in",
   "footer.social": "Social media",
   "footer.phone": "Phone",
   "footer.email": "Email",
@@ -97,5 +97,6 @@
   "cookies.marketing": "Marketing",
   "cookies.marketingText": "Used to measure the reach of our communications. Off by default.",
   "cookies.note": "Your choice applies for 6 months · Change it any time via “Cookies” in the footer",
-  "legal.updated": "Last updated"
+  "legal.updated": "Last updated",
+  "a11y.newTab": "(opens in a new tab)"
 }

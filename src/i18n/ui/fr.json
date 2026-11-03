@@ -28,7 +28,7 @@
   "form.error": "Une erreur s'est produite. Réessayez ou écrivez-nous par e-mail.",
   "form.required": "Veuillez remplir les champs marqués d'un *.",
   "ticker.label": "Indices Tixx™ (valeurs indicatives)",
-  "nav.login": "Connexion",
+  "nav.signIn": "Se connecter",
   "footer.social": "Réseaux sociaux",
   "footer.phone": "Téléphone",
   "footer.email": "E-mail",
@@ -97,5 +97,6 @@
   "cookies.marketing": "Marketing",
   "cookies.marketingText": "Mesurer la portée de nos communications. Désactivés par défaut.",
   "cookies.note": "Votre choix est valable 6 mois · Modifiable à tout moment via « Cookies » en bas de page",
-  "legal.updated": "Dernière mise à jour"
+  "legal.updated": "Dernière mise à jour",
+  "a11y.newTab": "(s'ouvre dans un nouvel onglet)"
 }

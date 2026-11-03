@@ -75,6 +75,12 @@ export async function getSiteSettings() {
   return entry.data;
 }
 
+/** Адреса сервісу datixxia™ — для всіх кнопок переходу в платформу (settings.json → loginUrl) */
+export async function getAppUrl(): Promise<string> {
+  const site = await getSiteSettings();
+  return site.loginUrl;
+}
+
 /** Номер телефону для посилання tel: (без пробілів) */
 export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, '')}`;
 

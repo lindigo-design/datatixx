@@ -17,8 +17,10 @@ interface Props {
   };
   primaryHref: string;
   secondaryHref: string;
+  /** Головна кнопка веде в сервіс datixxia™ (нова вкладка) */
+  primaryExternal?: boolean;
 }
-const { data, primaryHref, secondaryHref } = Astro.props;
+const { data, primaryHref, secondaryHref, primaryExternal } = Astro.props;
 ---
 
 <section class="section tools" aria-labelledby="tools-title">
@@ -37,7 +39,9 @@ const { data, primaryHref, secondaryHref } = Astro.props;
         ))}
       </ul>
       <div class="actions tools__actions">
-        <Button href={primaryHref}>{data.primaryCta}</Button>
+        <Button href={primaryHref} external={primaryExternal}>
+          {data.primaryCta}
+        </Button>
         <Button href={secondaryHref} variant="outline">
           {data.secondaryCta}
         </Button>

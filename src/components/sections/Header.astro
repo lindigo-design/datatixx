@@ -1,7 +1,7 @@
 ---
 /**
  * Navigation (Figma: «Navigation», 74px).
- * Ліворуч логотип, праворуч Login, мова, бургер.
+ * Ліворуч логотип, праворуч кнопка платформи datixxia™, мова, бургер.
  * Меню відкривається як <dialog> на всіх розмірах екрана — як у макеті.
  */
 import Logo from '@/components/ui/Logo.astro';
@@ -28,8 +28,8 @@ const isCurrent = (path: string, href: string) =>
 // Blog — лише коли в мові є опубліковані статті; номери 01, 02… ідуть підряд після фільтра
 const showBlog = await hasPublishedPosts(lang);
 const items = mainNav.filter(i => i.requires !== 'blog' || showBlog);
-// Login: заглушка, поки немає точної адреси платформи. Увімкнути — showLogin у settings.json / адмінці.
-const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
+// Кнопка платформи: адреса — settings.json → loginUrl (у адмінці «Адреса платформи datixxia™»)
+const appHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
 ---
 
 <header class="nav">
@@ -43,10 +43,16 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
     </a>
 
     <div class="nav__actions">
-      {loginHref && (
-        <a class="nav__login" href={loginHref} rel="noopener">
-          {t('nav.login')}
-        </a>
+      {appHref && (
+        <Button
+          href={appHref}
+          variant="outline"
+          size="sm"
+          external
+          class="nav__app"
+        >
+          {t('nav.signIn')}
+        </Button>
       )}
       <LanguageSwitcher lang={lang} links={langLinks} />
       <button
@@ -120,10 +126,9 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
     </nav>
 
     <div class="menu__bottom">
-      <Button href={localizePath('contact', lang)}>{t('nav.contact')}</Button>
-      {loginHref && (
-        <Button href={loginHref} variant="outline">
-          {t('nav.login')}
+      {appHref && (
+        <Button href={appHref} external>
+          {t('nav.signIn')}
         </Button>
       )}
     </div>
@@ -163,23 +168,6 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
     display: flex;
     align-items: center;
     gap: clamp(var(--space-2), 2vw, var(--space-6));
-  }
-
-  .nav__login {
-    display: none;
-    font-size: var(--fs-meta-m);
-    font-weight: var(--fw-medium);
-    padding: var(--space-2);
-  }
-
-  .nav__login:hover {
-    color: var(--color-green);
-  }
-
-  @media (min-width: 640px) {
-    .nav__login {
-      display: inline-block;
-    }
   }
 
   .nav__burger {
@@ -364,6 +352,13 @@ const loginHref = site.showLogin && site.loginUrl ? site.loginUrl : '';
     font-weight: var(--fw-medium);
     color: var(--color-text-muted);
     letter-spacing: var(--tracking-meta);
+  }
+
+  /* «Sign in» у header — з планшета (≥ 768 px); на телефоні — лише в бургер-меню */
+  @media (max-width: 767px) {
+    .nav__actions > :global(.nav__app) {
+      display: none;
+    }
   }
 
   .menu__bottom {

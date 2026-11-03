@@ -1027,9 +1027,11 @@ export default config({
         ),
         email: text('Email'),
         phone: optional('Телефон'),
-        loginUrl: optional('Посилання для кнопки Login (платформа Datixxia)'),
+        loginUrl: optional(
+          'Адреса платформи datixxia™ (кнопка в header і всі кнопки переходу в сервіс)'
+        ),
         showLogin: fields.checkbox({
-          label: 'Показувати кнопку Login',
+          label: 'Показувати кнопку платформи в header',
           defaultValue: false,
         }),
         analyticsId: optional(

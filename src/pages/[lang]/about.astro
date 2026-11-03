@@ -10,7 +10,7 @@ import ToolsSplit from '@/components/sections/about/ToolsSplit.astro';
 import CtaBand from '@/components/sections/CtaBand.astro';
 import heroImage from '@/assets/img/about/hero-europe.jpg';
 import { locales, localizePath, type Locale } from '@/i18n/utils';
-import { getAbout } from '@/content/helpers';
+import { getAppUrl, getAbout } from '@/content/helpers';
 
 export function getStaticPaths() {
   return locales.map(lang => ({ params: { lang } }));
@@ -18,6 +18,8 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang as Locale;
 const page = await getAbout(lang);
+// Адреса сервісу datixxia™ (settings.json → loginUrl)
+const appUrl = await getAppUrl();
 const to = (path: string) => localizePath(path, lang);
 ---
 
@@ -34,7 +36,8 @@ const to = (path: string) => localizePath(path, lang);
   <DataPillars data={page.data} />
   <ToolsSplit
     data={page.tools}
-    primaryHref={to('platform')}
+    primaryHref={appUrl}
+    primaryExternal
     secondaryHref={to('benefits')}
   />
   <CtaBand data={page.cta} href={to('contact')} />

@@ -24,6 +24,8 @@ interface Props {
   lead: string;
   primaryCta: string;
   primaryHref: string;
+  /** Головна кнопка веде в сервіс datixxia™ (нова вкладка) */
+  primaryExternal?: boolean;
   secondaryCta: string;
   secondaryHref: string;
   image: ImageMetadata;
@@ -39,6 +41,7 @@ const {
   lead,
   primaryCta,
   primaryHref,
+  primaryExternal,
   secondaryCta,
   secondaryHref,
   image,
@@ -94,7 +97,7 @@ const poster = video
     <div class="page-hero__content">
       <p class="page-hero__lead">{lead}</p>
       <div class="actions">
-        <Button href={primaryHref} class="btn--hero">
+        <Button href={primaryHref} class="btn--hero" external={primaryExternal}>
           {primaryCta}
         </Button>
         <Button href={secondaryHref} variant="outline">

@@ -179,6 +179,22 @@
   transform: scale(1.03);
 }
 
+/* Менша кнопка (header): 40px заввишки */
+.btn--sm {
+  min-height: 40px;
+  height: 40px;
+  padding: 0 20px;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+}
+
+/* Стрілка ↗ у кнопках, що відкривають сервіс у новій вкладці */
+.btn__ext {
+  flex: 0 0 auto;
+  width: 1em;
+  height: 1em;
+}
+
 .btn[disabled] {
   opacity: 0.6;
   cursor: progress;

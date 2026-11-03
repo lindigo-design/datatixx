@@ -1,8 +1,15 @@
 ---
 /** Кнопка або посилання-кнопка. Стилі — у styles/components.css (.btn). */
+import ArrowUpRight from '@/assets/icons/arrow-up-right.svg';
+import { isLocale, useTranslations } from '@/i18n/utils';
+
 interface Props {
   href?: string;
   variant?: 'primary' | 'outline' | 'light';
+  /** sm — менша кнопка (у header): 40px заввишки */
+  size?: 'md' | 'sm';
+  /** Перехід у сервіс datixxia™: нова вкладка, стрілка ↗ і підказка для екранних читачів */
+  external?: boolean;
   type?: 'button' | 'submit';
   class?: string;
   [key: string]: unknown;
@@ -10,18 +17,32 @@ interface Props {
 const {
   href,
   variant = 'primary',
+  size = 'md',
+  external = false,
   type = 'button',
   class: className,
   ...rest
 } = Astro.props;
 const Tag = href ? 'a' : 'button';
+const t = useTranslations(
+  isLocale(Astro.currentLocale) ? Astro.currentLocale : 'en'
+);
+const isExternal = external && !!href;
 ---
 
 <Tag
-  class:list={['btn', `btn--${variant}`, className]}
+  class:list={['btn', `btn--${variant}`, size === 'sm' && 'btn--sm', className]}
   href={href}
   type={href ? undefined : type}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener' : undefined}
   {...rest}
 >
   <slot />
+  {isExternal && (
+    <>
+      <ArrowUpRight class="btn__ext" aria-hidden="true" />
+      <span class="visually-hidden">{t('a11y.newTab')}</span>
+    </>
+  )}
 </Tag>

@@ -4,8 +4,8 @@
   "hero": {
     "title": "Market intelligence\nfor informed decisions",
     "lead": "datixxia™ turns published public contract awards into economic intelligence — explore where public spending is going and what it could mean for your sector.",
-    "primaryCta": "Contact us",
-    "secondaryCta": "Learn more",
+    "primaryCta": "See the platform",
+    "secondaryCta": "Contact us",
     "imageAlt": ""
   },
   "marquee": [
@@ -49,8 +49,8 @@
     "titleLine1": "Why choose our",
     "titleLine2": "market intelligence platform",
     "lead": "datixxia™ turns published public contract award data into accessible economic intelligence. Explore recorded award values, changes in activity and the distribution of awards across sectors and suppliers to support business decisions, research and investigations.",
-    "primaryCta": "Benefits",
-    "secondaryCta": "Learn more",
+    "primaryCta": "See the platform",
+    "secondaryCta": "Benefits",
     "cards": [
       {
         "title": "Patterns in procurement",

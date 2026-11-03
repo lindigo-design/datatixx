@@ -9,7 +9,7 @@ import ImpactStats from '@/components/sections/platform/ImpactStats.astro';
 import CtaBand from '@/components/sections/CtaBand.astro';
 import heroImage from '@/assets/img/about/hero-europe.jpg';
 import { locales, localizePath, type Locale } from '@/i18n/utils';
-import { getPlatform } from '@/content/helpers';
+import { getAppUrl, getPlatform } from '@/content/helpers';
 
 export function getStaticPaths() {
   return locales.map(lang => ({ params: { lang } }));
@@ -17,13 +17,16 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang as Locale;
 const page = await getPlatform(lang);
+// Адреса сервісу datixxia™ (settings.json → loginUrl)
+const appUrl = await getAppUrl();
 const to = (path: string) => localizePath(path, lang);
 ---
 
 <BaseLayout lang={lang} title={page.seoTitle} description={page.seoDescription}>
   <PageHero
     {...page.hero}
-    primaryHref="#model"
+    primaryHref={appUrl}
+    primaryExternal
     secondaryHref={to('contact')}
     image={heroImage}
   />
